@@ -1,7 +1,6 @@
-module Chapter2.Book where
+module Capítulo2 where
 
-open import Chapter1.Book public
-
+open import Capítulo1 public
 
 ---------------------------------------------------------------------------------
 

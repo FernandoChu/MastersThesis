@@ -1,4 +1,4 @@
-module Chapter1.Book where
+module Capítulo1 where
 
 open import Lib.Universes public
 
