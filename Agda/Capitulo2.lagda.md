@@ -1,11 +1,16 @@
-```agda
+# Capítulo 1. Teoría de Tipos Dependientes
 
+<!--
+```agda
 module Capitulo2 where
 open import Capitulo1 public
+```
+-->
 
---------------------------------------------------------------------------------
 
--- Sección 2.2. Los tipos son 1-grupoides
+## Sección 2.2. Los tipos son 1-grupoides
+
+```agda
 
 -- Lema 2.2.1.
 _∙_ : {X : 𝒰 𝒾} {x y z : X} → x ≡ y → y ≡ z → x ≡ z
@@ -67,10 +72,11 @@ infixr 2 _≡⟨⟩_ step-≡ step-≡˘
 _∎ : {X : 𝒰 𝒾} (x : X) → x ≡ x
 _∎ x = refl x
 infix  3 _∎
+```
 
---------------------------------------------------------------------------------
+## Sección 2.3. Funciones y functores
 
--- Sección 2.3. Funciones y functores
+```agda
 
 -- Lemma 2.3.1.
 ap : {X : 𝒰 𝒾} {Y : 𝒰 𝒿} (f : X → Y) {x x' : X} → x ≡ x' → f x ≡ f x'
@@ -112,13 +118,11 @@ ap⁻¹ f {x} {y} p = (q4)⁻¹ ∙ (h1ap)⁻¹ ∙ q6 ∙ h2q5 ∙ q3
    q6 : (ap f (p ⁻¹) ∙ ap f p) ∙ ((ap f p)⁻¹) ≡ ap f (p ⁻¹) ∙ (ap f p ∙ (ap f p)⁻¹)
    q6 = ∙-assoc (ap f (p ⁻¹))
 
----------------------------------------------------------------------------------
+```
 
--- Sección 2.4. Funciones dependientes y fibraciones
+## Sección 2.4. Funciones dependientes y fibraciones
 
-
-
-
+```agda
 
 -- Definition 2.1.7.
 𝒰∙ : (𝒾 : Level) → 𝒰 (𝒾 ⁺)
