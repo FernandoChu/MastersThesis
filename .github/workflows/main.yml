@@ -30,7 +30,8 @@ jobs:
           cp -v _build/html0/*.html _build/site/
           cp -v README.html _build/site/index.html
           cd ..
-          ls
+          echo 'test'
+          ls Agda
           pwd
       - name: Deploy 🚀
         if: ${{ github.ref_name == 'main' }}
