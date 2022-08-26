@@ -1,4 +1,5 @@
 ```agda
+
 module Capitulo2 where
 open import Capitulo1 public
 

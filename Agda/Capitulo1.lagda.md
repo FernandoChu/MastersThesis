@@ -11,6 +11,7 @@ open import Preliminares public
 ## Sección 1.5. El tipo de funciones
 
 ```agda
+
 -- Definición 1.5.5.
 idA : {A : 𝒰 𝒾} → A → A
 idA x = x
@@ -27,11 +28,10 @@ comp : {A : 𝒰 𝒾} {B : 𝒰 𝒿} {C : 𝒰 𝓀}
 comp g f x = g (f x)
 ```
 
----
-
 ## Sección 1.6. El tipo de funciones dependientes
 
 ```agda
+
 -- Definición 1.6.9.
 id : {A : 𝒰 𝒾} → A → A
 id x = x
@@ -58,9 +58,11 @@ domain {𝒾} {𝒿} {X} {Y} f = X
 
 codomain : {X : 𝒰 𝒾} {Y : 𝒰 𝒿} → (X → Y) → 𝒰 𝒿
 codomain {𝒾} {𝒿} {X} {Y} f = Y
+```
 
+## Sección 1.7. El tipo de pares dependientes
 
--- Sección 1.7. El tipo de pares dependientes
+```agda
 
 -- Definición del tipo de pares dependientes
 record Σ {X : 𝒰 𝒾} (Y : X → 𝒰 𝒿) : 𝒰 (𝒾 ⊔ 𝒿) where
@@ -93,10 +95,11 @@ pr₁ (x , y) = x
 
 pr₂ : {X : 𝒰 𝒾} {Y : X → 𝒰 𝒿} → (z : Σ Y) → Y (pr₁ z)
 pr₂ (x , y) = y
+```
 
+## Sección 1.8. 0, 1, 2 y el tipo del coproducto
 
-
--- Sección 1.8. 0, 1, 2 y el tipo del coproducto
+```agda
 
 -- Definición del tipo de pares dependientes
 data 𝟘 : 𝒰₀ where
@@ -142,9 +145,11 @@ pattern ₁ = inr ⋆
 𝟚-induction : (A : 𝟚 → 𝒰 𝒾) → A ₀ → A ₁ → (n : 𝟚) → A n
 𝟚-induction A a₀ a₁ ₀ = a₀
 𝟚-induction A a₀ a₁ ₁ = a₁
+```
 
+## Sección 1.9. El tipo de los naturales
 
--- Sección 1.9. El tipo de los naturales
+```agda
 
 -- Definición del tipo de los naturales
 data ℕ : 𝒰₀ where
@@ -172,9 +177,11 @@ double (succ n) = succ (succ (double n))
 add : ℕ → ℕ → ℕ
 add 0 = id
 add (succ n) = λ m → succ (add n m)
+```
 
+## Sección 1.10. Proposiciones como tipos
 
--- Sección 1.10. Proposiciones como tipos
+```agda
 
 -- Definición 1.10.1.
 logeq : (A : 𝒰 𝒾) (B : 𝒰 𝒿) → 𝒰 (𝒾 ⊔ 𝒿)
@@ -197,9 +204,11 @@ ac : {A : 𝒰 𝒾} {B : 𝒰 𝒿} {R : A → B → 𝒰 𝓀}
    → ((x : A) → Σ y ꞉ B , R x y)
    → Σ f ꞉ (A → B) , ((x : A) → R x (f x))
 ac g = ((λ x → pr₁ (g x)) , (λ x → pr₂ (g x)))
+```
 
+## Sección 1.11. El tipo de identidades
 
--- Sección 1.11. El tipo de identidades
+```agda
 
 -- Definición del tipo de identidades
 data Id (X : 𝒰 𝒾) : X → X → 𝒰 𝒾 where
