@@ -1,4 +1,4 @@
-# Capítulo 1. Teoría de Tipos Dependientes
+# Capítulo 2. La Interpretación Homotópica
 
 <!--
 ```agda
@@ -6,7 +6,6 @@ module Capitulo2 where
 open import Capitulo1 public
 ```
 -->
-
 
 ## Sección 2.2. Los tipos son 1-grupoides
 
@@ -78,17 +77,17 @@ infix  3 _∎
 
 ```agda
 
--- Lemma 2.3.1.
+-- Lema 2.3.1.
 ap : {X : 𝒰 𝒾} {Y : 𝒰 𝒿} (f : X → Y) {x x' : X} → x ≡ x' → f x ≡ f x'
 ap f {x} {x'} (refl x) = refl (f x)
 
--- Lemma 2.3.3.
+-- Lema 2.3.3.
 ap-∙ : {X : 𝒰 𝒾} {Y : 𝒰 𝒿} (f : X → Y) {x y z : X}
        (p : x ≡ y) (q : y ≡ z)
      → ap f (p ∙ q) ≡ ap f p ∙ ap f q
 ap-∙ f (refl x) (refl x) = refl (refl (f x))
 
--- Lemma 2.3.4.
+-- Lema 2.3.4.
 ap⁻¹ : {X : 𝒰 𝒾} {Y : 𝒰 𝒿} (f : X → Y) {x y : X} (p : x ≡ y)
      → (ap f p)⁻¹ ≡ ap f (p ⁻¹)
 ap⁻¹ f {x} {y} p = (q4)⁻¹ ∙ (h1ap)⁻¹ ∙ q6 ∙ h2q5 ∙ q3
@@ -118,12 +117,73 @@ ap⁻¹ f {x} {y} p = (q4)⁻¹ ∙ (h1ap)⁻¹ ∙ q6 ∙ h2q5 ∙ q3
    q6 : (ap f (p ⁻¹) ∙ ap f p) ∙ ((ap f p)⁻¹) ≡ ap f (p ⁻¹) ∙ (ap f p ∙ (ap f p)⁻¹)
    q6 = ∙-assoc (ap f (p ⁻¹))
 
+-- Lema 2.3.5. (I)
+ap-∘ : {X : 𝒰 𝒾} {Y : 𝒰 𝒿} {Z : 𝒰 𝓀}
+       (f : X → Y) (g : Y → Z) {x y : X} (p : x ≡ y)
+     → ap (g ∘ f) p ≡ (ap g ∘ ap f) p
+ap-∘ f g (refl x) = refl (refl (g (f x)))
+
+-- Lema 2.3.5. (II)
+ap-id : {X : 𝒰 𝒾} {x y : X} (p : x ≡ y)
+      → ap id p ≡ p
+ap-id (refl x) = refl (refl x)
+
+-- Lema 2.3.5. (III)
+∙-left-cancel : {X : 𝒰 𝒾} {x y z : X}
+                (p : x ≡ y) {q r : y ≡ z}
+              → p ∙ q ≡ p ∙ r
+              → q ≡ r
+∙-left-cancel p {q} {r} path = begin
+  q              ≡˘⟨ refl-left ⟩
+  refl _ ∙ q     ≡˘⟨ ap (_∙ q) (⁻¹-left∙ p) ⟩
+  (p ⁻¹ ∙ p) ∙ q ≡⟨ ∙-assoc (p ⁻¹) ⟩
+  p ⁻¹ ∙ (p ∙ q) ≡⟨ ap ((p ⁻¹) ∙_) path ⟩
+  p ⁻¹ ∙ (p ∙ r) ≡˘⟨ ∙-assoc (p ⁻¹) ⟩
+  (p ⁻¹ ∙ p) ∙ r ≡⟨ ap (_∙ r) (⁻¹-left∙ p) ⟩
+  refl _ ∙ r     ≡⟨ refl-left ⟩
+  r ∎
+
+-- Lema 2.3.5. (IV)
+∙-right-cancel : {X : 𝒰 𝒾} {x y z : X}
+                 (p : x ≡ y) {q : x ≡ y} {r : y ≡ z}
+               → p ∙ r ≡ q ∙ r
+               → p ≡ q
+∙-right-cancel p {q} {r} path = begin
+  p              ≡˘⟨ refl-right ⟩
+  p ∙ refl _     ≡˘⟨ ap (p ∙_) (⁻¹-right∙ r) ⟩
+  p ∙ (r ∙ r ⁻¹) ≡˘⟨ ∙-assoc p ⟩
+  (p ∙ r) ∙ r ⁻¹ ≡⟨ ap (_∙ (r ⁻¹)) path ⟩
+  (q ∙ r) ∙ r ⁻¹ ≡⟨ ∙-assoc q ⟩
+  q ∙ (r ∙ r ⁻¹) ≡⟨ ap (q ∙_) (⁻¹-right∙ r) ⟩
+  q ∙ refl _     ≡⟨ refl-right ⟩
+  q ∎
 ```
 
 ## Sección 2.4. Funciones dependientes y fibraciones
 
 ```agda
 
+-- Lema 2.4.1.
+tr : {A : 𝒰 𝒾} (P : A → 𝒰 𝒿) {x y : A}
+          → x ≡ y → P x → P y
+tr P (refl x) = id
+
+-- Lema 2.4.2.
+lift : {A : 𝒰 𝒾} {P : A → 𝒰 𝒿}
+       {x y : A} (u : P x) (p : x ≡ y)
+     → ((x , u) ≡ (y , tr P p u))
+lift u (refl x) = refl (x , u)
+
+lift-lemma : {A : 𝒰 𝒾} {P : A → 𝒰 𝒿}
+             {x y : A} (u : P x) (p : x ≡ y)
+           → ap pr₁ (lift u p) ≡ p
+lift-lemma u (refl x) = refl (refl x)
+```
+
+
+
+
+```agda
 -- Definition 2.1.7.
 𝒰∙ : (𝒾 : Level) → 𝒰 (𝒾 ⁺)
 𝒰∙ 𝒾 = Σ A ꞉ (𝒰 𝒾) , A
@@ -143,65 +203,12 @@ ap⁻¹ f {x} {y} p = (q4)⁻¹ ∙ (h1ap)⁻¹ ∙ q6 ∙ h2q5 ∙ q3
 
 
 
--- Lemma 2.2.2 iii)
-ap-∘ : {X : 𝒰 𝒾} {Y : 𝒰 𝒿} {Z : 𝒰 𝓀}
-       (f : X → Y) (g : Y → Z) {x y : X} (p : x ≡ y)
-     → ap (g ∘ f) p ≡ (ap g ∘ ap f) p
-ap-∘ f g (refl x) = refl (refl (g (f x)))
-
--- Lemma 2.2.2 iv)
-ap-id : {X : 𝒰 𝒾} {x y : X} (p : x ≡ y)
-      → ap id p ≡ p
-ap-id (refl x) = refl (refl x)
-
--- Some more helpers
-ap-const : {A : 𝒰 𝒾} {B : 𝒰 𝒿} {a₁ a₂ : A}
-           (p : a₁ ≡ a₂) (c : B)
-         → ap (λ _ → c) p ≡ refl c
-ap-const (refl _) c = refl _
-
-∙-left-cancel : {X : 𝒰 𝒾} {x y z : X}
-                (p : x ≡ y) {q r : y ≡ z}
-              → p ∙ q ≡ p ∙ r
-              → q ≡ r
-∙-left-cancel p {q} {r} path = begin
-  q              ≡˘⟨ refl-left ⟩
-  refl _ ∙ q     ≡˘⟨ ap (_∙ q) (⁻¹-left∙ p) ⟩
-  (p ⁻¹ ∙ p) ∙ q ≡⟨ ∙-assoc (p ⁻¹) ⟩
-  p ⁻¹ ∙ (p ∙ q) ≡⟨ ap ((p ⁻¹) ∙_) path ⟩
-  p ⁻¹ ∙ (p ∙ r) ≡˘⟨ ∙-assoc (p ⁻¹) ⟩
-  (p ⁻¹ ∙ p) ∙ r ≡⟨ ap (_∙ r) (⁻¹-left∙ p) ⟩
-  refl _ ∙ r     ≡⟨ refl-left ⟩
-  r ∎
-
-∙-right-cancel : {X : 𝒰 𝒾} {x y z : X}
-                 (p : x ≡ y) {q : x ≡ y} {r : y ≡ z}
-               → p ∙ r ≡ q ∙ r
-               → p ≡ q
-∙-right-cancel p {q} {r} path = begin
-  p              ≡˘⟨ refl-right ⟩
-  p ∙ refl _     ≡˘⟨ ap (p ∙_) (⁻¹-right∙ r) ⟩
-  p ∙ (r ∙ r ⁻¹) ≡˘⟨ ∙-assoc p ⟩
-  (p ∙ r) ∙ r ⁻¹ ≡⟨ ap (_∙ (r ⁻¹)) path ⟩
-  (q ∙ r) ∙ r ⁻¹ ≡⟨ ∙-assoc q ⟩
-  q ∙ (r ∙ r ⁻¹) ≡⟨ ap (q ∙_) (⁻¹-right∙ r) ⟩
-  q ∙ refl _     ≡⟨ refl-right ⟩
-  q ∎
 
 ---------------------------------------------------------------------------------
 
 -- Section 2.3 Type families are fibrations
 
--- Lemma 2.3.1.
-tr : {A : 𝒰 𝒾} (P : A → 𝒰 𝒿) {x y : A}
-          → x ≡ y → P x → P y
-tr P (refl x) = id
 
--- Lemma 2.3.2.
-lift : {A : 𝒰 𝒾} {P : A → 𝒰 𝒿}
-       {x y : A} (u : P x) (p : x ≡ y)
-     → ((x , u) ≡ (y , tr P p u))
-lift u (refl x) = refl (x , u)
 
 -- Lemma 2.3.4.
 apd : {A : 𝒰 𝒾} {P : A → 𝒰 𝒿} (f : (x : A) → P x) {x y : A}
