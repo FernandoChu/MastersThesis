@@ -1,0 +1,548 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <title>HoTTEST Summer School 2022 Lecture Notes</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,500;0,600;0,700;0,800;1,400;1,500;1,600;1,700;1,800&family=Inria+Sans:ital,wght@0,300;0,400;0,700;1,300;1,400;1,700&display=swap"
+    rel="stylesheet">
+</head>
+
+<body class="text-page">
+  <main>
+    <div id="post-toc-container" style="padding-left: 1em; padding-right: 1em;">
+
+      <article>
+
+        <pre class="Agda"><a id="9" class="Keyword">module</a> <a id="16" href="Cap%25C3%25ADtulo1.html" class="Module">Capítulo1</a> <a id="26" class="Keyword">where</a>
+
+        <a id="33" class="Keyword">open</a> <a id="38" class="Keyword">import</a> <a id="45" href="Lib.Universes.html" class="Module">Lib.Universes</a> <a id="59" class="Keyword">public</a>
+
+        <a id="67" class="Comment">---------------------------------------------------------------------------------</a>
+
+        <a id="150" class="Comment">-- Sección 1.5. El tipo de funciones</a>
+
+        <a id="188" class="Comment">-- Definición 1.5.5.</a>
+        <a id="idA"></a><a id="209" href="Cap%25C3%25ADtulo1.html#209" class="Function">idA</a> <a id="213" class="Symbol">:</a> <a id="215" class="Symbol">{</a><a id="216" href="Cap%25C3%25ADtulo1.html#216" class="Bound">A</a> <a id="218" class="Symbol">:</a> <a id="220" href="Lib.Universes.html#186" data-type="(ℓ : Level) → Universe (ℓ ⁺)" class="Function">𝒰</a> <a id="222" href="Lib.Universes.html#171" data-type="Level" class="Generalizable">𝒾</a><a id="223" class="Symbol">}</a> <a id="225" class="Symbol">→</a> <a id="227" href="Cap%25C3%25ADtulo1.html#216" class="Bound">A</a> <a id="229" class="Symbol">→</a> <a id="231" href="Cap%25C3%25ADtulo1.html#216" class="Bound">A</a>
+        <a id="233" href="Cap%25C3%25ADtulo1.html#209" class="Function">idA</a> <a id="237" href="Cap%25C3%25ADtulo1.html#237" class="Bound">x</a> <a id="239" class="Symbol">=</a> <a id="241" href="Cap%25C3%25ADtulo1.html#237" class="Bound">x</a>
+
+        <a id="244" class="Comment">-- Definición 1.5.8.</a>
+        <a id="cnst"></a><a id="265" href="Cap%25C3%25ADtulo1.html#265" class="Function">cnst</a> <a id="270" class="Symbol">:</a> <a id="272" class="Symbol">(</a><a id="273" href="Cap%25C3%25ADtulo1.html#273" class="Bound">A</a> <a id="275" class="Symbol">:</a> <a id="277" href="Lib.Universes.html#186" data-type="(ℓ : Level) → Universe (ℓ ⁺)" class="Function">𝒰</a> <a id="279" href="Lib.Universes.html#171" data-type="Level" class="Generalizable">𝒾</a><a id="280" class="Symbol">)</a> <a id="282" class="Symbol">(</a><a id="283" href="Cap%25C3%25ADtulo1.html#283" class="Bound">B</a> <a id="285" class="Symbol">:</a> <a id="287" href="Lib.Universes.html#186" data-type="(ℓ : Level) → Universe (ℓ ⁺)" class="Function">𝒰</a> <a id="289" href="Lib.Universes.html#173" data-type="Level" class="Generalizable">𝒿</a><a id="290" class="Symbol">)</a> <a id="292" class="Symbol">(</a><a id="293" href="Cap%25C3%25ADtulo1.html#293" class="Bound">x</a> <a id="295" class="Symbol">:</a> <a id="297" href="Cap%25C3%25ADtulo1.html#273" class="Bound">A</a><a id="298" class="Symbol">)</a> <a id="300" class="Symbol">(</a><a id="301" href="Cap%25C3%25ADtulo1.html#301" class="Bound">y</a> <a id="303" class="Symbol">:</a> <a id="305" href="Cap%25C3%25ADtulo1.html#283" class="Bound">B</a><a id="306" class="Symbol">)</a> <a id="308" class="Symbol">→</a> <a id="310" href="Cap%25C3%25ADtulo1.html#273" class="Bound">A</a>
+        <a id="312" href="Cap%25C3%25ADtulo1.html#265" class="Function">cnst</a> <a id="317" href="Cap%25C3%25ADtulo1.html#317" class="Bound">A</a> <a id="319" href="Cap%25C3%25ADtulo1.html#319" class="Bound">B</a> <a id="321" href="Cap%25C3%25ADtulo1.html#321" class="Bound">x</a> <a id="323" href="Cap%25C3%25ADtulo1.html#323" class="Bound">y</a> <a id="325" class="Symbol">=</a> <a id="327" href="Cap%25C3%25ADtulo1.html#321" class="Bound">x</a>
+
+        <a id="330" class="Comment">-- Definición 1.5.8.</a>
+        <a id="comp"></a><a id="351" href="Cap%25C3%25ADtulo1.html#351" class="Function">comp</a> <a id="356" class="Symbol">:</a> <a id="358" class="Symbol">{</a><a id="359" href="Cap%25C3%25ADtulo1.html#359" class="Bound">A</a> <a id="361" class="Symbol">:</a> <a id="363" href="Lib.Universes.html#186" data-type="(ℓ : Level) → Universe (ℓ ⁺)" class="Function">𝒰</a> <a id="365" href="Lib.Universes.html#171" data-type="Level" class="Generalizable">𝒾</a><a id="366" class="Symbol">}</a> <a id="368" class="Symbol">{</a><a id="369" href="Cap%25C3%25ADtulo1.html#369" class="Bound">B</a> <a id="371" class="Symbol">:</a> <a id="373" href="Lib.Universes.html#186" data-type="(ℓ : Level) → Universe (ℓ ⁺)" class="Function">𝒰</a> <a id="375" href="Lib.Universes.html#173" data-type="Level" class="Generalizable">𝒿</a><a id="376" class="Symbol">}</a> <a id="378" class="Symbol">{</a><a id="379" href="Cap%25C3%25ADtulo1.html#379" class="Bound">C</a> <a id="381" class="Symbol">:</a> <a id="383" href="Lib.Universes.html#186" data-type="(ℓ : Level) → Universe (ℓ ⁺)" class="Function">𝒰</a> <a id="385" href="Lib.Universes.html#175" data-type="Level" class="Generalizable">𝓀</a><a id="386" class="Symbol">}</a>
+            <a id="392" class="Symbol">→</a> <a id="394" class="Symbol">(</a><a id="395" href="Cap%25C3%25ADtulo1.html#369" class="Bound">B</a> <a id="397" class="Symbol">→</a> <a id="399" href="Cap%25C3%25ADtulo1.html#379" class="Bound">C</a><a id="400" class="Symbol">)</a>
+            <a id="406" class="Symbol">→</a> <a id="408" class="Symbol">(</a><a id="409" href="Cap%25C3%25ADtulo1.html#359" class="Bound">A</a> <a id="411" class="Symbol">→</a> <a id="413" href="Cap%25C3%25ADtulo1.html#369" class="Bound">B</a><a id="414" class="Symbol">)</a>
+            <a id="420" class="Symbol">→</a> <a id="422" class="Symbol">(</a><a id="423" href="Cap%25C3%25ADtulo1.html#359" class="Bound">A</a> <a id="425" class="Symbol">→</a> <a id="427" href="Cap%25C3%25ADtulo1.html#379" class="Bound">C</a><a id="428" class="Symbol">)</a>
+        <a id="430" href="Cap%25C3%25ADtulo1.html#351" class="Function">comp</a> <a id="435" href="Cap%25C3%25ADtulo1.html#435" class="Bound">g</a> <a id="437" href="Cap%25C3%25ADtulo1.html#437" class="Bound">f</a> <a id="439" href="Cap%25C3%25ADtulo1.html#439" class="Bound">x</a> <a id="441" class="Symbol">=</a> <a id="443" href="Cap%25C3%25ADtulo1.html#435" class="Bound">g</a> <a id="445" class="Symbol">(</a><a id="446" href="Cap%25C3%25ADtulo1.html#437" class="Bound">f</a> <a id="448" href="Cap%25C3%25ADtulo1.html#439" class="Bound">x</a><a id="449" class="Symbol">)</a>
+
+        <a id="452" class="Comment">---------------------------------------------------------------------------------</a>
+
+        <a id="535" class="Comment">-- Sección 1.6. El tipo de funciones dependientes</a>
+
+        <a id="586" class="Comment">-- Definición 1.6.9.</a>
+        <a id="id"></a><a id="607" href="Cap%25C3%25ADtulo1.html#607" class="Function">id</a> <a id="610" class="Symbol">:</a> <a id="612" class="Symbol">{</a><a id="613" href="Cap%25C3%25ADtulo1.html#613" class="Bound">A</a> <a id="615" class="Symbol">:</a> <a id="617" href="Lib.Universes.html#186" data-type="(ℓ : Level) → Universe (ℓ ⁺)" class="Function">𝒰</a> <a id="619" href="Lib.Universes.html#171" data-type="Level" class="Generalizable">𝒾</a><a id="620" class="Symbol">}</a> <a id="622" class="Symbol">→</a> <a id="624" href="Cap%25C3%25ADtulo1.html#613" class="Bound">A</a> <a id="626" class="Symbol">→</a> <a id="628" href="Cap%25C3%25ADtulo1.html#613" class="Bound">A</a>
+        <a id="630" href="Cap%25C3%25ADtulo1.html#607" class="Function">id</a> <a id="633" href="Cap%25C3%25ADtulo1.html#633" class="Bound">x</a> <a id="635" class="Symbol">=</a> <a id="637" href="Cap%25C3%25ADtulo1.html#633" class="Bound">x</a>
+
+        <a id="𝑖𝑑"></a><a id="640" href="Cap%25C3%25ADtulo1.html#640" class="Function">𝑖𝑑</a> <a id="643" class="Symbol">:</a> <a id="645" class="Symbol">(</a><a id="646" href="Cap%25C3%25ADtulo1.html#646" class="Bound">A</a> <a id="648" class="Symbol">:</a> <a id="650" href="Lib.Universes.html#186" data-type="(ℓ : Level) → Universe (ℓ ⁺)" class="Function">𝒰</a> <a id="652" href="Lib.Universes.html#171" data-type="Level" class="Generalizable">𝒾</a><a id="653" class="Symbol">)</a> <a id="655" class="Symbol">→</a> <a id="657" href="Cap%25C3%25ADtulo1.html#646" class="Bound">A</a> <a id="659" class="Symbol">→</a> <a id="661" href="Cap%25C3%25ADtulo1.html#646" class="Bound">A</a>
+        <a id="663" href="Cap%25C3%25ADtulo1.html#640" class="Function">𝑖𝑑</a> <a id="666" href="Cap%25C3%25ADtulo1.html#666" class="Bound">A</a> <a id="668" href="Cap%25C3%25ADtulo1.html#668" class="Bound">x</a> <a id="670" class="Symbol">=</a> <a id="672" href="Cap%25C3%25ADtulo1.html#668" class="Bound">x</a>
+
+        <a id="675" class="Comment">-- Ejemplo 1.6.11.</a>
+        <a id="swap"></a><a id="694" href="Cap%25C3%25ADtulo1.html#694" class="Function">swap</a> <a id="699" class="Symbol">:</a> <a id="701" class="Symbol">(</a><a id="702" href="Cap%25C3%25ADtulo1.html#702" class="Bound">A</a> <a id="704" class="Symbol">:</a> <a id="706" href="Lib.Universes.html#186" data-type="(ℓ : Level) → Universe (ℓ ⁺)" class="Function">𝒰</a> <a id="708" href="Lib.Universes.html#171" data-type="Level" class="Generalizable">𝒾</a><a id="709" class="Symbol">)</a> <a id="711" class="Symbol">(</a><a id="712" href="Cap%25C3%25ADtulo1.html#712" class="Bound">B</a> <a id="714" class="Symbol">:</a> <a id="716" href="Lib.Universes.html#186" data-type="(ℓ : Level) → Universe (ℓ ⁺)" class="Function">𝒰</a> <a id="718" href="Lib.Universes.html#173" data-type="Level" class="Generalizable">𝒿</a><a id="719" class="Symbol">)</a> <a id="721" class="Symbol">(</a><a id="722" href="Cap%25C3%25ADtulo1.html#722" class="Bound">C</a> <a id="724" class="Symbol">:</a> <a id="726" href="Lib.Universes.html#186" data-type="(ℓ : Level) → Universe (ℓ ⁺)" class="Function">𝒰</a> <a id="728" href="Lib.Universes.html#175" data-type="Level" class="Generalizable">𝓀</a><a id="729" class="Symbol">)</a> <a id="731" class="Symbol">→</a> <a id="733" class="Symbol">((</a><a id="735" href="Cap%25C3%25ADtulo1.html#702" class="Bound">A</a> <a id="737" class="Symbol">→</a> <a id="739" href="Cap%25C3%25ADtulo1.html#712" class="Bound">B</a> <a id="741" class="Symbol">→</a> <a id="743" href="Cap%25C3%25ADtulo1.html#722" class="Bound">C</a><a id="744" class="Symbol">)</a> <a id="746" class="Symbol">→</a> <a id="748" class="Symbol">(</a><a id="749" href="Cap%25C3%25ADtulo1.html#712" class="Bound">B</a> <a id="751" class="Symbol">→</a> <a id="753" href="Cap%25C3%25ADtulo1.html#702" class="Bound">A</a> <a id="755" class="Symbol">→</a> <a id="757" href="Cap%25C3%25ADtulo1.html#722" class="Bound">C</a><a id="758" class="Symbol">))</a>
+        <a id="761" href="Cap%25C3%25ADtulo1.html#694" class="Function">swap</a> <a id="766" href="Cap%25C3%25ADtulo1.html#766" class="Bound">A</a> <a id="768" href="Cap%25C3%25ADtulo1.html#768" class="Bound">B</a> <a id="770" href="Cap%25C3%25ADtulo1.html#770" class="Bound">C</a> <a id="772" href="Cap%25C3%25ADtulo1.html#772" class="Bound">g</a> <a id="774" href="Cap%25C3%25ADtulo1.html#774" class="Bound">b</a> <a id="776" href="Cap%25C3%25ADtulo1.html#776" class="Bound">a</a> <a id="778" class="Symbol">=</a> <a id="780" href="Cap%25C3%25ADtulo1.html#772" class="Bound">g</a> <a id="782" href="Cap%25C3%25ADtulo1.html#776" class="Bound">a</a> <a id="784" href="Cap%25C3%25ADtulo1.html#774" class="Bound">b</a>
+
+
+        <a id="788" class="Comment">-- Definición 1.6.12.</a>
+        <a id="_∘_"></a><a id="810" href="Cap%25C3%25ADtulo1.html#810" class="Function Operator">_∘_</a> <a id="814" class="Symbol">:</a> <a id="816" class="Symbol">{</a><a id="817" href="Cap%25C3%25ADtulo1.html#817" class="Bound">X</a> <a id="819" class="Symbol">:</a> <a id="821" href="Lib.Universes.html#186" data-type="(ℓ : Level) → Universe (ℓ ⁺)" class="Function">𝒰</a> <a id="823" href="Lib.Universes.html#171" data-type="Level" class="Generalizable">𝒾</a><a id="824" class="Symbol">}</a> <a id="826" class="Symbol">{</a><a id="827" href="Cap%25C3%25ADtulo1.html#827" class="Bound">Y</a> <a id="829" class="Symbol">:</a> <a id="831" href="Lib.Universes.html#186" data-type="(ℓ : Level) → Universe (ℓ ⁺)" class="Function">𝒰</a> <a id="833" href="Lib.Universes.html#173" data-type="Level" class="Generalizable">𝒿</a><a id="834" class="Symbol">}</a> <a id="836" class="Symbol">{</a><a id="837" href="Cap%25C3%25ADtulo1.html#837" class="Bound">Z</a> <a id="839" class="Symbol">:</a> <a id="841" href="Cap%25C3%25ADtulo1.html#827" class="Bound">Y</a> <a id="843" class="Symbol">→</a> <a id="845" href="Lib.Universes.html#186" data-type="(ℓ : Level) → Universe (ℓ ⁺)" class="Function">𝒰</a> <a id="847" href="Lib.Universes.html#175" data-type="Level" class="Generalizable">𝓀</a><a id="848" class="Symbol">}</a>
+            <a id="854" class="Symbol">→</a> <a id="856" class="Symbol">((</a><a id="858" href="Cap%25C3%25ADtulo1.html#858" class="Bound">y</a> <a id="860" class="Symbol">:</a> <a id="862" href="Cap%25C3%25ADtulo1.html#827" class="Bound">Y</a><a id="863" class="Symbol">)</a> <a id="865" class="Symbol">→</a> <a id="867" href="Cap%25C3%25ADtulo1.html#837" class="Bound">Z</a> <a id="869" href="Cap%25C3%25ADtulo1.html#858" class="Bound">y</a><a id="870" class="Symbol">)</a>
+            <a id="876" class="Symbol">→</a> <a id="878" class="Symbol">(</a><a id="879" href="Cap%25C3%25ADtulo1.html#879" class="Bound">f</a> <a id="881" class="Symbol">:</a> <a id="883" href="Cap%25C3%25ADtulo1.html#817" class="Bound">X</a> <a id="885" class="Symbol">→</a> <a id="887" href="Cap%25C3%25ADtulo1.html#827" class="Bound">Y</a><a id="888" class="Symbol">)</a>
+            <a id="894" class="Symbol">→</a> <a id="896" class="Symbol">(</a><a id="897" href="Cap%25C3%25ADtulo1.html#897" class="Bound">x</a> <a id="899" class="Symbol">:</a> <a id="901" href="Cap%25C3%25ADtulo1.html#817" class="Bound">X</a><a id="902" class="Symbol">)</a> <a id="904" class="Symbol">→</a> <a id="906" href="Cap%25C3%25ADtulo1.html#837" class="Bound">Z</a> <a id="908" class="Symbol">(</a><a id="909" href="Cap%25C3%25ADtulo1.html#879" class="Bound">f</a> <a id="911" href="Cap%25C3%25ADtulo1.html#897" class="Bound">x</a><a id="912" class="Symbol">)</a>
+        <a id="914" href="Cap%25C3%25ADtulo1.html#914" class="Bound">g</a> <a id="916" href="Cap%25C3%25ADtulo1.html#810" class="Function Operator">∘</a> <a id="918" href="Cap%25C3%25ADtulo1.html#918" class="Bound">f</a> <a id="920" class="Symbol">=</a> <a id="922" class="Symbol">λ</a> <a id="924" href="Cap%25C3%25ADtulo1.html#924" class="Bound">x</a> <a id="926" class="Symbol">→</a> <a id="928" href="Cap%25C3%25ADtulo1.html#914" class="Bound">g</a> <a id="930" class="Symbol">(</a><a id="931" href="Cap%25C3%25ADtulo1.html#918" class="Bound">f</a> <a id="933" href="Cap%25C3%25ADtulo1.html#924" class="Bound">x</a><a id="934" class="Symbol">)</a>
+        <a id="936" class="Keyword">infixl</a> <a id="943" class="Number">70</a> <a id="946" href="Cap%25C3%25ADtulo1.html#810" class="Function Operator">_∘_</a>
+
+        <a id="951" class="Comment">-- Helpers</a>
+        <a id="domain"></a><a id="962" href="Cap%25C3%25ADtulo1.html#962" class="Function">domain</a> <a id="969" class="Symbol">:</a> <a id="971" class="Symbol">{</a><a id="972" href="Cap%25C3%25ADtulo1.html#972" class="Bound">X</a> <a id="974" class="Symbol">:</a> <a id="976" href="Lib.Universes.html#186" data-type="(ℓ : Level) → Universe (ℓ ⁺)" class="Function">𝒰</a> <a id="978" href="Lib.Universes.html#171" data-type="Level" class="Generalizable">𝒾</a><a id="979" class="Symbol">}</a> <a id="981" class="Symbol">{</a><a id="982" href="Cap%25C3%25ADtulo1.html#982" class="Bound">Y</a> <a id="984" class="Symbol">:</a> <a id="986" href="Lib.Universes.html#186" data-type="(ℓ : Level) → Universe (ℓ ⁺)" class="Function">𝒰</a> <a id="988" href="Lib.Universes.html#173" data-type="Level" class="Generalizable">𝒿</a><a id="989" class="Symbol">}</a> <a id="991" class="Symbol">→</a> <a id="993" class="Symbol">(</a><a id="994" href="Cap%25C3%25ADtulo1.html#972" class="Bound">X</a> <a id="996" class="Symbol">→</a> <a id="998" href="Cap%25C3%25ADtulo1.html#982" class="Bound">Y</a><a id="999" class="Symbol">)</a> <a id="1001" class="Symbol">→</a> <a id="1003" href="Lib.Universes.html#186" data-type="(ℓ : Level) → Universe (ℓ ⁺)" class="Function">𝒰</a> <a id="1005" href="Lib.Universes.html#171" data-type="Level" class="Generalizable">𝒾</a>
+        <a id="1007" href="Cap%25C3%25ADtulo1.html#962" class="Function">domain</a> <a id="1014" class="Symbol">{</a><a id="1015" href="Cap%25C3%25ADtulo1.html#1015" class="Bound">𝒾</a><a id="1016" class="Symbol">}</a> <a id="1018" class="Symbol">{</a><a id="1019" href="Cap%25C3%25ADtulo1.html#1019" class="Bound">𝒿</a><a id="1020" class="Symbol">}</a> <a id="1022" class="Symbol">{</a><a id="1023" href="Cap%25C3%25ADtulo1.html#1023" class="Bound">X</a><a id="1024" class="Symbol">}</a> <a id="1026" class="Symbol">{</a><a id="1027" href="Cap%25C3%25ADtulo1.html#1027" class="Bound">Y</a><a id="1028" class="Symbol">}</a> <a id="1030" href="Cap%25C3%25ADtulo1.html#1030" class="Bound">f</a> <a id="1032" class="Symbol">=</a> <a id="1034" href="Cap%25C3%25ADtulo1.html#1023" class="Bound">X</a>
+
+        <a id="codomain"></a><a id="1037" href="Cap%25C3%25ADtulo1.html#1037" class="Function">codomain</a> <a id="1046" class="Symbol">:</a> <a id="1048" class="Symbol">{</a><a id="1049" href="Cap%25C3%25ADtulo1.html#1049" class="Bound">X</a> <a id="1051" class="Symbol">:</a> <a id="1053" href="Lib.Universes.html#186" data-type="(ℓ : Level) → Universe (ℓ ⁺)" class="Function">𝒰</a> <a id="1055" href="Lib.Universes.html#171" data-type="Level" class="Generalizable">𝒾</a><a id="1056" class="Symbol">}</a> <a id="1058" class="Symbol">{</a><a id="1059" href="Cap%25C3%25ADtulo1.html#1059" class="Bound">Y</a> <a id="1061" class="Symbol">:</a> <a id="1063" href="Lib.Universes.html#186" data-type="(ℓ : Level) → Universe (ℓ ⁺)" class="Function">𝒰</a> <a id="1065" href="Lib.Universes.html#173" data-type="Level" class="Generalizable">𝒿</a><a id="1066" class="Symbol">}</a> <a id="1068" class="Symbol">→</a> <a id="1070" class="Symbol">(</a><a id="1071" href="Cap%25C3%25ADtulo1.html#1049" class="Bound">X</a> <a id="1073" class="Symbol">→</a> <a id="1075" href="Cap%25C3%25ADtulo1.html#1059" class="Bound">Y</a><a id="1076" class="Symbol">)</a> <a id="1078" class="Symbol">→</a> <a id="1080" href="Lib.Universes.html#186" data-type="(ℓ : Level) → Universe (ℓ ⁺)" class="Function">𝒰</a> <a id="1082" href="Lib.Universes.html#173" data-type="Level" class="Generalizable">𝒿</a>
+        <a id="1084" href="Cap%25C3%25ADtulo1.html#1037" class="Function">codomain</a> <a id="1093" class="Symbol">{</a><a id="1094" href="Cap%25C3%25ADtulo1.html#1094" class="Bound">𝒾</a><a id="1095" class="Symbol">}</a> <a id="1097" class="Symbol">{</a><a id="1098" href="Cap%25C3%25ADtulo1.html#1098" class="Bound">𝒿</a><a id="1099" class="Symbol">}</a> <a id="1101" class="Symbol">{</a><a id="1102" href="Cap%25C3%25ADtulo1.html#1102" class="Bound">X</a><a id="1103" class="Symbol">}</a> <a id="1105" class="Symbol">{</a><a id="1106" href="Cap%25C3%25ADtulo1.html#1106" class="Bound">Y</a><a id="1107" class="Symbol">}</a> <a id="1109" href="Cap%25C3%25ADtulo1.html#1109" class="Bound">f</a> <a id="1111" class="Symbol">=</a> <a id="1113" href="Cap%25C3%25ADtulo1.html#1106" class="Bound">Y</a>
+
+        <a id="1116" class="Comment">---------------------------------------------------------------------------------</a>
+
+        <a id="1199" class="Comment">-- Sección 1.7. El tipo de pares dependientes</a>
+
+        <a id="1246" class="Comment">-- Definición del tipo de pares dependientes</a>
+        <a id="1291" class="Keyword">record</a> <a id="Σ"></a><a id="1298" href="Cap%25C3%25ADtulo1.html#1298" class="Record">Σ</a> <a id="1300" class="Symbol">{</a><a id="1301" href="Cap%25C3%25ADtulo1.html#1301" class="Bound">X</a> <a id="1303" class="Symbol">:</a> <a id="1305" href="Lib.Universes.html#186" data-type="(ℓ : Level) → Universe (ℓ ⁺)" class="Function">𝒰</a> <a id="1307" href="Lib.Universes.html#171" data-type="Level" class="Generalizable">𝒾</a><a id="1308" class="Symbol">}</a> <a id="1310" class="Symbol">(</a><a id="1311" href="Cap%25C3%25ADtulo1.html#1311" class="Bound">Y</a> <a id="1313" class="Symbol">:</a> <a id="1315" href="Cap%25C3%25ADtulo1.html#1301" class="Bound">X</a> <a id="1317" class="Symbol">→</a> <a id="1319" href="Lib.Universes.html#186" data-type="(ℓ : Level) → Universe (ℓ ⁺)" class="Function">𝒰</a> <a id="1321" href="Lib.Universes.html#173" data-type="Level" class="Generalizable">𝒿</a><a id="1322" class="Symbol">)</a> <a id="1324" class="Symbol">:</a> <a id="1326" href="Lib.Universes.html#186" data-type="(ℓ : Level) → Universe (ℓ ⁺)" class="Function">𝒰</a> <a id="1328" class="Symbol">(</a><a id="1329" href="Cap%25C3%25ADtulo1.html#1307" class="Bound">𝒾</a> <a id="1331" href="Agda.Primitive.html#810" data-type="Level → Level → Level" class="Primitive Operator">⊔</a> <a id="1333" href="Cap%25C3%25ADtulo1.html#1321" class="Bound">𝒿</a><a id="1334" class="Symbol">)</a> <a id="1336" class="Keyword">where</a>
+          <a id="1344" class="Keyword">constructor</a>
+            <a id="_,_"></a><a id="1360" href="Cap%25C3%25ADtulo1.html#1360" class="InductiveConstructor Operator">_,_</a>
+          <a id="1366" class="Keyword">field</a>
+            <a id="Σ.x"></a><a id="1376" href="Cap%25C3%25ADtulo1.html#1376" class="Field">x</a> <a id="1378" class="Symbol">:</a> <a id="1380" href="Cap%25C3%25ADtulo1.html#1301" class="Bound">X</a>
+            <a id="Σ.y"></a><a id="1386" href="Cap%25C3%25ADtulo1.html#1386" class="Field">y</a> <a id="1388" class="Symbol">:</a> <a id="1390" href="Cap%25C3%25ADtulo1.html#1311" class="Bound">Y</a> <a id="1392" href="Cap%25C3%25ADtulo1.html#1376" class="Field">x</a>
+        <a id="1394" class="Keyword">infixr</a> <a id="1401" class="Number">50</a> <a id="1404" href="Cap%25C3%25ADtulo1.html#1360" class="InductiveConstructor Operator">_,_</a>
+
+        <a id="-Σ"></a><a id="1409" href="Cap%25C3%25ADtulo1.html#1409" class="Function">-Σ</a> <a id="1412" class="Symbol">:</a> <a id="1414" class="Symbol">(</a><a id="1415" href="Cap%25C3%25ADtulo1.html#1415" class="Bound">X</a> <a id="1417" class="Symbol">:</a> <a id="1419" href="Lib.Universes.html#186" data-type="(ℓ : Level) → Universe (ℓ ⁺)" class="Function">𝒰</a> <a id="1421" href="Lib.Universes.html#171" data-type="Level" class="Generalizable">𝒾</a><a id="1422" class="Symbol">)</a> <a id="1424" class="Symbol">(</a><a id="1425" href="Cap%25C3%25ADtulo1.html#1425" class="Bound">Y</a> <a id="1427" class="Symbol">:</a> <a id="1429" href="Cap%25C3%25ADtulo1.html#1415" class="Bound">X</a> <a id="1431" class="Symbol">→</a> <a id="1433" href="Lib.Universes.html#186" data-type="(ℓ : Level) → Universe (ℓ ⁺)" class="Function">𝒰</a> <a id="1435" href="Lib.Universes.html#173" data-type="Level" class="Generalizable">𝒿</a><a id="1436" class="Symbol">)</a> <a id="1438" class="Symbol">→</a> <a id="1440" href="Lib.Universes.html#186" data-type="(ℓ : Level) → Universe (ℓ ⁺)" class="Function">𝒰</a> <a id="1442" class="Symbol">(</a><a id="1443" href="Lib.Universes.html#171" data-type="Level" class="Generalizable">𝒾</a> <a id="1445" href="Agda.Primitive.html#810" data-type="Level → Level → Level" class="Primitive Operator">⊔</a> <a id="1447" href="Lib.Universes.html#173" data-type="Level" class="Generalizable">𝒿</a><a id="1448" class="Symbol">)</a>
+        <a id="1450" href="Cap%25C3%25ADtulo1.html#1409" class="Function">-Σ</a> <a id="1453" href="Cap%25C3%25ADtulo1.html#1453" class="Bound">X</a> <a id="1455" href="Cap%25C3%25ADtulo1.html#1455" class="Bound">Y</a> <a id="1457" class="Symbol">=</a> <a id="1459" href="Cap%25C3%25ADtulo1.html#1298" class="Record">Σ</a> <a id="1461" href="Cap%25C3%25ADtulo1.html#1455" class="Bound">Y</a>
+        <a id="1463" class="Keyword">infixr</a> <a id="1470" class="Number">-1</a> <a id="1473" href="Cap%25C3%25ADtulo1.html#1409" class="Function">-Σ</a>
+
+        <a id="1477" class="Keyword">syntax</a> <a id="1484" href="Cap%25C3%25ADtulo1.html#1409" class="Function">-Σ</a> <a id="1487" class="Bound">X</a> <a id="1489" class="Symbol">(λ</a> <a id="1492" class="Bound">x</a> <a id="1494" class="Symbol">→</a> <a id="1496" class="Bound">y</a><a id="1497" class="Symbol">)</a> <a id="1499" class="Symbol">=</a> <a id="1501" class="Function">Σ</a> <a id="1503" class="Bound">x</a> <a id="1505" class="Function">꞉</a> <a id="1507" class="Bound">X</a> <a id="1509" class="Function">,</a> <a id="1511" class="Bound">y</a>
+
+        <a id="_×_"></a><a id="1514" href="Cap%25C3%25ADtulo1.html#1514" class="Function Operator">_×_</a> <a id="1518" class="Symbol">:</a> <a id="1520" class="Symbol">(</a><a id="1521" href="Cap%25C3%25ADtulo1.html#1521" class="Bound">X</a> <a id="1523" class="Symbol">:</a> <a id="1525" href="Lib.Universes.html#186" data-type="(ℓ : Level) → Universe (ℓ ⁺)" class="Function">𝒰</a> <a id="1527" href="Lib.Universes.html#171" data-type="Level" class="Generalizable">𝒾</a><a id="1528" class="Symbol">)</a> <a id="1530" class="Symbol">(</a><a id="1531" href="Cap%25C3%25ADtulo1.html#1531" class="Bound">Y</a> <a id="1533" class="Symbol">:</a> <a id="1535" href="Lib.Universes.html#186" data-type="(ℓ : Level) → Universe (ℓ ⁺)" class="Function">𝒰</a> <a id="1537" href="Lib.Universes.html#173" data-type="Level" class="Generalizable">𝒿</a><a id="1538" class="Symbol">)</a> <a id="1540" class="Symbol">→</a> <a id="1542" href="Lib.Universes.html#186" data-type="(ℓ : Level) → Universe (ℓ ⁺)" class="Function">𝒰</a> <a id="1544" class="Symbol">(</a><a id="1545" href="Lib.Universes.html#171" data-type="Level" class="Generalizable">𝒾</a> <a id="1547" href="Agda.Primitive.html#810" data-type="Level → Level → Level" class="Primitive Operator">⊔</a> <a id="1549" href="Lib.Universes.html#173" data-type="Level" class="Generalizable">𝒿</a><a id="1550" class="Symbol">)</a>
+        <a id="1552" href="Cap%25C3%25ADtulo1.html#1552" class="Bound">X</a> <a id="1554" href="Cap%25C3%25ADtulo1.html#1514" class="Function Operator">×</a> <a id="1556" href="Cap%25C3%25ADtulo1.html#1556" class="Bound">Y</a> <a id="1558" class="Symbol">=</a> <a id="1560" href="Cap%25C3%25ADtulo1.html#1409" class="Function">Σ</a> <a id="1562" href="Cap%25C3%25ADtulo1.html#1562" class="Bound">x</a> <a id="1564" href="Cap%25C3%25ADtulo1.html#1409" class="Function">꞉</a> <a id="1566" href="Cap%25C3%25ADtulo1.html#1552" class="Bound">X</a> <a id="1568" href="Cap%25C3%25ADtulo1.html#1409" class="Function">,</a> <a id="1570" href="Cap%25C3%25ADtulo1.html#1556" class="Bound">Y</a>
+        <a id="1572" class="Keyword">infixr</a> <a id="1579" class="Number">30</a> <a id="1582" href="Cap%25C3%25ADtulo1.html#1514" class="Function Operator">_×_</a>
+
+        <a id="1587" class="Comment">-- Teorema 1.7.5.</a>
+        <a id="Σ-induction"></a><a id="1605" href="Cap%25C3%25ADtulo1.html#1605" class="Function">Σ-induction</a> <a id="1617" class="Symbol">:</a> <a id="1619" class="Symbol">{</a><a id="1620" href="Cap%25C3%25ADtulo1.html#1620" class="Bound">X</a> <a id="1622" class="Symbol">:</a> <a id="1624" href="Lib.Universes.html#186" data-type="(ℓ : Level) → Universe (ℓ ⁺)" class="Function">𝒰</a> <a id="1626" href="Lib.Universes.html#171" data-type="Level" class="Generalizable">𝒾</a><a id="1627" class="Symbol">}</a> <a id="1629" class="Symbol">{</a><a id="1630" href="Cap%25C3%25ADtulo1.html#1630" class="Bound">Y</a> <a id="1632" class="Symbol">:</a> <a id="1634" href="Cap%25C3%25ADtulo1.html#1620" class="Bound">X</a> <a id="1636" class="Symbol">→</a> <a id="1638" href="Lib.Universes.html#186" data-type="(ℓ : Level) → Universe (ℓ ⁺)" class="Function">𝒰</a> <a id="1640" href="Lib.Universes.html#173" data-type="Level" class="Generalizable">𝒿</a><a id="1641" class="Symbol">}</a> <a id="1643" class="Symbol">{</a><a id="1644" href="Cap%25C3%25ADtulo1.html#1644" class="Bound">A</a> <a id="1646" class="Symbol">:</a> <a id="1648" href="Cap%25C3%25ADtulo1.html#1298" class="Record">Σ</a> <a id="1650" href="Cap%25C3%25ADtulo1.html#1630" class="Bound">Y</a> <a id="1652" class="Symbol">→</a> <a id="1654" href="Lib.Universes.html#186" data-type="(ℓ : Level) → Universe (ℓ ⁺)" class="Function">𝒰</a> <a id="1656" href="Lib.Universes.html#175" data-type="Level" class="Generalizable">𝓀</a><a id="1657" class="Symbol">}</a>
+                    <a id="1671" class="Symbol">→</a> <a id="1673" class="Symbol">((</a><a id="1675" href="Cap%25C3%25ADtulo1.html#1675" class="Bound">x</a> <a id="1677" class="Symbol">:</a> <a id="1679" href="Cap%25C3%25ADtulo1.html#1620" class="Bound">X</a><a id="1680" class="Symbol">)</a> <a id="1682" class="Symbol">(</a><a id="1683" href="Cap%25C3%25ADtulo1.html#1683" class="Bound">y</a> <a id="1685" class="Symbol">:</a> <a id="1687" href="Cap%25C3%25ADtulo1.html#1630" class="Bound">Y</a> <a id="1689" href="Cap%25C3%25ADtulo1.html#1675" class="Bound">x</a><a id="1690" class="Symbol">)</a> <a id="1692" class="Symbol">→</a> <a id="1694" href="Cap%25C3%25ADtulo1.html#1644" class="Bound">A</a> <a id="1696" class="Symbol">(</a><a id="1697" href="Cap%25C3%25ADtulo1.html#1675" class="Bound">x</a> <a id="1699" href="Cap%25C3%25ADtulo1.html#1360" class="InductiveConstructor Operator">,</a> <a id="1701" href="Cap%25C3%25ADtulo1.html#1683" class="Bound">y</a><a id="1702" class="Symbol">))</a>
+                    <a id="1717" class="Symbol">→</a> <a id="1719" class="Symbol">(</a><a id="1720" href="Cap%25C3%25ADtulo1.html#1720" class="Bound">(</a><a id="1721" href="Cap%25C3%25ADtulo1.html#1721" class="Bound">x</a> <a id="1723" href="Cap%25C3%25ADtulo1.html#1360" class="InductiveConstructor Operator">,</a> <a id="1725" href="Cap%25C3%25ADtulo1.html#1725" class="Bound">y</a><a id="1726" href="Cap%25C3%25ADtulo1.html#1720" class="Bound">)</a> <a id="1728" class="Symbol">:</a> <a id="1730" href="Cap%25C3%25ADtulo1.html#1298" class="Record">Σ</a> <a id="1732" href="Cap%25C3%25ADtulo1.html#1630" class="Bound">Y</a><a id="1733" class="Symbol">)</a> <a id="1735" class="Symbol">→</a> <a id="1737" href="Cap%25C3%25ADtulo1.html#1644" class="Bound">A</a> <a id="1739" class="Symbol">(</a><a id="1740" href="Cap%25C3%25ADtulo1.html#1721" class="Bound">x</a> <a id="1742" href="Cap%25C3%25ADtulo1.html#1360" class="InductiveConstructor Operator">,</a> <a id="1744" href="Cap%25C3%25ADtulo1.html#1725" class="Bound">y</a><a id="1745" class="Symbol">)</a>
+        <a id="1747" href="Cap%25C3%25ADtulo1.html#1605" class="Function">Σ-induction</a> <a id="1759" href="Cap%25C3%25ADtulo1.html#1759" class="Bound">g</a> <a id="1761" class="Symbol">(</a><a id="1762" href="Cap%25C3%25ADtulo1.html#1762" class="Bound">x</a> <a id="1764" href="Cap%25C3%25ADtulo1.html#1360" class="InductiveConstructor Operator">,</a> <a id="1766" href="Cap%25C3%25ADtulo1.html#1766" class="Bound">y</a><a id="1767" class="Symbol">)</a> <a id="1769" class="Symbol">=</a> <a id="1771" href="Cap%25C3%25ADtulo1.html#1759" class="Bound">g</a> <a id="1773" href="Cap%25C3%25ADtulo1.html#1762" class="Bound">x</a> <a id="1775" href="Cap%25C3%25ADtulo1.html#1766" class="Bound">y</a>
+
+        <a id="1778" class="Comment">-- Teorema 1.7.6.</a>
+        <a id="pr₁"></a><a id="1796" href="Cap%25C3%25ADtulo1.html#1796" class="Function">pr₁</a> <a id="1800" class="Symbol">:</a> <a id="1802" class="Symbol">{</a><a id="1803" href="Cap%25C3%25ADtulo1.html#1803" class="Bound">X</a> <a id="1805" class="Symbol">:</a> <a id="1807" href="Lib.Universes.html#186" data-type="(ℓ : Level) → Universe (ℓ ⁺)" class="Function">𝒰</a> <a id="1809" href="Lib.Universes.html#171" data-type="Level" class="Generalizable">𝒾</a><a id="1810" class="Symbol">}</a> <a id="1812" class="Symbol">{</a><a id="1813" href="Cap%25C3%25ADtulo1.html#1813" class="Bound">Y</a> <a id="1815" class="Symbol">:</a> <a id="1817" href="Cap%25C3%25ADtulo1.html#1803" class="Bound">X</a> <a id="1819" class="Symbol">→</a> <a id="1821" href="Lib.Universes.html#186" data-type="(ℓ : Level) → Universe (ℓ ⁺)" class="Function">𝒰</a> <a id="1823" href="Lib.Universes.html#173" data-type="Level" class="Generalizable">𝒿</a><a id="1824" class="Symbol">}</a> <a id="1826" class="Symbol">→</a> <a id="1828" href="Cap%25C3%25ADtulo1.html#1298" class="Record">Σ</a> <a id="1830" href="Cap%25C3%25ADtulo1.html#1813" class="Bound">Y</a> <a id="1832" class="Symbol">→</a> <a id="1834" href="Cap%25C3%25ADtulo1.html#1803" class="Bound">X</a>
+        <a id="1836" href="Cap%25C3%25ADtulo1.html#1796" class="Function">pr₁</a> <a id="1840" class="Symbol">(</a><a id="1841" href="Cap%25C3%25ADtulo1.html#1841" class="Bound">x</a> <a id="1843" href="Cap%25C3%25ADtulo1.html#1360" class="InductiveConstructor Operator">,</a> <a id="1845" href="Cap%25C3%25ADtulo1.html#1845" class="Bound">y</a><a id="1846" class="Symbol">)</a> <a id="1848" class="Symbol">=</a> <a id="1850" href="Cap%25C3%25ADtulo1.html#1841" class="Bound">x</a>
+
+        <a id="pr₂"></a><a id="1853" href="Cap%25C3%25ADtulo1.html#1853" class="Function">pr₂</a> <a id="1857" class="Symbol">:</a> <a id="1859" class="Symbol">{</a><a id="1860" href="Cap%25C3%25ADtulo1.html#1860" class="Bound">X</a> <a id="1862" class="Symbol">:</a> <a id="1864" href="Lib.Universes.html#186" data-type="(ℓ : Level) → Universe (ℓ ⁺)" class="Function">𝒰</a> <a id="1866" href="Lib.Universes.html#171" data-type="Level" class="Generalizable">𝒾</a><a id="1867" class="Symbol">}</a> <a id="1869" class="Symbol">{</a><a id="1870" href="Cap%25C3%25ADtulo1.html#1870" class="Bound">Y</a> <a id="1872" class="Symbol">:</a> <a id="1874" href="Cap%25C3%25ADtulo1.html#1860" class="Bound">X</a> <a id="1876" class="Symbol">→</a> <a id="1878" href="Lib.Universes.html#186" data-type="(ℓ : Level) → Universe (ℓ ⁺)" class="Function">𝒰</a> <a id="1880" href="Lib.Universes.html#173" data-type="Level" class="Generalizable">𝒿</a><a id="1881" class="Symbol">}</a> <a id="1883" class="Symbol">→</a> <a id="1885" class="Symbol">(</a><a id="1886" href="Cap%25C3%25ADtulo1.html#1886" class="Bound">z</a> <a id="1888" class="Symbol">:</a> <a id="1890" href="Cap%25C3%25ADtulo1.html#1298" class="Record">Σ</a> <a id="1892" href="Cap%25C3%25ADtulo1.html#1870" class="Bound">Y</a><a id="1893" class="Symbol">)</a> <a id="1895" class="Symbol">→</a> <a id="1897" href="Cap%25C3%25ADtulo1.html#1870" class="Bound">Y</a> <a id="1899" class="Symbol">(</a><a id="1900" href="Cap%25C3%25ADtulo1.html#1796" class="Function">pr₁</a> <a id="1904" href="Cap%25C3%25ADtulo1.html#1886" class="Bound">z</a><a id="1905" class="Symbol">)</a>
+        <a id="1907" href="Cap%25C3%25ADtulo1.html#1853" class="Function">pr₂</a> <a id="1911" class="Symbol">(</a><a id="1912" href="Cap%25C3%25ADtulo1.html#1912" class="Bound">x</a> <a id="1914" href="Cap%25C3%25ADtulo1.html#1360" class="InductiveConstructor Operator">,</a> <a id="1916" href="Cap%25C3%25ADtulo1.html#1916" class="Bound">y</a><a id="1917" class="Symbol">)</a> <a id="1919" class="Symbol">=</a> <a id="1921" href="Cap%25C3%25ADtulo1.html#1916" class="Bound">y</a>
+
+
+        <a id="1925" class="Comment">---------------------------------------------------------------------------------</a>
+
+        <a id="2008" class="Comment">-- Sección 1.8. 0, 1, 2 y el tipo del coproducto</a>
+
+        <a id="2058" class="Comment">-- Definición del tipo de pares dependientes</a>
+        <a id="2103" class="Keyword">data</a> <a id="𝟘"></a><a id="2108" href="Cap%25C3%25ADtulo1.html#2108" class="Datatype">𝟘</a> <a id="2110" class="Symbol">:</a> <a id="2112" href="Lib.Universes.html#237" data-type="Universe₁" class="Function">𝒰₀</a> <a id="2115" class="Keyword">where</a>
+
+        <a id="2122" class="Comment">-- Teorema 1.8.2.</a>
+        <a id="𝟘-induction"></a><a id="2140" href="Cap%25C3%25ADtulo1.html#2140" class="Function">𝟘-induction</a> <a id="2152" class="Symbol">:</a> <a id="2154" class="Symbol">(</a><a id="2155" href="Cap%25C3%25ADtulo1.html#2155" class="Bound">A</a> <a id="2157" class="Symbol">:</a> <a id="2159" href="Cap%25C3%25ADtulo1.html#2108" class="Datatype">𝟘</a> <a id="2161" class="Symbol">→</a> <a id="2163" href="Lib.Universes.html#186" data-type="(ℓ : Level) → Universe (ℓ ⁺)" class="Function">𝒰</a> <a id="2165" href="Lib.Universes.html#171" data-type="Level" class="Generalizable">𝒾</a><a id="2166" class="Symbol">)</a> <a id="2168" class="Symbol">→</a> <a id="2170" class="Symbol">(</a><a id="2171" href="Cap%25C3%25ADtulo1.html#2171" class="Bound">x</a> <a id="2173" class="Symbol">:</a> <a id="2175" href="Cap%25C3%25ADtulo1.html#2108" class="Datatype">𝟘</a><a id="2176" class="Symbol">)</a> <a id="2178" class="Symbol">→</a> <a id="2180" href="Cap%25C3%25ADtulo1.html#2155" class="Bound">A</a> <a id="2182" href="Cap%25C3%25ADtulo1.html#2171" class="Bound">x</a>
+        <a id="2184" href="Cap%25C3%25ADtulo1.html#2140" class="Function">𝟘-induction</a> <a id="2196" href="Cap%25C3%25ADtulo1.html#2196" class="Bound">A</a> <a id="2198" class="Symbol">()</a>
+
+        <a id="2202" class="Comment">-- Helper</a>
+        <a id="!𝟘"></a><a id="2212" href="Cap%25C3%25ADtulo1.html#2212" class="Function">!𝟘</a> <a id="2215" class="Symbol">:</a> <a id="2217" class="Symbol">(</a><a id="2218" href="Cap%25C3%25ADtulo1.html#2218" class="Bound">A</a> <a id="2220" class="Symbol">:</a> <a id="2222" href="Lib.Universes.html#186" data-type="(ℓ : Level) → Universe (ℓ ⁺)" class="Function">𝒰</a> <a id="2224" href="Lib.Universes.html#171" data-type="Level" class="Generalizable">𝒾</a><a id="2225" class="Symbol">)</a> <a id="2227" class="Symbol">→</a> <a id="2229" href="Cap%25C3%25ADtulo1.html#2108" class="Datatype">𝟘</a> <a id="2231" class="Symbol">→</a> <a id="2233" href="Cap%25C3%25ADtulo1.html#2218" class="Bound">A</a>
+        <a id="2235" href="Cap%25C3%25ADtulo1.html#2212" class="Function">!𝟘</a> <a id="2238" href="Cap%25C3%25ADtulo1.html#2238" class="Bound">A</a> <a id="2240" class="Symbol">=</a> <a id="2242" href="Cap%25C3%25ADtulo1.html#2140" class="Function">𝟘-induction</a> <a id="2254" class="Symbol">(λ</a> <a id="2257" href="Cap%25C3%25ADtulo1.html#2257" class="Bound">_</a> <a id="2259" class="Symbol">→</a> <a id="2261" href="Cap%25C3%25ADtulo1.html#2238" class="Bound">A</a><a id="2262" class="Symbol">)</a>
+
+        <a id="2265" class="Comment">-- Definición del tipo de pares dependientes</a>
+        <a id="2310" class="Keyword">data</a> <a id="𝟙"></a><a id="2315" href="Cap%25C3%25ADtulo1.html#2315" class="Datatype">𝟙</a> <a id="2317" class="Symbol">:</a> <a id="2319" href="Lib.Universes.html#237" data-type="Universe₁" class="Function">𝒰₀</a> <a id="2322" class="Keyword">where</a>
+          <a id="𝟙.⋆"></a><a id="2330" href="Cap%25C3%25ADtulo1.html#2330" class="InductiveConstructor">⋆</a> <a id="2332" class="Symbol">:</a> <a id="2334" href="Cap%25C3%25ADtulo1.html#2315" class="Datatype">𝟙</a>
+
+        <a id="2337" class="Comment">-- Teorema 1.8.4.</a>
+        <a id="𝟙-induction"></a><a id="2355" href="Cap%25C3%25ADtulo1.html#2355" class="Function">𝟙-induction</a> <a id="2367" class="Symbol">:</a> <a id="2369" class="Symbol">(</a><a id="2370" href="Cap%25C3%25ADtulo1.html#2370" class="Bound">A</a> <a id="2372" class="Symbol">:</a> <a id="2374" href="Cap%25C3%25ADtulo1.html#2315" class="Datatype">𝟙</a> <a id="2376" class="Symbol">→</a> <a id="2378" href="Lib.Universes.html#186" data-type="(ℓ : Level) → Universe (ℓ ⁺)" class="Function">𝒰</a> <a id="2380" href="Lib.Universes.html#171" data-type="Level" class="Generalizable">𝒾</a><a id="2381" class="Symbol">)</a> <a id="2383" class="Symbol">→</a> <a id="2385" href="Cap%25C3%25ADtulo1.html#2370" class="Bound">A</a> <a id="2387" href="Cap%25C3%25ADtulo1.html#2330" class="InductiveConstructor">⋆</a> <a id="2389" class="Symbol">→</a> <a id="2391" class="Symbol">(</a><a id="2392" href="Cap%25C3%25ADtulo1.html#2392" class="Bound">x</a> <a id="2394" class="Symbol">:</a> <a id="2396" href="Cap%25C3%25ADtulo1.html#2315" class="Datatype">𝟙</a><a id="2397" class="Symbol">)</a> <a id="2399" class="Symbol">→</a> <a id="2401" href="Cap%25C3%25ADtulo1.html#2370" class="Bound">A</a> <a id="2403" href="Cap%25C3%25ADtulo1.html#2392" class="Bound">x</a>
+        <a id="2405" href="Cap%25C3%25ADtulo1.html#2355" class="Function">𝟙-induction</a> <a id="2417" href="Cap%25C3%25ADtulo1.html#2417" class="Bound">A</a> <a id="2419" href="Cap%25C3%25ADtulo1.html#2419" class="Bound">a</a> <a id="2421" href="Cap%25C3%25ADtulo1.html#2330" class="InductiveConstructor">⋆</a> <a id="2423" class="Symbol">=</a> <a id="2425" href="Cap%25C3%25ADtulo1.html#2419" class="Bound">a</a>
+
+        <a id="2428" class="Comment">-- Definición del tipo del coproducto</a>
+        <a id="2466" class="Keyword">data</a> <a id="_⊎_"></a><a id="2471" href="Cap%25C3%25ADtulo1.html#2471" class="Datatype Operator">_⊎_</a> <a id="2475" class="Symbol">(</a><a id="2476" href="Cap%25C3%25ADtulo1.html#2476" class="Bound">X</a> <a id="2478" class="Symbol">:</a> <a id="2480" href="Lib.Universes.html#186" data-type="(ℓ : Level) → Universe (ℓ ⁺)" class="Function">𝒰</a> <a id="2482" href="Lib.Universes.html#171" data-type="Level" class="Generalizable">𝒾</a><a id="2483" class="Symbol">)</a> <a id="2485" class="Symbol">(</a><a id="2486" href="Cap%25C3%25ADtulo1.html#2486" class="Bound">Y</a> <a id="2488" class="Symbol">:</a> <a id="2490" href="Lib.Universes.html#186" data-type="(ℓ : Level) → Universe (ℓ ⁺)" class="Function">𝒰</a> <a id="2492" href="Lib.Universes.html#173" data-type="Level" class="Generalizable">𝒿</a><a id="2493" class="Symbol">)</a> <a id="2495" class="Symbol">:</a> <a id="2497" href="Lib.Universes.html#186" data-type="(ℓ : Level) → Universe (ℓ ⁺)" class="Function">𝒰</a> <a id="2499" class="Symbol">(</a><a id="2500" href="Cap%25C3%25ADtulo1.html#2482" class="Bound">𝒾</a> <a id="2502" href="Agda.Primitive.html#810" data-type="Level → Level → Level" class="Primitive Operator">⊔</a> <a id="2504" href="Cap%25C3%25ADtulo1.html#2492" class="Bound">𝒿</a><a id="2505" class="Symbol">)</a> <a id="2507" class="Keyword">where</a>
+         <a id="_⊎_.inl"></a><a id="2514" href="Cap%25C3%25ADtulo1.html#2514" class="InductiveConstructor">inl</a> <a id="2518" class="Symbol">:</a> <a id="2520" href="Cap%25C3%25ADtulo1.html#2476" class="Bound">X</a> <a id="2522" class="Symbol">→</a> <a id="2524" href="Cap%25C3%25ADtulo1.html#2476" class="Bound">X</a> <a id="2526" href="Cap%25C3%25ADtulo1.html#2471" class="Datatype Operator">⊎</a> <a id="2528" href="Cap%25C3%25ADtulo1.html#2486" class="Bound">Y</a>
+         <a id="_⊎_.inr"></a><a id="2531" href="Cap%25C3%25ADtulo1.html#2531" class="InductiveConstructor">inr</a> <a id="2535" class="Symbol">:</a> <a id="2537" href="Cap%25C3%25ADtulo1.html#2486" class="Bound">Y</a> <a id="2539" class="Symbol">→</a> <a id="2541" href="Cap%25C3%25ADtulo1.html#2476" class="Bound">X</a> <a id="2543" href="Cap%25C3%25ADtulo1.html#2471" class="Datatype Operator">⊎</a> <a id="2545" href="Cap%25C3%25ADtulo1.html#2486" class="Bound">Y</a>
+        <a id="2547" class="Keyword">infixr</a> <a id="2554" class="Number">20</a> <a id="2557" href="Cap%25C3%25ADtulo1.html#2471" class="Datatype Operator">_⊎_</a>
+
+        <a id="2562" class="Comment">-- Teorema 1.8.8.</a>
+        <a id="⊎-ind"></a><a id="2580" href="Cap%25C3%25ADtulo1.html#2580" class="Function">⊎-ind</a> <a id="2586" class="Symbol">:</a> <a id="2588" class="Symbol">{</a><a id="2589" href="Cap%25C3%25ADtulo1.html#2589" class="Bound">A</a> <a id="2591" class="Symbol">:</a> <a id="2593" href="Lib.Universes.html#186" data-type="(ℓ : Level) → Universe (ℓ ⁺)" class="Function">𝒰</a> <a id="2595" href="Lib.Universes.html#171" data-type="Level" class="Generalizable">𝒾</a><a id="2596" class="Symbol">}</a> <a id="2598" class="Symbol">{</a><a id="2599" href="Cap%25C3%25ADtulo1.html#2599" class="Bound">B</a> <a id="2601" class="Symbol">:</a> <a id="2603" href="Lib.Universes.html#186" data-type="(ℓ : Level) → Universe (ℓ ⁺)" class="Function">𝒰</a> <a id="2605" href="Lib.Universes.html#173" data-type="Level" class="Generalizable">𝒿</a><a id="2606" class="Symbol">}</a> <a id="2608" class="Symbol">(</a><a id="2609" href="Cap%25C3%25ADtulo1.html#2609" class="Bound">C</a> <a id="2611" class="Symbol">:</a> <a id="2613" href="Cap%25C3%25ADtulo1.html#2589" class="Bound">A</a> <a id="2615" href="Cap%25C3%25ADtulo1.html#2471" class="Datatype Operator">⊎</a> <a id="2617" href="Cap%25C3%25ADtulo1.html#2599" class="Bound">B</a> <a id="2619" class="Symbol">→</a> <a id="2621" href="Lib.Universes.html#186" data-type="(ℓ : Level) → Universe (ℓ ⁺)" class="Function">𝒰</a> <a id="2623" href="Lib.Universes.html#175" data-type="Level" class="Generalizable">𝓀</a><a id="2624" class="Symbol">)</a>
+              <a id="2632" class="Symbol">→</a> <a id="2634" class="Symbol">((</a><a id="2636" href="Cap%25C3%25ADtulo1.html#2636" class="Bound">x</a> <a id="2638" class="Symbol">:</a> <a id="2640" href="Cap%25C3%25ADtulo1.html#2589" class="Bound">A</a><a id="2641" class="Symbol">)</a> <a id="2643" class="Symbol">→</a> <a id="2645" href="Cap%25C3%25ADtulo1.html#2609" class="Bound">C</a> <a id="2647" class="Symbol">(</a><a id="2648" href="Cap%25C3%25ADtulo1.html#2514" class="InductiveConstructor">inl</a> <a id="2652" href="Cap%25C3%25ADtulo1.html#2636" class="Bound">x</a><a id="2653" class="Symbol">))</a>
+              <a id="2662" class="Symbol">→</a> <a id="2664" class="Symbol">((</a><a id="2666" href="Cap%25C3%25ADtulo1.html#2666" class="Bound">y</a> <a id="2668" class="Symbol">:</a> <a id="2670" href="Cap%25C3%25ADtulo1.html#2599" class="Bound">B</a><a id="2671" class="Symbol">)</a> <a id="2673" class="Symbol">→</a> <a id="2675" href="Cap%25C3%25ADtulo1.html#2609" class="Bound">C</a> <a id="2677" class="Symbol">(</a><a id="2678" href="Cap%25C3%25ADtulo1.html#2531" class="InductiveConstructor">inr</a> <a id="2682" href="Cap%25C3%25ADtulo1.html#2666" class="Bound">y</a><a id="2683" class="Symbol">))</a>
+              <a id="2692" class="Symbol">→</a> <a id="2694" class="Symbol">(</a><a id="2695" href="Cap%25C3%25ADtulo1.html#2695" class="Bound">z</a> <a id="2697" class="Symbol">:</a> <a id="2699" href="Cap%25C3%25ADtulo1.html#2589" class="Bound">A</a> <a id="2701" href="Cap%25C3%25ADtulo1.html#2471" class="Datatype Operator">⊎</a> <a id="2703" href="Cap%25C3%25ADtulo1.html#2599" class="Bound">B</a><a id="2704" class="Symbol">)</a> <a id="2706" class="Symbol">→</a> <a id="2708" href="Cap%25C3%25ADtulo1.html#2609" class="Bound">C</a> <a id="2710" href="Cap%25C3%25ADtulo1.html#2695" class="Bound">z</a>
+        <a id="2712" href="Cap%25C3%25ADtulo1.html#2580" class="Function">⊎-ind</a> <a id="2718" href="Cap%25C3%25ADtulo1.html#2718" class="Bound">C</a> <a id="2720" href="Cap%25C3%25ADtulo1.html#2720" class="Bound">f</a> <a id="2722" href="Cap%25C3%25ADtulo1.html#2722" class="Bound">g</a> <a id="2724" class="Symbol">(</a><a id="2725" href="Cap%25C3%25ADtulo1.html#2514" class="InductiveConstructor">inl</a> <a id="2729" href="Cap%25C3%25ADtulo1.html#2729" class="Bound">x</a><a id="2730" class="Symbol">)</a> <a id="2732" class="Symbol">=</a> <a id="2734" href="Cap%25C3%25ADtulo1.html#2720" class="Bound">f</a> <a id="2736" href="Cap%25C3%25ADtulo1.html#2729" class="Bound">x</a>
+        <a id="2738" href="Cap%25C3%25ADtulo1.html#2580" class="Function">⊎-ind</a> <a id="2744" href="Cap%25C3%25ADtulo1.html#2744" class="Bound">C</a> <a id="2746" href="Cap%25C3%25ADtulo1.html#2746" class="Bound">f</a> <a id="2748" href="Cap%25C3%25ADtulo1.html#2748" class="Bound">g</a> <a id="2750" class="Symbol">(</a><a id="2751" href="Cap%25C3%25ADtulo1.html#2531" class="InductiveConstructor">inr</a> <a id="2755" href="Cap%25C3%25ADtulo1.html#2755" class="Bound">y</a><a id="2756" class="Symbol">)</a> <a id="2758" class="Symbol">=</a> <a id="2760" href="Cap%25C3%25ADtulo1.html#2748" class="Bound">g</a> <a id="2762" href="Cap%25C3%25ADtulo1.html#2755" class="Bound">y</a>
+
+        <a id="2765" class="Comment">-- Definición del tipo 2</a>
+        <a id="𝟚"></a><a id="2790" href="Cap%25C3%25ADtulo1.html#2790" class="Function">𝟚</a> <a id="2792" class="Symbol">:</a> <a id="2794" href="Lib.Universes.html#237" data-type="Universe₁" class="Function">𝒰₀</a>
+        <a id="2797" href="Cap%25C3%25ADtulo1.html#2790" class="Function">𝟚</a> <a id="2799" class="Symbol">=</a> <a id="2801" href="Cap%25C3%25ADtulo1.html#2315" class="Datatype">𝟙</a> <a id="2803" href="Cap%25C3%25ADtulo1.html#2471" class="Datatype Operator">⊎</a> <a id="2805" href="Cap%25C3%25ADtulo1.html#2315" class="Datatype">𝟙</a>
+
+        <a id="2808" class="Keyword">pattern</a> <a id="₀"></a><a id="2816" href="Cap%25C3%25ADtulo1.html#2816" class="InductiveConstructor">₀</a> <a id="2818" class="Symbol">=</a> <a id="2820" href="Cap%25C3%25ADtulo1.html#2514" class="InductiveConstructor">inl</a> <a id="2824" href="Cap%25C3%25ADtulo1.html#2330" class="InductiveConstructor">⋆</a>
+        <a id="2826" class="Keyword">pattern</a> <a id="₁"></a><a id="2834" href="Cap%25C3%25ADtulo1.html#2834" class="InductiveConstructor">₁</a> <a id="2836" class="Symbol">=</a> <a id="2838" href="Cap%25C3%25ADtulo1.html#2531" class="InductiveConstructor">inr</a> <a id="2842" href="Cap%25C3%25ADtulo1.html#2330" class="InductiveConstructor">⋆</a>
+
+        <a id="2845" class="Comment">-- Teorema 1.8.10.</a>
+        <a id="𝟚-induction"></a><a id="2864" href="Cap%25C3%25ADtulo1.html#2864" class="Function">𝟚-induction</a> <a id="2876" class="Symbol">:</a> <a id="2878" class="Symbol">(</a><a id="2879" href="Cap%25C3%25ADtulo1.html#2879" class="Bound">A</a> <a id="2881" class="Symbol">:</a> <a id="2883" href="Cap%25C3%25ADtulo1.html#2790" class="Function">𝟚</a> <a id="2885" class="Symbol">→</a> <a id="2887" href="Lib.Universes.html#186" data-type="(ℓ : Level) → Universe (ℓ ⁺)" class="Function">𝒰</a> <a id="2889" href="Lib.Universes.html#171" data-type="Level" class="Generalizable">𝒾</a><a id="2890" class="Symbol">)</a> <a id="2892" class="Symbol">→</a> <a id="2894" href="Cap%25C3%25ADtulo1.html#2879" class="Bound">A</a> <a id="2896" href="Cap%25C3%25ADtulo1.html#2816" class="InductiveConstructor">₀</a> <a id="2898" class="Symbol">→</a> <a id="2900" href="Cap%25C3%25ADtulo1.html#2879" class="Bound">A</a> <a id="2902" href="Cap%25C3%25ADtulo1.html#2834" class="InductiveConstructor">₁</a> <a id="2904" class="Symbol">→</a> <a id="2906" class="Symbol">(</a><a id="2907" href="Cap%25C3%25ADtulo1.html#2907" class="Bound">n</a> <a id="2909" class="Symbol">:</a> <a id="2911" href="Cap%25C3%25ADtulo1.html#2790" class="Function">𝟚</a><a id="2912" class="Symbol">)</a> <a id="2914" class="Symbol">→</a> <a id="2916" href="Cap%25C3%25ADtulo1.html#2879" class="Bound">A</a> <a id="2918" href="Cap%25C3%25ADtulo1.html#2907" class="Bound">n</a>
+        <a id="2920" href="Cap%25C3%25ADtulo1.html#2864" class="Function">𝟚-induction</a> <a id="2932" href="Cap%25C3%25ADtulo1.html#2932" class="Bound">A</a> <a id="2934" href="Cap%25C3%25ADtulo1.html#2934" class="Bound">a₀</a> <a id="2937" href="Cap%25C3%25ADtulo1.html#2937" class="Bound">a₁</a> <a id="2940" href="Cap%25C3%25ADtulo1.html#2816" class="InductiveConstructor">₀</a> <a id="2942" class="Symbol">=</a> <a id="2944" href="Cap%25C3%25ADtulo1.html#2934" class="Bound">a₀</a>
+        <a id="2947" href="Cap%25C3%25ADtulo1.html#2864" class="Function">𝟚-induction</a> <a id="2959" href="Cap%25C3%25ADtulo1.html#2959" class="Bound">A</a> <a id="2961" href="Cap%25C3%25ADtulo1.html#2961" class="Bound">a₀</a> <a id="2964" href="Cap%25C3%25ADtulo1.html#2964" class="Bound">a₁</a> <a id="2967" href="Cap%25C3%25ADtulo1.html#2834" class="InductiveConstructor">₁</a> <a id="2969" class="Symbol">=</a> <a id="2971" href="Cap%25C3%25ADtulo1.html#2964" class="Bound">a₁</a>
+
+        <a id="2975" class="Comment">---------------------------------------------------------------------------------</a>
+
+        <a id="3058" class="Comment">-- Sección 1.9. El tipo de los naturales</a>
+
+        <a id="3100" class="Comment">-- Definición del tipo de los naturales</a>
+        <a id="3140" class="Keyword">data</a> <a id="ℕ"></a><a id="3145" href="Cap%25C3%25ADtulo1.html#3145" class="Datatype">ℕ</a> <a id="3147" class="Symbol">:</a> <a id="3149" href="Lib.Universes.html#237" data-type="Universe₁" class="Function">𝒰₀</a> <a id="3152" class="Keyword">where</a>
+          <a id="ℕ.zero"></a><a id="3160" href="Cap%25C3%25ADtulo1.html#3160" class="InductiveConstructor">zero</a> <a id="3165" class="Symbol">:</a> <a id="3167" href="Cap%25C3%25ADtulo1.html#3145" class="Datatype">ℕ</a>
+          <a id="ℕ.succ"></a><a id="3171" href="Cap%25C3%25ADtulo1.html#3171" class="InductiveConstructor">succ</a> <a id="3176" class="Symbol">:</a> <a id="3178" href="Cap%25C3%25ADtulo1.html#3145" class="Datatype">ℕ</a> <a id="3180" class="Symbol">→</a> <a id="3182" href="Cap%25C3%25ADtulo1.html#3145" class="Datatype">ℕ</a>
+        <a id="3184" class="Symbol">{-#</a> <a id="3188" class="Keyword">BUILTIN</a> <a id="3196" class="Keyword">NATURAL</a> <a id="3204" href="Cap%25C3%25ADtulo1.html#3145" class="Datatype">ℕ</a> <a id="3206" class="Symbol">#-}</a>
+
+        <a id="3211" class="Comment">-- Teorema 1.9.3.</a>
+        <a id="ℕ-induction"></a><a id="3229" href="Cap%25C3%25ADtulo1.html#3229" class="Function">ℕ-induction</a> <a id="3241" class="Symbol">:</a> <a id="3243" class="Symbol">(</a><a id="3244" href="Cap%25C3%25ADtulo1.html#3244" class="Bound">A</a> <a id="3246" class="Symbol">:</a> <a id="3248" href="Cap%25C3%25ADtulo1.html#3145" class="Datatype">ℕ</a> <a id="3250" class="Symbol">→</a> <a id="3252" href="Lib.Universes.html#186" data-type="(ℓ : Level) → Universe (ℓ ⁺)" class="Function">𝒰</a> <a id="3254" href="Lib.Universes.html#171" data-type="Level" class="Generalizable">𝒾</a><a id="3255" class="Symbol">)</a>
+                    <a id="3269" class="Symbol">→</a> <a id="3271" href="Cap%25C3%25ADtulo1.html#3244" class="Bound">A</a> <a id="3273" class="Number">0</a>
+                    <a id="3287" class="Symbol">→</a> <a id="3289" class="Symbol">((</a><a id="3291" href="Cap%25C3%25ADtulo1.html#3291" class="Bound">n</a> <a id="3293" class="Symbol">:</a> <a id="3295" href="Cap%25C3%25ADtulo1.html#3145" class="Datatype">ℕ</a><a id="3296" class="Symbol">)</a> <a id="3298" class="Symbol">→</a> <a id="3300" href="Cap%25C3%25ADtulo1.html#3244" class="Bound">A</a> <a id="3302" href="Cap%25C3%25ADtulo1.html#3291" class="Bound">n</a> <a id="3304" class="Symbol">→</a> <a id="3306" href="Cap%25C3%25ADtulo1.html#3244" class="Bound">A</a> <a id="3308" class="Symbol">(</a><a id="3309" href="Cap%25C3%25ADtulo1.html#3171" class="InductiveConstructor">succ</a> <a id="3314" href="Cap%25C3%25ADtulo1.html#3291" class="Bound">n</a><a id="3315" class="Symbol">))</a>
+                    <a id="3330" class="Symbol">→</a> <a id="3332" class="Symbol">(</a><a id="3333" href="Cap%25C3%25ADtulo1.html#3333" class="Bound">n</a> <a id="3335" class="Symbol">:</a> <a id="3337" href="Cap%25C3%25ADtulo1.html#3145" class="Datatype">ℕ</a><a id="3338" class="Symbol">)</a> <a id="3340" class="Symbol">→</a> <a id="3342" href="Cap%25C3%25ADtulo1.html#3244" class="Bound">A</a> <a id="3344" href="Cap%25C3%25ADtulo1.html#3333" class="Bound">n</a>
+        <a id="3346" href="Cap%25C3%25ADtulo1.html#3229" class="Function">ℕ-induction</a> <a id="3358" href="Cap%25C3%25ADtulo1.html#3358" class="Bound">A</a> <a id="3360" href="Cap%25C3%25ADtulo1.html#3360" class="Bound">a₀</a> <a id="3363" href="Cap%25C3%25ADtulo1.html#3363" class="Bound">f</a> <a id="3365" class="Symbol">=</a> <a id="3367" href="Cap%25C3%25ADtulo1.html#3381" class="Function">h</a>
+          <a id="3371" class="Keyword">where</a>
+            <a id="3381" href="Cap%25C3%25ADtulo1.html#3381" class="Function">h</a> <a id="3383" class="Symbol">:</a> <a id="3385" class="Symbol">(</a><a id="3386" href="Cap%25C3%25ADtulo1.html#3386" class="Bound">n</a> <a id="3388" class="Symbol">:</a> <a id="3390" href="Cap%25C3%25ADtulo1.html#3145" class="Datatype">ℕ</a><a id="3391" class="Symbol">)</a> <a id="3393" class="Symbol">→</a> <a id="3395" href="Cap%25C3%25ADtulo1.html#3358" class="Bound">A</a> <a id="3397" href="Cap%25C3%25ADtulo1.html#3386" class="Bound">n</a>
+            <a id="3403" href="Cap%25C3%25ADtulo1.html#3381" class="Function">h</a> <a id="3405" class="Number">0</a>        <a id="3414" class="Symbol">=</a> <a id="3416" href="Cap%25C3%25ADtulo1.html#3360" class="Bound">a₀</a>
+            <a id="3423" href="Cap%25C3%25ADtulo1.html#3381" class="Function">h</a> <a id="3425" class="Symbol">(</a><a id="3426" href="Cap%25C3%25ADtulo1.html#3171" class="InductiveConstructor">succ</a> <a id="3431" href="Cap%25C3%25ADtulo1.html#3431" class="Bound">n</a><a id="3432" class="Symbol">)</a> <a id="3434" class="Symbol">=</a> <a id="3436" href="Cap%25C3%25ADtulo1.html#3363" class="Bound">f</a> <a id="3438" href="Cap%25C3%25ADtulo1.html#3431" class="Bound">n</a> <a id="3440" class="Symbol">(</a><a id="3441" href="Cap%25C3%25ADtulo1.html#3381" class="Function">h</a> <a id="3443" href="Cap%25C3%25ADtulo1.html#3431" class="Bound">n</a><a id="3444" class="Symbol">)</a>
+
+        <a id="3447" class="Comment">-- Ejemplo 1.9.5.</a>
+        <a id="double"></a><a id="3465" href="Cap%25C3%25ADtulo1.html#3465" class="Function">double</a> <a id="3472" class="Symbol">:</a> <a id="3474" href="Cap%25C3%25ADtulo1.html#3145" class="Datatype">ℕ</a> <a id="3476" class="Symbol">→</a> <a id="3478" href="Cap%25C3%25ADtulo1.html#3145" class="Datatype">ℕ</a>
+        <a id="3480" href="Cap%25C3%25ADtulo1.html#3465" class="Function">double</a> <a id="3487" class="Number">0</a> <a id="3489" class="Symbol">=</a> <a id="3491" class="Number">0</a>
+        <a id="3493" href="Cap%25C3%25ADtulo1.html#3465" class="Function">double</a> <a id="3500" class="Symbol">(</a><a id="3501" href="Cap%25C3%25ADtulo1.html#3171" class="InductiveConstructor">succ</a> <a id="3506" href="Cap%25C3%25ADtulo1.html#3506" class="Bound">n</a><a id="3507" class="Symbol">)</a> <a id="3509" class="Symbol">=</a> <a id="3511" href="Cap%25C3%25ADtulo1.html#3171" class="InductiveConstructor">succ</a> <a id="3516" class="Symbol">(</a><a id="3517" href="Cap%25C3%25ADtulo1.html#3171" class="InductiveConstructor">succ</a> <a id="3522" class="Symbol">(</a><a id="3523" href="Cap%25C3%25ADtulo1.html#3465" class="Function">double</a> <a id="3530" href="Cap%25C3%25ADtulo1.html#3506" class="Bound">n</a><a id="3531" class="Symbol">))</a>
+
+        <a id="3535" class="Comment">-- Ejemplo 1.9.6.</a>
+        <a id="add"></a><a id="3553" href="Cap%25C3%25ADtulo1.html#3553" class="Function">add</a> <a id="3557" class="Symbol">:</a> <a id="3559" href="Cap%25C3%25ADtulo1.html#3145" class="Datatype">ℕ</a> <a id="3561" class="Symbol">→</a> <a id="3563" href="Cap%25C3%25ADtulo1.html#3145" class="Datatype">ℕ</a> <a id="3565" class="Symbol">→</a> <a id="3567" href="Cap%25C3%25ADtulo1.html#3145" class="Datatype">ℕ</a>
+        <a id="3569" href="Cap%25C3%25ADtulo1.html#3553" class="Function">add</a> <a id="3573" class="Number">0</a> <a id="3575" class="Symbol">=</a> <a id="3577" href="Cap%25C3%25ADtulo1.html#607" class="Function">id</a>
+        <a id="3580" href="Cap%25C3%25ADtulo1.html#3553" class="Function">add</a> <a id="3584" class="Symbol">(</a><a id="3585" href="Cap%25C3%25ADtulo1.html#3171" class="InductiveConstructor">succ</a> <a id="3590" href="Cap%25C3%25ADtulo1.html#3590" class="Bound">n</a><a id="3591" class="Symbol">)</a> <a id="3593" class="Symbol">=</a> <a id="3595" class="Symbol">λ</a> <a id="3597" href="Cap%25C3%25ADtulo1.html#3597" class="Bound">m</a> <a id="3599" class="Symbol">→</a> <a id="3601" href="Cap%25C3%25ADtulo1.html#3171" class="InductiveConstructor">succ</a> <a id="3606" class="Symbol">(</a><a id="3607" href="Cap%25C3%25ADtulo1.html#3553" class="Function">add</a> <a id="3611" href="Cap%25C3%25ADtulo1.html#3590" class="Bound">n</a> <a id="3613" href="Cap%25C3%25ADtulo1.html#3597" class="Bound">m</a><a id="3614" class="Symbol">)</a>
+
+        <a id="3617" class="Comment">---------------------------------------------------------------------------------</a>
+
+        <a id="3700" class="Comment">-- Sección 1.10. Proposiciones como tipos</a>
+
+        <a id="3743" class="Comment">-- Definición 1.10.1.</a>
+        <a id="logeq"></a><a id="3765" href="Cap%25C3%25ADtulo1.html#3765" class="Function">logeq</a> <a id="3771" class="Symbol">:</a> <a id="3773" class="Symbol">(</a><a id="3774" href="Cap%25C3%25ADtulo1.html#3774" class="Bound">A</a> <a id="3776" class="Symbol">:</a> <a id="3778" href="Lib.Universes.html#186" data-type="(ℓ : Level) → Universe (ℓ ⁺)" class="Function">𝒰</a> <a id="3780" href="Lib.Universes.html#171" data-type="Level" class="Generalizable">𝒾</a><a id="3781" class="Symbol">)</a> <a id="3783" class="Symbol">(</a><a id="3784" href="Cap%25C3%25ADtulo1.html#3784" class="Bound">B</a> <a id="3786" class="Symbol">:</a> <a id="3788" href="Lib.Universes.html#186" data-type="(ℓ : Level) → Universe (ℓ ⁺)" class="Function">𝒰</a> <a id="3790" href="Lib.Universes.html#173" data-type="Level" class="Generalizable">𝒿</a><a id="3791" class="Symbol">)</a> <a id="3793" class="Symbol">→</a> <a id="3795" href="Lib.Universes.html#186" data-type="(ℓ : Level) → Universe (ℓ ⁺)" class="Function">𝒰</a> <a id="3797" class="Symbol">(</a><a id="3798" href="Lib.Universes.html#171" data-type="Level" class="Generalizable">𝒾</a> <a id="3800" href="Agda.Primitive.html#810" data-type="Level → Level → Level" class="Primitive Operator">⊔</a> <a id="3802" href="Lib.Universes.html#173" data-type="Level" class="Generalizable">𝒿</a><a id="3803" class="Symbol">)</a>
+        <a id="3805" href="Cap%25C3%25ADtulo1.html#3765" class="Function">logeq</a> <a id="3811" href="Cap%25C3%25ADtulo1.html#3811" class="Bound">A</a> <a id="3813" href="Cap%25C3%25ADtulo1.html#3813" class="Bound">B</a> <a id="3815" class="Symbol">=</a> <a id="3817" class="Symbol">(</a><a id="3818" href="Cap%25C3%25ADtulo1.html#3811" class="Bound">A</a> <a id="3820" class="Symbol">→</a> <a id="3822" href="Cap%25C3%25ADtulo1.html#3813" class="Bound">B</a><a id="3823" class="Symbol">)</a> <a id="3825" href="Cap%25C3%25ADtulo1.html#1514" class="Function Operator">×</a> <a id="3827" class="Symbol">(</a><a id="3828" href="Cap%25C3%25ADtulo1.html#3813" class="Bound">B</a> <a id="3830" class="Symbol">→</a> <a id="3832" href="Cap%25C3%25ADtulo1.html#3811" class="Bound">A</a><a id="3833" class="Symbol">)</a>
+
+        <a id="3836" class="Comment">-- Ejemplo 1.10.2.</a>
+        <a id="ej-1-10-2"></a><a id="3855" href="Cap%25C3%25ADtulo1.html#3855" class="Function">ej-1-10-2</a> <a id="3865" class="Symbol">:</a> <a id="3867" class="Symbol">{</a><a id="3868" href="Cap%25C3%25ADtulo1.html#3868" class="Bound">A</a> <a id="3870" class="Symbol">:</a> <a id="3872" href="Lib.Universes.html#186" data-type="(ℓ : Level) → Universe (ℓ ⁺)" class="Function">𝒰</a> <a id="3874" href="Lib.Universes.html#171" data-type="Level" class="Generalizable">𝒾</a><a id="3875" class="Symbol">}</a> <a id="3877" class="Symbol">{</a><a id="3878" href="Cap%25C3%25ADtulo1.html#3878" class="Bound">B</a> <a id="3880" class="Symbol">:</a> <a id="3882" href="Lib.Universes.html#186" data-type="(ℓ : Level) → Universe (ℓ ⁺)" class="Function">𝒰</a> <a id="3884" href="Lib.Universes.html#173" data-type="Level" class="Generalizable">𝒿</a><a id="3885" class="Symbol">}</a> <a id="3887" class="Symbol">→</a> <a id="3889" class="Symbol">(</a><a id="3890" href="Cap%25C3%25ADtulo1.html#3868" class="Bound">A</a> <a id="3892" class="Symbol">→</a> <a id="3894" href="Cap%25C3%25ADtulo1.html#2108" class="Datatype">𝟘</a><a id="3895" class="Symbol">)</a> <a id="3897" href="Cap%25C3%25ADtulo1.html#2471" class="Datatype Operator">⊎</a> <a id="3899" class="Symbol">(</a><a id="3900" href="Cap%25C3%25ADtulo1.html#3878" class="Bound">B</a> <a id="3902" class="Symbol">→</a> <a id="3904" href="Cap%25C3%25ADtulo1.html#2108" class="Datatype">𝟘</a><a id="3905" class="Symbol">)</a> <a id="3907" class="Symbol">→</a> <a id="3909" class="Symbol">((</a><a id="3911" href="Cap%25C3%25ADtulo1.html#3868" class="Bound">A</a> <a id="3913" href="Cap%25C3%25ADtulo1.html#1514" class="Function Operator">×</a> <a id="3915" href="Cap%25C3%25ADtulo1.html#3878" class="Bound">B</a><a id="3916" class="Symbol">)</a> <a id="3918" class="Symbol">→</a> <a id="3920" href="Cap%25C3%25ADtulo1.html#2108" class="Datatype">𝟘</a><a id="3921" class="Symbol">)</a>
+        <a id="3923" href="Cap%25C3%25ADtulo1.html#3855" class="Function">ej-1-10-2</a> <a id="3933" class="Symbol">(</a><a id="3934" href="Cap%25C3%25ADtulo1.html#2514" class="InductiveConstructor">inl</a> <a id="3938" href="Cap%25C3%25ADtulo1.html#3938" class="Bound">f1</a><a id="3940" class="Symbol">)</a> <a id="3942" class="Symbol">(</a><a id="3943" href="Cap%25C3%25ADtulo1.html#3943" class="Bound">a</a> <a id="3945" href="Cap%25C3%25ADtulo1.html#1360" class="InductiveConstructor Operator">,</a> <a id="3947" href="Cap%25C3%25ADtulo1.html#3947" class="Bound">b</a><a id="3948" class="Symbol">)</a> <a id="3950" class="Symbol">=</a> <a id="3952" href="Cap%25C3%25ADtulo1.html#3938" class="Bound">f1</a> <a id="3955" href="Cap%25C3%25ADtulo1.html#3943" class="Bound">a</a>
+        <a id="3957" href="Cap%25C3%25ADtulo1.html#3855" class="Function">ej-1-10-2</a> <a id="3967" class="Symbol">(</a><a id="3968" href="Cap%25C3%25ADtulo1.html#2531" class="InductiveConstructor">inr</a> <a id="3972" href="Cap%25C3%25ADtulo1.html#3972" class="Bound">f2</a><a id="3974" class="Symbol">)</a> <a id="3976" class="Symbol">(</a><a id="3977" href="Cap%25C3%25ADtulo1.html#3977" class="Bound">a</a> <a id="3979" href="Cap%25C3%25ADtulo1.html#1360" class="InductiveConstructor Operator">,</a> <a id="3981" href="Cap%25C3%25ADtulo1.html#3981" class="Bound">b</a><a id="3982" class="Symbol">)</a> <a id="3984" class="Symbol">=</a> <a id="3986" href="Cap%25C3%25ADtulo1.html#3972" class="Bound">f2</a> <a id="3989" href="Cap%25C3%25ADtulo1.html#3981" class="Bound">b</a>
+
+        <a id="3992" class="Comment">-- Ejemplo 1.10.3.</a>
+        <a id="ej-1-10-3"></a><a id="4011" href="Cap%25C3%25ADtulo1.html#4011" class="Function">ej-1-10-3</a> <a id="4021" class="Symbol">:</a> <a id="4023" class="Symbol">{</a><a id="4024" href="Cap%25C3%25ADtulo1.html#4024" class="Bound">A</a> <a id="4026" class="Symbol">:</a> <a id="4028" href="Lib.Universes.html#186" data-type="(ℓ : Level) → Universe (ℓ ⁺)" class="Function">𝒰</a> <a id="4030" href="Lib.Universes.html#171" data-type="Level" class="Generalizable">𝒾</a><a id="4031" class="Symbol">}</a> <a id="4033" class="Symbol">{</a><a id="4034" href="Cap%25C3%25ADtulo1.html#4034" class="Bound">P</a> <a id="4036" class="Symbol">:</a> <a id="4038" href="Cap%25C3%25ADtulo1.html#4024" class="Bound">A</a> <a id="4040" class="Symbol">→</a> <a id="4042" href="Lib.Universes.html#186" data-type="(ℓ : Level) → Universe (ℓ ⁺)" class="Function">𝒰</a> <a id="4044" href="Lib.Universes.html#173" data-type="Level" class="Generalizable">𝒿</a><a id="4045" class="Symbol">}</a>
+                  <a id="4057" class="Symbol">→</a> <a id="4059" href="Cap%25C3%25ADtulo1.html#1409" class="Function">Σ</a> <a id="4061" href="Cap%25C3%25ADtulo1.html#4061" class="Bound">x</a> <a id="4063" href="Cap%25C3%25ADtulo1.html#1409" class="Function">꞉</a> <a id="4065" href="Cap%25C3%25ADtulo1.html#4024" class="Bound">A</a> <a id="4067" href="Cap%25C3%25ADtulo1.html#1409" class="Function">,</a> <a id="4069" class="Symbol">(</a><a id="4070" href="Cap%25C3%25ADtulo1.html#4034" class="Bound">P</a> <a id="4072" href="Cap%25C3%25ADtulo1.html#4061" class="Bound">x</a> <a id="4074" class="Symbol">→</a> <a id="4076" href="Cap%25C3%25ADtulo1.html#2108" class="Datatype">𝟘</a><a id="4077" class="Symbol">)</a>
+                  <a id="4089" class="Symbol">→</a> <a id="4091" class="Symbol">((</a><a id="4093" href="Cap%25C3%25ADtulo1.html#4093" class="Bound">x</a> <a id="4095" class="Symbol">:</a> <a id="4097" href="Cap%25C3%25ADtulo1.html#4024" class="Bound">A</a><a id="4098" class="Symbol">)</a> <a id="4100" class="Symbol">→</a> <a id="4102" href="Cap%25C3%25ADtulo1.html#4034" class="Bound">P</a> <a id="4104" href="Cap%25C3%25ADtulo1.html#4093" class="Bound">x</a><a id="4105" class="Symbol">)</a>
+                  <a id="4117" class="Symbol">→</a> <a id="4119" href="Cap%25C3%25ADtulo1.html#2108" class="Datatype">𝟘</a>
+        <a id="4121" href="Cap%25C3%25ADtulo1.html#4011" class="Function">ej-1-10-3</a> <a id="4131" class="Symbol">(</a><a id="4132" href="Cap%25C3%25ADtulo1.html#4132" class="Bound">a</a> <a id="4134" href="Cap%25C3%25ADtulo1.html#1360" class="InductiveConstructor Operator">,</a> <a id="4136" href="Cap%25C3%25ADtulo1.html#4136" class="Bound">g</a><a id="4137" class="Symbol">)</a> <a id="4139" href="Cap%25C3%25ADtulo1.html#4139" class="Bound">h</a> <a id="4141" class="Symbol">=</a> <a id="4143" href="Cap%25C3%25ADtulo1.html#4136" class="Bound">g</a> <a id="4145" class="Symbol">(</a><a id="4146" href="Cap%25C3%25ADtulo1.html#4139" class="Bound">h</a> <a id="4148" href="Cap%25C3%25ADtulo1.html#4132" class="Bound">a</a><a id="4149" class="Symbol">)</a>
+
+        <a id="4152" class="Comment">-- Ejemplo 1.10.4.</a>
+        <a id="ac"></a><a id="4171" href="Cap%25C3%25ADtulo1.html#4171" class="Function">ac</a> <a id="4174" class="Symbol">:</a> <a id="4176" class="Symbol">{</a><a id="4177" href="Cap%25C3%25ADtulo1.html#4177" class="Bound">A</a> <a id="4179" class="Symbol">:</a> <a id="4181" href="Lib.Universes.html#186" data-type="(ℓ : Level) → Universe (ℓ ⁺)" class="Function">𝒰</a> <a id="4183" href="Lib.Universes.html#171" data-type="Level" class="Generalizable">𝒾</a><a id="4184" class="Symbol">}</a> <a id="4186" class="Symbol">{</a><a id="4187" href="Cap%25C3%25ADtulo1.html#4187" class="Bound">B</a> <a id="4189" class="Symbol">:</a> <a id="4191" href="Lib.Universes.html#186" data-type="(ℓ : Level) → Universe (ℓ ⁺)" class="Function">𝒰</a> <a id="4193" href="Lib.Universes.html#173" data-type="Level" class="Generalizable">𝒿</a><a id="4194" class="Symbol">}</a> <a id="4196" class="Symbol">{</a><a id="4197" href="Cap%25C3%25ADtulo1.html#4197" class="Bound">R</a> <a id="4199" class="Symbol">:</a> <a id="4201" href="Cap%25C3%25ADtulo1.html#4177" class="Bound">A</a> <a id="4203" class="Symbol">→</a> <a id="4205" href="Cap%25C3%25ADtulo1.html#4187" class="Bound">B</a> <a id="4207" class="Symbol">→</a> <a id="4209" href="Lib.Universes.html#186" data-type="(ℓ : Level) → Universe (ℓ ⁺)" class="Function">𝒰</a> <a id="4211" href="Lib.Universes.html#175" data-type="Level" class="Generalizable">𝓀</a><a id="4212" class="Symbol">}</a>
+           <a id="4217" class="Symbol">→</a> <a id="4219" class="Symbol">((</a><a id="4221" href="Cap%25C3%25ADtulo1.html#4221" class="Bound">x</a> <a id="4223" class="Symbol">:</a> <a id="4225" href="Cap%25C3%25ADtulo1.html#4177" class="Bound">A</a><a id="4226" class="Symbol">)</a> <a id="4228" class="Symbol">→</a> <a id="4230" href="Cap%25C3%25ADtulo1.html#1409" class="Function">Σ</a> <a id="4232" href="Cap%25C3%25ADtulo1.html#4232" class="Bound">y</a> <a id="4234" href="Cap%25C3%25ADtulo1.html#1409" class="Function">꞉</a> <a id="4236" href="Cap%25C3%25ADtulo1.html#4187" class="Bound">B</a> <a id="4238" href="Cap%25C3%25ADtulo1.html#1409" class="Function">,</a> <a id="4240" href="Cap%25C3%25ADtulo1.html#4197" class="Bound">R</a> <a id="4242" href="Cap%25C3%25ADtulo1.html#4221" class="Bound">x</a> <a id="4244" href="Cap%25C3%25ADtulo1.html#4232" class="Bound">y</a><a id="4245" class="Symbol">)</a>
+           <a id="4250" class="Symbol">→</a> <a id="4252" href="Cap%25C3%25ADtulo1.html#1409" class="Function">Σ</a> <a id="4254" href="Cap%25C3%25ADtulo1.html#4254" class="Bound">f</a> <a id="4256" href="Cap%25C3%25ADtulo1.html#1409" class="Function">꞉</a> <a id="4258" class="Symbol">(</a><a id="4259" href="Cap%25C3%25ADtulo1.html#4177" class="Bound">A</a> <a id="4261" class="Symbol">→</a> <a id="4263" href="Cap%25C3%25ADtulo1.html#4187" class="Bound">B</a><a id="4264" class="Symbol">)</a> <a id="4266" href="Cap%25C3%25ADtulo1.html#1409" class="Function">,</a> <a id="4268" class="Symbol">((</a><a id="4270" href="Cap%25C3%25ADtulo1.html#4270" class="Bound">x</a> <a id="4272" class="Symbol">:</a> <a id="4274" href="Cap%25C3%25ADtulo1.html#4177" class="Bound">A</a><a id="4275" class="Symbol">)</a> <a id="4277" class="Symbol">→</a> <a id="4279" href="Cap%25C3%25ADtulo1.html#4197" class="Bound">R</a> <a id="4281" href="Cap%25C3%25ADtulo1.html#4270" class="Bound">x</a> <a id="4283" class="Symbol">(</a><a id="4284" href="Cap%25C3%25ADtulo1.html#4254" class="Bound">f</a> <a id="4286" href="Cap%25C3%25ADtulo1.html#4270" class="Bound">x</a><a id="4287" class="Symbol">))</a>
+        <a id="4290" href="Cap%25C3%25ADtulo1.html#4171" class="Function">ac</a> <a id="4293" href="Cap%25C3%25ADtulo1.html#4293" class="Bound">g</a> <a id="4295" class="Symbol">=</a> <a id="4297" class="Symbol">((λ</a> <a id="4301" href="Cap%25C3%25ADtulo1.html#4301" class="Bound">x</a> <a id="4303" class="Symbol">→</a> <a id="4305" href="Cap%25C3%25ADtulo1.html#1796" class="Function">pr₁</a> <a id="4309" class="Symbol">(</a><a id="4310" href="Cap%25C3%25ADtulo1.html#4293" class="Bound">g</a> <a id="4312" href="Cap%25C3%25ADtulo1.html#4301" class="Bound">x</a><a id="4313" class="Symbol">))</a> <a id="4316" href="Cap%25C3%25ADtulo1.html#1360" class="InductiveConstructor Operator">,</a> <a id="4318" class="Symbol">(λ</a> <a id="4321" href="Cap%25C3%25ADtulo1.html#4321" class="Bound">x</a> <a id="4323" class="Symbol">→</a> <a id="4325" href="Cap%25C3%25ADtulo1.html#1853" class="Function">pr₂</a> <a id="4329" class="Symbol">(</a><a id="4330" href="Cap%25C3%25ADtulo1.html#4293" class="Bound">g</a> <a id="4332" href="Cap%25C3%25ADtulo1.html#4321" class="Bound">x</a><a id="4333" class="Symbol">)))</a>
+
+        <a id="4338" class="Comment">---------------------------------------------------------------------------------</a>
+
+        <a id="4421" class="Comment">-- Sección 1.11. El tipo de identidades</a>
+
+        <a id="4462" class="Comment">-- Definición del tipo de identidades</a>
+        <a id="4500" class="Keyword">data</a> <a id="Id"></a><a id="4505" href="Cap%25C3%25ADtulo1.html#4505" class="Datatype">Id</a> <a id="4508" class="Symbol">(</a><a id="4509" href="Cap%25C3%25ADtulo1.html#4509" class="Bound">X</a> <a id="4511" class="Symbol">:</a> <a id="4513" href="Lib.Universes.html#186" data-type="(ℓ : Level) → Universe (ℓ ⁺)" class="Function">𝒰</a> <a id="4515" href="Lib.Universes.html#171" data-type="Level" class="Generalizable">𝒾</a><a id="4516" class="Symbol">)</a> <a id="4518" class="Symbol">:</a> <a id="4520" href="Cap%25C3%25ADtulo1.html#4509" class="Bound">X</a> <a id="4522" class="Symbol">→</a> <a id="4524" href="Cap%25C3%25ADtulo1.html#4509" class="Bound">X</a> <a id="4526" class="Symbol">→</a> <a id="4528" href="Lib.Universes.html#186" data-type="(ℓ : Level) → Universe (ℓ ⁺)" class="Function">𝒰</a> <a id="4530" href="Cap%25C3%25ADtulo1.html#4515" class="Bound">𝒾</a> <a id="4532" class="Keyword">where</a>
+          <a id="Id.refl"></a><a id="4540" href="Cap%25C3%25ADtulo1.html#4540" class="InductiveConstructor">refl</a> <a id="4545" class="Symbol">:</a> <a id="4547" class="Symbol">(</a><a id="4548" href="Cap%25C3%25ADtulo1.html#4548" class="Bound">x</a> <a id="4550" class="Symbol">:</a> <a id="4552" href="Cap%25C3%25ADtulo1.html#4509" class="Bound">X</a><a id="4553" class="Symbol">)</a> <a id="4555" class="Symbol">→</a> <a id="4557" href="Cap%25C3%25ADtulo1.html#4505" class="Datatype">Id</a> <a id="4560" href="Cap%25C3%25ADtulo1.html#4509" class="Bound">X</a> <a id="4562" href="Cap%25C3%25ADtulo1.html#4548" class="Bound">x</a> <a id="4564" href="Cap%25C3%25ADtulo1.html#4548" class="Bound">x</a>
+        <a id="4566" class="Keyword">infix</a>   <a id="4574" class="Number">0</a> <a id="4576" href="Cap%25C3%25ADtulo1.html#4505" class="Datatype">Id</a>
+
+        <a id="_≡_"></a><a id="4580" href="Cap%25C3%25ADtulo1.html#4580" class="Function Operator">_≡_</a> <a id="4584" class="Symbol">:</a> <a id="4586" class="Symbol">{</a><a id="4587" href="Cap%25C3%25ADtulo1.html#4587" class="Bound">X</a> <a id="4589" class="Symbol">:</a> <a id="4591" href="Lib.Universes.html#186" data-type="(ℓ : Level) → Universe (ℓ ⁺)" class="Function">𝒰</a> <a id="4593" href="Lib.Universes.html#171" data-type="Level" class="Generalizable">𝒾</a><a id="4594" class="Symbol">}</a> <a id="4596" class="Symbol">→</a> <a id="4598" href="Cap%25C3%25ADtulo1.html#4587" class="Bound">X</a> <a id="4600" class="Symbol">→</a> <a id="4602" href="Cap%25C3%25ADtulo1.html#4587" class="Bound">X</a> <a id="4604" class="Symbol">→</a> <a id="4606" href="Lib.Universes.html#186" data-type="(ℓ : Level) → Universe (ℓ ⁺)" class="Function">𝒰</a> <a id="4608" href="Lib.Universes.html#171" data-type="Level" class="Generalizable">𝒾</a>
+        <a id="4610" href="Cap%25C3%25ADtulo1.html#4610" class="Bound">x</a> <a id="4612" href="Cap%25C3%25ADtulo1.html#4580" class="Function Operator">≡</a> <a id="4614" href="Cap%25C3%25ADtulo1.html#4614" class="Bound">y</a> <a id="4616" class="Symbol">=</a> <a id="4618" href="Cap%25C3%25ADtulo1.html#4505" class="Datatype">Id</a> <a id="4621" class="Symbol">_</a> <a id="4623" href="Cap%25C3%25ADtulo1.html#4610" class="Bound">x</a> <a id="4625" href="Cap%25C3%25ADtulo1.html#4614" class="Bound">y</a>
+        <a id="4627" class="Keyword">infix</a>   <a id="4635" class="Number">0</a> <a id="4637" href="Cap%25C3%25ADtulo1.html#4580" class="Function Operator">_≡_</a>
+        <a id="4641" class="Symbol">{-#</a> <a id="4645" class="Keyword">BUILTIN</a> <a id="4653" class="Keyword">EQUALITY</a> <a id="4662" href="Cap%25C3%25ADtulo1.html#4580" class="Function Operator">_≡_</a> <a id="4666" class="Symbol">#-}</a>
+
+        <a id="4671" class="Comment">-- Ejemplo 1.11.2.</a>
+        <a id="ej-1-11-2"></a><a id="4690" href="Cap%25C3%25ADtulo1.html#4690" class="Function">ej-1-11-2</a> <a id="4700" class="Symbol">:</a> <a id="4702" class="Symbol">(</a><a id="4703" href="Cap%25C3%25ADtulo1.html#4703" class="Bound">n</a> <a id="4705" class="Symbol">:</a> <a id="4707" href="Cap%25C3%25ADtulo1.html#3145" class="Datatype">ℕ</a><a id="4708" class="Symbol">)</a> <a id="4710" class="Symbol">→</a> <a id="4712" class="Symbol">(</a><a id="4713" href="Cap%25C3%25ADtulo1.html#3553" class="Function">add</a> <a id="4717" class="Number">0</a> <a id="4719" href="Cap%25C3%25ADtulo1.html#4703" class="Bound">n</a> <a id="4721" href="Cap%25C3%25ADtulo1.html#4580" class="Function Operator">≡</a> <a id="4723" href="Cap%25C3%25ADtulo1.html#4703" class="Bound">n</a><a id="4724" class="Symbol">)</a>
+        <a id="4726" href="Cap%25C3%25ADtulo1.html#4690" class="Function">ej-1-11-2</a> <a id="4736" href="Cap%25C3%25ADtulo1.html#4736" class="Bound">n</a> <a id="4738" class="Symbol">=</a> <a id="4740" href="Cap%25C3%25ADtulo1.html#4540" class="InductiveConstructor">refl</a> <a id="4745" href="Cap%25C3%25ADtulo1.html#4736" class="Bound">n</a>
+
+        <a id="4748" class="Comment">-- Teorema 1.11.4.</a>
+        <a id="𝕁"></a><a id="4767" href="Cap%25C3%25ADtulo1.html#4767" class="Function">𝕁</a> <a id="4769" class="Symbol">:</a> <a id="4771" class="Symbol">(</a><a id="4772" href="Cap%25C3%25ADtulo1.html#4772" class="Bound">A</a> <a id="4774" class="Symbol">:</a> <a id="4776" href="Lib.Universes.html#186" data-type="(ℓ : Level) → Universe (ℓ ⁺)" class="Function">𝒰</a> <a id="4778" href="Lib.Universes.html#171" data-type="Level" class="Generalizable">𝒾</a><a id="4779" class="Symbol">)</a> <a id="4781" class="Symbol">(</a><a id="4782" href="Cap%25C3%25ADtulo1.html#4782" class="Bound">D</a> <a id="4784" class="Symbol">:</a> <a id="4786" class="Symbol">(</a><a id="4787" href="Cap%25C3%25ADtulo1.html#4787" class="Bound">x</a> <a id="4789" href="Cap%25C3%25ADtulo1.html#4789" class="Bound">y</a> <a id="4791" class="Symbol">:</a> <a id="4793" href="Cap%25C3%25ADtulo1.html#4772" class="Bound">A</a><a id="4794" class="Symbol">)</a> <a id="4796" class="Symbol">→</a> <a id="4798" href="Cap%25C3%25ADtulo1.html#4787" class="Bound">x</a> <a id="4800" href="Cap%25C3%25ADtulo1.html#4580" class="Function Operator">≡</a> <a id="4802" href="Cap%25C3%25ADtulo1.html#4789" class="Bound">y</a> <a id="4804" class="Symbol">→</a> <a id="4806" href="Lib.Universes.html#186" data-type="(ℓ : Level) → Universe (ℓ ⁺)" class="Function">𝒰</a> <a id="4808" href="Lib.Universes.html#173" data-type="Level" class="Generalizable">𝒿</a><a id="4809" class="Symbol">)</a>
+          <a id="4813" class="Symbol">→</a> <a id="4815" class="Symbol">((</a><a id="4817" href="Cap%25C3%25ADtulo1.html#4817" class="Bound">x</a> <a id="4819" class="Symbol">:</a> <a id="4821" href="Cap%25C3%25ADtulo1.html#4772" class="Bound">A</a><a id="4822" class="Symbol">)</a> <a id="4824" class="Symbol">→</a> <a id="4826" href="Cap%25C3%25ADtulo1.html#4782" class="Bound">D</a> <a id="4828" href="Cap%25C3%25ADtulo1.html#4817" class="Bound">x</a> <a id="4830" href="Cap%25C3%25ADtulo1.html#4817" class="Bound">x</a> <a id="4832" class="Symbol">(</a><a id="4833" href="Cap%25C3%25ADtulo1.html#4540" class="InductiveConstructor">refl</a> <a id="4838" href="Cap%25C3%25ADtulo1.html#4817" class="Bound">x</a><a id="4839" class="Symbol">))</a>
+          <a id="4844" class="Symbol">→</a> <a id="4846" class="Symbol">(</a><a id="4847" href="Cap%25C3%25ADtulo1.html#4847" class="Bound">x</a> <a id="4849" href="Cap%25C3%25ADtulo1.html#4849" class="Bound">y</a> <a id="4851" class="Symbol">:</a> <a id="4853" href="Cap%25C3%25ADtulo1.html#4772" class="Bound">A</a><a id="4854" class="Symbol">)</a> <a id="4856" class="Symbol">(</a><a id="4857" href="Cap%25C3%25ADtulo1.html#4857" class="Bound">p</a> <a id="4859" class="Symbol">:</a> <a id="4861" href="Cap%25C3%25ADtulo1.html#4847" class="Bound">x</a> <a id="4863" href="Cap%25C3%25ADtulo1.html#4580" class="Function Operator">≡</a> <a id="4865" href="Cap%25C3%25ADtulo1.html#4849" class="Bound">y</a><a id="4866" class="Symbol">)</a> <a id="4868" class="Symbol">→</a> <a id="4870" href="Cap%25C3%25ADtulo1.html#4782" class="Bound">D</a> <a id="4872" href="Cap%25C3%25ADtulo1.html#4847" class="Bound">x</a> <a id="4874" href="Cap%25C3%25ADtulo1.html#4849" class="Bound">y</a> <a id="4876" href="Cap%25C3%25ADtulo1.html#4857" class="Bound">p</a>
+        <a id="4878" href="Cap%25C3%25ADtulo1.html#4767" class="Function">𝕁</a> <a id="4880" href="Cap%25C3%25ADtulo1.html#4880" class="Bound">A</a> <a id="4882" href="Cap%25C3%25ADtulo1.html#4882" class="Bound">D</a> <a id="4884" href="Cap%25C3%25ADtulo1.html#4884" class="Bound">d</a> <a id="4886" href="Cap%25C3%25ADtulo1.html#4886" class="Bound">x</a> <a id="4888" href="Cap%25C3%25ADtulo1.html#4886" class="Bound">x</a> <a id="4890" class="Symbol">(</a><a id="4891" href="Cap%25C3%25ADtulo1.html#4540" class="InductiveConstructor">refl</a> <a id="4896" href="Cap%25C3%25ADtulo1.html#4886" class="Bound">x</a><a id="4897" class="Symbol">)</a> <a id="4899" class="Symbol">=</a> <a id="4901" href="Cap%25C3%25ADtulo1.html#4884" class="Bound">d</a> <a id="4903" href="Cap%25C3%25ADtulo1.html#4886" class="Bound">x</a>
+        </pre>
+
+      </article>
+    </div>
+  </main>
+</body>
+<style>
+  :root {
+    --text-bg: #fff;
+    --text-fg: #222;
+    --shadow: #000;
+    --primary: #0054F4;
+    --secondary: #9C1BD6;
+    --modal-bg: #ccccccaa;
+    --warning-bg: #fef08a;
+    --code-bg: var(--text-bg);
+    --code-fg: var(--text-fg);
+    --code-keyword: #BB3B13;
+    --code-string: #d52753;
+    --code-number: #8A1060;
+    --code-module: #8A1060;
+    --code-field: #9C1BD6;
+    --code-constructor: #207B1D;
+    --code-highlight: #F5DEB3;
+    --search-selected: #e2e8f0;
+    --details-summary: #b2ebf2;
+    --details-open: #80deea;
+    --depgraph-edge: #eee;
+    --blockquote-bg: #d8b4fe;
+  }
+
+  .diagram-dark {
+    display: none !important;
+  }
+
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --text-bg: #282C34;
+      --text-fg: #bfbfbf;
+      --shadow: #475569;
+      --primary: #61AFEF;
+      --secondary: #C878DD;
+      --modal-bg: #282C34aa;
+      --warning-bg: #991b1b;
+      --code-keyword: #E5C07B;
+      --code-string: #E06C75;
+      --code-number: #98C379;
+      --code-module: #56B6C2;
+      --code-field: #C878DD;
+      --code-constructor: #98C379;
+      --code-highlight: #ef444499;
+      --search-selected: #474e5e;
+      --details-summary: #5b21b6;
+      --details-open: #4c1d95;
+      --depgraph-edge: #474e5e;
+      --blockquote-bg: #475569;
+    }
+
+    div.warning {
+      --shadow: #7f1d1d;
+    }
+
+    input {
+      background-color: #334155;
+      border: 1px solid #475569;
+      color: var(--text-fg);
+    }
+
+    body {
+      scrollbar-color: #3b4454 #2b2e33;
+    }
+
+    .diagram-dark {
+      display: block !important;
+    }
+
+    .diagram-light {
+      display: none !important;
+    }
+  }
+
+  table {
+    margin: auto;
+    border-collapse: collapse;
+  }
+
+  table td,
+  table th {
+    text-align: center;
+    padding: 0px 1em 0px 1em;
+    border: 1px solid black;
+  }
+
+  table th {
+    border-bottom: 2px solid black;
+  }
+
+  table td {
+    white-space: nowrap;
+  }
+
+  html {
+    max-width: 100%;
+  }
+
+  body {
+    font-family: "Inria Sans", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
+    width: 100%;
+    font-size: var(--font-size);
+    overflow-x: clip;
+    background-color: var(--text-bg);
+    color: var(--text-fg);
+  }
+
+  div#post-toc-container {
+    max-width: 120ch;
+    margin: auto;
+  }
+
+  article a[href],
+  div#return>a[href],
+  div#top>a[href],
+  aside#toc>div#toc-container ul a[href] {
+    color: var(--primary);
+    text-decoration: none;
+  }
+
+  article a[href]:hover,
+  div#return>a[href]:hover,
+  div#top>a[href]:hover,
+  aside#toc>div#toc-container ul a[href]:hover {
+    text-decoration: 2px currentColor underline !important;
+  }
+
+  article a[href]:visited,
+  div#return>a[href]:visited,
+  div#top>a[href]:visited,
+  aside#toc>div#toc-container ul a[href]:visited {
+    color: var(--secondary);
+  }
+
+  /* Aspects. */
+  .Agda {
+    /* NameKinds. */
+    /* OtherAspects. */
+    /* Standard attributes. */
+    font-family: 'iosevka', 'Iosevka', 'Fantasque Sans Mono', 'Roboto Mono', monospace;
+    font-weight: 400;
+  }
+
+  .Agda .Comment {
+    color: var(--code-fg);
+    font-style: italic;
+  }
+
+  .Agda .Background {
+    background-color: var(--code-bg);
+  }
+
+  .Agda .Markup {
+    color: var(--code-fg);
+  }
+
+  .Agda .Keyword {
+    color: var(--code-keyword);
+  }
+
+  .Agda .String {
+    color: var(--code-string);
+  }
+
+  .Agda .Number {
+    color: var(--code-number);
+  }
+
+  .Agda .Symbol {
+    color: var(--code-fg);
+  }
+
+  .Agda .PrimitiveType {
+    color: var(--primary);
+  }
+
+  .Agda .Pragma {
+    color: var(--code-fg);
+  }
+
+  .Agda .Bound {
+    color: var(--code-fg) !important;
+  }
+
+  .Agda .Generalizable {
+    color: var(--code-fg) !important;
+  }
+
+  .Agda .InductiveConstructor {
+    color: var(--code-constructor) !important;
+  }
+
+  .Agda .CoinductiveConstructor {
+    color: var(--code-constructor) !important;
+  }
+
+  .Agda .Datatype {
+    color: var(--primary) !important;
+  }
+
+  .Agda .Field {
+    color: var(--code-field) !important;
+  }
+
+  .Agda .Function {
+    color: var(--primary) !important;
+  }
+
+  .Agda .Module {
+    color: var(--code-module) !important;
+  }
+
+  .Agda .Postulate {
+    color: var(--primary) !important;
+  }
+
+  .Agda .Primitive {
+    color: var(--primary) !important;
+  }
+
+  .Agda .Record {
+    color: var(--primary) !important;
+  }
+
+  .Agda .UnsolvedMeta {
+    color: var(--code-fg);
+    background: yellow;
+  }
+
+  .Agda .UnsolvedConstraint {
+    color: var(--code-fg);
+    background: yellow;
+  }
+
+  .Agda .TerminationProblem {
+    color: var(--code-fg);
+    background: #FFA07A;
+  }
+
+  .Agda .IncompletePattern {
+    color: var(--code-fg);
+    background: #F5DEB3;
+  }
+
+  .Agda .Error {
+    color: red;
+    text-decoration: underline;
+  }
+
+  .Agda .TypeChecks {
+    color: var(--code-fg);
+    background: #ADD8E6;
+  }
+
+  .Agda .ShadowingInTelescope {
+    color: var(--code-fg);
+    background: #808080;
+  }
+
+  .Agda .Deadcode {
+    color: var(--code-keyword);
+    font-weight: bold;
+  }
+
+  .Agda a {
+    text-decoration: none;
+  }
+
+  .Agda a[href]:hover {
+    text-decoration: 2px var(--primary) underline;
+  }
+
+  .Agda a[href]:target {
+    animation: highlight 2.5s;
+  }
+
+  body.text-page .Agda {
+    font-size: var(--code-font-size);
+  }
+
+  pre.Agda,
+  div.sourceCode,
+  pre {
+    border-radius: 0;
+    box-shadow: none;
+    overflow-y: clip;
+    margin: 0;
+    padding: 1em;
+    padding-top: 0.25em;
+    padding-bottom: 0.25em;
+    background-color: var(--code-bg);
+    color: var(--code-fg);
+    font-size: var(--code-font-size);
+    max-width: 100%;
+    overflow-x: auto;
+  }
+</style>
+
+</html>
