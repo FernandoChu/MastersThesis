@@ -23,7 +23,7 @@ jobs:
 
       - name: Build 🛠️
         run: |
-          git config --global --add safe.directory /__w/Master-Thesis/Master-Thesis
+          git config --global --add safe.directory /__w/MasterThesis/MasterThesis
           cd Agda/
           build-agda-index README.md
           mkdir -p _build/site
@@ -35,4 +35,4 @@ jobs:
         uses: JamesIves/github-pages-deploy-action@4.1.7
         with:
           branch: gh-pages
-          folder: /__w/Master-Thesis/Master-Thesis/Agda/_build/site
+          folder: /__w/MasterThesis/MasterThesis/Agda/_build/site
