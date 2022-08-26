@@ -1,12 +1,16 @@
-Test
+# Capítulo 1. Teoría de Tipos Dependientes
+
+<!--
 ```agda
--- idk
 module Capitulo1 where
-open import Lib.Universes public
+open import Preliminares public
+```
+-->
 
 
--- Sección 1.5. El tipo de funciones
+## Sección 1.5. El tipo de funciones
 
+```agda
 -- Definición 1.5.5.
 idA : {A : 𝒰 𝒾} → A → A
 idA x = x
@@ -21,10 +25,13 @@ comp : {A : 𝒰 𝒾} {B : 𝒰 𝒿} {C : 𝒰 𝓀}
     → (A → B)
     → (A → C)
 comp g f x = g (f x)
+```
 
+---
 
--- Sección 1.6. El tipo de funciones dependientes
+## Sección 1.6. El tipo de funciones dependientes
 
+```agda
 -- Definición 1.6.9.
 id : {A : 𝒰 𝒾} → A → A
 id x = x
@@ -213,10 +220,4 @@ ej-1-11-2 n = refl n
   → ((x : A) → D x x (refl x))
   → (x y : A) (p : x ≡ y) → D x y p
 𝕁 A D d x x (refl x) = d x
-```
-
-test2
-```agda
--- test3
--- test4
 ```
