@@ -1,0 +1,6 @@
+name: hott-book
+include: .
+flags: --without-K
+       --exact-split
+       --auto-inline
+       --no-import-sorts
