@@ -30,6 +30,8 @@ jobs:
           cp -v _build/html0/*.html _build/site/
           cp -v README.html _build/site/index.html
           cd ..
+          ls
+          pwd
       - name: Deploy 🚀
         if: ${{ github.ref_name == 'main' }}
         uses: JamesIves/github-pages-deploy-action@4.1.7
