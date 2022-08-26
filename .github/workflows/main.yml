@@ -3,7 +3,7 @@ on: [push, pull_request]
 jobs:
   build:
     runs-on: ubuntu-latest
-    container: ryunaq/agda2html:latest
+    container: pltamy/hottest-lecture-notes:latest
 
     steps:
       - name: Checkout ⬇️
