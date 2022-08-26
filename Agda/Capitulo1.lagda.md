@@ -1,5 +1,5 @@
 ```agda
-module Capítulo1 where
+module Capitulo1 where
 
 open import Lib.Universes public
 
