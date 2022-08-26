@@ -1,6 +1,6 @@
-module Capítulo2 where
-
-open import Capítulo1 public
+```agda
+module Capitulo2 where
+open import Capitulo1 public
 
 ---------------------------------------------------------------------------------
 
@@ -793,3 +793,4 @@ tr-x≡x-≃ {𝒾} {A} {a} {a'} (refl a) q r =
     ε (g , h) = refl _
     η : map⁻¹ ∘ map ∼ id
     η f = funext fe (λ x → (Σ-uniq (f x))⁻¹)
+```
