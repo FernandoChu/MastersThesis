@@ -189,6 +189,12 @@ lift-lemma u (refl x) = refl (refl x)
 apd : {A : 𝒰 𝒾} {P : A → 𝒰 𝒿} (f : (x : A) → P x) {x y : A}
       (p : x ≡ y) → tr P p (f x) ≡ f y
 apd f (refl x) = refl (f x)
+
+-- Lema 2.4.5.
+tr-f : {A : 𝒰 𝒾} (B : A → 𝒰 𝒿) (f : A → A)
+       {x y : A} (p : x ≡ y)
+     → tr B (ap f p) ≡ tr (B ∘ f) p
+tr-f B f (refl _) = refl _
 ```
 
 ## Sección 2.5. Equivalencias homotópicas
@@ -428,7 +434,7 @@ qinv-ua : (X Y : 𝒰 𝒾) → qinv idtoeqv
 qinv-ua X Y = equivs-are-invs idtoeqv (ua-ax X Y)
 
 ua : {X Y : 𝒰 𝒾} → X ≃ Y → X ≡ Y
-ua {X} {Y} eqv =
+ua eqv =
   let (ua , idtoeqv∘ua , ua∘idtoeqv) = qinv-ua _ _
    in ua eqv
 
@@ -438,6 +444,73 @@ id∼idtoeqv∘ua : {X Y : 𝒰 𝒾} (eqv : X ≃ Y)
 id∼idtoeqv∘ua {X} {Y} eqv =
   let (ua , idtoeqv∘ua , ua∘idtoeqv) = qinv-ua _ _
    in (idtoeqv∘ua eqv)⁻¹
+```
+
+# Sección 2.9. Caminos entre naturales
+
+```agda
+
+-- Lema 2.9.1
+code-ℕ : ℕ → ℕ → 𝒰₀
+code-ℕ 0 0               = 𝟙
+code-ℕ (succ m) 0        = 𝟘
+code-ℕ 0 (succ m)        = 𝟘
+code-ℕ (succ m) (succ n) = code-ℕ m n
+
+r-ℕ : (n : ℕ) → code-ℕ n n
+r-ℕ 0        = ⋆
+r-ℕ (succ n) = r-ℕ n
+
+encode-ℕ : (m n : ℕ) → (m ≡ n) → code-ℕ m n
+encode-ℕ m n p = tr (code-ℕ m) p (r-ℕ m)
+
+decode-ℕ : (m n : ℕ) → code-ℕ m n → (m ≡ n)
+decode-ℕ 0 0 f = refl 0
+decode-ℕ (succ m) 0 f = !𝟘 (succ m ≡ 0) f
+decode-ℕ 0 (succ n) f = !𝟘 (0 ≡ succ n) f
+decode-ℕ (succ m) (succ n) f = ap succ (decode-ℕ m n f)
+
+decode∘encode-ℕ∼id : (m n : ℕ) → (decode-ℕ m n) ∘ (encode-ℕ m n) ∼ id
+decode∘encode-ℕ∼id m n (refl n) = lema n
+  where
+    lema : (n : ℕ) → decode-ℕ n n (r-ℕ n) ≡ refl n
+    lema 0 = refl _
+    lema (succ n) = ap (ap succ) (lema n)
+
+encode∘decode-ℕ∼id : (m n : ℕ) → (encode-ℕ m n) ∘ (decode-ℕ m n) ∼ id
+encode∘decode-ℕ∼id 0 0 ⋆               = refl ⋆
+encode∘decode-ℕ∼id (succ m) 0 c        = !𝟘 _ c
+encode∘decode-ℕ∼id 0 (succ n) c        = !𝟘 _ c
+encode∘decode-ℕ∼id (succ m) (succ n) c = begin
+  encode-ℕ (succ m) (succ n) (decode-ℕ (succ m) (succ n) c)           ≡⟨⟩
+  encode-ℕ (succ m) (succ n) (ap succ (decode-ℕ m n c))               ≡⟨⟩
+  tr (code-ℕ (succ m)) (ap succ (decode-ℕ m n c)) (r-ℕ (succ m))      ≡⟨ i ⟩
+  tr (λ - → code-ℕ (succ m) (succ -)) (decode-ℕ m n c) (r-ℕ (succ m)) ≡⟨⟩
+  tr (λ - → code-ℕ (succ m) (succ -)) (decode-ℕ m n c) (r-ℕ m)        ≡⟨⟩
+  tr (code-ℕ m) (decode-ℕ m n c) (r-ℕ m)                              ≡⟨⟩
+  encode-ℕ m n (decode-ℕ m n c)                                       ≡⟨ ii ⟩
+  c ∎
+ where
+  i = happly (tr-f (code-ℕ (succ m)) succ ((decode-ℕ m n c))) (r-ℕ (succ m))
+  ii = encode∘decode-ℕ∼id m n c
+
+ℕ-≡-≃ : (m n : ℕ) → (m ≡ n) ≃ code-ℕ m n
+ℕ-≡-≃ m n =
+  encode-ℕ m n , invs-are-equivs (encode-ℕ m n)
+    (decode-ℕ m n , encode∘decode-ℕ∼id m n , decode∘encode-ℕ∼id m n)
+
+sm≡sn→m≡n : {m n : ℕ} → (succ m ≡ succ n) → (m ≡ n)
+sm≡sn→m≡n {m} {n} p = decode-ℕ m n (encode-ℕ (succ m) (succ n) p)
+
+ℕ-decidable : (m n : ℕ) → (m ≡ n) ⊎ ((m ≡ n) → 𝟘)
+ℕ-decidable 0 0               = inl (refl 0)
+ℕ-decidable (succ m) 0        = inr (λ - → !𝟘 _ (encode-ℕ (succ m) 0 -))
+ℕ-decidable 0 (succ n)        = inr (λ - → !𝟘 _ (encode-ℕ 0 (succ n) -))
+ℕ-decidable (succ m) (succ n) =
+  ⊎-ind ((λ - → (succ m ≡ succ n) ⊎ (succ m ≡ succ n → 𝟘)))
+    (λ p → inl(ap succ p))
+    (λ contra → inr(λ p → contra (sm≡sn→m≡n p)))
+    (ℕ-decidable m n)
 ```
 
 
