@@ -1,0 +1,422 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="es" xml:lang="es">
+
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <title>Teoría Homotópica de Tipos</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,500;0,600;0,700;0,800;1,400;1,500;1,600;1,700;1,800&family=Inria+Sans:ital,wght@0,300;0,400;0,700;1,300;1,400;1,700&display=swap"
+    rel="stylesheet">
+</head>
+
+<body class="text-page">
+  <main>
+    <div id="post-toc-container" style="padding-left: 1em; padding-right: 1em;">
+
+      <article>
+
+        <h1 id="apéndice-b.-resultados-técnicos">Apéndice B. Resultados
+        técnicos</h1>
+        <!--
+        <pre class="Agda"><a id="49" class="Keyword">module</a> <a id="56" href="ApendiceB.html" class="Module">ApendiceB</a> <a id="66" class="Keyword">where</a>
+        <a id="72" class="Keyword">open</a> <a id="77" class="Keyword">import</a> <a id="84" href="Capitulo3.html" class="Module">Capitulo3</a> <a id="94" class="Keyword">public</a>
+        </pre>-->
+        <pre class="Agda">
+        <a id="119" class="Comment">-- Lema 2.1.</a>
+        <a id="fibra≃"></a><a id="132" href="ApendiceB.html#132" data-type="(A : 𝒰 𝒾) (B : A → 𝒰 𝒿) (x : A) → B x ≃ -Σ (Σ B) (λ z → pr₁ z ≡ x)" class="Function">fibra≃</a> <a id="139" class="Symbol">:</a> <a id="141" class="Symbol">(</a><a id="142" href="ApendiceB.html#142" class="Bound">A</a> <a id="144" class="Symbol">:</a> <a id="146" href="Preliminares.html#362" data-type="(ℓ : Level) → Universe (ℓ ⁺)" class="Function">𝒰</a> <a id="148" href="Preliminares.html#347" data-type="Level" class="Generalizable">𝒾</a><a id="149" class="Symbol">)</a> <a id="151" class="Symbol">(</a><a id="152" href="ApendiceB.html#152" class="Bound">B</a> <a id="154" class="Symbol">:</a> <a id="156" href="ApendiceB.html#142" class="Bound">A</a> <a id="158" class="Symbol">→</a> <a id="160" href="Preliminares.html#362" data-type="(ℓ : Level) → Universe (ℓ ⁺)" class="Function">𝒰</a> <a id="162" href="Preliminares.html#349" data-type="Level" class="Generalizable">𝒿</a><a id="163" class="Symbol">)</a> <a id="165" class="Symbol">(</a><a id="166" href="ApendiceB.html#166" class="Bound">x</a> <a id="168" class="Symbol">:</a> <a id="170" href="ApendiceB.html#142" class="Bound">A</a><a id="171" class="Symbol">)</a>
+             <a id="178" class="Symbol">→</a> <a id="180" class="Symbol">(</a><a id="181" href="ApendiceB.html#152" class="Bound">B</a> <a id="183" href="ApendiceB.html#166" class="Bound">x</a><a id="184" class="Symbol">)</a> <a id="186" href="Capitulo2.html#7370" data-type="𝒰 𝒾 → 𝒰 𝒿 → 𝒰 (𝒾 ⊔ 𝒿)" class="Function Operator">≃</a> <a id="188" class="Symbol">(</a><a id="189" href="Capitulo1.html#1251" data-type="(X : 𝒰 𝒾) → (X → 𝒰 𝒿) → 𝒰 (𝒾 ⊔ 𝒿)" class="Function">Σ</a> <a id="191" href="ApendiceB.html#191" class="Bound">z</a> <a id="193" href="Capitulo1.html#1251" data-type="(X : 𝒰 𝒾) → (X → 𝒰 𝒿) → 𝒰 (𝒾 ⊔ 𝒿)" class="Function">꞉</a> <a id="195" class="Symbol">(</a><a id="196" href="Capitulo1.html#1140" data-type="(Y : X → 𝒰 𝒿) → 𝒰 (𝒾 ⊔ 𝒿)" class="Record">Σ</a> <a id="198" href="ApendiceB.html#152" class="Bound">B</a><a id="199" class="Symbol">)</a> <a id="201" href="Capitulo1.html#1251" data-type="(X : 𝒰 𝒾) → (X → 𝒰 𝒿) → 𝒰 (𝒾 ⊔ 𝒿)" class="Function">,</a> <a id="203" href="Capitulo1.html#1638" data-type="Σ Y → X" class="Function">pr₁</a> <a id="207" href="ApendiceB.html#191" class="Bound">z</a> <a id="209" href="Capitulo1.html#4141" data-type="X → X → 𝒰 𝒾" class="Function Operator">≡</a> <a id="211" href="ApendiceB.html#166" class="Bound">x</a><a id="212" class="Symbol">)</a>
+        <a id="214" href="ApendiceB.html#132" data-type="(A : 𝒰 𝒾) (B : A → 𝒰 𝒿) (x : A) → B x ≃ -Σ (Σ B) (λ z → pr₁ z ≡ x)" class="Function">fibra≃</a> <a id="221" href="ApendiceB.html#221" class="Bound">A</a> <a id="223" href="ApendiceB.html#223" class="Bound">B</a> <a id="225" href="ApendiceB.html#225" class="Bound">x</a> <a id="227" class="Symbol">=</a> <a id="229" href="ApendiceB.html#275" data-type="(A : 𝒰 𝒾) (B : A → 𝒰 𝒿) (x : A) (y : B x) → Σ (λ v → pr₁ v ≡ x)" class="Function">f</a> <a id="231" href="Capitulo1.html#1202" data-type="(x : X) (y : Y x) → Σ Y" class="InductiveConstructor Operator">,</a> <a id="233" href="Capitulo2.html#6863" data-type="(f : A → B) → qinv f → isequiv f" class="Function">invs-are-equivs</a> <a id="249" href="ApendiceB.html#275" data-type="(A : 𝒰 𝒾) (B : A → 𝒰 𝒿) (x : A) (y : B x) → Σ (λ v → pr₁ v ≡ x)" class="Function">f</a> <a id="251" class="Symbol">(</a><a id="252" href="ApendiceB.html#306" data-type="(A : 𝒰 𝒾) (B : A → 𝒰 𝒿) (x : A) → -Σ (Σ B) (λ z → pr₁ z ≡ x) → B x" class="Function">g</a> <a id="254" href="Capitulo1.html#1202" data-type="(x : X) (y : Y x) → Σ Y" class="InductiveConstructor Operator">,</a> <a id="256" href="ApendiceB.html#375" data-type="(A : 𝒰 𝒾) (B : A → 𝒰 𝒿) (x : A) (α : -Σ (Σ B) (λ z → pr₁ z ≡ x)) →
+        f A B x (g A B x α) ≡ α" class="Function">ε</a> <a id="258" href="Capitulo1.html#1202" data-type="(x : X) (y : Y x) → Σ Y" class="InductiveConstructor Operator">,</a> <a id="260" href="ApendiceB.html#463" data-type="(A : 𝒰 𝒾) (B : A → 𝒰 𝒿) (x : A) (y : B x) → Id (B x) y y" class="Function">η</a><a id="261" class="Symbol">)</a>
+          <a id="265" class="Keyword">where</a>
+            <a id="275" href="ApendiceB.html#275" data-type="(A : 𝒰 𝒾) (B : A → 𝒰 𝒿) (x : A) (y : B x) → Σ (λ v → pr₁ v ≡ x)" class="Function">f</a> <a id="277" class="Symbol">=</a> <a id="279" class="Symbol">λ</a> <a id="281" href="ApendiceB.html#281" class="Bound">y</a> <a id="283" class="Symbol">→</a> <a id="285" class="Symbol">(</a><a id="286" href="ApendiceB.html#225" class="Bound">x</a> <a id="288" href="Capitulo1.html#1202" data-type="(x : X) (y : Y x) → Σ Y" class="InductiveConstructor Operator">,</a> <a id="290" href="ApendiceB.html#281" class="Bound">y</a><a id="291" class="Symbol">)</a> <a id="293" href="Capitulo1.html#1202" data-type="(x : X) (y : Y x) → Σ Y" class="InductiveConstructor Operator">,</a> <a id="295" href="Capitulo1.html#4101" data-type="(x : X) → Id X x x" class="InductiveConstructor">refl</a> <a id="300" href="ApendiceB.html#225" class="Bound">x</a>
+            <a id="306" href="ApendiceB.html#306" data-type="(A : 𝒰 𝒾) (B : A → 𝒰 𝒿) (x : A) → -Σ (Σ B) (λ z → pr₁ z ≡ x) → B x" class="Function">g</a> <a id="308" class="Symbol">:</a> <a id="310" class="Symbol">(</a><a id="311" href="Capitulo1.html#1251" data-type="(X : 𝒰 𝒾) → (X → 𝒰 𝒿) → 𝒰 (𝒾 ⊔ 𝒿)" class="Function">Σ</a> <a id="313" href="ApendiceB.html#313" class="Bound">z</a> <a id="315" href="Capitulo1.html#1251" data-type="(X : 𝒰 𝒾) → (X → 𝒰 𝒿) → 𝒰 (𝒾 ⊔ 𝒿)" class="Function">꞉</a> <a id="317" class="Symbol">(</a><a id="318" href="Capitulo1.html#1140" data-type="(Y : X → 𝒰 𝒿) → 𝒰 (𝒾 ⊔ 𝒿)" class="Record">Σ</a> <a id="320" href="ApendiceB.html#223" class="Bound">B</a><a id="321" class="Symbol">)</a> <a id="323" href="Capitulo1.html#1251" data-type="(X : 𝒰 𝒾) → (X → 𝒰 𝒿) → 𝒰 (𝒾 ⊔ 𝒿)" class="Function">,</a> <a id="325" href="Capitulo1.html#1638" data-type="Σ Y → X" class="Function">pr₁</a> <a id="329" href="ApendiceB.html#313" class="Bound">z</a> <a id="331" href="Capitulo1.html#4141" data-type="X → X → 𝒰 𝒾" class="Function Operator">≡</a> <a id="333" href="ApendiceB.html#225" class="Bound">x</a><a id="334" class="Symbol">)</a> <a id="336" class="Symbol">→</a> <a id="338" href="ApendiceB.html#223" class="Bound">B</a> <a id="340" href="ApendiceB.html#225" class="Bound">x</a>
+            <a id="346" href="ApendiceB.html#306" data-type="(A : 𝒰 𝒾) (B : A → 𝒰 𝒿) (x : A) → -Σ (Σ B) (λ z → pr₁ z ≡ x) → B x" class="Function">g</a> <a id="348" class="Symbol">((</a><a id="350" href="ApendiceB.html#350" class="Bound">a</a> <a id="352" href="Capitulo1.html#1202" data-type="(x : X) (y : Y x) → Σ Y" class="InductiveConstructor Operator">,</a> <a id="354" href="ApendiceB.html#354" class="Bound">b</a><a id="355" class="Symbol">)</a> <a id="357" href="Capitulo1.html#1202" data-type="(x : X) (y : Y x) → Σ Y" class="InductiveConstructor Operator">,</a> <a id="359" href="Capitulo1.html#4101" data-type="(x : X) → Id X x x" class="InductiveConstructor">refl</a> <a id="364" class="Symbol">_)</a> <a id="367" class="Symbol">=</a> <a id="369" href="ApendiceB.html#354" class="Bound">b</a>
+            <a id="375" href="ApendiceB.html#375" data-type="(A : 𝒰 𝒾) (B : A → 𝒰 𝒿) (x : A) (α : -Σ (Σ B) (λ z → pr₁ z ≡ x)) →
+        f A B x (g A B x α) ≡ α" class="Function">ε</a> <a id="377" class="Symbol">:</a> <a id="379" class="Symbol">(</a><a id="380" href="ApendiceB.html#380" class="Bound">α</a> <a id="382" class="Symbol">:</a> <a id="384" class="Symbol">(</a><a id="385" href="Capitulo1.html#1251" data-type="(X : 𝒰 𝒾) → (X → 𝒰 𝒿) → 𝒰 (𝒾 ⊔ 𝒿)" class="Function">Σ</a> <a id="387" href="ApendiceB.html#387" class="Bound">z</a> <a id="389" href="Capitulo1.html#1251" data-type="(X : 𝒰 𝒾) → (X → 𝒰 𝒿) → 𝒰 (𝒾 ⊔ 𝒿)" class="Function">꞉</a> <a id="391" class="Symbol">(</a><a id="392" href="Capitulo1.html#1140" data-type="(Y : X → 𝒰 𝒿) → 𝒰 (𝒾 ⊔ 𝒿)" class="Record">Σ</a> <a id="394" href="ApendiceB.html#223" class="Bound">B</a><a id="395" class="Symbol">)</a> <a id="397" href="Capitulo1.html#1251" data-type="(X : 𝒰 𝒾) → (X → 𝒰 𝒿) → 𝒰 (𝒾 ⊔ 𝒿)" class="Function">,</a> <a id="399" href="Capitulo1.html#1638" data-type="Σ Y → X" class="Function">pr₁</a> <a id="403" href="ApendiceB.html#387" class="Bound">z</a> <a id="405" href="Capitulo1.html#4141" data-type="X → X → 𝒰 𝒾" class="Function Operator">≡</a> <a id="407" href="ApendiceB.html#225" class="Bound">x</a><a id="408" class="Symbol">))</a> <a id="411" class="Symbol">→</a> <a id="413" href="ApendiceB.html#275" data-type="(A : 𝒰 𝒾) (B : A → 𝒰 𝒿) (x : A) (y : B x) → Σ (λ v → pr₁ v ≡ x)" class="Function">f</a> <a id="415" class="Symbol">(</a><a id="416" href="ApendiceB.html#306" data-type="(A : 𝒰 𝒾) (B : A → 𝒰 𝒿) (x : A) → -Σ (Σ B) (λ z → pr₁ z ≡ x) → B x" class="Function">g</a> <a id="418" href="ApendiceB.html#380" class="Bound">α</a><a id="419" class="Symbol">)</a> <a id="421" href="Capitulo1.html#4141" data-type="X → X → 𝒰 𝒾" class="Function Operator">≡</a> <a id="423" href="ApendiceB.html#380" class="Bound">α</a>
+            <a id="429" href="ApendiceB.html#375" data-type="(A : 𝒰 𝒾) (B : A → 𝒰 𝒿) (x : A) (α : -Σ (Σ B) (λ z → pr₁ z ≡ x)) →
+        f A B x (g A B x α) ≡ α" class="Function">ε</a> <a id="431" class="Symbol">((</a><a id="433" href="ApendiceB.html#433" class="Bound">a</a> <a id="435" href="Capitulo1.html#1202" data-type="(x : X) (y : Y x) → Σ Y" class="InductiveConstructor Operator">,</a> <a id="437" href="ApendiceB.html#437" class="Bound">b</a><a id="438" class="Symbol">)</a> <a id="440" href="Capitulo1.html#1202" data-type="(x : X) (y : Y x) → Σ Y" class="InductiveConstructor Operator">,</a> <a id="442" href="Capitulo1.html#4101" data-type="(x : X) → Id X x x" class="InductiveConstructor">refl</a> <a id="447" class="Symbol">_)</a> <a id="450" class="Symbol">=</a> <a id="452" href="Capitulo1.html#4101" data-type="(x : X) → Id X x x" class="InductiveConstructor">refl</a> <a id="457" class="Symbol">_</a>
+            <a id="463" href="ApendiceB.html#463" data-type="(A : 𝒰 𝒾) (B : A → 𝒰 𝒿) (x : A) (y : B x) → Id (B x) y y" class="Function">η</a> <a id="465" class="Symbol">=</a> <a id="467" class="Symbol">λ</a> <a id="469" href="ApendiceB.html#469" class="Bound">y</a> <a id="471" class="Symbol">→</a> <a id="473" href="Capitulo1.html#4101" data-type="(x : X) → Id X x x" class="InductiveConstructor">refl</a> <a id="478" href="ApendiceB.html#469" class="Bound">y</a>
+
+        <a id="fibra="></a><a id="481" href="ApendiceB.html#481" data-type="(A : 𝒰 𝒾) (B : A → 𝒰 𝒾) (x : A) → B x ≡ -Σ (Σ B) (λ z → pr₁ z ≡ x)" class="Function">fibra=</a> <a id="488" class="Symbol">:</a> <a id="490" class="Symbol">(</a><a id="491" href="ApendiceB.html#491" class="Bound">A</a> <a id="493" class="Symbol">:</a> <a id="495" href="Preliminares.html#362" data-type="(ℓ : Level) → Universe (ℓ ⁺)" class="Function">𝒰</a> <a id="497" href="Preliminares.html#347" data-type="Level" class="Generalizable">𝒾</a><a id="498" class="Symbol">)</a> <a id="500" class="Symbol">(</a><a id="501" href="ApendiceB.html#501" class="Bound">B</a> <a id="503" class="Symbol">:</a> <a id="505" href="ApendiceB.html#491" class="Bound">A</a> <a id="507" class="Symbol">→</a> <a id="509" href="Preliminares.html#362" data-type="(ℓ : Level) → Universe (ℓ ⁺)" class="Function">𝒰</a> <a id="511" href="Preliminares.html#347" data-type="Level" class="Generalizable">𝒾</a><a id="512" class="Symbol">)</a> <a id="514" class="Symbol">(</a><a id="515" href="ApendiceB.html#515" class="Bound">x</a> <a id="517" class="Symbol">:</a> <a id="519" href="ApendiceB.html#491" class="Bound">A</a><a id="520" class="Symbol">)</a>
+              <a id="528" class="Symbol">→</a> <a id="530" class="Symbol">(</a><a id="531" href="ApendiceB.html#501" class="Bound">B</a> <a id="533" href="ApendiceB.html#515" class="Bound">x</a><a id="534" class="Symbol">)</a> <a id="536" href="Capitulo1.html#4141" data-type="X → X → 𝒰 𝒾" class="Function Operator">≡</a> <a id="538" class="Symbol">(</a><a id="539" href="Capitulo1.html#1251" data-type="(X : 𝒰 𝒾) → (X → 𝒰 𝒿) → 𝒰 (𝒾 ⊔ 𝒿)" class="Function">Σ</a> <a id="541" href="ApendiceB.html#541" class="Bound">z</a> <a id="543" href="Capitulo1.html#1251" data-type="(X : 𝒰 𝒾) → (X → 𝒰 𝒿) → 𝒰 (𝒾 ⊔ 𝒿)" class="Function">꞉</a> <a id="545" class="Symbol">(</a><a id="546" href="Capitulo1.html#1140" data-type="(Y : X → 𝒰 𝒿) → 𝒰 (𝒾 ⊔ 𝒿)" class="Record">Σ</a> <a id="548" href="ApendiceB.html#501" class="Bound">B</a><a id="549" class="Symbol">)</a> <a id="551" href="Capitulo1.html#1251" data-type="(X : 𝒰 𝒾) → (X → 𝒰 𝒿) → 𝒰 (𝒾 ⊔ 𝒿)" class="Function">,</a> <a id="553" href="Capitulo1.html#1638" data-type="Σ Y → X" class="Function">pr₁</a> <a id="557" href="ApendiceB.html#541" class="Bound">z</a> <a id="559" href="Capitulo1.html#4141" data-type="X → X → 𝒰 𝒾" class="Function Operator">≡</a> <a id="561" href="ApendiceB.html#515" class="Bound">x</a><a id="562" class="Symbol">)</a>
+        <a id="564" href="ApendiceB.html#481" data-type="(A : 𝒰 𝒾) (B : A → 𝒰 𝒾) (x : A) → B x ≡ -Σ (Σ B) (λ z → pr₁ z ≡ x)" class="Function">fibra=</a> <a id="571" href="ApendiceB.html#571" class="Bound">A</a> <a id="573" href="ApendiceB.html#573" class="Bound">B</a> <a id="575" href="ApendiceB.html#575" class="Bound">x</a> <a id="577" class="Symbol">=</a> <a id="579" href="Capitulo2.html#12609" data-type="X ≃ Y → X ≡ Y" class="Function">ua</a> <a id="582" class="Symbol">(</a><a id="583" href="ApendiceB.html#132" data-type="(A : 𝒰 𝒾) (B : A → 𝒰 𝒿) (x : A) → B x ≃ -Σ (Σ B) (λ z → pr₁ z ≡ x)" class="Function">fibra≃</a> <a id="590" href="ApendiceB.html#571" class="Bound">A</a> <a id="592" href="ApendiceB.html#573" class="Bound">B</a> <a id="594" href="ApendiceB.html#575" class="Bound">x</a><a id="595" class="Symbol">)</a>
+
+        <a id="598" class="Comment">-- Lema 2.2.</a>
+        <a id="paths-over-≃"></a><a id="611" href="ApendiceB.html#611" data-type="(P : A → 𝒰 𝒿) (x y : A) (p : x ≡ y) (u : P x) (v : P y) →
+        -Σ (x , u ≡ y , v) (λ q → ap pr₁ q ≡ p) ≃ (tr P p u ≡ v)" class="Function">paths-over-≃</a> <a id="624" class="Symbol">:</a> <a id="626" class="Symbol">{</a><a id="627" href="ApendiceB.html#627" class="Bound">A</a> <a id="629" class="Symbol">:</a> <a id="631" href="Preliminares.html#362" data-type="(ℓ : Level) → Universe (ℓ ⁺)" class="Function">𝒰</a> <a id="633" href="Preliminares.html#347" data-type="Level" class="Generalizable">𝒾</a><a id="634" class="Symbol">}</a> <a id="636" class="Symbol">(</a><a id="637" href="ApendiceB.html#637" class="Bound">P</a> <a id="639" class="Symbol">:</a> <a id="641" href="ApendiceB.html#627" class="Bound">A</a> <a id="643" class="Symbol">→</a> <a id="645" href="Preliminares.html#362" data-type="(ℓ : Level) → Universe (ℓ ⁺)" class="Function">𝒰</a> <a id="647" href="Preliminares.html#349" data-type="Level" class="Generalizable">𝒿</a><a id="648" class="Symbol">)</a>
+               <a id="657" class="Symbol">(</a><a id="658" href="ApendiceB.html#658" class="Bound">x</a> <a id="660" href="ApendiceB.html#660" class="Bound">y</a> <a id="662" class="Symbol">:</a> <a id="664" href="ApendiceB.html#627" class="Bound">A</a><a id="665" class="Symbol">)</a> <a id="667" class="Symbol">(</a><a id="668" href="ApendiceB.html#668" class="Bound">p</a> <a id="670" class="Symbol">:</a> <a id="672" href="ApendiceB.html#658" class="Bound">x</a> <a id="674" href="Capitulo1.html#4141" data-type="X → X → 𝒰 𝒾" class="Function Operator">≡</a> <a id="676" href="ApendiceB.html#660" class="Bound">y</a><a id="677" class="Symbol">)</a>
+               <a id="686" class="Symbol">(</a><a id="687" href="ApendiceB.html#687" class="Bound">u</a> <a id="689" class="Symbol">:</a> <a id="691" href="ApendiceB.html#637" class="Bound">P</a> <a id="693" href="ApendiceB.html#658" class="Bound">x</a><a id="694" class="Symbol">)</a> <a id="696" class="Symbol">(</a><a id="697" href="ApendiceB.html#697" class="Bound">v</a> <a id="699" class="Symbol">:</a> <a id="701" href="ApendiceB.html#637" class="Bound">P</a> <a id="703" href="ApendiceB.html#660" class="Bound">y</a><a id="704" class="Symbol">)</a>
+             <a id="711" class="Symbol">→</a> <a id="713" class="Symbol">(</a><a id="714" href="Capitulo1.html#1251" data-type="(X : 𝒰 𝒾) → (X → 𝒰 𝒿) → 𝒰 (𝒾 ⊔ 𝒿)" class="Function">Σ</a> <a id="716" href="ApendiceB.html#716" class="Bound">q</a> <a id="718" href="Capitulo1.html#1251" data-type="(X : 𝒰 𝒾) → (X → 𝒰 𝒿) → 𝒰 (𝒾 ⊔ 𝒿)" class="Function">꞉</a> <a id="720" class="Symbol">((</a><a id="722" href="ApendiceB.html#658" class="Bound">x</a> <a id="724" href="Capitulo1.html#1202" data-type="(x : X) (y : Y x) → Σ Y" class="InductiveConstructor Operator">,</a> <a id="726" href="ApendiceB.html#687" class="Bound">u</a><a id="727" class="Symbol">)</a> <a id="729" href="Capitulo1.html#4141" data-type="X → X → 𝒰 𝒾" class="Function Operator">≡</a> <a id="731" class="Symbol">(</a><a id="732" href="ApendiceB.html#660" class="Bound">y</a> <a id="734" href="Capitulo1.html#1202" data-type="(x : X) (y : Y x) → Σ Y" class="InductiveConstructor Operator">,</a> <a id="736" href="ApendiceB.html#697" class="Bound">v</a><a id="737" class="Symbol">))</a> <a id="740" href="Capitulo1.html#1251" data-type="(X : 𝒰 𝒾) → (X → 𝒰 𝒿) → 𝒰 (𝒾 ⊔ 𝒿)" class="Function">,</a> <a id="742" class="Symbol">(</a><a id="743" href="Capitulo2.html#1944" data-type="(f : X → Y) → x ≡ x&#39; → f x ≡ f x&#39;" class="Function">ap</a> <a id="746" href="Capitulo1.html#1638" data-type="Σ Y → X" class="Function">pr₁</a> <a id="750" href="ApendiceB.html#716" class="Bound">q</a> <a id="752" href="Capitulo1.html#4141" data-type="X → X → 𝒰 𝒾" class="Function Operator">≡</a> <a id="754" href="ApendiceB.html#668" class="Bound">p</a><a id="755" class="Symbol">))</a> <a id="758" href="Capitulo2.html#7370" data-type="𝒰 𝒾 → 𝒰 𝒿 → 𝒰 (𝒾 ⊔ 𝒿)" class="Function Operator">≃</a> <a id="760" class="Symbol">(</a><a id="761" href="Capitulo2.html#4597" data-type="(P : A → 𝒰 𝒿) → x ≡ y → P x → P y" class="Function">tr</a> <a id="764" href="ApendiceB.html#637" class="Bound">P</a> <a id="766" href="ApendiceB.html#668" class="Bound">p</a> <a id="768" href="ApendiceB.html#687" class="Bound">u</a> <a id="770" href="Capitulo1.html#4141" data-type="X → X → 𝒰 𝒾" class="Function Operator">≡</a> <a id="772" href="ApendiceB.html#697" class="Bound">v</a><a id="773" class="Symbol">)</a>
+        <a id="775" href="ApendiceB.html#611" data-type="(P : A → 𝒰 𝒿) (x y : A) (p : x ≡ y) (u : P x) (v : P y) →
+        -Σ (x , u ≡ y , v) (λ q → ap pr₁ q ≡ p) ≃ (tr P p u ≡ v)" class="Function">paths-over-≃</a> <a id="788" href="ApendiceB.html#788" class="Bound">P</a> <a id="790" href="ApendiceB.html#790" class="Bound">x</a> <a id="792" href="ApendiceB.html#792" class="Bound">y</a> <a id="794" href="ApendiceB.html#794" class="Bound">p</a> <a id="796" href="ApendiceB.html#796" class="Bound">u</a> <a id="798" href="ApendiceB.html#798" class="Bound">v</a> <a id="800" class="Symbol">=</a> <a id="802" href="ApendiceB.html#858" data-type="(P : A → 𝒰 𝒿) (x y : A) →
+        x ≡ y →
+        (u : P x) (v : P y) (p : x ≡ y) →
+        -Σ (x , u ≡ y , v) (λ q → ap pr₁ q ≡ p) → tr P p u ≡ v" class="Function">f</a> <a id="804" href="ApendiceB.html#794" class="Bound">p</a> <a id="806" href="Capitulo1.html#1202" data-type="(x : X) (y : Y x) → Σ Y" class="InductiveConstructor Operator">,</a> <a id="808" href="Capitulo2.html#6863" data-type="(f : A → B) → qinv f → isequiv f" class="Function">invs-are-equivs</a> <a id="824" class="Symbol">(</a><a id="825" href="ApendiceB.html#858" data-type="(P : A → 𝒰 𝒿) (x y : A) →
+        x ≡ y →
+        (u : P x) (v : P y) (p : x ≡ y) →
+        -Σ (x , u ≡ y , v) (λ q → ap pr₁ q ≡ p) → tr P p u ≡ v" class="Function">f</a> <a id="827" href="ApendiceB.html#794" class="Bound">p</a><a id="828" class="Symbol">)</a> <a id="830" class="Symbol">(</a><a id="831" href="ApendiceB.html#969" data-type="(P : A → 𝒰 𝒿) (x y : A) →
+        x ≡ y →
+        (u : P x) (v : P y) (p : x ≡ y) →
+        tr P p u ≡ v → -Σ (x , u ≡ y , v) (λ q → ap pr₁ q ≡ p)" class="Function">g</a> <a id="833" href="ApendiceB.html#794" class="Bound">p</a> <a id="835" href="Capitulo1.html#1202" data-type="(x : X) (y : Y x) → Σ Y" class="InductiveConstructor Operator">,</a> <a id="837" href="ApendiceB.html#1090" data-type="(P : A → 𝒰 𝒿) (x y : A) (p : x ≡ y) (u : P x) (v : P y)
+        (p₁ : x ≡ y) (s : tr P p₁ u ≡ v) →
+        f P x y p u v p₁ (g P x y p u v p₁ s) ≡ s" class="Function">ε</a> <a id="839" href="ApendiceB.html#794" class="Bound">p</a> <a id="841" href="Capitulo1.html#1202" data-type="(x : X) (y : Y x) → Σ Y" class="InductiveConstructor Operator">,</a> <a id="843" href="ApendiceB.html#1182" data-type="(P : A → 𝒰 𝒿) (x y : A) (p : x ≡ y) (u : P x) (v : P y)
+        (α : -Σ (x , u ≡ y , v) (λ q → ap pr₁ q ≡ p)) →
+        g P x y p u v p (f P x y p u v p α) ≡ α" class="Function">η</a><a id="844" class="Symbol">)</a>
+          <a id="848" class="Keyword">where</a>
+            <a id="858" href="ApendiceB.html#858" data-type="(P : A → 𝒰 𝒿) (x y : A) →
+        x ≡ y →
+        (u : P x) (v : P y) (p : x ≡ y) →
+        -Σ (x , u ≡ y , v) (λ q → ap pr₁ q ≡ p) → tr P p u ≡ v" class="Function">f</a> <a id="860" class="Symbol">:</a> <a id="862" class="Symbol">(</a><a id="863" href="ApendiceB.html#863" class="Bound">p</a> <a id="865" class="Symbol">:</a> <a id="867" href="ApendiceB.html#790" class="Bound">x</a> <a id="869" href="Capitulo1.html#4141" data-type="X → X → 𝒰 𝒾" class="Function Operator">≡</a> <a id="871" href="ApendiceB.html#792" class="Bound">y</a><a id="872" class="Symbol">)</a> <a id="874" class="Symbol">→</a> <a id="876" class="Symbol">(</a><a id="877" href="Capitulo1.html#1251" data-type="(X : 𝒰 𝒾) → (X → 𝒰 𝒿) → 𝒰 (𝒾 ⊔ 𝒿)" class="Function">Σ</a> <a id="879" href="ApendiceB.html#879" class="Bound">q</a> <a id="881" href="Capitulo1.html#1251" data-type="(X : 𝒰 𝒾) → (X → 𝒰 𝒿) → 𝒰 (𝒾 ⊔ 𝒿)" class="Function">꞉</a> <a id="883" class="Symbol">(</a><a id="884" href="ApendiceB.html#790" class="Bound">x</a> <a id="886" href="Capitulo1.html#1202" data-type="(x : X) (y : Y x) → Σ Y" class="InductiveConstructor Operator">,</a> <a id="888" href="ApendiceB.html#796" class="Bound">u</a> <a id="890" href="Capitulo1.html#4141" data-type="X → X → 𝒰 𝒾" class="Function Operator">≡</a> <a id="892" href="ApendiceB.html#792" class="Bound">y</a> <a id="894" href="Capitulo1.html#1202" data-type="(x : X) (y : Y x) → Σ Y" class="InductiveConstructor Operator">,</a> <a id="896" href="ApendiceB.html#798" class="Bound">v</a><a id="897" class="Symbol">)</a> <a id="899" href="Capitulo1.html#1251" data-type="(X : 𝒰 𝒾) → (X → 𝒰 𝒿) → 𝒰 (𝒾 ⊔ 𝒿)" class="Function">,</a> <a id="901" href="Capitulo2.html#1944" data-type="(f : X → Y) → x ≡ x&#39; → f x ≡ f x&#39;" class="Function">ap</a> <a id="904" href="Capitulo1.html#1638" data-type="Σ Y → X" class="Function">pr₁</a> <a id="908" href="ApendiceB.html#879" class="Bound">q</a> <a id="910" href="Capitulo1.html#4141" data-type="X → X → 𝒰 𝒾" class="Function Operator">≡</a> <a id="912" href="ApendiceB.html#863" class="Bound">p</a><a id="913" class="Symbol">)</a> <a id="915" class="Symbol">→</a> <a id="917" href="Capitulo2.html#4597" data-type="(P : A → 𝒰 𝒿) → x ≡ y → P x → P y" class="Function">tr</a> <a id="920" href="ApendiceB.html#788" class="Bound">P</a> <a id="922" href="ApendiceB.html#863" class="Bound">p</a> <a id="924" href="ApendiceB.html#796" class="Bound">u</a> <a id="926" href="Capitulo1.html#4141" data-type="X → X → 𝒰 𝒾" class="Function Operator">≡</a> <a id="928" href="ApendiceB.html#798" class="Bound">v</a>
+            <a id="934" href="ApendiceB.html#858" data-type="(P : A → 𝒰 𝒿) (x y : A) →
+        x ≡ y →
+        (u : P x) (v : P y) (p : x ≡ y) →
+        -Σ (x , u ≡ y , v) (λ q → ap pr₁ q ≡ p) → tr P p u ≡ v" class="Function">f</a> <a id="936" href="ApendiceB.html#936" class="Bound">p</a> <a id="938" class="Symbol">(</a><a id="939" href="Capitulo1.html#4101" data-type="(x : X) → Id X x x" class="InductiveConstructor">refl</a> <a id="944" class="Symbol">_</a> <a id="946" href="Capitulo1.html#1202" data-type="(x : X) (y : Y x) → Σ Y" class="InductiveConstructor Operator">,</a> <a id="948" href="Capitulo1.html#4101" data-type="(x : X) → Id X x x" class="InductiveConstructor">refl</a> <a id="953" class="Symbol">_)</a> <a id="956" class="Symbol">=</a> <a id="958" href="Capitulo1.html#4101" data-type="(x : X) → Id X x x" class="InductiveConstructor">refl</a> <a id="963" href="ApendiceB.html#796" class="Bound">u</a>
+            <a id="969" href="ApendiceB.html#969" data-type="(P : A → 𝒰 𝒿) (x y : A) →
+        x ≡ y →
+        (u : P x) (v : P y) (p : x ≡ y) →
+        tr P p u ≡ v → -Σ (x , u ≡ y , v) (λ q → ap pr₁ q ≡ p)" class="Function">g</a> <a id="971" class="Symbol">:</a> <a id="973" class="Symbol">(</a><a id="974" href="ApendiceB.html#974" class="Bound">p</a> <a id="976" class="Symbol">:</a> <a id="978" href="ApendiceB.html#790" class="Bound">x</a> <a id="980" href="Capitulo1.html#4141" data-type="X → X → 𝒰 𝒾" class="Function Operator">≡</a> <a id="982" href="ApendiceB.html#792" class="Bound">y</a><a id="983" class="Symbol">)</a> <a id="985" class="Symbol">→</a> <a id="987" href="Capitulo2.html#4597" data-type="(P : A → 𝒰 𝒿) → x ≡ y → P x → P y" class="Function">tr</a> <a id="990" href="ApendiceB.html#788" class="Bound">P</a> <a id="992" href="ApendiceB.html#974" class="Bound">p</a> <a id="994" href="ApendiceB.html#796" class="Bound">u</a> <a id="996" href="Capitulo1.html#4141" data-type="X → X → 𝒰 𝒾" class="Function Operator">≡</a> <a id="998" href="ApendiceB.html#798" class="Bound">v</a> <a id="1000" class="Symbol">→</a> <a id="1002" href="Capitulo1.html#1251" data-type="(X : 𝒰 𝒾) → (X → 𝒰 𝒿) → 𝒰 (𝒾 ⊔ 𝒿)" class="Function">Σ</a> <a id="1004" href="ApendiceB.html#1004" class="Bound">q</a> <a id="1006" href="Capitulo1.html#1251" data-type="(X : 𝒰 𝒾) → (X → 𝒰 𝒿) → 𝒰 (𝒾 ⊔ 𝒿)" class="Function">꞉</a> <a id="1008" class="Symbol">(</a><a id="1009" href="ApendiceB.html#790" class="Bound">x</a> <a id="1011" href="Capitulo1.html#1202" data-type="(x : X) (y : Y x) → Σ Y" class="InductiveConstructor Operator">,</a> <a id="1013" href="ApendiceB.html#796" class="Bound">u</a> <a id="1015" href="Capitulo1.html#4141" data-type="X → X → 𝒰 𝒾" class="Function Operator">≡</a> <a id="1017" href="ApendiceB.html#792" class="Bound">y</a> <a id="1019" href="Capitulo1.html#1202" data-type="(x : X) (y : Y x) → Σ Y" class="InductiveConstructor Operator">,</a> <a id="1021" href="ApendiceB.html#798" class="Bound">v</a><a id="1022" class="Symbol">)</a> <a id="1024" href="Capitulo1.html#1251" data-type="(X : 𝒰 𝒾) → (X → 𝒰 𝒿) → 𝒰 (𝒾 ⊔ 𝒿)" class="Function">,</a> <a id="1026" href="Capitulo2.html#1944" data-type="(f : X → Y) → x ≡ x&#39; → f x ≡ f x&#39;" class="Function">ap</a> <a id="1029" href="Capitulo1.html#1638" data-type="Σ Y → X" class="Function">pr₁</a> <a id="1033" href="ApendiceB.html#1004" class="Bound">q</a> <a id="1035" href="Capitulo1.html#4141" data-type="X → X → 𝒰 𝒾" class="Function Operator">≡</a> <a id="1037" href="ApendiceB.html#974" class="Bound">p</a>
+            <a id="1043" href="ApendiceB.html#969" data-type="(P : A → 𝒰 𝒿) (x y : A) →
+        x ≡ y →
+        (u : P x) (v : P y) (p : x ≡ y) →
+        tr P p u ≡ v → -Σ (x , u ≡ y , v) (λ q → ap pr₁ q ≡ p)" class="Function">g</a> <a id="1045" href="ApendiceB.html#1045" class="Bound">p</a> <a id="1047" class="Symbol">(</a><a id="1048" href="Capitulo1.html#4101" data-type="(x : X) → Id X x x" class="InductiveConstructor">refl</a> <a id="1053" class="Symbol">_)</a> <a id="1056" class="Symbol">=</a> <a id="1058" class="Symbol">(</a><a id="1059" href="Capitulo2.html#4868" data-type="(u : P x) (p : x ≡ y) → x , u ≡ y , tr P p u" class="Function">lift</a> <a id="1064" href="ApendiceB.html#796" class="Bound">u</a> <a id="1066" href="ApendiceB.html#1045" class="Bound">p</a><a id="1067" class="Symbol">)</a> <a id="1069" href="Capitulo1.html#1202" data-type="(x : X) (y : Y x) → Σ Y" class="InductiveConstructor Operator">,</a> <a id="1071" href="Capitulo2.html#5004" data-type="(u : P x) (p : x ≡ y) → ap pr₁ (lift u p) ≡ p" class="Function">lift-lemma</a> <a id="1082" href="ApendiceB.html#796" class="Bound">u</a> <a id="1084" href="ApendiceB.html#1045" class="Bound">p</a>
+            <a id="1090" href="ApendiceB.html#1090" data-type="(P : A → 𝒰 𝒿) (x y : A) (p : x ≡ y) (u : P x) (v : P y)
+        (p₁ : x ≡ y) (s : tr P p₁ u ≡ v) →
+        f P x y p u v p₁ (g P x y p u v p₁ s) ≡ s" class="Function">ε</a> <a id="1092" class="Symbol">:</a> <a id="1094" class="Symbol">(</a><a id="1095" href="ApendiceB.html#1095" class="Bound">p</a> <a id="1097" class="Symbol">:</a> <a id="1099" href="ApendiceB.html#790" class="Bound">x</a> <a id="1101" href="Capitulo1.html#4141" data-type="X → X → 𝒰 𝒾" class="Function Operator">≡</a> <a id="1103" href="ApendiceB.html#792" class="Bound">y</a><a id="1104" class="Symbol">)</a> <a id="1106" class="Symbol">→</a> <a id="1108" class="Symbol">(</a><a id="1109" href="ApendiceB.html#1109" class="Bound">s</a> <a id="1111" class="Symbol">:</a> <a id="1113" href="Capitulo2.html#4597" data-type="(P : A → 𝒰 𝒿) → x ≡ y → P x → P y" class="Function">tr</a> <a id="1116" href="ApendiceB.html#788" class="Bound">P</a> <a id="1118" href="ApendiceB.html#1095" class="Bound">p</a> <a id="1120" href="ApendiceB.html#796" class="Bound">u</a> <a id="1122" href="Capitulo1.html#4141" data-type="X → X → 𝒰 𝒾" class="Function Operator">≡</a> <a id="1124" href="ApendiceB.html#798" class="Bound">v</a><a id="1125" class="Symbol">)</a> <a id="1127" class="Symbol">→</a> <a id="1129" href="ApendiceB.html#858" data-type="(P : A → 𝒰 𝒿) (x y : A) →
+        x ≡ y →
+        (u : P x) (v : P y) (p : x ≡ y) →
+        -Σ (x , u ≡ y , v) (λ q → ap pr₁ q ≡ p) → tr P p u ≡ v" class="Function">f</a> <a id="1131" href="ApendiceB.html#1095" class="Bound">p</a> <a id="1133" class="Symbol">(</a><a id="1134" href="ApendiceB.html#969" data-type="(P : A → 𝒰 𝒿) (x y : A) →
+        x ≡ y →
+        (u : P x) (v : P y) (p : x ≡ y) →
+        tr P p u ≡ v → -Σ (x , u ≡ y , v) (λ q → ap pr₁ q ≡ p)" class="Function">g</a> <a id="1136" href="ApendiceB.html#1095" class="Bound">p</a> <a id="1138" href="ApendiceB.html#1109" class="Bound">s</a><a id="1139" class="Symbol">)</a> <a id="1141" href="Capitulo1.html#4141" data-type="X → X → 𝒰 𝒾" class="Function Operator">≡</a> <a id="1143" href="ApendiceB.html#1109" class="Bound">s</a>
+            <a id="1149" href="ApendiceB.html#1090" data-type="(P : A → 𝒰 𝒿) (x y : A) (p : x ≡ y) (u : P x) (v : P y)
+        (p₁ : x ≡ y) (s : tr P p₁ u ≡ v) →
+        f P x y p u v p₁ (g P x y p u v p₁ s) ≡ s" class="Function">ε</a> <a id="1151" class="Symbol">(</a><a id="1152" href="Capitulo1.html#4101" data-type="(x : X) → Id X x x" class="InductiveConstructor">refl</a> <a id="1157" class="Symbol">_)</a> <a id="1160" class="Symbol">(</a><a id="1161" href="Capitulo1.html#4101" data-type="(x : X) → Id X x x" class="InductiveConstructor">refl</a> <a id="1166" class="Symbol">_)</a> <a id="1169" class="Symbol">=</a> <a id="1171" href="Capitulo1.html#4101" data-type="(x : X) → Id X x x" class="InductiveConstructor">refl</a> <a id="1176" class="Symbol">_</a>
+            <a id="1182" href="ApendiceB.html#1182" data-type="(P : A → 𝒰 𝒿) (x y : A) (p : x ≡ y) (u : P x) (v : P y)
+        (α : -Σ (x , u ≡ y , v) (λ q → ap pr₁ q ≡ p)) →
+        g P x y p u v p (f P x y p u v p α) ≡ α" class="Function">η</a> <a id="1184" class="Symbol">:</a> <a id="1186" class="Symbol">(</a><a id="1187" href="ApendiceB.html#1187" class="Bound">α</a> <a id="1189" class="Symbol">:</a> <a id="1191" class="Symbol">(</a><a id="1192" href="Capitulo1.html#1251" data-type="(X : 𝒰 𝒾) → (X → 𝒰 𝒿) → 𝒰 (𝒾 ⊔ 𝒿)" class="Function">Σ</a> <a id="1194" href="ApendiceB.html#1194" class="Bound">q</a> <a id="1196" href="Capitulo1.html#1251" data-type="(X : 𝒰 𝒾) → (X → 𝒰 𝒿) → 𝒰 (𝒾 ⊔ 𝒿)" class="Function">꞉</a> <a id="1198" class="Symbol">(</a><a id="1199" href="ApendiceB.html#790" class="Bound">x</a> <a id="1201" href="Capitulo1.html#1202" data-type="(x : X) (y : Y x) → Σ Y" class="InductiveConstructor Operator">,</a> <a id="1203" href="ApendiceB.html#796" class="Bound">u</a> <a id="1205" href="Capitulo1.html#4141" data-type="X → X → 𝒰 𝒾" class="Function Operator">≡</a> <a id="1207" href="ApendiceB.html#792" class="Bound">y</a> <a id="1209" href="Capitulo1.html#1202" data-type="(x : X) (y : Y x) → Σ Y" class="InductiveConstructor Operator">,</a> <a id="1211" href="ApendiceB.html#798" class="Bound">v</a><a id="1212" class="Symbol">)</a> <a id="1214" href="Capitulo1.html#1251" data-type="(X : 𝒰 𝒾) → (X → 𝒰 𝒿) → 𝒰 (𝒾 ⊔ 𝒿)" class="Function">,</a> <a id="1216" href="Capitulo2.html#1944" data-type="(f : X → Y) → x ≡ x&#39; → f x ≡ f x&#39;" class="Function">ap</a> <a id="1219" href="Capitulo1.html#1638" data-type="Σ Y → X" class="Function">pr₁</a> <a id="1223" href="ApendiceB.html#1194" class="Bound">q</a> <a id="1225" href="Capitulo1.html#4141" data-type="X → X → 𝒰 𝒾" class="Function Operator">≡</a> <a id="1227" href="ApendiceB.html#794" class="Bound">p</a><a id="1228" class="Symbol">))</a> <a id="1231" class="Symbol">→</a> <a id="1233" href="ApendiceB.html#969" data-type="(P : A → 𝒰 𝒿) (x y : A) →
+        x ≡ y →
+        (u : P x) (v : P y) (p : x ≡ y) →
+        tr P p u ≡ v → -Σ (x , u ≡ y , v) (λ q → ap pr₁ q ≡ p)" class="Function">g</a> <a id="1235" href="ApendiceB.html#794" class="Bound">p</a> <a id="1237" class="Symbol">(</a><a id="1238" href="ApendiceB.html#858" data-type="(P : A → 𝒰 𝒿) (x y : A) →
+        x ≡ y →
+        (u : P x) (v : P y) (p : x ≡ y) →
+        -Σ (x , u ≡ y , v) (λ q → ap pr₁ q ≡ p) → tr P p u ≡ v" class="Function">f</a> <a id="1240" href="ApendiceB.html#794" class="Bound">p</a> <a id="1242" href="ApendiceB.html#1187" class="Bound">α</a><a id="1243" class="Symbol">)</a> <a id="1245" href="Capitulo1.html#4141" data-type="X → X → 𝒰 𝒾" class="Function Operator">≡</a> <a id="1247" href="ApendiceB.html#1187" class="Bound">α</a>
+            <a id="1253" href="ApendiceB.html#1182" data-type="(P : A → 𝒰 𝒿) (x y : A) (p : x ≡ y) (u : P x) (v : P y)
+        (α : -Σ (x , u ≡ y , v) (λ q → ap pr₁ q ≡ p)) →
+        g P x y p u v p (f P x y p u v p α) ≡ α" class="Function">η</a> <a id="1255" class="Symbol">(</a><a id="1256" href="Capitulo1.html#4101" data-type="(x : X) → Id X x x" class="InductiveConstructor">refl</a> <a id="1261" class="Symbol">_</a> <a id="1263" href="Capitulo1.html#1202" data-type="(x : X) (y : Y x) → Σ Y" class="InductiveConstructor Operator">,</a> <a id="1265" href="Capitulo1.html#4101" data-type="(x : X) → Id X x x" class="InductiveConstructor">refl</a> <a id="1270" class="Symbol">_)</a> <a id="1273" class="Symbol">=</a> <a id="1275" href="Capitulo1.html#4101" data-type="(x : X) → Id X x x" class="InductiveConstructor">refl</a> <a id="1280" class="Symbol">_</a>
+
+        </pre>
+
+      </article>
+    </div>
+  </main>
+</body>
+<style>
+  :root {
+    --text-bg: #fff;
+    --text-fg: #222;
+    --shadow: #000;
+    --primary: #0054F4;
+    --secondary: #9C1BD6;
+    --modal-bg: #ccccccaa;
+    --warning-bg: #fef08a;
+    --code-bg: var(--text-bg);
+    --code-fg: var(--text-fg);
+    --code-keyword: #BB3B13;
+    --code-string: #d52753;
+    --code-number: #8A1060;
+    --code-module: #8A1060;
+    --code-field: #9C1BD6;
+    --code-constructor: #207B1D;
+    --code-highlight: #F5DEB3;
+    --search-selected: #e2e8f0;
+    --details-summary: #b2ebf2;
+    --details-open: #80deea;
+    --depgraph-edge: #eee;
+    --blockquote-bg: #d8b4fe;
+  }
+
+  .diagram-dark {
+    display: none !important;
+  }
+
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --text-bg: #282C34;
+      --text-fg: #bfbfbf;
+      --shadow: #475569;
+      --primary: #61AFEF;
+      --secondary: #C878DD;
+      --modal-bg: #282C34aa;
+      --warning-bg: #991b1b;
+      --code-keyword: #E5C07B;
+      --code-string: #E06C75;
+      --code-number: #98C379;
+      --code-module: #56B6C2;
+      --code-field: #C878DD;
+      --code-constructor: #98C379;
+      --code-highlight: #ef444499;
+      --search-selected: #474e5e;
+      --details-summary: #5b21b6;
+      --details-open: #4c1d95;
+      --depgraph-edge: #474e5e;
+      --blockquote-bg: #475569;
+    }
+
+    div.warning {
+      --shadow: #7f1d1d;
+    }
+
+    input {
+      background-color: #334155;
+      border: 1px solid #475569;
+      color: var(--text-fg);
+    }
+
+    body {
+      scrollbar-color: #3b4454 #2b2e33;
+    }
+
+    .diagram-dark {
+      display: block !important;
+    }
+
+    .diagram-light {
+      display: none !important;
+    }
+  }
+
+  table {
+    margin: auto;
+    border-collapse: collapse;
+  }
+
+  table td,
+  table th {
+    text-align: center;
+    padding: 0px 1em 0px 1em;
+    border: 1px solid black;
+  }
+
+  table th {
+    border-bottom: 2px solid black;
+  }
+
+  table td {
+    white-space: nowrap;
+  }
+
+  html {
+    max-width: 100%;
+  }
+
+  body {
+    font-family: "Inria Sans", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
+    width: 100%;
+    font-size: var(--font-size);
+    overflow-x: clip;
+    background-color: var(--text-bg);
+    color: var(--text-fg);
+  }
+
+  div#post-toc-container {
+    max-width: 120ch;
+    margin: auto;
+  }
+
+  article a[href],
+  div#return>a[href],
+  div#top>a[href],
+  aside#toc>div#toc-container ul a[href] {
+    color: var(--primary);
+    text-decoration: none;
+  }
+
+  article a[href]:hover,
+  div#return>a[href]:hover,
+  div#top>a[href]:hover,
+  aside#toc>div#toc-container ul a[href]:hover {
+    text-decoration: 2px currentColor underline !important;
+  }
+
+  article a[href]:visited,
+  div#return>a[href]:visited,
+  div#top>a[href]:visited,
+  aside#toc>div#toc-container ul a[href]:visited {
+    color: var(--secondary);
+  }
+
+  /* Aspects. */
+  .Agda {
+    /* NameKinds. */
+    /* OtherAspects. */
+    /* Standard attributes. */
+    font-family: 'iosevka', 'Iosevka', 'Fantasque Sans Mono', 'Roboto Mono', monospace;
+    font-weight: 400;
+  }
+
+  .Agda .Comment {
+    color: var(--code-fg);
+    font-style: italic;
+  }
+
+  .Agda .Background {
+    background-color: var(--code-bg);
+  }
+
+  .Agda .Markup {
+    color: var(--code-fg);
+  }
+
+  .Agda .Keyword {
+    color: var(--code-keyword);
+  }
+
+  .Agda .String {
+    color: var(--code-string);
+  }
+
+  .Agda .Number {
+    color: var(--code-number);
+  }
+
+  .Agda .Symbol {
+    color: var(--code-fg);
+  }
+
+  .Agda .PrimitiveType {
+    color: var(--primary);
+  }
+
+  .Agda .Pragma {
+    color: var(--code-fg);
+  }
+
+  .Agda .Bound {
+    color: var(--code-fg) !important;
+  }
+
+  .Agda .Generalizable {
+    color: var(--code-fg) !important;
+  }
+
+  .Agda .InductiveConstructor {
+    color: var(--code-constructor) !important;
+  }
+
+  .Agda .CoinductiveConstructor {
+    color: var(--code-constructor) !important;
+  }
+
+  .Agda .Datatype {
+    color: var(--primary) !important;
+  }
+
+  .Agda .Field {
+    color: var(--code-field) !important;
+  }
+
+  .Agda .Function {
+    color: var(--primary) !important;
+  }
+
+  .Agda .Module {
+    color: var(--code-module) !important;
+  }
+
+  .Agda .Postulate {
+    color: var(--primary) !important;
+  }
+
+  .Agda .Primitive {
+    color: var(--primary) !important;
+  }
+
+  .Agda .Record {
+    color: var(--primary) !important;
+  }
+
+  .Agda .UnsolvedMeta {
+    color: var(--code-fg);
+    background: yellow;
+  }
+
+  .Agda .UnsolvedConstraint {
+    color: var(--code-fg);
+    background: yellow;
+  }
+
+  .Agda .TerminationProblem {
+    color: var(--code-fg);
+    background: #FFA07A;
+  }
+
+  .Agda .IncompletePattern {
+    color: var(--code-fg);
+    background: #F5DEB3;
+  }
+
+  .Agda .Error {
+    color: red;
+    text-decoration: underline;
+  }
+
+  .Agda .TypeChecks {
+    color: var(--code-fg);
+    background: #ADD8E6;
+  }
+
+  .Agda .ShadowingInTelescope {
+    color: var(--code-fg);
+    background: #808080;
+  }
+
+  .Agda .Deadcode {
+    color: var(--code-keyword);
+    font-weight: bold;
+  }
+
+  .Agda a {
+    text-decoration: none;
+  }
+
+  .Agda a[href]:hover {
+    text-decoration: 2px var(--primary) underline;
+  }
+
+  .Agda a[href]:target {
+    animation: highlight 2.5s;
+  }
+
+  body.text-page .Agda {
+    font-size: var(--code-font-size);
+  }
+
+  pre.Agda,
+  div.sourceCode,
+  pre {
+    border-radius: 0;
+    box-shadow: none;
+    overflow-y: clip;
+    margin: 0;
+    margin-left: -4em;
+    padding: 1em;
+    padding-top: 0.25em;
+    padding-bottom: 0.25em;
+    background-color: var(--code-bg);
+    color: var(--code-fg);
+    font-size: var(--code-font-size);
+    max-width: 100%;
+    overflow-x: auto;
+  }
+
+  h1 {
+    font-size: 1.8em;
+  }
+</style>
+
+</html>
