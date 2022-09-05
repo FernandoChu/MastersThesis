@@ -1,4 +1,4 @@
-## [Teoría Homotópica de Tipos - Fernando Chu (Tesis de Maestría)](https://ryunaq.github.io/Master-Thesis/)
+## [Teoría Homotópica de Tipos - Fernando Chu (Tesis de Maestría)](https://ryunaq.github.io/MastersThesis/)
 
 En estas páginas pueden encontrar la formalización en Agda del contenido de
 mi tesis de maestría. El pdf lo pueden encontrar en el siguiente [link]().

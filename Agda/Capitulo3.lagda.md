@@ -50,7 +50,6 @@ retract-equation : {X : 𝒰 𝒾} {Y : 𝒰 𝒿} (ρ : X ◁ Y)
 retract-equation (r , s , ε) = ε
 ```
 
-
 ## Sección 3.2. $n$-tipos
 
 ```agda
@@ -245,6 +244,7 @@ retract-preserves-n-type (succ n) A B rs f a₁ a₂ =
 
 En agda, los HITs se tienen que definir de una forma indirecta; esta es una limitación de agda, no de la teoría actual.
 En todo caso, las definiciones en agda pueden ser omitidas de la lectura sin ningún inconveniente.
+
 ```agda
 
 -- Proposición 3.3.1.
