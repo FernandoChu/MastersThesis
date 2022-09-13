@@ -1,6 +1,7 @@
-name: hott-book
+name: master-thesis
 include: .
 flags: --without-K
        --exact-split
        --auto-inline
        --no-import-sorts
+       --rewriting

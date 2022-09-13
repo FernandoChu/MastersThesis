@@ -1,4 +1,4 @@
-# Capítulo 3. Teoría Homotópica de Tipos
+# Capítulo 3. La Interpretación Homotópica
 
 <!--
 ```agda
@@ -7,311 +7,568 @@ open import Capitulo2 public
 ```
 -->
 
-## Sección 3.1. Introducción
+## Sección 3.2. Los tipos son 1-grupoides
 
 ```agda
 
--- Proposición 3.1.1.
-pr₁-is-fibration : (B : 𝒰 𝒾) (P : B → 𝒰 𝒿) (X : 𝒰 𝓀)
-                   (f g : X → B) (h : f ∼ g)
-                   (f' : (x : X) → P (f x))
-                 → Σ h' ꞉ ((x : X) → Id (Σ P) (f x , f' x) (g x , tr P (h x) (f' x))),
-                     ((x : X) → ap pr₁ (h' x) ≡ h x)
-pr₁-is-fibration B P X f g h f' =
-  h' , h'-lifts-h
- where
-  h' : (x : X) → Id (Σ P) (f x , f' x) (g x , tr P (h x) (f' x))
-  h' x = pair⁼(h x , refl _)
+-- Lema 3.2.1.
+_∙_ : {X : 𝒰 𝒾} {x y z : X} → x ≡ y → y ≡ z → x ≡ z
+(refl x) ∙ (refl x) = (refl x)
+infixl 30 _∙_
 
-  lema : {X : 𝒰 𝒾} {Y : X → 𝒰 𝒿} {w w' : Σ Y}
-          (p : (pr₁ w ≡ pr₁ w')) → (q : tr Y p (pr₂ w) ≡ (pr₂ w'))
-        → ap pr₁ (pair⁼(p , q)) ≡ p
-  lema (refl _) (refl _) = refl _
+-- Lema 3.2.2.
+refl-left : {X : 𝒰 𝒾} {x y : X} {p : x ≡ y} → refl x ∙ p ≡ p
+refl-left {𝓤} {X} {x} {x} {refl x} = refl (refl x)
 
-  h'-lifts-h : (x : X) → ap pr₁ (h' x) ≡ h x
-  h'-lifts-h x = lema (h x) (refl _)
-
--- Definición 3.1.2.
-has-section : {X : 𝒰 𝒾} {Y : 𝒰 𝒿} → (X → Y) → 𝒰 (𝒾 ⊔ 𝒿)
-has-section r = Σ s ꞉ (codomain r → domain r), r ∘ s ∼ id
-
--- Helpers
-_◁_ : 𝒰 𝒾 → 𝒰 𝒿 → 𝒰 (𝒾 ⊔ 𝒿)
-X ◁ Y = Σ r ꞉ (Y → X), has-section r
-
-retraction : {X : 𝒰 𝒾} {Y : 𝒰 𝒿} → X ◁ Y → Y → X
-retraction (r , s , ε) = r
-
-section : {X : 𝒰 𝒾} {Y : 𝒰 𝒿} → X ◁ Y → X → Y
-section (r , s , ε) = s
-
-retract-equation : {X : 𝒰 𝒾} {Y : 𝒰 𝒿} (ρ : X ◁ Y)
-                 → retraction ρ ∘ section ρ ∼ 𝑖𝑑 X
-retract-equation (r , s , ε) = ε
-```
-
-## Sección 3.2. $n$-tipos
-
-```agda
-
--- Definición 3.2.1.
-isContr : 𝒰 𝒾 → 𝒰 𝒾
-isContr A = Σ a ꞉ A , ((x : A) → a ≡ x)
-
--- Proposición 3.2.2.
-isContr→≃𝟙 : (A : 𝒰 𝒾) → isContr A → A ≃ 𝟙
-isContr→≃𝟙 A (c , p) = f , invs-are-equivs f (g , ε , η)
-  where
-    f = λ x → ⋆
-    g = λ x → c
-    ε : (x : 𝟙) → f (g x) ≡ x
-    ε ⋆ = refl ⋆
-    η = λ x → p x
-
-≃𝟙→isContr : (A : 𝒰 𝒾) → A ≃ 𝟙 → isContr A
-≃𝟙→isContr A eqv = ≃-← eqv ⋆ , res
-  where
-    eq-el-𝟙 : (x : 𝟙) → ⋆ ≡ x
-    eq-el-𝟙 ⋆ = refl ⋆
-    res : (x : A) → ≃-← eqv ⋆ ≡ x
-    res x = begin
-      ≃-← eqv ⋆ ≡⟨ ap (≃-← eqv) (eq-el-𝟙 (≃-→ eqv x)) ⟩
-      ≃-← eqv (≃-→ eqv x) ≡⟨ ≃-η eqv x ⟩
-      x ∎
-
-Σ-preserves-isContr : (A : 𝒰 𝒾) (B : A → 𝒰 𝒿)
-                    → isContr A
-                    → ((a : A) → isContr (B a))
-                    → isContr (Σ B)
-Σ-preserves-isContr A B (a₀ , pf) f = (a₀ , b₀) , res
- where
-  b₀ : B (a₀)
-  b₀ = pr₁ (f a₀)
-  q : (b : B a₀) → b₀ ≡ b
-  q = pr₂ (f a₀)
-  res : (x : Σ B) → a₀ , b₀ ≡ x
-  res (a , b) = pair⁼(p , pr₂=)
-   where
-    p : a₀ ≡ a
-    p = pf a
-    pr₂= : tr B p b₀ ≡ b
-    pr₂= = begin
-     tr B p b₀ ≡⟨ ap (tr B p) (q _) ⟩
-     tr B p (tr B (p ⁻¹) b) ≡⟨ happly (tr-∘ B (p ⁻¹) p) b ⟩
-     tr B (p ⁻¹ ∙ p) b ≡⟨ ap (λ - → tr B - b) (⁻¹-left∙ p) ⟩
-     tr B (refl a) b ≡⟨⟩
-     b ∎
-
-×-preserves-isContr : (A : 𝒰 𝒾) (B : 𝒰 𝒿)
-                    → isContr A
-                    → isContr B
-                    → isContr (A × B)
-×-preserves-isContr A B f g = Σ-preserves-isContr A (λ - → B) f (λ - → g)
-
-retrac-preserves-isContr : (A : 𝒰 𝒾) (B : 𝒰 𝒿)
-                         → A ◁ B
-                         → isContr B
-                         → isContr A
-retrac-preserves-isContr A B s (b₀ , pf) =
-  retraction s b₀ , λ a → begin
-    retraction s b₀ ≡⟨ ap (retraction s) (pf (section s a)) ⟩
-    retraction s (section s a) ≡⟨ retract-equation s a ⟩
-    a ∎
-
+refl-right : {X : 𝒰 𝒾} {x y : X} {p : x ≡ y} → p ∙ refl y ≡ p
+refl-right {𝓤} {X} {x} {y} {refl x} = refl (refl x)
 
 -- Lema 3.2.3.
-trHomc- : {A : 𝒰 𝒾} (a : A) {x₁ x₂ : A} (p : x₁ ≡ x₂) (q : a ≡ x₁)
-          → tr (λ x → a ≡ x) p q ≡ q ∙ p
-trHomc- a (refl _) (refl _) = refl (refl a)
+∙-assoc : {X : 𝒰 𝒾} {x y z t : X} (p : x ≡ y) {q : y ≡ z} {r : z ≡ t}
+        → (p ∙ q) ∙ r ≡ p ∙ (q ∙ r)
+∙-assoc (refl x) {refl x} {refl x} = refl (refl x)
 
--- Proposición 3.2.4.
-isContr-Paths→isProp : (A : 𝒰 𝒾)
-                     → ((x y : A)
-                     → isContr (x ≡ y))
-                     → ((x y : A) → x ≡ y)
-isContr-Paths→isProp A f x y = pr₁ (f x y)
+-- Lema 3.2.4.
+_⁻¹ : {X : 𝒰 𝒾} → {x y : X} → x ≡ y → y ≡ x
+(refl x)⁻¹ = refl x
+infix  40 _⁻¹
 
-isProp→isContr-Paths : (A : 𝒰 𝒾)
-                     → ((x y : A) → x ≡ y)
-                     → ((x y : A) → isContr (x ≡ y))
-isProp→isContr-Paths A f x y = (g x ⁻¹ ∙ g y) , res
-  where
-    g : (z : A) → x ≡ z
-    g z = f x z
-    res : (p : x ≡ y) → (g x)⁻¹ ∙ g y ≡ p
-    res p = begin
-      (g x)⁻¹ ∙ g y               ≡˘⟨ ap (λ - → (g x)⁻¹ ∙ -) (apd g p) ⟩
-      (g x)⁻¹ ∙ tr (x ≡_) p (g x) ≡⟨ ap (λ - → (g x)⁻¹ ∙ -) (trHomc- x p (g x)) ⟩
-      (g x)⁻¹ ∙ (g x ∙ p)         ≡˘⟨ ∙-assoc ((g x)⁻¹) ⟩
-      ((g x)⁻¹ ∙ g x) ∙ p         ≡⟨ ap (λ - → - ∙ p) (⁻¹-left∙ (g x)) ⟩
-      (refl x) ∙ p                ≡⟨ refl-left ⟩
-      p  ∎
+⁻¹-left∙ : {X : 𝒰 𝒾} {x y : X} (p : x ≡ y)
+         → p ⁻¹ ∙ p ≡ refl y
+⁻¹-left∙ (refl x) = refl (refl x)
 
-isProp : (A : 𝒰 𝒾) → 𝒰 𝒾
-isProp A = (x y : A) → x ≡ y
+⁻¹-right∙ : {X : 𝒰 𝒾} {x y : X} (p : x ≡ y)
+          → p ∙ p ⁻¹ ≡ refl x
+⁻¹-right∙ (refl x) = refl (refl x)
 
-isProp-𝟙 : (x y : 𝟙) → x ≡ y
-isProp-𝟙 ⋆ ⋆ = refl ⋆
+-- Lema 3.2.6.
+⁻¹-involutive : {X : 𝒰 𝒾} {x y : X} (p : x ≡ y)
+              → (p ⁻¹)⁻¹ ≡ p
+⁻¹-involutive (refl x) = refl (refl x)
 
-isProp-𝟘 : (x y : 𝟘) → x ≡ y
-isProp-𝟘 ()
+⁻¹-∙ : {X : 𝒰 𝒾} {x y z : X} (p : x ≡ y) {q : y ≡ z}
+     → (p ∙ q)⁻¹ ≡  (q)⁻¹ ∙ (p)⁻¹
+⁻¹-∙ (refl x) {refl x} = refl (refl x)
 
-isProp-ℕ-paths : (m n : ℕ) (p q : m ≡ n) → p ≡ q
-isProp-ℕ-paths m n p q = begin
-  p                             ≡˘⟨ ≃-η (ℕ-≡-≃ m n) p ⟩
-  decode-ℕ m n (encode-ℕ m n p) ≡⟨ ap (decode-ℕ m n) (lema m n _ _) ⟩
-  decode-ℕ m n (encode-ℕ m n q) ≡⟨ ≃-η (ℕ-≡-≃ m n) q ⟩
-  q ∎
-  where
-    lema : (m n : ℕ) (p q : code-ℕ m n) → p ≡ q
-    lema zero zero p q         = isProp-𝟙 p q
-    lema (succ m) zero p q     = isProp-𝟘 p q
-    lema zero (succ n) p q     = isProp-𝟘 p q
-    lema (succ m) (succ n) p q = lema m n p q
+-- Helpers tomados de
+-- https://agda.github.io/agda-stdlib/Relation.Binary.PropositionalEquality.Core.html#2708
+begin_ : {X : 𝒰 𝒾} {x y : X} → x ≡ y → x ≡ y
+begin_ x≡y = x≡y
+infix  1 begin_
 
-isSet : 𝒰 𝒾 → 𝒰 𝒾
-isSet X = {x y : X} (p q : x ≡ y) → (p ≡ q)
+_≡⟨⟩_ : {X : 𝒰 𝒾} (x {y} : X) → x ≡ y → x ≡ y
+_ ≡⟨⟩ x≡y = x≡y
 
-isSet-𝟘 : isSet 𝟘
-isSet-𝟘 {}
+step-≡ : {X : 𝒰 𝒾} (x {y z} : X) → y ≡ z → x ≡ y → x ≡ z
+step-≡ _ y≡z x≡y = x≡y ∙ y≡z
+syntax step-≡ x y≡z x≡y = x ≡⟨ x≡y ⟩ y≡z
 
-isSet-ℕ : isSet ℕ
-isSet-ℕ {m} {n} = isProp-ℕ-paths m n
+step-≡˘ : {X : 𝒰 𝒾} (x {y z} : X) → y ≡ z → y ≡ x → x ≡ z
+step-≡˘ _ y≡z y≡x = (y≡x)⁻¹ ∙ y≡z
+syntax step-≡˘ x y≡z y≡x = x ≡˘⟨ y≡x ⟩ y≡z
+infixr 2 _≡⟨⟩_ step-≡ step-≡˘
 
-is-n-2-type : (n : ℕ) (A : 𝒰 𝒾) → 𝒰 𝒾
-is-n-2-type 0 A        = isContr A
-is-n-2-type (succ n) A = (x y : A) → is-n-2-type n (x ≡ y)
-
-n-type-cumul : (n : ℕ) (A : 𝒰 𝒾)
-             → is-n-2-type n A
-             → is-n-2-type (succ n) A
-n-type-cumul 0 A (c , p) x y = ((p x)⁻¹ ∙ (p y)) , contraction
-  where
-    contraction : (q : x ≡ y) → p x ⁻¹ ∙ p y ≡ q
-    contraction (refl x) = ⁻¹-left∙ _
-n-type-cumul (succ n) A f x y = n-type-cumul n (x ≡ y) (f x y)
-
-retract-preserves-n-type : (n : ℕ) (A : 𝒰 𝒾) (B : 𝒰 𝒿) → (A ◁ B)
-                         → is-n-2-type n B
-                         → is-n-2-type n A
-retract-preserves-n-type 0 A B s f = retrac-preserves-isContr A B s f
-retract-preserves-n-type (succ n) A B rs f a₁ a₂ =
-  retract-preserves-n-type n (a₁ ≡ a₂) (s a₁ ≡ s a₂) ret (f (s a₁) (s a₂))
- where
-  r = retraction rs
-  s = section rs
-  ε = retract-equation rs
-  t : (s a₁ ≡ s a₂) → (a₁ ≡ a₂)
-  t q = (ε a₁)⁻¹ ∙ ap r q ∙ ε a₂
-  ret : (a₁ ≡ a₂) ◁ (s a₁ ≡ s a₂)
-  ret = t , ap s , htpy
-   where
-    htpy : t ∘ ap s ∼ id
-    htpy p = begin
-     ((ε a₁)⁻¹ ∙ ap r (ap s p)) ∙ ε a₂  ≡⟨ ∙-assoc _ ⟩
-     (ε a₁)⁻¹ ∙ (ap r (ap s p) ∙ ε a₂)  ≡˘⟨ ap (λ - → (ε a₁)⁻¹ ∙ (- ∙ ε a₂)) (ap-∘ _ _ _) ⟩
-     (ε a₁)⁻¹ ∙ ((ap (r ∘ s) p) ∙ ε a₂) ≡˘⟨ ap ((ε a₁)⁻¹ ∙_) (∼-naturality _ _ ε) ⟩
-     (ε a₁)⁻¹ ∙ (ε a₁ ∙ ap id p)        ≡⟨ ap (λ - → (ε a₁)⁻¹ ∙ (ε a₁ ∙ -)) (ap-id _) ⟩
-     (ε a₁)⁻¹ ∙ (ε a₁ ∙ p)              ≡˘⟨ ∙-assoc _ ⟩
-     ((ε a₁)⁻¹ ∙ ε a₁) ∙ p              ≡⟨ ap (_∙ p) (⁻¹-left∙ _) ⟩
-     (refl a₁) ∙ p                      ≡⟨ refl-left ⟩
-     p ∎
-
-≃-preserves-n-type : (n : ℕ) (A : 𝒰 𝒾) (B : 𝒰 𝒿) → (A ≃ B)
-                   → is-n-2-type n B
-                   → is-n-2-type n A
-≃-preserves-n-type n A B eqv f =
-  retract-preserves-n-type n A B (≃-← eqv , ≃-→ eqv , ≃-η eqv) f
-
-Σ-preserves-n-type : (A : 𝒰 𝒾) (B : A → 𝒰 𝒿) (n : ℕ)
-                   → is-n-2-type n A
-                   → ((a : A) → is-n-2-type n (B a))
-                   → is-n-2-type n (Σ B)
-Σ-preserves-n-type {𝒾} {𝒿} A B 0 f g = Σ-preserves-isContr A B f g
-Σ-preserves-n-type {𝒾} {𝒿} A B (succ n) f g (a₁ , b₁) (a₂ , b₂) =
-  ≃-preserves-n-type n _ _ paths≃ Σ-is-ntype
-  where
-    paths≃ : ((a₁ , b₁) ≡ (a₂ , b₂)) ≃ (Σ p ꞉ (a₁ ≡ a₂) , tr B p b₁ ≡ b₂)
-    paths≃ = Σ-≡-≃
-    Σ-is-ntype : is-n-2-type n (Σ p ꞉ (a₁ ≡ a₂) , tr B p b₁ ≡ b₂)
-    Σ-is-ntype = Σ-preserves-n-type (a₁ ≡ a₂) (λ p → tr B p b₁ ≡ b₂) n (f a₁ a₂) lema
-      where
-        lema : (a : a₁ ≡ a₂) → is-n-2-type n (tr B a b₁ ≡ b₂)
-        lema (refl _) = g a₁ b₁ b₂
+_∎ : {X : 𝒰 𝒾} (x : X) → x ≡ x
+_∎ x = refl x
+infix  3 _∎
 ```
 
-## Sección 3.2. Tipos Inductivos Superiores
-
-En agda, los HITs se tienen que definir de una forma indirecta; esta es una limitación de agda, no de la teoría actual.
-En todo caso, las definiciones en agda pueden ser omitidas de la lectura sin ningún inconveniente.
+## Sección 3.3. Funciones y functores
 
 ```agda
 
--- Proposición 3.3.1.
-module Interval where
-  private
-    data I : 𝒰₀ where
-      Zero : I
-      One  : I
+-- Lema 3.3.1.
+ap : {X : 𝒰 𝒾} {Y : 𝒰 𝒿} (f : X → Y) {x x' : X} → x ≡ x' → f x ≡ f x'
+ap f {x} {x'} (refl x) = refl (f x)
 
-  𝕀 : 𝒰₀
-  𝕀 = I
+-- Lema 3.3.3.
+ap-∙ : {X : 𝒰 𝒾} {Y : 𝒰 𝒿} (f : X → Y) {x y z : X}
+       (p : x ≡ y) (q : y ≡ z)
+     → ap f (p ∙ q) ≡ ap f p ∙ ap f q
+ap-∙ f (refl x) (refl x) = refl (refl (f x))
 
-  0ᵢ : 𝕀
-  0ᵢ = Zero
-
-  1ᵢ : 𝕀
-  1ᵢ = One
-
-  postulate seg : 0ᵢ ≡ 1ᵢ
-
-  𝕀-rec : (B : 𝒰 𝒾)
-        → (b₀ b₁ : B)
-        → (s : b₀ ≡ b₁)
-        → 𝕀 → B
-  𝕀-rec B b₀ b₁ s Zero = b₀
-  𝕀-rec B b₀ b₁ s One = b₁
-
-  𝕀-ind : (P : 𝕀 → 𝒰 𝒾)
-        → (b₀ : P 0ᵢ)
-        → (b₁ : P 1ᵢ)
-        → (s : tr P seg b₀ ≡ b₁)
-        → ((x : 𝕀) → P x)
-  𝕀-ind P b₀ b₁ s Zero = b₀
-  𝕀-ind P b₀ b₁ s One = b₁
-
-  postulate 𝕀-rec-comp : (B : 𝒰 𝒾)
-                       → (b₀ b₁ : B)
-                       → (s : b₀ ≡ b₁)
-                       → (ap (𝕀-rec B b₀ b₁ s) seg ≡ s)
-  postulate 𝕀-ind-comp : (P : 𝕀 → 𝒰 𝒾)
-                       → (b₀ : P 0ᵢ)
-                       → (b₁ : P 1ᵢ)
-                       → (s : tr P seg b₀ ≡ b₁)
-                       → (apd (𝕀-ind P b₀ b₁ s) seg ≡ s)
-
-open Interval public
-
--- Proposición 3.3.2.
-𝕀-isContr : isContr 𝕀
-𝕀-isContr = (0ᵢ , λ x → contr x)
- where
-  contr : (x : 𝕀) → (0ᵢ ≡ x)
-  contr = 𝕀-ind (0ᵢ ≡_) (refl 0ᵢ) seg treq
-   where
-    treq : tr (0ᵢ ≡_) seg (refl 0ᵢ) ≡ seg
-    treq = trHomc- 0ᵢ seg (refl 0ᵢ) ∙ refl-left
-
-
--- Proposición 3.3.3.
-funext' : (A : 𝒰 𝒾) (B : 𝒰 𝒿)
-        → (f g : A → B)
-        → ((x : A) → (f x ≡ g x))
-        → f ≡ g
-funext' A B f g p = ap β seg
+-- Lema 3.3.4.
+ap⁻¹ : {X : 𝒰 𝒾} {Y : 𝒰 𝒿} (f : X → Y) {x y : X} (p : x ≡ y)
+     → (ap f p)⁻¹ ≡ ap f (p ⁻¹)
+ap⁻¹ f {x} {y} p = (q4)⁻¹ ∙ (h1ap)⁻¹ ∙ q6 ∙ h2q5 ∙ q3
   where
-    α : A → 𝕀 → B
-    α x = 𝕀-rec B (f x) (g x) (p x)
-    β : 𝕀 → (A → B)
-    β i x = α x i
+   q1 : p ⁻¹ ∙ p ≡ refl y
+   q1 = ⁻¹-left∙ p
+   g : (y ≡ y) → (f y ≡ f y)
+   g = λ r → ap f r
+   gq1 : ap f (p ⁻¹ ∙ p) ≡ refl (f y)
+   gq1 = ap g q1
+   q2 : ap f (p ⁻¹ ∙ p) ≡ ap f (p ⁻¹) ∙ ap f p
+   q2 = ap-∙ f (p ⁻¹) p
+   h1 : (f y ≡ f y) → (f y ≡ f x)
+   h1 = λ r → r ∙ ((ap f p)⁻¹)
+   h1ap : (ap f (p ⁻¹) ∙ ap f p) ∙ ((ap f p)⁻¹) ≡ refl (f y) ∙ ((ap f p)⁻¹)
+   h1ap = ap h1 ((q2 ⁻¹) ∙ gq1)
+   q3 : (ap f (p ⁻¹)) ∙ refl (f x) ≡ ap f (p ⁻¹)
+   q3 = refl-right
+   q4 : refl (f y) ∙ (ap f p)⁻¹ ≡ (ap f p)⁻¹
+   q4 = refl-left
+   q5 : ap f p ∙ ap f p ⁻¹ ≡ refl (f x)
+   q5 = ⁻¹-right∙ (ap f p)
+   h2 : (f x ≡ f x) → (f y ≡ f x)
+   h2 = λ r → ap f (p ⁻¹) ∙ r
+   h2q5 : ap f (p ⁻¹) ∙ (ap f p ∙ ap f p ⁻¹) ≡ ap f (p ⁻¹) ∙ (refl (f x))
+   h2q5 = ap h2 q5
+   q6 : (ap f (p ⁻¹) ∙ ap f p) ∙ ((ap f p)⁻¹) ≡ ap f (p ⁻¹) ∙ (ap f p ∙ (ap f p)⁻¹)
+   q6 = ∙-assoc (ap f (p ⁻¹))
+
+-- Lema 3.3.5. (I)
+ap-∘ : {X : 𝒰 𝒾} {Y : 𝒰 𝒿} {Z : 𝒰 𝓀}
+       (f : X → Y) (g : Y → Z) {x y : X} (p : x ≡ y)
+     → ap (g ∘ f) p ≡ (ap g ∘ ap f) p
+ap-∘ f g (refl x) = refl (refl (g (f x)))
+
+-- Lema 3.3.5. (II)
+ap-id : {X : 𝒰 𝒾} {x y : X} (p : x ≡ y)
+      → ap id p ≡ p
+ap-id (refl x) = refl (refl x)
+
+-- Lema 3.3.5. (III)
+∙-left-cancel : {X : 𝒰 𝒾} {x y z : X}
+                (p : x ≡ y) {q r : y ≡ z}
+              → p ∙ q ≡ p ∙ r
+              → q ≡ r
+∙-left-cancel p {q} {r} path = begin
+  q              ≡˘⟨ refl-left ⟩
+  refl _ ∙ q     ≡˘⟨ ap (_∙ q) (⁻¹-left∙ p) ⟩
+  (p ⁻¹ ∙ p) ∙ q ≡⟨ ∙-assoc (p ⁻¹) ⟩
+  p ⁻¹ ∙ (p ∙ q) ≡⟨ ap ((p ⁻¹) ∙_) path ⟩
+  p ⁻¹ ∙ (p ∙ r) ≡˘⟨ ∙-assoc (p ⁻¹) ⟩
+  (p ⁻¹ ∙ p) ∙ r ≡⟨ ap (_∙ r) (⁻¹-left∙ p) ⟩
+  refl _ ∙ r     ≡⟨ refl-left ⟩
+  r ∎
+
+-- Lema 3.3.5. (IV)
+∙-right-cancel : {X : 𝒰 𝒾} {x y z : X}
+                 (p : x ≡ y) {q : x ≡ y} {r : y ≡ z}
+               → p ∙ r ≡ q ∙ r
+               → p ≡ q
+∙-right-cancel p {q} {r} path = begin
+  p              ≡˘⟨ refl-right ⟩
+  p ∙ refl _     ≡˘⟨ ap (p ∙_) (⁻¹-right∙ r) ⟩
+  p ∙ (r ∙ r ⁻¹) ≡˘⟨ ∙-assoc p ⟩
+  (p ∙ r) ∙ r ⁻¹ ≡⟨ ap (_∙ (r ⁻¹)) path ⟩
+  (q ∙ r) ∙ r ⁻¹ ≡⟨ ∙-assoc q ⟩
+  q ∙ (r ∙ r ⁻¹) ≡⟨ ap (q ∙_) (⁻¹-right∙ r) ⟩
+  q ∙ refl _     ≡⟨ refl-right ⟩
+  q ∎
+```
+
+## Sección 3.4. Funciones dependientes y fibraciones
+
+```agda
+
+-- Lema 3.4.1.
+tr : {A : 𝒰 𝒾} (P : A → 𝒰 𝒿) {x y : A}
+          → x ≡ y → P x → P y
+tr P (refl x) = id
+
+-- Lema 3.4.2.
+tr-∘ : {A : 𝒰 𝒾} (P : A → 𝒰 𝒿) {x y z : A}
+       (p : x ≡ y) (q : y ≡ z)
+     → (tr P q) ∘ (tr P p) ≡ tr P (p ∙ q)
+tr-∘ P (refl x) (refl x) = refl id
+
+-- Lema 3.4.4.
+lift : {A : 𝒰 𝒾} {P : A → 𝒰 𝒿}
+       {x y : A} (u : P x) (p : x ≡ y)
+     → ((x , u) ≡ (y , tr P p u))
+lift u (refl x) = refl (x , u)
+
+lift-lemma : {𝒾 𝒿 : Level} {A : 𝒰 𝒾} {P : A → 𝒰 𝒿}
+             {x y : A} (u : P x) (p : x ≡ y)
+           → (ap pr₁ (lift {𝒾} {𝒿} {A} {P} {x} {y} u p)) ≡ p
+lift-lemma u (refl x) = refl (refl x)
+
+-- Lema 3.4.5.
+apd : {A : 𝒰 𝒾} {P : A → 𝒰 𝒿} (f : (x : A) → P x) {x y : A}
+      (p : x ≡ y) → tr P p (f x) ≡ f y
+apd f (refl x) = refl (f x)
+
+-- Lema 3.4.6.
+tr-f : {A : 𝒰 𝒾} (B : A → 𝒰 𝒿) (f : A → A)
+       {x y : A} (p : x ≡ y)
+     → tr B (ap f p) ≡ tr (B ∘ f) p
+tr-f B f (refl _) = refl _
+
+-- Lema 3.4.7.
+tr-ap-assoc : {A : 𝒰 𝒾} (B : A → 𝒰 𝒿) {x y : A}
+              (p : x ≡ y)
+            → tr id (ap B p) ≡ tr B p
+tr-ap-assoc B (refl _) = refl _
+
+```
+
+## Sección 3.5. Equivalencias homotópicas
+
+```agda
+
+-- Definición 3.5.1.
+_∼_ : {X : 𝒰 𝒾} {P : X → 𝒰 𝒿} → ((x : X) → P x) → ((x : X) → P x) → 𝒰 (𝒾 ⊔ 𝒿)
+f ∼ g = ∀ x → f x ≡ g x
+
+∼-refl : {X : 𝒰 𝒾} {P : X → 𝒰 𝒿} (f : (x : X) → P x) → (f ∼ f)
+∼-refl f = λ x → (refl (f x))
+
+∼-sym : {X : 𝒰 𝒾} {P : X → 𝒰 𝒿}
+      → (f g : (x : X) → P x)
+      → (f ∼ g)
+      → (g ∼ f)
+∼-sym f g H = λ x → (H x)⁻¹
+
+∼-trans : {X : 𝒰 𝒾} {P : X → 𝒰 𝒿}
+        → (f g h : (x : X) → P x)
+        → (f ∼ g)
+        → (g ∼ h)
+        → (f ∼ h)
+∼-trans f g h H1 H2 = λ x → (H1 x) ∙ (H2 x)
+
+-- Lema 3.5.2.
+∼-naturality : {X : 𝒰 𝒾} {A : 𝒰 𝒿}
+               (f g : X → A) (H : f ∼ g) {x y : X} {p : x ≡ y}
+             → H x ∙ ap g p ≡ ap f p ∙ H y
+∼-naturality f g H {x} {_} {refl a} = refl-right ∙ refl-left ⁻¹
+
+-- Definición 3.5.3.
+qinv : {A : 𝒰 𝒾} {B : 𝒰 𝒿} → (A → B) → 𝒰 (𝒾 ⊔ 𝒿)
+qinv f = Σ g ꞉ (codomain f → domain f) , (f ∘ g ∼ id) × (g ∘ f ∼ id)
+
+-- Ejemplo 3.5.4.
+qinv-id-id : (A : 𝒰 𝒾) → qinv (𝑖𝑑 A)
+qinv-id-id A = (𝑖𝑑 A) , refl , refl
+
+-- Ejemplo 3.5.5.
+qinv-tr : {A : 𝒰 𝒾} {x y : A} (P : A → 𝒰 𝒿) (p : x ≡ y)
+        → qinv (tr P p)
+qinv-tr P (refl x) = id , refl , refl
+
+-- Definición 3.5.6.
+isequiv : {A : 𝒰 𝒾} {B : 𝒰 𝒿} → (A → B) → 𝒰 (𝒾 ⊔ 𝒿)
+isequiv f = (Σ g ꞉ (codomain f → domain f) , (f ∘ g ∼ id))
+           × (Σ h ꞉ (codomain f → domain f) , (h ∘ f ∼ id))
+
+-- Proposición 3.5.7.
+invs-are-equivs : {A : 𝒰 𝒾} {B : 𝒰 𝒿} (f : A → B)
+                → (qinv f) → (isequiv f)
+invs-are-equivs f ( g , α , β ) = ( (g , α) , (g , β) )
+
+equivs-are-invs : {A : 𝒰 𝒾} {B : 𝒰 𝒿} (f : A → B)
+                → (isequiv f) → (qinv f)
+equivs-are-invs f ( (g , α) , (h , β) ) = ( g , α , β' )
+  where
+    γ : (x : codomain f) → (g x ≡ h x)
+    γ x = begin
+      g x ≡˘⟨ β (g x) ⟩
+      h (f (g x)) ≡⟨ ap h (α x) ⟩
+      h x ∎
+    β' : g ∘ f ∼ 𝑖𝑑 (domain f)
+    β' x = γ (f x) ∙ β x
+
+-- Definición 3.5.8.
+_≃_ : 𝒰 𝒾 → 𝒰 𝒿 → 𝒰 (𝒾 ⊔ 𝒿)
+A ≃ B = Σ f ꞉ (A → B), isequiv f
+
+-- Helpers para conseguir la data de quasi-inversas de una equivalencia
+≃-→ : {X : 𝒰 𝒾} {Y : 𝒰 𝒿} → X ≃ Y → (X → Y)
+≃-→ (f , eqv) = f
+
+≃-← : {X : 𝒰 𝒾} {Y : 𝒰 𝒿} → X ≃ Y → (Y → X)
+≃-← (f , eqv) =
+ let (g , ε , η) = equivs-are-invs f eqv
+  in g
+
+≃-ε : {X : 𝒰 𝒾} {Y : 𝒰 𝒿}
+    → (equiv : (X ≃ Y))
+    → ((pr₁ equiv) ∘ (≃-← equiv) ∼ id)
+≃-ε (f , eqv) =
+ let (g , ε , η) = equivs-are-invs f eqv
+  in ε
+
+≃-η : {X : 𝒰 𝒾} {Y : 𝒰 𝒿}
+    → (equiv : (X ≃ Y))
+    → ((≃-← equiv) ∘ (pr₁ equiv) ∼ id)
+≃-η (f , eqv) =
+ let (g , ε , η) = equivs-are-invs f eqv
+  in η
+
+-- Lema 3.5.9.
+≃-refl : (X : 𝒰 𝒾) → X ≃ X
+≃-refl X = ( 𝑖𝑑 X , invs-are-equivs (𝑖𝑑 X) (qinv-id-id X) )
+
+≃-sym : {X : 𝒰 𝒾} {Y : 𝒰 𝒿} → X ≃ Y → Y ≃ X
+≃-sym ( f , e ) =
+  let ( f⁻¹ , p , q) = ( equivs-are-invs f e )
+  in  ( f⁻¹ , invs-are-equivs f⁻¹ (f , q , p) )
+
+≃-trans-helper : {A : 𝒰 𝒾} {B : 𝒰 𝒿} {C : 𝒰 𝓀}
+                 (eqvf : A ≃ B) (eqvg : B ≃ C)
+               → isequiv (pr₁ eqvg ∘ pr₁ eqvf)
+≃-trans-helper ( f , ef ) ( g , eg ) =
+  let ( f⁻¹ , pf , qf ) = ( equivs-are-invs f ef )
+      ( g⁻¹ , pg , qg ) = ( equivs-are-invs g eg )
+      h1 : ((g ∘ f) ∘ (f⁻¹ ∘ g⁻¹) ∼ id)
+      h1 x = begin
+        g (f (f⁻¹ (g⁻¹ x))) ≡⟨ ap g (pf (g⁻¹ x)) ⟩
+        g (g⁻¹ x) ≡⟨ pg x ⟩
+        x ∎
+      h2 : ((f⁻¹ ∘ g⁻¹) ∘ (g ∘ f) ∼ id)
+      h2 x = begin
+        f⁻¹ (g⁻¹ (g (f x))) ≡⟨ ap f⁻¹ (qg (f x)) ⟩
+        f⁻¹ (f x) ≡⟨ qf x ⟩
+        x ∎
+  in  invs-are-equivs (g ∘ f) ((f⁻¹ ∘ g⁻¹) , h1 , h2)
+
+≃-trans : {A : 𝒰 𝒾} {B : 𝒰 𝒿} {C : 𝒰 𝓀}
+        → A ≃ B → B ≃ C → A ≃ C
+≃-trans eqvf@( f , ef ) eqvg@( g , eg ) =
+  let ( f⁻¹ , pf , qf ) = ( equivs-are-invs f ef )
+      ( g⁻¹ , pg , qg ) = ( equivs-are-invs g eg )
+      h1 : ((g ∘ f) ∘ (f⁻¹ ∘ g⁻¹) ∼ id)
+      h1 x = begin
+        g (f (f⁻¹ (g⁻¹ x))) ≡⟨ ap g (pf (g⁻¹ x)) ⟩
+        g (g⁻¹ x)           ≡⟨ pg x ⟩
+        x ∎
+      h2 : ((f⁻¹ ∘ g⁻¹) ∘ (g ∘ f) ∼ id)
+      h2 x = begin
+        f⁻¹ (g⁻¹ (g (f x))) ≡⟨ ap f⁻¹ (qg (f x)) ⟩
+        f⁻¹ (f x)           ≡⟨ qf x ⟩
+        x ∎
+  in  ((g ∘ f) , ≃-trans-helper eqvf eqvg)
+
+-- Proposición 3.5.10
+fibra≃ : (A : 𝒰 𝒾) (B : A → 𝒰 𝒿) (x : A)
+     → (B x) ≃ (Σ z ꞉ (Σ B) , pr₁ z ≡ x)
+fibra≃ A B x = f , invs-are-equivs f (g , ε , η)
+  where
+    f = λ y → (x , y) , refl x
+    g : (Σ z ꞉ (Σ B) , pr₁ z ≡ x) → B x
+    g ((a , b) , refl _) = b
+    ε : (α : (Σ z ꞉ (Σ B) , pr₁ z ≡ x)) → f (g α) ≡ α
+    ε ((a , b) , refl _) = refl _
+    η = λ y → refl y
+
+-- Proposición 3.5.11
+paths-over-≃ : {A : 𝒰 𝒾} (P : A → 𝒰 𝒿)
+       (x y : A) (p : x ≡ y)
+       (u : P x) (v : P y)
+     → (Σ q ꞉ ((x , u) ≡ (y , v)) , (ap pr₁ q ≡ p)) ≃ (tr P p u ≡ v)
+paths-over-≃ P x y p u v = f p , invs-are-equivs (f p) (g p , ε p , η)
+  where
+    f : (p : x ≡ y) → (Σ q ꞉ (x , u ≡ y , v) , ap pr₁ q ≡ p) → tr P p u ≡ v
+    f p (refl (x , u) , refl p) = refl u
+    g : (p : x ≡ y) → tr P p u ≡ v → Σ q ꞉ (x , u ≡ y , v) , ap pr₁ q ≡ p
+    g p (refl v) = (lift u p) , lift-lemma u p
+    ε : (p : x ≡ y) → (s : tr P p u ≡ v) → f p (g p s) ≡ s
+    ε (refl u) (refl v) = refl _
+    η : (α : (Σ q ꞉ (x , u ≡ y , v) , ap pr₁ q ≡ p)) → g p (f p α) ≡ α
+    η (refl _ , refl _) = refl _
+```
+
+## Sección 3.6. Caminos entre pares dependientes
+
+```agda
+
+-- Teorema 3.6.1.
+pair⁼⁻¹ : {X : 𝒰 𝒾} {Y : X → 𝒰 𝒿} {w w' : Σ Y}
+        → (w ≡ w') → (Σ p ꞉ (pr₁ w ≡ pr₁ w') , tr Y p (pr₂ w) ≡ (pr₂ w'))
+pair⁼⁻¹ (refl w) = ( refl (pr₁ w) , refl (pr₂ w) )
+
+pair⁼ : {X : 𝒰 𝒾} {Y : X → 𝒰 𝒿} {w w' : Σ Y}
+        → (Σ p ꞉ (pr₁ w ≡ pr₁ w') , tr Y p (pr₂ w) ≡ (pr₂ w')) → (w ≡ w')
+pair⁼ {𝒾} {𝒿} {X} {Y} {w1 , w2} {w'1 , w'2} (refl w1 , refl w2) = refl (w1 , w2)
+
+Σ-≡-≃ : {X : 𝒰 𝒾} {Y : X → 𝒰 𝒿} {w w' : Σ Y}
+      → (w ≡ w') ≃ (Σ p ꞉ (pr₁ w ≡ pr₁ w') , tr Y p (pr₂ w) ≡ (pr₂ w'))
+Σ-≡-≃ {𝒾} {𝒿} {X} {Y} {w1 , w2} {w'1 , w'2} =
+  pair⁼⁻¹ , invs-are-equivs pair⁼⁻¹ (pair⁼ , α , β)
+    where
+      α : (pq : (Σ p ꞉ w1 ≡ w'1 , tr Y p w2 ≡ w'2))
+        → pair⁼⁻¹ (pair⁼ pq) ≡ pq
+      α (refl w1 , refl w2) = refl (refl w1 , refl w2)
+      β : (p : (w1 , w2 ≡ w'1 , w'2))
+        → pair⁼ (pair⁼⁻¹ p) ≡ p
+      β (refl (w1 , w2)) = refl (refl (w1 , w2))
+
+-- Corolario 3.6.2.
+Σ-uniq : {X : 𝒰 𝒾} {P : X → 𝒰 𝒿} (z : Σ P)
+       → z ≡ (pr₁ z , pr₂ z)
+Σ-uniq z = pair⁼ (refl _ , refl _)
+
+-- Corolario 3.6.2.
+pair×⁼⁻¹ : {X : 𝒰 𝒾} {Y : 𝒰 𝒿} {w w' : X × Y}
+         → (w ≡ w') → ((pr₁ w ≡ pr₁ w') × (pr₂ w ≡ pr₂ w'))
+pair×⁼⁻¹ (refl w) = ( refl (pr₁ w) , refl (pr₂ w) )
+
+pair×⁼ : {X : 𝒰 𝒾} {Y : 𝒰 𝒿} {w w' : X × Y}
+       → ((pr₁ w ≡ pr₁ w') × (pr₂ w ≡ pr₂ w')) → (w ≡ w')
+pair×⁼ {𝒾} {𝒿} {X} {Y} {w1 , w2} {w'1 , w'2} (refl w1 , refl w2) = refl (w1 , w2)
+
+×-≡-≃ : {X : 𝒰 𝒾} {Y : 𝒰 𝒿} {w w' : X × Y}
+      → (w ≡ w') ≃ ((pr₁ w ≡ pr₁ w') × (pr₂ w ≡ pr₂ w'))
+×-≡-≃ {𝒾} {𝒿} {X} {Y} {w1 , w2} {w'1 , w'2} =
+  pair×⁼⁻¹ , invs-are-equivs pair×⁼⁻¹ (pair×⁼ , α , β)
+    where
+      α : (pq : (w1 ≡ w'1) × (w2 ≡ w'2))
+        → pair×⁼⁻¹ (pair×⁼ pq) ≡ pq
+      α (refl w1 , refl w2) = refl (refl w1 , refl w2)
+      β : (p : (w1 , w2 ≡ w'1 , w'2))
+        → pair×⁼ (pair×⁼⁻¹ p) ≡ p
+      β (refl (w1 , w2)) = refl (refl (w1 , w2))
+```
+
+# Sección 3.7. Caminos entre funciones dependientes
+
+```agda
+
+happly : {A : 𝒰 𝒾} {B : A → 𝒰 𝒿} {f g : (x : A) → B x}
+       → f ≡ g → f ∼ g
+happly p x = ap (λ - → - x) p
+
+-- Axioma 3.7.1.
+has-funext : (𝒾 𝒿 : Level) → 𝒰 ((𝒾 ⊔ 𝒿)⁺)
+has-funext 𝒾 𝒿 = {A : 𝒰 𝒾} {B : A → 𝒰 𝒿} (f g : (x : A) → B x)
+               → isequiv (happly {𝒾} {𝒿} {A} {B} {f} {g})
+
+postulate fe-ax : {𝒾 𝒿 : Level} → has-funext 𝒾 𝒿
+
+qinv-fe : {A : 𝒰 𝒾} {B : A → 𝒰 𝒿}
+          (f g : (x : A) → B x) → qinv happly
+qinv-fe f g = equivs-are-invs happly (fe-ax f g)
+
+funext : {A : 𝒰 𝒾} {B : A → 𝒰 𝒿}
+       → {f g : (x : A) → B x}
+       → f ∼ g → f ≡ g
+funext {f} {g} htpy =
+  let (funext , η , ε ) = qinv-fe _ _
+   in funext htpy
+
+-- Lema 3.7.3.
+PathOver-→ : {X : 𝒰 𝒾}
+             {A B : X → 𝒰 𝓀}
+             {x₁ x₂ : X} {p : x₁ ≡ x₂}
+             {f : A x₁ → B x₁}
+             {y : A x₂}
+           → tr (λ (x : X) → (A x → B x)) p f y
+               ≡ tr B p (f (tr A (p ⁻¹) y))
+PathOver-→ {A} {B} {p = refl _} = refl _
+
+-- Lema 3.7.4
+PathOver-Π : {X : 𝒰 𝒾}
+              {A : X → 𝒰 𝓀}
+              {B : (x : X) → A x → 𝒰 𝒿}
+              {x₁ x₂ : X} {p : x₁ ≡ x₂}
+              {f : (y : A x₁) → B x₁ y}
+              {g : (y : A x₂) → B x₂ y}
+            → ({a₁ : A x₁} {a₂ : A x₂} (q : tr A p a₁ ≡ a₂)
+                → tr (λ (w : Σ A) → B (pr₁ w) (pr₂ w)) (pair⁼(p , q)) (f a₁) ≡ (g a₂))
+            → (tr (λ (x : X) → ((a : A x) → B x a)) p f) ≡ g
+PathOver-Π {A = A} {B} {p = refl _} {f = f} {g = g} lem
+  = funext (λ - → lem (refl -))
+```
+
+# Sección 3.8. Caminos entre tipos
+
+```agda
+
+-- Lema 3.8.1.
+idtoeqv-helper : {X Y : 𝒰 𝒾} (p : X ≡ Y) → isequiv (tr (λ C → C) p)
+idtoeqv-helper (refl X) = invs-are-equivs (𝑖𝑑 X) (qinv-id-id X)
+
+idtoeqv : {X Y : 𝒰 𝒾} → X ≡ Y → X ≃ Y
+idtoeqv {𝒾} {X} {Y} p = tr (λ C → C) p , (idtoeqv-helper p)
+
+-- Axioma 3.8.2.
+is-univalent : (𝒾 : Level) → 𝒰 (𝒾 ⁺)
+is-univalent 𝒾 = (X Y : 𝒰 𝒾) → isequiv (idtoeqv {𝒾} {X} {Y})
+
+postulate ua-ax : {𝒾 : Level} → is-univalent 𝒾
+
+qinv-ua : (X Y : 𝒰 𝒾) → qinv idtoeqv
+qinv-ua X Y = equivs-are-invs idtoeqv (ua-ax X Y)
+
+ua : {X Y : 𝒰 𝒾} → X ≃ Y → X ≡ Y
+ua eqv =
+  let (ua , idtoeqv∘ua , ua∘idtoeqv) = qinv-ua _ _
+   in ua eqv
+
+-- Helper
+id∼idtoeqv∘ua : {X Y : 𝒰 𝒾} (eqv : X ≃ Y)
+              → eqv ≡ idtoeqv (ua eqv)
+id∼idtoeqv∘ua {X} {Y} eqv =
+  let (ua , idtoeqv∘ua , ua∘idtoeqv) = qinv-ua _ _
+   in (idtoeqv∘ua eqv)⁻¹
+```
+
+# Sección 3.9. Caminos entre naturales
+
+```agda
+
+code-ℕ : ℕ → ℕ → 𝒰₀
+code-ℕ 0 0               = 𝟙
+code-ℕ (succ m) 0        = 𝟘
+code-ℕ 0 (succ m)        = 𝟘
+code-ℕ (succ m) (succ n) = code-ℕ m n
+
+-- Teorema 3.9.1.
+r-ℕ : (n : ℕ) → code-ℕ n n
+r-ℕ 0        = ⋆
+r-ℕ (succ n) = r-ℕ n
+
+encode-ℕ : (m n : ℕ) → (m ≡ n) → code-ℕ m n
+encode-ℕ m n p = tr (code-ℕ m) p (r-ℕ m)
+
+decode-ℕ : (m n : ℕ) → code-ℕ m n → (m ≡ n)
+decode-ℕ 0 0 f = refl 0
+decode-ℕ (succ m) 0 f = !𝟘 (succ m ≡ 0) f
+decode-ℕ 0 (succ n) f = !𝟘 (0 ≡ succ n) f
+decode-ℕ (succ m) (succ n) f = ap succ (decode-ℕ m n f)
+
+decode∘encode-ℕ∼id : (m n : ℕ) → (decode-ℕ m n) ∘ (encode-ℕ m n) ∼ id
+decode∘encode-ℕ∼id m n (refl n) = lema n
+  where
+    lema : (n : ℕ) → decode-ℕ n n (r-ℕ n) ≡ refl n
+    lema 0 = refl _
+    lema (succ n) = ap (ap succ) (lema n)
+
+encode∘decode-ℕ∼id : (m n : ℕ) → (encode-ℕ m n) ∘ (decode-ℕ m n) ∼ id
+encode∘decode-ℕ∼id 0 0 ⋆               = refl ⋆
+encode∘decode-ℕ∼id (succ m) 0 c        = !𝟘 _ c
+encode∘decode-ℕ∼id 0 (succ n) c        = !𝟘 _ c
+encode∘decode-ℕ∼id (succ m) (succ n) c = begin
+  encode-ℕ (succ m) (succ n) (decode-ℕ (succ m) (succ n) c)           ≡⟨⟩
+  encode-ℕ (succ m) (succ n) (ap succ (decode-ℕ m n c))               ≡⟨⟩
+  tr (code-ℕ (succ m)) (ap succ (decode-ℕ m n c)) (r-ℕ (succ m))      ≡⟨ i ⟩
+  tr (λ - → code-ℕ (succ m) (succ -)) (decode-ℕ m n c) (r-ℕ (succ m)) ≡⟨⟩
+  tr (λ - → code-ℕ (succ m) (succ -)) (decode-ℕ m n c) (r-ℕ m)        ≡⟨⟩
+  tr (code-ℕ m) (decode-ℕ m n c) (r-ℕ m)                              ≡⟨⟩
+  encode-ℕ m n (decode-ℕ m n c)                                       ≡⟨ ii ⟩
+  c ∎
+ where
+  i = happly (tr-f (code-ℕ (succ m)) succ ((decode-ℕ m n c))) (r-ℕ (succ m))
+  ii = encode∘decode-ℕ∼id m n c
+
+ℕ-≡-≃ : (m n : ℕ) → (m ≡ n) ≃ code-ℕ m n
+ℕ-≡-≃ m n =
+  encode-ℕ m n , invs-are-equivs (encode-ℕ m n)
+    (decode-ℕ m n , encode∘decode-ℕ∼id m n , decode∘encode-ℕ∼id m n)
+
+-- Corolario 3.9.2.
+sm≡sn→m≡n : {m n : ℕ} → (succ m ≡ succ n) → (m ≡ n)
+sm≡sn→m≡n {m} {n} p = decode-ℕ m n (encode-ℕ (succ m) (succ n) p)
+
+-- Corolario 3.9.3.
+ℕ-decidable : (m n : ℕ) → (m ≡ n) ⊎ ((m ≡ n) → 𝟘)
+ℕ-decidable 0 0               = inl (refl 0)
+ℕ-decidable (succ m) 0        = inr (λ - → !𝟘 _ (encode-ℕ (succ m) 0 -))
+ℕ-decidable 0 (succ n)        = inr (λ - → !𝟘 _ (encode-ℕ 0 (succ n) -))
+ℕ-decidable (succ m) (succ n) =
+  ⊎-ind ((λ - → (succ m ≡ succ n) ⊎ (succ m ≡ succ n → 𝟘)))
+    (λ p → inl(ap succ p))
+    (λ contra → inr(λ p → contra (sm≡sn→m≡n p)))
+    (ℕ-decidable m n)
 ```

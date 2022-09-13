@@ -8,7 +8,7 @@ let
       ref = "refs/heads/nixpkgs-unstable";
       # Search for the revision for the agda versions in
       # https://lazamar.co.uk/nix-versions/?channel=nixpkgs-unstable&package=agda
-      rev = "bf972dc380f36a3bf83db052380e55f0eaa7dcb6";
+      rev = "12408341763b8f2f0f0a88001d9650313f6371d5";
     })
     { };
 in
