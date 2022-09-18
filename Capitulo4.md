@@ -1,29 +1,16 @@
-<!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml" lang="es" xml:lang="es">
+---
+title: Capítulo 4. Teoría Homotópica de Tipos
+---
 
-<head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Capítulo 4. Teoría Homotópica de Tipos</title>
-    <link rel="stylesheet" href="styles.css">
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-        href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,500;0,600;0,700;0,800;1,400;1,500;1,600;1,700;1,800&family=Inria+Sans:ital,wght@0,300;0,400;0,700;1,300;1,400;1,700&display=swap"
-        rel="stylesheet" />
-</head>
+# Capítulo 4. Teoría Homotópica de Tipos
 
-<body class="text-page">
-    <main>
-        <div id="post-toc-container" style="padding-left: 1em; padding-right: 1em">
-            <article>
-<a href="index.html">Back to index</a>
-<h1 id="captulo4teorahomotpicadetipos">Capítulo 4. Teoría Homotópica de Tipos</h1>
 <!--
 <pre class="Agda"><a id="111" class="Keyword">module</a> <a id="118" href="Capitulo4.html" class="Module">Capitulo4</a> <a id="128" class="Keyword">where</a>
 <a id="134" class="Keyword">open</a> <a id="139" class="Keyword">import</a> <a id="146" href="Capitulo3.html" class="Module">Capitulo3</a> <a id="156" class="Keyword">public</a>
 </pre>-->
-<h2 id="seccin41introduccin">Sección 4.1. Introducción</h2>
+
+## Sección 4.1. Introducción
+
 <pre class="Agda">
 <a id="211" class="Comment">-- Proposición 4.1.1.</a>
 <a id="pr₁-is-fibration"></a><a id="233" href="Capitulo4.html#233" class="Function">pr₁-is-fibration</a> <a id="250" class="Symbol">:</a> <a id="252" class="Symbol">(</a><a id="253" href="Capitulo4.html#253" class="Bound">B</a> <a id="255" class="Symbol">:</a> <a id="257" href="Capitulo2.html#273" class="Function">𝒰</a> <a id="259" href="Capitulo2.html#258" class="Generalizable">𝒾</a><a id="260" class="Symbol">)</a> <a id="262" class="Symbol">(</a><a id="263" href="Capitulo4.html#263" class="Bound">P</a> <a id="265" class="Symbol">:</a> <a id="267" href="Capitulo4.html#253" class="Bound">B</a> <a id="269" class="Symbol">→</a> <a id="271" href="Capitulo2.html#273" class="Function">𝒰</a> <a id="273" href="Capitulo2.html#260" class="Generalizable">𝒿</a><a id="274" class="Symbol">)</a> <a id="276" class="Symbol">(</a><a id="277" href="Capitulo4.html#277" class="Bound">X</a> <a id="279" class="Symbol">:</a> <a id="281" href="Capitulo2.html#273" class="Function">𝒰</a> <a id="283" href="Capitulo2.html#262" class="Generalizable">𝓀</a><a id="284" class="Symbol">)</a>
@@ -63,7 +50,8 @@
                  <a id="1365" class="Symbol">→</a> <a id="1367" href="Capitulo4.html#1149" class="Function">retraction</a> <a id="1378" href="Capitulo4.html#1337" class="Bound">ρ</a> <a id="1380" href="Capitulo2.html#953" class="Function Operator">∘</a> <a id="1382" href="Capitulo4.html#1226" class="Function">section</a> <a id="1390" href="Capitulo4.html#1337" class="Bound">ρ</a> <a id="1392" href="Capitulo3.html#5789" class="Function Operator">∼</a> <a id="1394" href="Capitulo2.html#783" class="Function">𝑖𝑑</a> <a id="1397" href="Capitulo4.html#1317" class="Bound">X</a>
 <a id="1399" href="Capitulo4.html#1297" class="Function">retract-equation</a> <a id="1416" class="Symbol">(</a><a id="1417" href="Capitulo4.html#1417" class="Bound">r</a> <a id="1419" href="Capitulo2.html#1433" class="InductiveConstructor Operator">,</a> <a id="1421" href="Capitulo4.html#1421" class="Bound">s</a> <a id="1423" href="Capitulo2.html#1433" class="InductiveConstructor Operator">,</a> <a id="1425" href="Capitulo4.html#1425" class="Bound">ε</a><a id="1426" class="Symbol">)</a> <a id="1428" class="Symbol">=</a> <a id="1430" href="Capitulo4.html#1425" class="Bound">ε</a>
 </pre>
-<h2 id="seccin42dndtipos">Sección 4.2. $n$-tipos</h2>
+## Sección 4.2. $n$-tipos
+
 <pre class="Agda">
 <a id="1473" class="Comment">-- Definición 4.2.1.</a>
 <a id="isContr"></a><a id="1494" href="Capitulo4.html#1494" class="Function">isContr</a> <a id="1502" class="Symbol">:</a> <a id="1504" href="Capitulo2.html#273" class="Function">𝒰</a> <a id="1506" href="Capitulo2.html#258" class="Generalizable">𝒾</a> <a id="1508" class="Symbol">→</a> <a id="1510" href="Capitulo2.html#273" class="Function">𝒰</a> <a id="1512" href="Capitulo2.html#258" class="Generalizable">𝒾</a>
@@ -279,9 +267,11 @@
         <a id="8208" href="Capitulo4.html#8208" class="Function">lema</a> <a id="8213" class="Symbol">:</a> <a id="8215" class="Symbol">(</a><a id="8216" href="Capitulo4.html#8216" class="Bound">a</a> <a id="8218" class="Symbol">:</a> <a id="8220" href="Capitulo4.html#7869" class="Bound">a₁</a> <a id="8223" href="Capitulo2.html#4409" class="Function Operator">≡</a> <a id="8225" href="Capitulo4.html#7879" class="Bound">a₂</a><a id="8227" class="Symbol">)</a> <a id="8229" class="Symbol">→</a> <a id="8231" href="Capitulo4.html#5693" class="Function">is-n-2-type</a> <a id="8243" href="Capitulo4.html#7861" class="Bound">n</a> <a id="8245" class="Symbol">(</a><a id="8246" href="Capitulo3.html#4654" class="Function">tr</a> <a id="8249" href="Capitulo4.html#7853" class="Bound">B</a> <a id="8251" href="Capitulo4.html#8216" class="Bound">a</a> <a id="8253" href="Capitulo4.html#7874" class="Bound">b₁</a> <a id="8256" href="Capitulo2.html#4409" class="Function Operator">≡</a> <a id="8258" href="Capitulo4.html#7884" class="Bound">b₂</a><a id="8260" class="Symbol">)</a>
         <a id="8270" href="Capitulo4.html#8208" class="Function">lema</a> <a id="8275" class="Symbol">(</a><a id="8276" href="Capitulo2.html#4369" class="InductiveConstructor">refl</a> <a id="8281" class="Symbol">_)</a> <a id="8284" class="Symbol">=</a> <a id="8286" href="Capitulo4.html#7866" class="Bound">g</a> <a id="8288" href="Capitulo4.html#7869" class="Bound">a₁</a> <a id="8291" href="Capitulo4.html#7874" class="Bound">b₁</a> <a id="8294" href="Capitulo4.html#7884" class="Bound">b₂</a>
 </pre>
-<h2 id="seccin43tiposinductivossuperiores">Sección 4.3. Tipos Inductivos Superiores</h2>
-<p>En agda, los HITs se tienen que definir de una forma indirecta; esta es una limitación de agda, no de la teoría actual.
-En todo caso, las definiciones en agda pueden ser omitidas de la lectura sin ningún inconveniente.</p>
+## Sección 4.3. Tipos Inductivos Superiores
+
+En agda, los HITs se tienen que definir de una forma indirecta; esta es una limitación de agda, no de la teoría actual.
+En todo caso, las definiciones en agda pueden ser omitidas de la lectura sin ningún inconveniente.
+
 <pre class="Agda">
 <a id="8576" class="Comment">-- Definición 4.3.1.</a>
 <a id="8597" class="Keyword">postulate</a>
@@ -462,7 +452,8 @@ En todo caso, las definiciones en agda pueden ser omitidas de la lectura sin nin
   <a id="hSetℤ"></a><a id="13292" href="Capitulo4.html#13292" class="Postulate">hSetℤ</a> <a id="13298" class="Symbol">:</a> <a id="13300" href="Capitulo4.html#5485" class="Function">isSet</a> <a id="13306" href="Capitulo4.html#12644" class="Postulate">ℤ</a>
 
 </pre>
-<h2 id="seccin44elgrupofundamentaldelcrculo">Sección 4.4. El grupo fundamental del círculo</h2>
+## Sección 4.4. El grupo fundamental del círculo
+
 <pre class="Agda">
 <a id="13373" class="Comment">-- Definición 4.4.1.</a>
 <a id="Ωn"></a><a id="13394" href="Capitulo4.html#13394" class="Function">Ωn</a> <a id="13397" class="Symbol">:</a> <a id="13399" class="Symbol">(</a><a id="13400" href="Capitulo4.html#13400" class="Bound">n</a> <a id="13402" class="Symbol">:</a> <a id="13404" href="Capitulo2.html#3114" class="Datatype">ℕ</a><a id="13405" class="Symbol">)</a> <a id="13407" class="Symbol">(</a><a id="13408" href="Capitulo4.html#13408" class="Bound">A</a> <a id="13410" class="Symbol">:</a> <a id="13412" href="Capitulo2.html#273" class="Function">𝒰</a> <a id="13414" href="Capitulo2.html#258" class="Generalizable">𝒾</a><a id="13415" class="Symbol">)</a> <a id="13417" class="Symbol">(</a><a id="13418" href="Capitulo4.html#13418" class="Bound">a</a> <a id="13420" class="Symbol">:</a> <a id="13422" href="Capitulo4.html#13408" class="Bound">A</a><a id="13423" class="Symbol">)</a> <a id="13425" class="Symbol">→</a> <a id="13427" class="Symbol">(</a><a id="13428" href="Capitulo2.html#1482" class="Function">Σ</a> <a id="13430" href="Capitulo4.html#13430" class="Bound">X</a> <a id="13432" href="Capitulo2.html#1482" class="Function">꞉</a> <a id="13434" href="Capitulo2.html#273" class="Function">𝒰</a> <a id="13436" href="Capitulo2.html#258" class="Generalizable">𝒾</a> <a id="13438" href="Capitulo2.html#1482" class="Function">,</a> <a id="13440" href="Capitulo4.html#13430" class="Bound">X</a><a id="13441" class="Symbol">)</a>
@@ -597,8 +588,3 @@ En todo caso, las definiciones en agda pueden ser omitidas de la lectura sin nin
 <a id="π₁𝕊¹≡ℤ"></a><a id="18153" href="Capitulo4.html#18153" class="Function">π₁𝕊¹≡ℤ</a> <a id="18160" class="Symbol">:</a> <a id="18162" href="Capitulo4.html#13531" class="Function">πₙ</a> <a id="18165" class="Number">1</a> <a id="18167" href="Capitulo4.html#10177" class="Postulate">𝕊¹</a> <a id="18170" href="Capitulo4.html#10187" class="Postulate">base</a> <a id="18175" href="Capitulo2.html#4409" class="Function Operator">≡</a> <a id="18177" href="Capitulo4.html#12644" class="Postulate">ℤ</a>
 <a id="18179" href="Capitulo4.html#18153" class="Function">π₁𝕊¹≡ℤ</a> <a id="18186" class="Symbol">=</a> <a id="18188" href="Capitulo3.html#4654" class="Function">tr</a> <a id="18191" class="Symbol">(λ</a> <a id="18194" href="Capitulo4.html#18194" class="Bound">-</a> <a id="18196" class="Symbol">→</a> <a id="18198" href="Capitulo4.html#11286" class="Postulate Operator">∥</a> <a id="18200" href="Capitulo4.html#18194" class="Bound">-</a> <a id="18202" href="Capitulo4.html#11286" class="Postulate Operator">∥₀</a> <a id="18205" href="Capitulo2.html#4409" class="Function Operator">≡</a> <a id="18207" href="Capitulo4.html#12644" class="Postulate">ℤ</a><a id="18208" class="Symbol">)</a> <a id="18210" class="Symbol">(</a><a id="18211" href="Capitulo4.html#18079" class="Function">Ω𝕊¹≡ℤ</a> <a id="18217" href="Capitulo3.html#772" class="Function Operator">⁻¹</a><a id="18219" class="Symbol">)</a> <a id="18221" class="Symbol">(</a><a id="18222" href="Capitulo4.html#11945" class="Function">∥∥₀-set-is-id</a> <a id="18236" href="Capitulo4.html#12644" class="Postulate">ℤ</a> <a id="18238" href="Capitulo4.html#13292" class="Postulate">hSetℤ</a><a id="18243" class="Symbol">)</a>
 </pre>
-            </article>
-        </div>
-    </main>
-</body>
-</html>

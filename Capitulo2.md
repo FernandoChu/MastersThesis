@@ -1,24 +1,9 @@
-<!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml" lang="es" xml:lang="es">
+---
+title: Capítulo 2. Teoría de Tipos Dependientes
+---
 
-<head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Capítulo 2. Teoría de Tipos Dependientes</title>
-    <link rel="stylesheet" href="styles.css">
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-        href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,500;0,600;0,700;0,800;1,400;1,500;1,600;1,700;1,800&family=Inria+Sans:ital,wght@0,300;0,400;0,700;1,300;1,400;1,700&display=swap"
-        rel="stylesheet" />
-</head>
+# Capítulo 2. Teoría de Tipos Dependientes
 
-<body class="text-page">
-    <main>
-        <div id="post-toc-container" style="padding-left: 1em; padding-right: 1em">
-            <article>
-<a href="index.html">Back to index</a>
-<h1 id="captulo2teoradetiposdependientes">Capítulo 2. Teoría de Tipos Dependientes</h1>
 <!--
 <pre class="Agda"><a id="115" class="Keyword">module</a> <a id="122" href="Capitulo2.html" class="Module">Capitulo2</a> <a id="132" class="Keyword">where</a>
 
@@ -35,7 +20,10 @@
 
 <a id="𝒰₀"></a><a id="324" href="Capitulo2.html#324" class="Function">𝒰₀</a> <a id="327" class="Symbol">=</a> <a id="329" href="Capitulo2.html#205" class="Primitive">Universe</a> <a id="338" href="Agda.Primitive.html#764" class="Primitive">lzero</a>
 </pre>-->
-<h2 id="seccin25eltipodefunciones">Sección 2.5. El tipo de funciones</h2>
+
+
+## Sección 2.5. El tipo de funciones
+
 <pre class="Agda">
 <a id="401" class="Comment">-- Definición 2.5.5.</a>
 <a id="idA"></a><a id="422" href="Capitulo2.html#422" class="Function">idA</a> <a id="426" class="Symbol">:</a> <a id="428" class="Symbol">{</a><a id="429" href="Capitulo2.html#429" class="Bound">A</a> <a id="431" class="Symbol">:</a> <a id="433" href="Capitulo2.html#273" class="Function">𝒰</a> <a id="435" href="Capitulo2.html#258" class="Generalizable">𝒾</a><a id="436" class="Symbol">}</a> <a id="438" class="Symbol">→</a> <a id="440" href="Capitulo2.html#429" class="Bound">A</a> <a id="442" class="Symbol">→</a> <a id="444" href="Capitulo2.html#429" class="Bound">A</a>
@@ -52,7 +40,8 @@
     <a id="633" class="Symbol">→</a> <a id="635" class="Symbol">(</a><a id="636" href="Capitulo2.html#572" class="Bound">A</a> <a id="638" class="Symbol">→</a> <a id="640" href="Capitulo2.html#592" class="Bound">C</a><a id="641" class="Symbol">)</a>
 <a id="643" href="Capitulo2.html#564" class="Function">comp</a> <a id="648" href="Capitulo2.html#648" class="Bound">g</a> <a id="650" href="Capitulo2.html#650" class="Bound">f</a> <a id="652" href="Capitulo2.html#652" class="Bound">x</a> <a id="654" class="Symbol">=</a> <a id="656" href="Capitulo2.html#648" class="Bound">g</a> <a id="658" class="Symbol">(</a><a id="659" href="Capitulo2.html#650" class="Bound">f</a> <a id="661" href="Capitulo2.html#652" class="Bound">x</a><a id="662" class="Symbol">)</a>
 </pre>
-<h2 id="seccin26eltipodefuncionesdependientes">Sección 2.6. El tipo de funciones dependientes</h2>
+## Sección 2.6. El tipo de funciones dependientes
+
 <pre class="Agda">
 <a id="729" class="Comment">-- Definición 2.6.9.</a>
 <a id="id"></a><a id="750" href="Capitulo2.html#750" class="Function">id</a> <a id="753" class="Symbol">:</a> <a id="755" class="Symbol">{</a><a id="756" href="Capitulo2.html#756" class="Bound">A</a> <a id="758" class="Symbol">:</a> <a id="760" href="Capitulo2.html#273" class="Function">𝒰</a> <a id="762" href="Capitulo2.html#258" class="Generalizable">𝒾</a><a id="763" class="Symbol">}</a> <a id="765" class="Symbol">→</a> <a id="767" href="Capitulo2.html#756" class="Bound">A</a> <a id="769" class="Symbol">→</a> <a id="771" href="Capitulo2.html#756" class="Bound">A</a>
@@ -81,7 +70,8 @@
 <a id="codomain"></a><a id="1180" href="Capitulo2.html#1180" class="Function">codomain</a> <a id="1189" class="Symbol">:</a> <a id="1191" class="Symbol">{</a><a id="1192" href="Capitulo2.html#1192" class="Bound">X</a> <a id="1194" class="Symbol">:</a> <a id="1196" href="Capitulo2.html#273" class="Function">𝒰</a> <a id="1198" href="Capitulo2.html#258" class="Generalizable">𝒾</a><a id="1199" class="Symbol">}</a> <a id="1201" class="Symbol">{</a><a id="1202" href="Capitulo2.html#1202" class="Bound">Y</a> <a id="1204" class="Symbol">:</a> <a id="1206" href="Capitulo2.html#273" class="Function">𝒰</a> <a id="1208" href="Capitulo2.html#260" class="Generalizable">𝒿</a><a id="1209" class="Symbol">}</a> <a id="1211" class="Symbol">→</a> <a id="1213" class="Symbol">(</a><a id="1214" href="Capitulo2.html#1192" class="Bound">X</a> <a id="1216" class="Symbol">→</a> <a id="1218" href="Capitulo2.html#1202" class="Bound">Y</a><a id="1219" class="Symbol">)</a> <a id="1221" class="Symbol">→</a> <a id="1223" href="Capitulo2.html#273" class="Function">𝒰</a> <a id="1225" href="Capitulo2.html#260" class="Generalizable">𝒿</a>
 <a id="1227" href="Capitulo2.html#1180" class="Function">codomain</a> <a id="1236" class="Symbol">{</a><a id="1237" href="Capitulo2.html#1237" class="Bound">𝒾</a><a id="1238" class="Symbol">}</a> <a id="1240" class="Symbol">{</a><a id="1241" href="Capitulo2.html#1241" class="Bound">𝒿</a><a id="1242" class="Symbol">}</a> <a id="1244" class="Symbol">{</a><a id="1245" href="Capitulo2.html#1245" class="Bound">X</a><a id="1246" class="Symbol">}</a> <a id="1248" class="Symbol">{</a><a id="1249" href="Capitulo2.html#1249" class="Bound">Y</a><a id="1250" class="Symbol">}</a> <a id="1252" href="Capitulo2.html#1252" class="Bound">f</a> <a id="1254" class="Symbol">=</a> <a id="1256" href="Capitulo2.html#1249" class="Bound">Y</a>
 </pre>
-<h2 id="seccin27eltipodeparesdependientes">Sección 2.7. El tipo de pares dependientes</h2>
+## Sección 2.7. El tipo de pares dependientes
+
 <pre class="Agda">
 <a id="1319" class="Comment">-- Definición del tipo de pares dependientes</a>
 <a id="1364" class="Keyword">record</a> <a id="Σ"></a><a id="1371" href="Capitulo2.html#1371" class="Record">Σ</a> <a id="1373" class="Symbol">{</a><a id="1374" href="Capitulo2.html#1374" class="Bound">X</a> <a id="1376" class="Symbol">:</a> <a id="1378" href="Capitulo2.html#273" class="Function">𝒰</a> <a id="1380" href="Capitulo2.html#258" class="Generalizable">𝒾</a><a id="1381" class="Symbol">}</a> <a id="1383" class="Symbol">(</a><a id="1384" href="Capitulo2.html#1384" class="Bound">Y</a> <a id="1386" class="Symbol">:</a> <a id="1388" href="Capitulo2.html#1374" class="Bound">X</a> <a id="1390" class="Symbol">→</a> <a id="1392" href="Capitulo2.html#273" class="Function">𝒰</a> <a id="1394" href="Capitulo2.html#260" class="Generalizable">𝒿</a><a id="1395" class="Symbol">)</a> <a id="1397" class="Symbol">:</a> <a id="1399" href="Capitulo2.html#273" class="Function">𝒰</a> <a id="1401" class="Symbol">(</a><a id="1402" href="Capitulo2.html#1380" class="Bound">𝒾</a> <a id="1404" href="Agda.Primitive.html#810" class="Primitive Operator">⊔</a> <a id="1406" href="Capitulo2.html#1394" class="Bound">𝒿</a><a id="1407" class="Symbol">)</a> <a id="1409" class="Keyword">where</a>
@@ -115,7 +105,8 @@
 <a id="pr₂"></a><a id="1926" href="Capitulo2.html#1926" class="Function">pr₂</a> <a id="1930" class="Symbol">:</a> <a id="1932" class="Symbol">{</a><a id="1933" href="Capitulo2.html#1933" class="Bound">X</a> <a id="1935" class="Symbol">:</a> <a id="1937" href="Capitulo2.html#273" class="Function">𝒰</a> <a id="1939" href="Capitulo2.html#258" class="Generalizable">𝒾</a><a id="1940" class="Symbol">}</a> <a id="1942" class="Symbol">{</a><a id="1943" href="Capitulo2.html#1943" class="Bound">Y</a> <a id="1945" class="Symbol">:</a> <a id="1947" href="Capitulo2.html#1933" class="Bound">X</a> <a id="1949" class="Symbol">→</a> <a id="1951" href="Capitulo2.html#273" class="Function">𝒰</a> <a id="1953" href="Capitulo2.html#260" class="Generalizable">𝒿</a><a id="1954" class="Symbol">}</a> <a id="1956" class="Symbol">→</a> <a id="1958" class="Symbol">(</a><a id="1959" href="Capitulo2.html#1959" class="Bound">z</a> <a id="1961" class="Symbol">:</a> <a id="1963" href="Capitulo2.html#1371" class="Record">Σ</a> <a id="1965" href="Capitulo2.html#1943" class="Bound">Y</a><a id="1966" class="Symbol">)</a> <a id="1968" class="Symbol">→</a> <a id="1970" href="Capitulo2.html#1943" class="Bound">Y</a> <a id="1972" class="Symbol">(</a><a id="1973" href="Capitulo2.html#1869" class="Function">pr₁</a> <a id="1977" href="Capitulo2.html#1959" class="Bound">z</a><a id="1978" class="Symbol">)</a>
 <a id="1980" href="Capitulo2.html#1926" class="Function">pr₂</a> <a id="1984" class="Symbol">(</a><a id="1985" href="Capitulo2.html#1985" class="Bound">x</a> <a id="1987" href="Capitulo2.html#1433" class="InductiveConstructor Operator">,</a> <a id="1989" href="Capitulo2.html#1989" class="Bound">y</a><a id="1990" class="Symbol">)</a> <a id="1992" class="Symbol">=</a> <a id="1994" href="Capitulo2.html#1989" class="Bound">y</a>
 </pre>
-<h2 id="seccin28012yeltipodelcoproducto">Sección 2.8. 0, 1, 2 y el tipo del coproducto</h2>
+## Sección 2.8. 0, 1, 2 y el tipo del coproducto
+
 <pre class="Agda">
 <a id="2060" class="Comment">-- Definición del tipo de pares dependientes</a>
 <a id="2105" class="Keyword">data</a> <a id="𝟘"></a><a id="2110" href="Capitulo2.html#2110" class="Datatype">𝟘</a> <a id="2112" class="Symbol">:</a> <a id="2114" href="Capitulo2.html#324" class="Function">𝒰₀</a> <a id="2117" class="Keyword">where</a>
@@ -165,7 +156,8 @@
 <a id="2959" href="Capitulo2.html#2903" class="Function">𝟚-induction</a> <a id="2971" href="Capitulo2.html#2971" class="Bound">A</a> <a id="2973" href="Capitulo2.html#2973" class="Bound">a₀</a> <a id="2976" href="Capitulo2.html#2976" class="Bound">a₁</a> <a id="2979" href="Capitulo2.html#2855" class="InductiveConstructor">₀</a> <a id="2981" class="Symbol">=</a> <a id="2983" href="Capitulo2.html#2973" class="Bound">a₀</a>
 <a id="2986" href="Capitulo2.html#2903" class="Function">𝟚-induction</a> <a id="2998" href="Capitulo2.html#2998" class="Bound">A</a> <a id="3000" href="Capitulo2.html#3000" class="Bound">a₀</a> <a id="3003" href="Capitulo2.html#3003" class="Bound">a₁</a> <a id="3006" href="Capitulo2.html#2873" class="InductiveConstructor">₁</a> <a id="3008" class="Symbol">=</a> <a id="3010" href="Capitulo2.html#3003" class="Bound">a₁</a>
 </pre>
-<h2 id="seccin29eltipodelosnaturales">Sección 2.9. El tipo de los naturales</h2>
+## Sección 2.9. El tipo de los naturales
+
 <pre class="Agda">
 <a id="3069" class="Comment">-- Definición del tipo de los naturales</a>
 <a id="3109" class="Keyword">data</a> <a id="ℕ"></a><a id="3114" href="Capitulo2.html#3114" class="Datatype">ℕ</a> <a id="3116" class="Symbol">:</a> <a id="3118" href="Capitulo2.html#324" class="Function">𝒰₀</a> <a id="3121" class="Keyword">where</a>
@@ -194,7 +186,8 @@
 <a id="3538" href="Capitulo2.html#3522" class="Function">add</a> <a id="3542" class="Number">0</a> <a id="3544" class="Symbol">=</a> <a id="3546" href="Capitulo2.html#750" class="Function">id</a>
 <a id="3549" href="Capitulo2.html#3522" class="Function">add</a> <a id="3553" class="Symbol">(</a><a id="3554" href="Capitulo2.html#3140" class="InductiveConstructor">succ</a> <a id="3559" href="Capitulo2.html#3559" class="Bound">n</a><a id="3560" class="Symbol">)</a> <a id="3562" class="Symbol">=</a> <a id="3564" class="Symbol">λ</a> <a id="3566" href="Capitulo2.html#3566" class="Bound">m</a> <a id="3568" class="Symbol">→</a> <a id="3570" href="Capitulo2.html#3140" class="InductiveConstructor">succ</a> <a id="3575" class="Symbol">(</a><a id="3576" href="Capitulo2.html#3522" class="Function">add</a> <a id="3580" href="Capitulo2.html#3559" class="Bound">n</a> <a id="3582" href="Capitulo2.html#3566" class="Bound">m</a><a id="3583" class="Symbol">)</a>
 </pre>
-<h2 id="seccin210proposicionescomotipos">Sección 2.10. Proposiciones como tipos</h2>
+## Sección 2.10. Proposiciones como tipos
+
 <pre class="Agda">
 <a id="3642" class="Comment">-- Definición 2.10.1.</a>
 <a id="logeq"></a><a id="3664" href="Capitulo2.html#3664" class="Function">logeq</a> <a id="3670" class="Symbol">:</a> <a id="3672" class="Symbol">(</a><a id="3673" href="Capitulo2.html#3673" class="Bound">A</a> <a id="3675" class="Symbol">:</a> <a id="3677" href="Capitulo2.html#273" class="Function">𝒰</a> <a id="3679" href="Capitulo2.html#258" class="Generalizable">𝒾</a><a id="3680" class="Symbol">)</a> <a id="3682" class="Symbol">(</a><a id="3683" href="Capitulo2.html#3683" class="Bound">B</a> <a id="3685" class="Symbol">:</a> <a id="3687" href="Capitulo2.html#273" class="Function">𝒰</a> <a id="3689" href="Capitulo2.html#260" class="Generalizable">𝒿</a><a id="3690" class="Symbol">)</a> <a id="3692" class="Symbol">→</a> <a id="3694" href="Capitulo2.html#273" class="Function">𝒰</a> <a id="3696" class="Symbol">(</a><a id="3697" href="Capitulo2.html#258" class="Generalizable">𝒾</a> <a id="3699" href="Agda.Primitive.html#810" class="Primitive Operator">⊔</a> <a id="3701" href="Capitulo2.html#260" class="Generalizable">𝒿</a><a id="3702" class="Symbol">)</a>
@@ -218,7 +211,8 @@
    <a id="4149" class="Symbol">→</a> <a id="4151" href="Capitulo2.html#1482" class="Function">Σ</a> <a id="4153" href="Capitulo2.html#4153" class="Bound">f</a> <a id="4155" href="Capitulo2.html#1482" class="Function">꞉</a> <a id="4157" class="Symbol">(</a><a id="4158" href="Capitulo2.html#4076" class="Bound">A</a> <a id="4160" class="Symbol">→</a> <a id="4162" href="Capitulo2.html#4086" class="Bound">B</a><a id="4163" class="Symbol">)</a> <a id="4165" href="Capitulo2.html#1482" class="Function">,</a> <a id="4167" class="Symbol">((</a><a id="4169" href="Capitulo2.html#4169" class="Bound">x</a> <a id="4171" class="Symbol">:</a> <a id="4173" href="Capitulo2.html#4076" class="Bound">A</a><a id="4174" class="Symbol">)</a> <a id="4176" class="Symbol">→</a> <a id="4178" href="Capitulo2.html#4096" class="Bound">R</a> <a id="4180" href="Capitulo2.html#4169" class="Bound">x</a> <a id="4182" class="Symbol">(</a><a id="4183" href="Capitulo2.html#4153" class="Bound">f</a> <a id="4185" href="Capitulo2.html#4169" class="Bound">x</a><a id="4186" class="Symbol">))</a>
 <a id="4189" href="Capitulo2.html#4070" class="Function">ac</a> <a id="4192" href="Capitulo2.html#4192" class="Bound">g</a> <a id="4194" class="Symbol">=</a> <a id="4196" class="Symbol">((λ</a> <a id="4200" href="Capitulo2.html#4200" class="Bound">x</a> <a id="4202" class="Symbol">→</a> <a id="4204" href="Capitulo2.html#1869" class="Function">pr₁</a> <a id="4208" class="Symbol">(</a><a id="4209" href="Capitulo2.html#4192" class="Bound">g</a> <a id="4211" href="Capitulo2.html#4200" class="Bound">x</a><a id="4212" class="Symbol">))</a> <a id="4215" href="Capitulo2.html#1433" class="InductiveConstructor Operator">,</a> <a id="4217" class="Symbol">(λ</a> <a id="4220" href="Capitulo2.html#4220" class="Bound">x</a> <a id="4222" class="Symbol">→</a> <a id="4224" href="Capitulo2.html#1926" class="Function">pr₂</a> <a id="4228" class="Symbol">(</a><a id="4229" href="Capitulo2.html#4192" class="Bound">g</a> <a id="4231" href="Capitulo2.html#4220" class="Bound">x</a><a id="4232" class="Symbol">)))</a>
 </pre>
-<h2 id="seccin211eltipodeidentidades">Sección 2.11. El tipo de identidades</h2>
+## Sección 2.11. El tipo de identidades
+
 <pre class="Agda">
 <a id="4291" class="Comment">-- Definición del tipo de identidades</a>
 <a id="4329" class="Keyword">data</a> <a id="Id"></a><a id="4334" href="Capitulo2.html#4334" class="Datatype">Id</a> <a id="4337" class="Symbol">(</a><a id="4338" href="Capitulo2.html#4338" class="Bound">X</a> <a id="4340" class="Symbol">:</a> <a id="4342" href="Capitulo2.html#273" class="Function">𝒰</a> <a id="4344" href="Capitulo2.html#258" class="Generalizable">𝒾</a><a id="4345" class="Symbol">)</a> <a id="4347" class="Symbol">:</a> <a id="4349" href="Capitulo2.html#4338" class="Bound">X</a> <a id="4351" class="Symbol">→</a> <a id="4353" href="Capitulo2.html#4338" class="Bound">X</a> <a id="4355" class="Symbol">→</a> <a id="4357" href="Capitulo2.html#273" class="Function">𝒰</a> <a id="4359" href="Capitulo2.html#4344" class="Bound">𝒾</a> <a id="4361" class="Keyword">where</a>
@@ -241,8 +235,3 @@
   <a id="4701" class="Symbol">→</a> <a id="4703" class="Symbol">(</a><a id="4704" href="Capitulo2.html#4704" class="Bound">x</a> <a id="4706" href="Capitulo2.html#4706" class="Bound">y</a> <a id="4708" class="Symbol">:</a> <a id="4710" href="Capitulo2.html#4629" class="Bound">A</a><a id="4711" class="Symbol">)</a> <a id="4713" class="Symbol">(</a><a id="4714" href="Capitulo2.html#4714" class="Bound">p</a> <a id="4716" class="Symbol">:</a> <a id="4718" href="Capitulo2.html#4704" class="Bound">x</a> <a id="4720" href="Capitulo2.html#4409" class="Function Operator">≡</a> <a id="4722" href="Capitulo2.html#4706" class="Bound">y</a><a id="4723" class="Symbol">)</a> <a id="4725" class="Symbol">→</a> <a id="4727" href="Capitulo2.html#4639" class="Bound">D</a> <a id="4729" href="Capitulo2.html#4704" class="Bound">x</a> <a id="4731" href="Capitulo2.html#4706" class="Bound">y</a> <a id="4733" href="Capitulo2.html#4714" class="Bound">p</a>
 <a id="4735" href="Capitulo2.html#4624" class="Function">𝕁</a> <a id="4737" href="Capitulo2.html#4737" class="Bound">A</a> <a id="4739" href="Capitulo2.html#4739" class="Bound">D</a> <a id="4741" href="Capitulo2.html#4741" class="Bound">d</a> <a id="4743" href="Capitulo2.html#4743" class="Bound">x</a> <a id="4745" href="Capitulo2.html#4743" class="Bound">x</a> <a id="4747" class="Symbol">(</a><a id="4748" href="Capitulo2.html#4369" class="InductiveConstructor">refl</a> <a id="4753" href="Capitulo2.html#4743" class="Bound">x</a><a id="4754" class="Symbol">)</a> <a id="4756" class="Symbol">=</a> <a id="4758" href="Capitulo2.html#4741" class="Bound">d</a> <a id="4760" href="Capitulo2.html#4743" class="Bound">x</a>
 </pre>
-            </article>
-        </div>
-    </main>
-</body>
-</html>
