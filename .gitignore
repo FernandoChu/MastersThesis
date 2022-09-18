@@ -1,4 +1,3 @@
 *.agdai
 **/_build
 node_modules
-package-lock.json
