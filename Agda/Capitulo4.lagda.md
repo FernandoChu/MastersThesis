@@ -14,7 +14,6 @@ open import Capitulo3 public
 ## Sección 4.1. Introducción
 
 ```agda
-
 -- Proposición 4.1.1.
 pr₁-is-fibration : (B : 𝒰 𝒾) (P : B → 𝒰 𝒿) (X : 𝒰 𝓀)
                    (f g : X → B) (h : f ∼ g)
@@ -57,7 +56,6 @@ retract-equation (r , s , ε) = ε
 ## Sección 4.2. $n$-tipos
 
 ```agda
-
 -- Definición 4.2.1.
 isContr : 𝒰 𝒾 → 𝒰 𝒾
 isContr A = Σ a ꞉ A , ((x : A) → a ≡ x)
@@ -279,7 +277,6 @@ En agda, los HITs se tienen que definir de una forma indirecta; esta es una limi
 En todo caso, las definiciones en agda pueden ser omitidas de la lectura sin ningún inconveniente.
 
 ```agda
-
 -- Definición 4.3.1.
 postulate
   𝕀 : 𝒰₀
@@ -463,7 +460,6 @@ postulate
 ## Sección 4.4. El grupo fundamental del círculo
 
 ```agda
-
 -- Definición 4.4.1.
 Ωn : (n : ℕ) (A : 𝒰 𝒾) (a : A) → (Σ X ꞉ 𝒰 𝒾 , X)
 Ωn 0 A a        = (A , a)
@@ -580,9 +576,7 @@ decode-encode = 𝕊¹-ind _
                        (PathOver-Π {p = loop}
                                    {f = decode-encode-base}
                                    {g = decode-encode-base}
-
-                                   (λ (q : tr Cover loop _ ≡ _) → hSetℤ (tr (λ (w : Σ Cover) → encode (pr₁ w) (decode (pr₁ w) (pr₂ w)) ≡ pr₂ w)
-                                                  (pair⁼ (loop , q)) (decode-encode-base _)) (decode-encode-base _)))
+                                   (λ q → hSetℤ _ _))
 
 -- Proposición 4.4.13.
 ≃-Cover : (x : 𝕊¹) → (base ≡ x) ≃ Cover x
@@ -596,3 +590,4 @@ decode-encode = 𝕊¹-ind _
 -- Corolario 4.4.15.
 π₁𝕊¹≡ℤ : πₙ 1 𝕊¹ base ≡ ℤ
 π₁𝕊¹≡ℤ = tr (λ - → ∥ - ∥₀ ≡ ℤ) (Ω𝕊¹≡ℤ ⁻¹) (∥∥₀-set-is-id ℤ hSetℤ)
+```

@@ -27,7 +27,6 @@ variable
 ## Sección 2.5. El tipo de funciones
 
 ```agda
-
 -- Definición 2.5.5.
 idA : {A : 𝒰 𝒾} → A → A
 idA x = x
@@ -47,7 +46,6 @@ comp g f x = g (f x)
 ## Sección 2.6. El tipo de funciones dependientes
 
 ```agda
-
 -- Definición 2.6.9.
 id : {A : 𝒰 𝒾} → A → A
 id x = x
@@ -79,7 +77,6 @@ codomain {𝒾} {𝒿} {X} {Y} f = Y
 ## Sección 2.7. El tipo de pares dependientes
 
 ```agda
-
 -- Definición del tipo de pares dependientes
 record Σ {X : 𝒰 𝒾} (Y : X → 𝒰 𝒿) : 𝒰 (𝒾 ⊔ 𝒿) where
   constructor
@@ -116,7 +113,6 @@ pr₂ (x , y) = y
 ## Sección 2.8. 0, 1, 2 y el tipo del coproducto
 
 ```agda
-
 -- Definición del tipo de pares dependientes
 data 𝟘 : 𝒰₀ where
 
@@ -169,7 +165,6 @@ pattern ₁ = inr ⋆
 ## Sección 2.9. El tipo de los naturales
 
 ```agda
-
 -- Definición del tipo de los naturales
 data ℕ : 𝒰₀ where
   zero : ℕ
@@ -201,7 +196,6 @@ add (succ n) = λ m → succ (add n m)
 ## Sección 2.10. Proposiciones como tipos
 
 ```agda
-
 -- Definición 2.10.1.
 logeq : (A : 𝒰 𝒾) (B : 𝒰 𝒿) → 𝒰 (𝒾 ⊔ 𝒿)
 logeq A B = (A → B) × (B → A)
@@ -228,7 +222,6 @@ ac g = ((λ x → pr₁ (g x)) , (λ x → pr₂ (g x)))
 ## Sección 2.11. El tipo de identidades
 
 ```agda
-
 -- Definición del tipo de identidades
 data Id (X : 𝒰 𝒾) : X → X → 𝒰 𝒾 where
   refl : (x : X) → Id X x x

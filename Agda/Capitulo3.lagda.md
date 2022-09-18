@@ -14,7 +14,6 @@ open import Capitulo2 public
 ## Sección 3.2. Los tipos son 1-grupoides
 
 ```agda
-
 -- Lema 3.2.1.
 _∙_ : {X : 𝒰 𝒾} {x y z : X} → x ≡ y → y ≡ z → x ≡ z
 (refl x) ∙ (refl x) = (refl x)
@@ -80,7 +79,6 @@ infix  3 _∎
 ## Sección 3.3. Funciones y functores
 
 ```agda
-
 -- Lema 3.3.1.
 ap : {X : 𝒰 𝒾} {Y : 𝒰 𝒿} (f : X → Y) {x x' : X} → x ≡ x' → f x ≡ f x'
 ap f {x} {x'} (refl x) = refl (f x)
@@ -166,7 +164,6 @@ ap-id (refl x) = refl (refl x)
 ## Sección 3.4. Funciones dependientes y fibraciones
 
 ```agda
-
 -- Lema 3.4.1.
 tr : {A : 𝒰 𝒾} (P : A → 𝒰 𝒿) {x y : A}
           → x ≡ y → P x → P y
@@ -211,7 +208,6 @@ tr-ap-assoc B (refl _) = refl _
 ## Sección 3.5. Equivalencias homotópicas
 
 ```agda
-
 -- Definición 3.5.1.
 _∼_ : {X : 𝒰 𝒾} {P : X → 𝒰 𝒿} → ((x : X) → P x) → ((x : X) → P x) → 𝒰 (𝒾 ⊔ 𝒿)
 f ∼ g = ∀ x → f x ≡ g x
@@ -376,7 +372,6 @@ paths-over-≃ P x y p u v = f p , invs-are-equivs (f p) (g p , ε p , η)
 ## Sección 3.6. Caminos entre pares dependientes
 
 ```agda
-
 -- Teorema 3.6.1.
 pair⁼⁻¹ : {X : 𝒰 𝒾} {Y : X → 𝒰 𝒿} {w w' : Σ Y}
         → (w ≡ w') → (Σ p ꞉ (pr₁ w ≡ pr₁ w') , tr Y p (pr₂ w) ≡ (pr₂ w'))
@@ -428,7 +423,6 @@ pair×⁼ {𝒾} {𝒿} {X} {Y} {w1 , w2} {w'1 , w'2} (refl w1 , refl w2) = refl
 # Sección 3.7. Caminos entre funciones dependientes
 
 ```agda
-
 happly : {A : 𝒰 𝒾} {B : A → 𝒰 𝒿} {f g : (x : A) → B x}
        → f ≡ g → f ∼ g
 happly p x = ap (λ - → - x) p
@@ -478,7 +472,6 @@ PathOver-Π {A = A} {B} {p = refl _} {f = f} {g = g} lem
 # Sección 3.8. Caminos entre tipos
 
 ```agda
-
 -- Lema 3.8.1.
 idtoeqv-helper : {X Y : 𝒰 𝒾} (p : X ≡ Y) → isequiv (tr (λ C → C) p)
 idtoeqv-helper (refl X) = invs-are-equivs (𝑖𝑑 X) (qinv-id-id X)
@@ -511,7 +504,6 @@ id∼idtoeqv∘ua {X} {Y} eqv =
 # Sección 3.9. Caminos entre naturales
 
 ```agda
-
 code-ℕ : ℕ → ℕ → 𝒰₀
 code-ℕ 0 0               = 𝟙
 code-ℕ (succ m) 0        = 𝟘
