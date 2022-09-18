@@ -1,3 +1,7 @@
+---
+title: Capítulo 3. La Interpretación Homotópica
+---
+
 # Capítulo 3. La Interpretación Homotópica
 
 <!--

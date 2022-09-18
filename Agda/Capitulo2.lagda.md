@@ -1,3 +1,7 @@
+---
+title: Capítulo 2. Teoría de Tipos Dependientes
+---
+
 # Capítulo 2. Teoría de Tipos Dependientes
 
 <!--

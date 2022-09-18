@@ -1,0 +1,22 @@
+{
+  "name": "hottbook",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "build": "node web/build.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/shiranaiyo/MastersThesis.git"
+  },
+  "author": "",
+  "bugs": {
+    "url": "https://github.com/shiranaiyo/MastersThesis/issues"
+  },
+  "homepage": "https://github.com/shiranaiyo/MastersThesis#readme",
+  "dependencies": {
+    "handlebars": "^4.7.7",
+    "showdown": "^2.1.0"
+  }
+}

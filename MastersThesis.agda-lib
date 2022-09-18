@@ -1,5 +1,5 @@
 name: master-thesis
-include: .
+include: Agda
 flags: --without-K
        --exact-split
        --auto-inline

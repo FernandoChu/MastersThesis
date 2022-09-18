@@ -1,3 +1,7 @@
+---
+title: Capítulo 4. Teoría Homotópica de Tipos
+---
+
 # Capítulo 4. Teoría Homotópica de Tipos
 
 <!--

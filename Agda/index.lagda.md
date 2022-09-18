@@ -1,18 +1,31 @@
-## [Teoría Homotópica de Tipos - Fernando Chu (Tesis de Maestría)](https://ryunaq.github.io/MastersThesis/)
+---
+title: Teoría Homotópica de Tipos
+isIndex: true
+---
+
+<!--
+```agda
+module index where
+open import Capitulo4 public
+```
+-->
+
+## [Teoría Homotópica de Tipos - Fernando Chu (Tesis de Maestría)](https://shiranaiyo.github.io/MastersThesis/)
 
 En estas páginas pueden encontrar la formalización en Agda del contenido de
 mi tesis de maestría.
 <!-- El pdf lo pueden encontrar en el siguiente [link](). -->
 
+
 ## Capítulos
 - Capítulo 1 - Preliminares categóricos
-- [Capítulo 2](./Capitulo2.lagda.md) - Teoría de Tipos Dependientes
-- [Capítulo 3](./Capitulo3.lagda.md) - La Interpretación Homotópica
-- [Capítulo 4](./Capitulo4.lagda.md) - Teoría Homotópica de Tipos
+- [Capítulo 2](./Capitulo2.html) - Teoría de Tipos Dependientes
+- [Capítulo 3](./Capitulo3.html) - La Interpretación Homotópica
+- [Capítulo 4](./Capitulo4.html) - Teoría Homotópica de Tipos
 - Capítulo 5 - Conclusiones
 
 El código de todo el material para la creación de la página web y del pdf se
-encuentra libremente en un [repositorio abierto](https://github.com/Ryunaq/MastersThesis).
+encuentra libremente en un [repositorio abierto](https://github.com/shiranaiyo/MastersThesis).
 
 
 ## Agradecimientos

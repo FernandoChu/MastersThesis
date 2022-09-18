@@ -1,38 +1,22 @@
-name: Build
+name: Build and Deploy
 on: [push, pull_request]
 jobs:
-  build:
+  build-and-deploy:
     runs-on: ubuntu-latest
-    container: pltamy/hottest-lecture-notes:latest
+    container: shiranaiyo/agda:2.6.2.2
 
     steps:
-      - name: Checkout ⬇️
-        uses: actions/checkout@v2
-        with:
-          fetch-depth: 0
+      - name: Checkout 🛎️
+        uses: actions/checkout@v3
 
-      - name: Get Shakefile version
-        run: sha256sum /bin/1lab-shake | cut -d' ' -f1 > .shake-version
-
-      - name: Cache _build
-        id: cache-build
-        uses: actions/cache@v3
-        with:
-          path: _build
-          key: shake-${{ hashFiles('.shake-version' )}}
-
-      - name: Build 🛠️
+      - name: Install and Build 🔧
         run: |
-          git config --global --add safe.directory /__w/MastersThesis/MastersThesis
-          cd Agda/
-          build-agda-index README.md
-          mkdir -p _build/site
-          cp -v _build/html0/*.html _build/site/
-          cp -v README.html _build/site/index.html
-          cd ..
+          apt-get update && apt-get install -y rsync
+          npm ci
+          npm run build
+
       - name: Deploy 🚀
-        if: ${{ github.ref_name == 'main' }}
-        uses: JamesIves/github-pages-deploy-action@4.1.7
+        uses: JamesIves/github-pages-deploy-action@v4
         with:
-          branch: gh-pages
-          folder: /__w/MastersThesis/MastersThesis/Agda/_build/site
+          branch: gh-pages # The branch the action should deploy to.
+          folder: html # The folder the action should deploy.
