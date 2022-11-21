@@ -12,7 +12,7 @@ isIndex: true
 
 En estas páginas pueden encontrar la formalización en Agda del contenido de
 mi tesis de maestría.
-<!-- El pdf lo pueden encontrar en el siguiente [link](). -->
+El pdf lo pueden encontrar en el siguiente [link](https://github.com/shiranaiyo/MastersThesis/blob/main/Tex/main.pdf).
 
 
 ## Capítulos
