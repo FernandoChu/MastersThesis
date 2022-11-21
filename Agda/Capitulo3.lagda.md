@@ -568,3 +568,41 @@ sm≡sn→m≡n {m} {n} p = decode-ℕ m n (encode-ℕ (succ m) (succ n) p)
     (λ contra → inr(λ p → contra (sm≡sn→m≡n p)))
     (ℕ-decidable m n)
 ```
+
+# Sección 10. Propiedades Universales
+
+```agda
+×-→ : (X : 𝒰 𝒾) (Y : 𝒰 𝒿) (Z : 𝒰 𝓀)
+      (f : Z → X) (g : Z → Y)
+      (h' : Z → X × Y)
+    → (pr₁ ∘ h' ≡ f)
+    → (pr₂ ∘ h' ≡ g)
+    → (h' ≡ λ z → (f z , g z))
+×-→ X Y Z f g h' p q =
+  funext (λ z → pair×⁼(happly p z , happly q z))
+
+⊎-→ : (X : 𝒰 𝒾) (Y : 𝒰 𝒿) (Z : 𝒰 𝓀)
+      (f : X → Z) (g : Y → Z)
+      (h' : X ⊎ Y → Z)
+    → (h' ∘ inl ≡ f)
+    → (h' ∘ inr ≡ g)
+    → (h' ≡ ⊎-ind (λ _ → Z) f g)
+⊎-→ X Y Z f g h' p q =
+  funext (⊎-ind (λ - → h' - ≡ (⊎-ind (λ _ → Z) f g -))
+         (happly p)
+         (happly q))
+
+ℕ-→ : (C : 𝒰 𝒾)
+      (c : C) (f : C → C)
+      (h : ℕ → C)
+    → (h 0 ≡ c)
+    → (h ∘ succ ≡ f ∘ h)
+    → (h ≡ ℕ-rec C c f)
+ℕ-→ C c f h p q =
+  funext (ℕ-induction (λ - → h - ≡ ℕ-rec C c f -) p
+    (λ n ind → begin
+        h (succ n) ≡⟨ happly q n ⟩
+        f (h n) ≡⟨ ap f ind ⟩
+        f (ℕ-rec C c f n) ≡⟨⟩
+        ℕ-rec C c f (succ n) ∎))
+```

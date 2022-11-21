@@ -1,0 +1,656 @@
+\documentclass[../main.tex]{subfiles}
+\begin{document}
+
+
+En este cap\'itulo, veremos algunas aplicaciones de HoTT en la topolog\'ia algebraica.
+Analizaremos a mayor profundidad la estructura homot\'opica de los tipos,
+y veremos algunos resultados cl\'asicos involucrando conceptos como el de contractibilidad, CW complejos, y el grupo fundamental.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%% sec1
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Topolog\'ia y tipos}
+
+Puesto que los tipos son tipos de homotop\'ia de espacios topol\'ogicos, se puede formalizar varias propiedades cl\'asicas que estos cumplen.
+Para comenzar, ahora podemos ver la demostraci\'on completa de la proposici\'on mencionada previamente de que las familias de tipos son fibraciones.
+
+\begin{proposition}\label{sigmafib}
+  Sea $P : B \to \UU$ una familia de tipos sobre $B$, y $f,g: X \to B$ dos funciones tales que existe una homotop\'ia $h$ entre ellas. Si existe un levantamiento de $f$, $\tilde f:\prd{x:X}P(f(x))$; entonces existe una homotop\'ia $\tilde h$ entre $\tilde f$ y un levantamiento de $g$, tal que $\tilde h$ levanta a $h$,
+\end{proposition}
+\begin{proof}
+  Podemos definir una homotop\'ia
+  \[ \tilde h : \prd{x:X} \id[\tsm{x:X}P(x)]{(f(x),\tilde f(x))}{\left(g(x), \trfib{P}{h(x)}{\tilde f(x)}\right)} \]
+  por $\tilde h(x)=\pair^=(h(x), \mathsf{refl})$. Para ver que esta levanta a $H$, necesitamos comprobar que
+  \[ \prd{x:X}\fst(\tilde h(x))=h(x) \]
+  Sin embargo, por inducci\'on, es f\'acil notar que $\apfunc \fst (\pair^=(p , q)) = p$, para todo $p,q$. Aplicando esto en la ecuación anterior, obtenemos el resultado deseado.
+\end{proof}
+
+Notamos que, con los conceptos ya introducidos, es f\'acil formalizara varios conceptos topol\'ogicos. Por ejemplo, podemos definir los conceptos de retracciones y secciones.
+
+\begin{definition}
+  Una \textbf{retracci\'on} es una funci\'on $r:A \to B$ tal que existe una función $s:B \to A$, su \textbf{secci\'on}, y una homotop\'ia $\epsilon : \prd{y:B}(r(s(y))=y)$. Cuando esto se de, decimos que $B$ es un \textbf{retracto} de $A$.
+\end{definition}
+
+Veamos c\'omo podemos hacer un an\'alisis similar a otros conceptos.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%% sec2
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{$n$-tipos}
+En topolog\'ia cl\'asica, un espacio topol\'ogico es llamado contractible cuando la función identidad es homot\'opica a la imagen de un solo punto. Esto sugiere:
+
+\begin{definition}
+  Un tipo $A$ es \textbf{contractible} cuando posee un elemento $a:A$, llamado el \textbf{centro de contracci\'on}, tal que $a=x$, para todo $x:A$. Es decir, definimos la propiedad de ser contractible como:
+  \[ \iscontr(A) \defeq \sm{a:A} \prd{x:A}(a=x). \]
+\end{definition}
+
+\begin{example}
+  El tipo $\unit$ es contractible, pues para mostrar que $\prd{x:\unit}(\star=x)$, podemos asumir que $x$ es $\star$, y podemos tomar el camino constante.
+\end{example}
+
+Con este resultado, podemos demostrar que el tipo $\unit$ es un objeto terminal.
+\begin{proposition}\label{1-terminal}
+  Para todo tipo $C$ y funci\'on $f:C \to \unit$, se tiene que $f=\ !\unit_{C}$.
+\end{proposition}
+\begin{proof}
+  Para todo $x:C$, se tiene $f(x)=\star$, por el resultado previo. Por extensionalidad de funciones, entonces $f=\ !\unit_{C}$.
+\end{proof}
+
+Desde una perspectiva l\'ogica, la contractibilidad indica que todos los elementos del tipo son iguales a un elemento en espec\'ifico.
+Topológicamente, tenemos una función continua que lleva cualquier punto $x:A$ hacia $a$.
+Esto sugiere que el tipo $A$ es equivalente al tipo $\unit$.
+
+\begin{proposition}\label{contr-iff-unit}
+  Un tipo $A$ es contractible s\'i y solo s\'i este es equivalente al tipo $\unit$.
+\end{proposition}
+\begin{proof}
+  Sea $(c,p) : \iscontr(A)$, podemos definir $f:A \to \unit$ por $f(x)=\star$.
+  En sentido contrario, tenemos $g:\unit \to A$ dado por $g(y)=c$.
+  Ahora, por un lado, realizando inducci\'on en \unit, vemos que para todo $y:\unit$, $f(g(y))=\star$.
+  Por otro lado, para todo $x : A$, tenemos $g(f(x))=c = x$, donde la segunda igualdad se da por $p(x)$.
+  Juntando estos resultamos, obtenemos que $A \simeq \unit$.
+
+  Para mostrar la rec\'iproca, supongamos que $A \simeq \unit$, y sean $f:A \to \unit$ y $g:\unit \to A$ las quasi-inversas.
+  Por el ejemplo previo, tenemos que $\star=f(x)$.
+  As\'i, se tiene:
+  \[ g (\star) = g (f (x)) = x, \]
+  con lo que $g(\star)$ es el centro de contracci\'on.
+\end{proof}
+
+Veamos que este, al igual que en MC, esta propiedad se preserva bajo varias operaciones, como productos y retracciones.
+
+\begin{proposition}\label{sigma-preserves-contr}
+  Sea $B: A \to \UU$ una familia de tipos. Si $A$ es contractible y para todo $x:A$, $B(x)$ es contractible, entonces $\tsm{x:A}B(x)$ tambi\'en lo es.
+\end{proposition}
+\begin{proof}
+  Sea $a_0 : A$ el centro de contracci\'on de $A$, y sea $b_0 :B(a_0)$ el centro de contraci\'on de $B(a_0)$. Mostraremos que $(a_0,b_0)$ es un centro de contracción.
+  Dado $(a,b) : \tsm{x:A}B(x)$, necesitamos mostrar camino $p : a_0 = a$ tal que $\trfib{B}{p}{b_0}=b$.
+  Por un lado, este $p$ existe por contractibilidad de $A$.
+  Por otro lado, tenemos:
+  \begin{align*}
+    \trfib{B}{p}{b_0} & = \trfib{B}{p}{\trfib{B}{p^{-1}}{b}} &  & \text{Por contractibilidad de $B(a_0)$} \\
+                      & = \trfib{P}{p^{-1} \ct p}{b}         &  & \text{Por el Lema \ref{trfunctor}}      \\
+                      & = \trfib{P}{\refl a}{b}              &  &                                         \\
+                      & \jdeq b
+  \end{align*}
+\end{proof}
+
+\begin{corollary}
+  La contractibilidad se preserva bajo productos.
+\end{corollary}
+\begin{proof}
+  Aplicaci\'on directa de la proposici\'on anterior en el tipo $\lam{x:A}B$.
+\end{proof}
+
+\begin{proposition}\label{retrac-preserves-contr}
+  Sea $B$ contractible y sea $r : B \to A$ una retracci\'on. Entonces $A$ es contractible.
+\end{proposition}
+\begin{proof}
+  Sea $b:B$ el centro de contracción de $B$, y sea $s : A \to B$ la secci\'on correspondiente de $r$. Mostraremos que $r(b_0)$ es un centro de contracción de $A$, en efecto, tenemos:
+  \begin{align*}
+    r(b_0) & = r(s(a)) &  & \text{Por contractibilidad de $B$}     \\
+           & = a       &  & \text{Por ser $s$ la secci\'on de $r$}
+  \end{align*}
+\end{proof}
+
+Consideremos el tipo
+\begin{equation} \label{prop}
+  \prd{x,y:A}\iscontr(\id[A]{x}{y}) \jdeq  \prd{x,y:A}\sm{p:x=y} \prd{q:x=y}(p=q)
+\end{equation}
+
+Este tipo indica que, para todo par de elementos de $A$, el tipo de caminos entre ellos es contractible.
+En particular, para todo $x,y:A$, tenemos un camino $p:x=y$ entre estos.
+Para ver que esta condici\'on es tambi\'en suficiente, necesitaremos un lema previo.
+
+\begin{lemma}\label{Homa-}
+  Sea $A$ un tipo, $a, x_1, y_1 :A$ y $p : x_1 = x_2, q : a = x_1$ caminos.
+  Entonces
+  \[ \trfib{\lambda x \to a = x} p q = q \ct p \]
+\end{lemma}
+\begin{proof}
+  Aplicando inducci\'on a ambos caminos, ambos lados de la igualdad se reducen a \refl{a}.
+\end{proof}
+
+N\'otese que este lema corresponde a la acci\'on functorial (covariante) del functor $\text{Hom}(a,\blank)$ mencionado en el Ejemplo \ref{cat-homa-}. Existe un resultado an\'alogo para $\mathsf{tr}^{\lambda x \to x=a}$, correspondiente a $\text{Hom}(\blank, a)$, el cual no necesitaremos.
+
+\begin{proposition}
+  Sea $A$ un tipo. El tipo \textnormal{(\ref{prop})} está habitado s\'i y solo s\'i para todo $x, y: A$, tenemos que $x=y$.
+\end{proposition}
+\begin{proof}
+  Ya mostramos un lado de la implicaci\'on, veamos el caso de la recíproca.
+  Por hip\'otesis, tenemos una funci\'on $f: \prd{x,y:A}x=y$. Consideremos la funci\'on $g : \prd{z:A}x=z$ definida por $g(z)=f(x,z)$.
+
+  Mostraremos que $(g(x))^{-1} \ct g(y)$ es el centro de contracci\'on.
+  En efecto, dado $p:x=y$ tenemos:
+  \begin{align*}
+    (g(x))^{-1} \ct g(y)
+     & =(g(x))^{-1} \ct \trfib{\lambda z \to x = z}{p}{g(x)} &  & \text{Por el Lema \ref{apd}}   \\
+     & =(g(x))^{-1} \ct (g(x) \ct p)                         &  & \text{Por el Lema \ref{Homa-}} \\
+     & = p
+  \end{align*}
+\end{proof}
+
+Ya hab\'iamos encontrado esta propiedad previamente, en nuestra discusi\'on del axioma K en la secci\'on \ref{sec-caminos}, pues este axioma indica justamente que todos los elementos del tipo $\id[A]{x}{y}$ son iguales entre s\'i.
+Desde una perspectiva l\'ogica, las proposiciones est\'an caracterizadas por la propiedad de tener un valor de verdad, ser verdaderas o falsas.
+No es relevante qu\'e elemento en particular tenemos de una proposici\'on, por lo que podemos considerar a todas como iguales.
+Esto sugiere que el tipo (\ref{prop}) previo corresponde a la propiedad de ser una proposici\'on.
+
+\begin{definition}\label{hprops}
+  Decimos que un tipo $P$ es una \textbf{proposici\'on simple} si es que el siguiente tipo est\'a habitado.
+  \[ \isprop(P) \defeq \prd{x,y:A}(x=y) \]
+\end{definition}
+
+\begin{example}
+  Todo tipo contractible es una proposici\'on simple. En efecto, sea $(c,p):\iscontr(A)$, entonces para todo $x,y:A$ tenemos $x=c=y$. En particular, el tipo \unit es una proposici\'on simple.
+\end{example}
+\begin{example}
+  El tipo \emptyt es una proposici\'on simple. Si tenemos $x,y:\emptyt$ tenemos inmediatamente una contradicción, por lo que podemos derivar que el resultado deseado.
+\end{example}
+\begin{example}
+  Para toda $f: A \to B$, $\isequiv(f)$ es una proposici\'on simple; este es justo uno de los requisitos que hab\'iamos pedido de una noci\'on correcta de equivalencia homot\'opica.
+\end{example}
+\begin{example}\label{Npaths-props}
+  Para todo $m,n: \N$, el tipo $m=n$ es una proposici\'on simple.
+  Puesto que $\eqv{(m=n)}{(\code(m,n))}$, es suficiente demostrar que $\code(m,n)$ es una proposici\'on simple.
+  Procedemos por inducción en $m$ y $n$. Cuando ambos son 0, entonces $\code(0,0)\jdeq \unit$, y ya hemos visto que esta es una proposici\'on simple.
+  Cuando uno es un sucesor y el otro no, $\code(m,n)\jdeq \emptyt$, y sabemos que este tipo tambi\'en es una proposici\'on simple.
+  Finalmente, cuando tenemos $\suc(m)$ y $\suc(n)$, entonces $\code(\suc(m),\suc(n))\jdeq \code(m,n)$, por lo que podemos aplicar la hip\'otesis de inducción.
+\end{example}
+
+Podemos volver a iterar, y preguntarnos qu\'e propiedad satisfacen aquellos tipos cuyos caminos son todos proposiciones simples; veremos que esta es justamente la propiedad de ser un conjunto.
+
+\begin{definition}
+  Un tipo $A$ es un \textbf{conjunto} si el siguiente tipo est\'a habitado
+  \[ \isset(A)\defeq \prd{x,y:A}\prd{p,q:x=y}(p=q) \]
+\end{definition}
+
+Topol\'ogicamente, esta propiedad nos indica que todo par de caminos con los mismos extremos son homot\'opicos entre s\'i.
+Es decir, tienen el mismo tipo de homotop\'ia que un espacio con la topolog\'ia discreta.
+As\'i, lo \'unico relevante en un conjunto son sus elementos diferentes, lo que captura la noci\'on usual de MC.
+
+\begin{example}
+  El tipo \emptyt es un conjunto, pues de $x,y:\emptyt$ se deriva un absurdo.
+\end{example}
+
+\begin{example}
+  El tipo \N es un conjunto, pues por el Ejemplo \ref{Npaths-props}, para todo $m,n:\N$, $m=n$ es una proposici\'on simple.
+\end{example}
+
+N\'otese que con este tipo, podemos hacer definiciones como el tipo de todos los conjuntos:
+
+\[ \mathsf{Set}_{\UU} \defeq \sm{A:\UU} \isset(A) \]
+
+Es claro que podemos siguer iterando este tipo de preguntas al infinito.
+Podemos indigar respecto a todas estas propiedades, definiendo la siguiente familia de tipos.
+\begin{definition}
+  Definimos ser un $n$-tipo, a trav\'es de recursi\'on en los naturales de la siguiente forma
+  \begin{align*}
+    \istype{(n-2)}          & : \UU \to \UU                        \\
+    \istype{(0-2)}(A)       & \defeq \iscontr(A)                   \\
+    \istype{(\suc(n)-2)}(A) & \defeq \prd{x,y:A} \istype{(n-2)}(A)
+  \end{align*}
+\end{definition}
+
+As\'i, los $(-2)$-tipos son los tipos contractibles, los $(-1)$-tipos las proposiciones simples, los $0$-tipos los conjuntos, etc.
+La raz\'on de empezar desde el $-2$ es porque ahora tenemos la siguiente descripci\'on m\'as sugerente: para $n : \N$, el tipo $A$ es un $n$-tipo si solo tiene $m$-caminos no-triviales para $m \leq n$.
+Esta es una noci\'on com\'unmente estudiada en topolog\'ia algebraica, llamada ah\'i el $n$-tipo de homotop\'ia.
+
+Dada esta nueva interpretaci\'on, nuestra intuici\'on geom\'etrica sugiere una serie de resultados. Mostraremos aqu\'i algunos.
+
+\begin{proposition}
+  La jerarquía de $n$-tipos es cumulativa; es decir, si $A$ es un $n$-tipo, tambi\'en es un $\suc(n)$-tipo.
+\end{proposition}
+\begin{proof}
+  Procedemos por inducci\'on en $n$.
+  Para el caso base, sea $A$ un tipo contractible, necesitamos mostrar que los caminos en $A$ son contractibles.
+  Sea $(c,p):\iscontr(A)$, y sean $x,y$ en $A$. Primero, tenemos que $p(x)^{-1} \ct (p(y)) : x=y$. Queremos mostrar que este es el centro de contracción.
+  Dado otro camino $q:x=y$, por inducci\'on, es suficiente mostrar que $p(x) \ct (p(x))^{-1}=\refl{x}$, lo que ya hemos visto previamente.
+
+  Para el caso general, si $A$ es un $\suc(n)$-tipo, tenemos que $x=y$ es un $n$-tipo por definici\'on, por lo que por la hip\'otesis de inducci\'on concluimos que $x=y$ tambi\'en es un $\suc(n)$-tipo
+\end{proof}
+
+\begin{proposition}
+  Los $n$-tipos se preservan bajo retracciones. Es decir, para todo $n \geq -2$, si $r:B \to A$ es una retracci\'on y $B$ es un $n$-tipo, entonces $A$ tambi\'en es un $n$-tipo.
+\end{proposition}
+\begin{proof}
+  Realizaremos la prueba por inducción en $n$.
+  El caso base, lo muestra la Proposici\'on \ref{retrac-preserves-contr}.
+  Entonces, supongamos que $B$ es un $\suc(n)$-tipo, y sean $s:A \to B$ la secci\'on de $r$, y $\epsilon : r \circ s \htpy \idfunc$ la homotop\'ia correspondiente.
+
+  Dados $a_1, a_2 :A$ arbitrarios, necesitamos mostrar que $a_1=a_2$ es un $n$-tipo,
+  pero por la hip\'otesis de inducci\'on, es suficiente mostrar que tipo es un retracto de $s(a_1)=s(a_2)$. Realizaremos esto a continuaci\'on.
+
+  Para la secci\'on, tomamos
+  \[ \apfunc{s} : (a_1 = a_2) \to (s(a_1) = s(a_2)), \]
+  mientras que la retracci\'on $t: (s(a_1) = s(a_2)) \to (a_1 = a_2)$ la definimos por
+  \[ t(q) \defeq \epsilon_{a_1}^{-1} \ct r(q) \ct \epsilon_{a_2}. \]
+  Para concluir la prueba, necesitamos $t \circ \apfunc \htpy \idfunc$; es decir, que para todo $p:a_1 = a_2$ se tenga que
+  \[ \epsilon_{a_1}^{-1} \ct r(s(p)) \ct \epsilon_{a_2} = p, \]
+  pero esto es una consecuencia del Lema \ref{htpy-nattrans}.
+\end{proof}
+
+Como una consecuencia de esta proposici\'on, podemos obtener el siguiente resultado sin usar univalencia.
+\begin{corollary}\label{eq-preserves-ntypes}
+  Los $n$-tipos se preservan bajo equivalencias.
+\end{corollary}
+\begin{proof}
+  Una la existencia de una equivalencia $\eqv{A}{B}$ implica que $A$ es una retracci\'on de $B$, por lo que si $B$ es un $n$-tipo, entonces $A$ tambi\'en lo es.
+\end{proof}
+
+Finalmente, presentamos la generalizaci\'on de la Proposici\'on \ref{sigma-preserves-contr}.
+
+\begin{proposition}
+  Los $n$-tipos se preservan bajo sumas dependientes. Es decir, sea para todo $n \geq -2$, si $A$ es un $n$-tipo y la familia de tipos $B: A \to \UU$ satisface que $B(a)$ es un $n$-tipo para todo $a:A$, entonces $\tsm{x:A}B(x)$ es un $n$-tipo.
+\end{proposition}
+\begin{proof}
+  Realizaremos la prueba por inducción en $n$.
+  El caso base, lo muestra la Proposici\'on \ref{sigma-preserves-contr}.
+  Entonces, supongamos que $A$ es un $\suc(n)$-tipo y $B(a)$ es un $\suc(n)$-tipo para todo $a:A$.
+  Dados $(a_1,b_1),(a_2,b_2):\tsm{x:A}B(x)$ arbitrarios, necesitamos mostrar que $(a_1,b_1)=(a_2,b_2)$ es un $n$-tipo. Pero por la caracterizaci\'on de caminos dependientes, tenemos:
+  \[ \eqv{((a_1,b_1)=(a_2,b_2))}{\sm{p:a_1=a_2}(\trfib{B}{p}{b_1} = b_2)} \]
+  Pero el tipo de la derecha es un $n$-tipo por la hip\'otesis de inducci\'on, por lo que, por el Corolario \ref{eq-preserves-ntypes}, el tipo de la izquierda tambi\'en lo es.
+\end{proof}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%% sec3
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Tipos Inductivos Superiores}\label{HITs-sec}
+Como ya mencionamos en la Secci\'on \ref{univ-prop-sec}, los tipos que hemos introducidos hasta ahora, pueden ser considerados como aquellos libremente generados por sus \textit{constructores}, aquellas constantes y funciones que nos permiten formar elementos del tipo.
+As\'i, por ejemplo, los naturales est\'an libremente generados por la existencia de un elemento $0 : \N$ y la funci\'on $\suc : \N \to \N$.
+
+Podemos expandir este procedimiento para que los constructores incluyan no solo elementos del tipo, sino tambi\'en caminos entre los elementos.
+Aquellos tipos que incluyen constructores de caminos son llamados \textbf{Tipos Inductivos Superiores}, o \textbf{HITs}, por su nombre en ingl\'es, \textit{Higher Inductive Types}.
+Veamos uno de estos.
+
+\begin{definition}
+  El \textbf{intervalo}, denotado $I$, es el tipo generado por
+  \begin{itemize}
+    \item un punto $\izero : I$,
+    \item un punto $\ione : I$, y
+    \item un camino $\seg : \izero = \ione$.
+  \end{itemize}
+\end{definition}
+
+Este tipo representa un camino abstracto; es decir, el tipo de homotop\'ia de un intervalo cerrado en los reales.
+N\'otese que la definici\'on logra esto sin hacer ninguna menci\'on a toda la maquinaria usual de MC (distancia, bolas, topolog\'ia, clases de equivalencia, etc).
+
+El principio de recursi\'on de los tipos indica que estos pueden ser mapeados hacia tipos que comparten su estructura interna. En efecto, existe un algoritmo que permite deducir el principio de recursi\'on (y el de inducci\'on), dado los constructores de un tipo.
+No abordaremos este tema, y daremos estos principios para los tipos que usaremos.
+
+En el caso del tipo del intervalo, el principio de recursi\'on dice que dado un tipo $B$ junto con
+\begin{itemize}
+  \item un punto $b_0 : B$,
+  \item un punto $b_1 : B$, y
+  \item un camino $s : b_0 = b_1$,
+\end{itemize}
+existe una \'unica funci\'on $f:I \to B$ tal que $f(\izero)\jdeq b_0, f(\ione)\jdeq b_1$, y $f(\seg)= s$.
+N\'otece que las primeras dos igualdades son por definici\'on, mientras que la tercera de estas es una igualdad proposicional.
+
+El principio de inducci\'on de un tipo, como ya hemos mencionado, es el principio de recursi\'on generalizado para familias dependientes.
+Entonces, para el caso dice que dado una familia de tipos $P: I \to \UU$, junto con
+\begin{itemize}
+  \item un punto $b_0 : P(\izero)$,
+  \item un punto $b_1 : P(\ione)$, y
+  \item un camino levantado $s : P(b_0) =_\seg^P P(b_1)$,
+\end{itemize}
+existe una \'unica funci\'on $f:\prd{x:I}P(x)$ tal que $f(\izero)\jdeq b_0, f(\ione)\jdeq b_1$, y $\apd{f}{\seg}= s$. Con este principio, podemos demostrar que, como se esperar\'ia, este tipo es contractible.
+
+\begin{proposition}
+  El tipo $I$ es contractible.
+\end{proposition}
+\begin{proof}
+  Mostraremos que $\izero$ es un centro de contracci\'on. As\'i, necesitamos una funci\'on $\tprd{x:I}(\izero = x)$. Por el principio de inducci\'on, podemos definir $f$ por:
+  \begin{alignat*}{2}
+    f(\izero) & \defeq \refl{\izero} & :\izero = \izero, \\
+    f(\ione)  & \defeq \seg          & :\izero = \ione.
+  \end{alignat*}
+  junto con el hecho de que existe un camino $p:\refl{\izero}=_\seg^{\lamu{x:I}\izero=x}\seg$.
+  Pero por el Lema \ref{Homa-}, esto es equivalente a un camino $\refl{\izero}\ct \seg = \seg$, el cual tenemos por el Lema \ref{reflright}.
+\end{proof}
+
+Por este resultado, junto con la Proposici\'on \ref{contr-iff-unit}, el tipo $I$ es equivalente al tipo $\unit$.
+A pesar de esto, este tipo igual es interesante, pues nos permite realizar otros tipos de argumentos.
+
+\begin{theorem}\label{funext-proof}
+  Sean $f,g:A \to B$ funciones tales que para todo $x:A$ se tiene que $f(x)=g(x)$. Entonces, $f=g$.
+\end{theorem}
+\begin{proof}
+  Por recursi\'on, podemos definir una funci\'on $\alpha: A \to (I \to B)$ por
+  \begin{alignat*}{2}
+    \alpha(x)(\izero) & \defeq f(x) & : B, \\
+    \alpha(x)(\ione)  & \defeq g(x) & : B.
+  \end{alignat*}
+  notando que por suposici\'on, tenemos un camino $p:f(x)=g(x)$. Ahora, podemos invertir el orden de las variables, generando una funci\'on
+  \[ \beta \defeq \lam{x:I}\lam{y:A}\alpha(y)(x) : I \to (A \to B). \]
+  Finalmente, vemos que $\beta(seg):\beta(\izero)=\beta(\ione)$, pero $\beta(\izero)\jdeq f$ y $\beta(\ione) \jdeq g$.
+\end{proof}
+
+Otro HIT, quiz\'as m\'as interesante, es el c\'irculo, el cual estudiaremos a m\'as detalle en la pr\'oxima secci\'on.
+
+\begin{definition}
+  El \textbf{c\'irculo}, denotado $\Sn^1$, es el tipo generado por
+  \begin{itemize}
+    \item un punto $\base : \Sn^1$, y
+    \item un camino $\lloop : \base=\base$.
+  \end{itemize}
+  Su principio de recursi\'on indica que dados
+  \begin{itemize}
+    \item un punto $b : B$, y
+    \item un camino $\ell : b=b$,
+  \end{itemize}
+  existe una \'unica funci\'on $f:\Sn^1 \to B$ tal que $f(\base) \jdeq b$ y $f(\lloop)=\ell$. El principio de inducci\'on dice que dada una familia de tipos $P: \Sn^1 \to \UU$, junto con
+  \begin{itemize}
+    \item un punto $b : B(\base)$, y
+    \item un camino $\ell : b=^B_\lloop b$,
+  \end{itemize}
+  existe una \'unica funci\'on $f:\tprd{x:\Sn^1}B(x)$ tal que $f(\base) \jdeq b$ y $\apd{f}{\lloop}=\ell$.
+\end{definition}
+
+Similarmente, usando esta misma t\'ecnica, podemos definir la esfera.
+\begin{definition}
+  La \textbf{esfera} $\Sn^2$ es el tipo generado por
+  \begin{itemize}
+    \item un punto $\base : \Sn^2$, y
+    \item un 2-camino $\mathsf{surf} : \refl{\base}=\refl{\base}$,
+  \end{itemize}
+\end{definition}
+
+Este tipo de definiciones es an\'alogo a la construcci\'on de algunos espacios como CW complejos. Vamos un \'ultimo ejemplo.
+\begin{definition}
+  Podemos definir al \textbf{toro} $T^2$ como el tipo generado por
+  \begin{itemize}
+    \item un punto $b : T^2$,
+    \item un camino $p:b=b$,
+    \item otro camino $q:b=b$, y
+    \item un 2-camino camino $t:p\ct q= q \ct p$,
+  \end{itemize}
+\end{definition}
+Esta definici\'on corresponde al toro como un cuadrado con los lados opuestos identificados. N\'otese la mayor elegancia y simplicidad de esta construcci\'on, que evita apelar a nociones t\'ecnicas como lo es la topolog\'ia cociente.
+
+Los HITs no solo sirven para crear espacios topol\'ogicos (hasta homotop\'ia), sino tambi\'en permite la implementaci\'on de algunas operaciones sobre tipos, veamos un ejemplo.
+
+\begin{definition}
+  Dado un tipo $A$, podemos definir su \textbf{0-truncaci\'on} $\trunc0 A$ como el tipo generado por
+  \begin{itemize}
+    \item una funci\'on $\tprojf0 : A \to \trunc0 A$, y
+    \item para todo par de puntos $x,y:\trunc0A$ y par de caminos $p,q:x=y$, una igualdad $p=q$.
+  \end{itemize}
+  Su principio de recursi\'on indica que dados
+  \begin{itemize}
+    \item una funci\'on $g: A \to B$, y
+    \item para todo par de puntos $x,y:B$ y par de caminos $p,q:x=y$, una igualdad $p=q$,
+  \end{itemize}
+  existe una \'unica funci\'on $f: \trunc0 A \to B$ tal que $f(\tproj0x) \jdeq g(x)$, para todo $x:A$, y $\apfunc{f}$ lleva el camino de $p=q$ en $\trunc0 A$ en el camino especificado $f(p)=f(q)$ en $B$.
+\end{definition}
+
+Este tipo efectivamente trivializa los 1-caminos, pues todos se vuelven homot\'opicos entre s\'i. Por otro lado, esto es lo \'unico que hace, como uno esperar\'ia, deja a los conjuntos intactos.
+
+\begin{proposition}\label{set-trunc-is-set}
+  Sea $A$ un conjunto, entonces $\trunc0 A = A$.
+\end{proposition}
+\begin{proof}
+  Por univalencia, es suficiente demostrar que $\eqv{\trunc0 A}{A}$.
+  Por un lado, tenemos una funci\'on $f: \trunc0 A \to A$ definida por recursi\'on, con $f(\tproj0 x) \jdeq x$.
+  Por otro lado, tomamos $\tprojf0: A \to \trunc0 A$ como la quasi-inversa.
+
+  Por definici\'on de $f$, vemos que $f \circ \tprojf0 \htpy \idfunc$.
+  Para ver que $\tprojf0 \circ f \htpy \idfunc$, por unicidad de la funci\'on proveniente de recursi\'on, solo necesitamos comprobar que
+  \[ (\tprojf0 \circ f \circ \tprojf0)(x) = \tproj0 x, \]
+  pero nuevamente esto se da por definici\'on de $f$.
+\end{proof}
+
+Existen $n$-truncaciones para $n \geq -1$, las cuales ``truncan'' $A$ hacia un $n$-tipo, pero no abordaremos estas construcciones.
+
+Finalmente, los HITs permiten la definici\'on de tipos de una manera más concisa.
+Por ejemplo, el tipo de los enteros $\Z$ generalmente se define como un cociente de $\N \times \N$; sin embargo, la siguiente descripción \cite{altenkirch_integers_2020} es m\'as \'util (y m\'as elegante).
+
+\begin{definition}
+  El tipo de los \textbf{enteros} $\Z$ es el tipo generado por
+  \begin{itemize}
+    \item un elemento $0_\Z : \Z$
+    \item una equivalencia $\suc_\Z :\eqv{\Z}{\Z}$,
+  \end{itemize}
+  junto con el hecho de que $\Z$ es un conjunto.
+\end{definition}
+
+Aqu\'i, la equivalencia $\suc_\Z$ corresponde al hecho de que la funci\'on sucesor posee una quasi-inversa, la funci\'on predecesor.
+
+El principio de recursi\'on de $\Z$ indica que dados
+\begin{itemize}
+  \item un punto $b : B$, y
+  \item una equivalencia $s : \eqv{B}{B}$,
+\end{itemize}
+existe una \'unica funci\'on $\Z \to B$ tal que $f(0_\Z) \jdeq b$ y para todo $x:\Z$, $f(\suc_\Z(x))=s(f(x))$.
+
+El principio de inducci\'on, lo omitimos, pues no lo necesitaremos.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%% sec4
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{El grupo fundamental del c\'irculo}\label{fgcircle}
+El grupo fundamental $\pi_1(X)$ permite generar un objeto algebraico, a partir de las operaciones de concatenaci\'on de los $1$-caminos en $X$.
+Sin embargo, esto se puede generalizar para $n$-caminos, para $n\geq 1$.
+
+\begin{definition}
+  El espacio de $n$-caminos cerrados en un tipo $A$ con base $a:A$, es el tipo
+  \begin{align*}
+    \Omega^0(A,a)         & \defeq (A, a)                                                     \\
+    \Omega^{\suc(n)}(A,a) & \defeq \Omega^n\left( \left(\id[A]{a}{a}\right), \refl{a} \right)
+  \end{align*}
+\end{definition}
+
+\begin{definition}
+  Sea $n\geq 1$ y sea $A$ un tipo con $a:A$, definimos el \textbf{$n$-\'esimo grupo de homotop\'ia} de $A$ centrado en $a$ como el tipo
+  \[ \pi_n (A,a) \defeq \trunc0{\fst \left( \Omega^n(A,a) \right)} \]
+\end{definition}
+
+El objetivo de esta secci\'on es demostrar que $\pi_1(\Sn^1, \base)=\Z$. De hecho, demostraremos algo a\'un m\'as fuerte, que $\eqv{(\base = \base)}{\Z}$.
+Comencemos con el regreso de las quasi-inversas.
+
+\begin{lemma}
+  Existe una funci\'on $\lloop \string^ : \Z \to (\base = \base)$.
+\end{lemma}
+\begin{proof}
+  Por el principio de recursi\'on de los enteros, necesitamos un elemento de $\base=\base$, el cual escogemos que sea $\refl{\base}$, junto con una equivalencia $s : \eqv{(\base=\base)}{(\base=\base)}$.
+  Definiremos esta equivalencia como la asociada al siguiente par de quasi-inversas, $f(p) \defeq  p \ct \lloop$ y $g(p) \defeq p \ct \lloop^{-1}$.
+  \begin{align*}
+    f(g(p)) & \jdeq p \ct \lloop^{-1} \ct \lloop = p \\
+    g(f(p)) & \jdeq p \ct \lloop \ct \lloop^{-1} = p
+  \end{align*}
+\end{proof}
+
+Esta funci\'on lleva al $0_\Z$ al camino constante, lleva a los enteros positivos $n$ a $n$ concatenaciones de $\lloop$, y enteros negativos $-n$ a $N$ concatenaciones de $\lloop^{-1}$, de igual manera que en la demostraci\'on usual de MC.
+
+Para generar una funci\'on $(\base = \base) \to \Z$ utilizaremos el m\'etodo encode-decode, caracterizando el tipo de caminos $(\base = x)$, para $x:\Sn^1$.
+
+\begin{definition}
+  Definimos la funci\'on $\mathsf{Cover} : \Sn^1 \to \UU$ por recursi\'on en el c\'irculo:
+  \begin{align*}
+    \mathsf{Cover}(\base)  & \defeq \Z       \\
+    \mathsf{Cover}(\lloop) & := \ua(\suc_\Z)
+  \end{align*}
+\end{definition}
+
+As\'i, $\mathsf{Cover}$ representa el espacio de cubrimiento usual del c\'irculo.
+Podemos realizar c\'alculos con este tipo, por ejemplo, que transportando un natural a lo largo de $\lloop$ es lo mismo que sumarle uno.
+
+\begin{lemma}\label{tr-Cover-loop}
+  Para todo $x:\Z$, se tiene que
+  \[ \trfib{\mathsf{Cover}}{\lloop}{x} = \suc_\Z(x) \]
+\end{lemma}
+\begin{proof}
+  Tenemos que
+  \begin{align*}
+    \mathsf{tr}^{\mathsf{Cover}}(\lloop,x)
+     & \jdeq \trfib{\idfunc\circ \mathsf{Cover}}{\lloop}{x} &  & \text{(Def. de \idfunc)}          \\
+     & = \trfib{\idfunc}{\mathsf{Cover}(\lloop)}{x}         &  & \text{(Lema \ref{tr-funcs-id})}   \\
+     & = \trfib{\idfunc}{\ua(\suc_\Z)}{x}                   &  & \text{(Def. de $\mathsf{Cover}$)} \\
+     & \jdeq \fst (\idtoeqv (\ua(\suc_\Z)))                 &  & \text{(Def. de \idtoeqv)}         \\
+     & = \suc_\Z                                            &  & \text{(Def. de \ua)}
+  \end{align*}
+\end{proof}
+
+Procederemos a demostrar ahora la equivalencia $\eqv{(\base = x)}{\mathsf{Cover}(x)}$, para todo $x:\Sn^1$. Tenemos que generar las dos quasi-inversas y mostrar que sus composiciones son homot\'opicas a la identidad.
+
+\begin{lemma}
+  Tenemos una funci\'on
+  \[ \encode: \prd{x:\Sn^1}(\base=x) \to \mathsf{Cover}(x) \]
+\end{lemma}
+\begin{proof}
+  Definimos $\encode$ por $\encode(x,p)\defeq \trfib{\mathsf{Cover}}{p}{0_\Z}$.
+\end{proof}
+
+Intuitivamente, $\encode$ toma un camino $\base=x$ y lo lleva al tipo asociado transportando $0_\Z$.
+
+\begin{lemma}
+  Tenemos una funci\'on
+  \[ \decode: \prd{x:\Sn^1} \mathsf{Cover}(x) \to (\base=x) \]
+\end{lemma}
+\begin{proof}
+  Definimos $\decode$ usando el principio de inducci\'on sobre la familia de tipos
+  \[ C \defeq \lam{x:\Sn^1}\left( \mathsf{Cover}(x) \to (\base = x) \right) \]
+  Para esto, primero necesitamos un elemento de $C(\base)$, tomaremos a $\lloop\string^$ como este. Para completar la inducci\'on necesitamos un camino $\lloop\string^ =^C_\lloop \lloop\string^$.
+  Pero observamos que
+  \begin{align*}
+    \mathsf{tr} & ^{(\lamu{x}(\cover(x)\to (\base = x)))}(\lloop, \lloop\string^)                                         &  &                                   \\
+                & = \trfib{\base = \blank}{\lloop}{\blank} \circ \lloop\string^ \circ \trfib{\cover}{\lloop^{-1}}{\blank} &  & \text{(Lema \ref{path-over-f})}   \\
+                & = (- \ct \lloop) \circ \lloop\string^ \circ \trfib{\cover}{\lloop^{-1}}{\blank}                         &  & \text{(Lema \ref{Homa-})}         \\
+                & = \lloop\string^ \circ \suc_\Z \circ \trfib{\cover}{\lloop^{-1}}{\blank}                                &  & \text{(Def. de $\lloop\string^$)} \\
+                & = \lloop\string^ \circ \trfib{\cover}{\lloop}{\blank} \circ \trfib{\cover}{\lloop^{-1}}{\blank}         &  & \text{(Lema \ref{tr-Cover-loop})} \\
+                & = \lloop\string^ \circ \trfib{\cover}{\lloop^{-1} \ct \lloop}{\blank}                                   &  & \text{(Lema \ref{trfunctor})}     \\
+                & = \lloop\string^ \circ \trfib{\cover}{\refl{\base}}{\blank}                                             &  & \text{(Lema \ref{-1lema})}        \\
+                & = \lloop\string^                                                                                        &  & \text{(Def. de $\mathsf{tr}$)}
+  \end{align*}
+\end{proof}
+
+Intuitivamente, $\decode$ toma un elemento de $\cover(x)$ y lo lleva al tipo asociado inducido por $\lloop\string^$.
+
+Ahora, la primera de las dos homotop\'ia requeridas es inmediata.
+
+\begin{lemma}
+  Para todo $x:\Sn^1$ y $p:\base=x$, tenemos que
+  \[ \decode(x, \encode(x,p)) = p \]
+\end{lemma}
+\begin{proof}
+  Por inducci\'on, podemos asumir que $p$ es $\refl{\base}$, pero entonces:
+  \begin{align*}
+    \decode(\base, \encode(\base,\refl{\base}))
+     & \jdeq \decode(\base, \trfib{\cover}{\refl{\base}}{0_\Z}) &  & \text{} \\
+     & \jdeq \decode(\base, 0_\Z)                               &  & \text{} \\
+     & \jdeq \lloop\string^(0_\Z)                               &  & \text{} \\
+     & \jdeq \refl{\base}                                       &  & \text{}
+  \end{align*}
+\end{proof}
+
+La otra homotop\'ia es m\'as complicada, y necesitaremos uno lemas previos.
+
+\begin{lemma}\label{endo-Z-is-id}
+  Sea $f:\Z \to \Z$ una funci\'on tal que $f(0_\Z)=0_\Z$  y tal que
+  \[ f \circ \suc_\Z \htpy \suc_\Z \circ f, \]
+  entonces $f \htpy \idfunc$.
+\end{lemma}
+\begin{proof}
+  N\'otese que la funci\'on identidad cumple que
+  \[ \idfunc \circ \suc_\Z \htpy \suc_\Z \circ \idfunc, \]
+  por lo que, por la unicidad de la funci\'on preveniente de recursi\'on, $f \htpy \idfunc$.
+\end{proof}
+
+Este resultado indica que la identidad es la \'unica funci\'on que conmuta con la funci\'on sucesor.
+
+\begin{lemma}\label{tr-Cover-then-loop}
+  Para todo $x: \Sn^1$, $p : x = \base$ y $y:\cover(x)$ se tiene que
+  \[ \trfib{\cover}{p \ct \lloop}{y} = \suc_\Z(\trfib{\cover}{p}{y})  \]
+\end{lemma}
+\begin{proof}
+  Por inducci\'on, podemos asumir que $p$ es $\refl{\base}$. Entonces, se tiene que
+  \[ \trfib{\cover}{\refl{\base} \ct \lloop}{y}
+    = \trfib{\cover}{\lloop}{y}
+    = \suc_\Z(y). \]
+\end{proof}
+
+Este resultado indica cuando transportamos $\cover$ a lo largo de un camino $p \ct \lloop$, esto es lo mismo que haber transportado a lo largo de $p$, y luego sumarle 1.
+
+\begin{lemma}
+  Para todo $x : \Z$, se tiene que
+  \[ \encode(\base , \lloop\string^(x)) = x \]
+\end{lemma}
+\begin{proof}
+  Por el Lema \ref{endo-Z-is-id}, es suficiente mostrar que la funci\'on
+  \[ h = \lam{x:\Z}\encode(\base, \lloop\string^(x)) \]
+  satisface que evaluada en $0_\Z$ es $0_\Z$, y que conmuta con $\suc_\Z$.
+  Por un lado, vemos que
+  \[ h(0_\Z) \jdeq \encode(\base, \refl{\base}) \jdeq 0_\Z \]
+  Por otro lado, tenemos que
+  \begin{align*}
+    h (\suc_\Z (x))
+     & \jdeq \encode(\base, \lloop\string^(\suc_\Z(x)))       &  & \text{(Def. $h$)}                      \\
+     & \jdeq \trfib{\cover}{\lloop\string^(\suc_\Z(x))}{0_\Z} &  & \text{(Def. $\encode$)}                \\
+     & = \trfib{\cover}{\lloop\string^(x) \ct \lloop}{0_\Z}   &  & \text{(Def. $\lloop\string^$)}         \\
+     & = \suc_\Z(\trfib{\cover}{\lloop\string^(x)}{0_\Z})     &  & \text{(Lema \ref{tr-Cover-then-loop})} \\
+     & \jdeq \suc_\Z(\encode(\base, \lloop\string^(x)))       &  & \text{(Def. $\encode$)}                \\
+     & \jdeq \suc_\Z(h(x))                                    &  & \text{(Def. $h$)}
+  \end{align*}
+\end{proof}
+
+Este resultado indica que transportar un el entero asociado a $x : \Z$ concatenaciones del camino $\lloop$, es $x$ mismo.
+
+Con todos estos lemas, procedemos a mostrar la \'ultima homotop\'ia.
+
+\begin{lemma}
+  Para todo $x : \Sn^1$ y $p:\cover(x)$, se tiene que
+  \[ \encode(x , \decode(x, p)) = p \]
+\end{lemma}
+\begin{proof}
+  Sea
+  \[ C = \lam{x : \Sn^1}\prd{p:\cover{x}} \encode(x, \decode(x,p)) = p. \]
+  El lema es equivalente a mostrar una funci\'on $\lam{x:\Sn^1}C(x)$.
+  Probaremos la existencia de esta funci\'on usando el principio de inducci\'on del c\'irculo.
+  Primero debemos dar un camino
+  \[ q : \encode(\base , \lloop\string^(x)) = x, \]
+  el cual tenemos por el lema previo. Ahora, necesitamos un camino $q=^C_\lloop q$.
+  Pero por el Lema \ref{path-over-pi}, es suficiente que para todo camino $\beta:a_1=^\cover_\lloop a_2$ se tenga que
+  \[ q(a_1) =^{\lam{(x,y):\tsm{x:\Sn^1}\cover(x)}\encode(x,\decode(x,y))=y}_{\pair^=(\lloop,\alpha)} q(a_2) \]
+  Pero puesto que $\Z$ es un conjunto, ambos caminos son iguales inmediatamente.
+\end{proof}
+
+Con todos estos resultados, obtenemos una caracterizaci\'on del tipo de caminos $\base=x$.
+\begin{proposition}
+  Para todo $x: \Sn^1$, tenemos que $\eqv{\base = x}{\cover(x)}$.
+\end{proposition}
+
+Aplicando esto en $x \defeq \base$, por univalencia obtenemos el siguiente corolario.
+\begin{corollary}
+  El tipo $\base = \base$ es igual a el tipo de los enteros $\Z$.
+\end{corollary}
+
+Finalmente, podemos calcular el grupo fundamental del c\'irculo.
+
+\begin{corollary}
+  El grupo fundamental del c\'irculo es $\Z$.
+\end{corollary}
+\begin{proof}
+  Tenemos que $\trunc0 \Z = \Z$ por la proposici\'on \ref{set-trunc-is-set}.
+  Entonces, como $\base = \base$ es $\Z$, obtenemos $\pi_1(\Sn^1)=\Z$.
+\end{proof}
+\end{document}

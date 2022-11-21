@@ -1,0 +1,353 @@
+\documentclass[../main.tex]{subfiles}
+\begin{document}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%% sec1
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+En este cap\'itulo mencionaremos algunas definiciones clave de teor\'ia de categor\'ias.
+Seguiremos las convenciones de Riehl \cite{riehl_category_2016}.
+
+\begin{definitionap}
+    Una \textbf{categor\'ia} $\mathsf{C}$ consiste de
+    \begin{itemize}
+        \item una colección $\text{Ob}(\mathcal{C})$ de objetos $X,Y,Z,\dots$, y
+        \item una colección $\text{Ar}(\mathcal{C})$ de morfismos $f,g,h,\dots$,
+    \end{itemize}
+    tales que:
+    \begin{itemize}
+        \item Cada morfismo tiene dos objetos asociados, su \textbf{domino} y su \textbf{codominio}. Escribiremos $f:X \to Y$ cuando $f$ sean un morfismo con dominio $X$ y codominio $Y$.
+        \item Cada objeto $X$ tiene un morfismo identidad $\idfunc[X]:X \to X$.
+        \item Para cada par de morfismos $f:X \to Y$ y $g: Y \to Z$, existe un morfismo $g \circ f$, llamado la composici\'on de $g$ y $f$.
+    \end{itemize}
+    Adicionalmente, se requiere que se cumplan las siguientes condiciones:
+    \begin{itemize}
+        \item Para todo $f:X \to Y$, se tiene que \[\idfunc[Y]\circ f = f \circ \idfunc[X] = f.\]
+        \item Para todos $f:X_1 \to X_2$, $g:X_2 \to X_3$, $h:X_3 \to X_4$, se tiene que
+              \[(f \circ g) \circ h = f \circ (g \circ h).\]
+    \end{itemize}
+\end{definitionap}
+
+N\'otese que utilizamos el concepto de \textit{colecci\'on}, no de \textit{conjunto}; pues necesitamos una mayor generalidad para las categor\'ias que veremos a lo largo de la presente tesis.
+
+\begin{exampleap}
+    La categor\'ia $\mathsf{Set}$ tiene como objetos conjuntos, y como morfismos funciones entre conjuntes. El morfismo identidad es la funci\'on identidad, y la composici\'on de morfismos es la composici\'on de funciones usual. Las dos condiciones adicionales se cumplen inmediatamente.
+\end{exampleap}
+
+Al igual que en el ejemplo previo, en la mayor\'ia de casos la satisfacci\'on de las dos \'ultimas condiciones es inmediata. Asimismo, el morfismo identidad y la composici\'on de morfismos es usualmente la funci\'on identidad y la composici\'on de funciones usual, respectivamente.
+Por estos motivos, omitiremos menci\'on de estos detalles en los ejemplos siguiente, salvo la construcci\'on sea diferente.
+
+\begin{exampleap}
+    La categor\'ia $\mathsf{Vec}_K$ tiene como objetos espacios vectoriales sobre el cuerpo $K$, y como morfismos transformaciones $K$-lineales entre espacios vectoriales. Nuevamente, el morfismo identidad es la funci\'on identidad, y la composici\'on es la usual.
+\end{exampleap}
+
+\begin{exampleap}
+    La categor\'ia $\mathsf{Top}_*$ tiene como objetos pares $(X,x)$, donde $X$ es un espacio topol\'ogico y $x$ es un elemento de $X$, el cual es llamado el elemento base. Los morfismos son funciones continuas que preservan elementos base.
+\end{exampleap}
+
+\begin{exampleap}
+    La categor\'ia $\emptyt$ no tiene ning\'un objeto ni ning\'un morfismo. La categor\'ia $\unit$ tiene un solo elemento, \star, y solo un morfismo $\idfunc[\star]$.
+\end{exampleap}
+
+\begin{exampleap}
+    Sea $\mathsf{C}$ una categor\'ia, podemos definir una nueva categor\'ia $\mathsf{C}^{\text{op}}$, la categor\'ia \textbf{opuesta} o \textbf{dual}. Esta est\'a definida de la siguiente manera: los objetos son los mismos que en $\mathsf{C}$, pero los morfismos tienen el dominio y codominio intercambiado. Es decir, asignamos a cada morfismo $f:X \to Y$ un morfismo $f^{\text{op}}:Y \to X$.
+
+    Finalmente, la composici\'on entre dos morfismos $f^{\text{op}}:Y \to X$ y $g^{\text{op}}:Z \to Y$ la definimos por
+    \[ f^{\text{op}} \circ g^{\text{op}} := (g\circ f)^{\text{op}}. \]
+\end{exampleap}
+
+\begin{exampleap}\label{prodcat}
+    Sea $\mathsf{C}$ una categor\'ia y sean $X$ y $Y$ objetos de $\mathsf{C}$.
+    A partir de estos datos, podemos formar una nueva categor\'ia $\mathsf{C}_{X,Y}$.
+
+    Sus objetos son triples $(Z,f,g)$, donde $Z$ es un objeto de $\mathsf{C}$, y $f:Z \to X$ y $g:Z \to Y$ son morfismos.
+    Un morfismo $\alpha: (Z, f , g) \to (Z', f',g')$ es un morfismo $h: Z \to Z'$ tal que $f \circ h = f'$ y $g \circ h = g'$.
+
+    En otras palabras, se requiere que $h:Z \to Z'$ sea tal que el siguiente diagrama conmute.
+    \[\begin{tikzcd}[row sep=large,column sep=large]
+            & Z \\
+            X & {Z'} & Y
+            \arrow["f"', from=1-2, to=2-1]
+            \arrow["{f'}", from=2-2, to=2-1]
+            \arrow["g", from=1-2, to=2-3]
+            \arrow["{g'}"', from=2-2, to=2-3]
+            \arrow["h"{description}, from=1-2, to=2-2]
+        \end{tikzcd}\]
+    La composici\'on de morfismos es la usual composici\'on de morfismos.
+\end{exampleap}
+
+\begin{exampleap}\label{coprodcat}
+    Veamos la construcci\'on dual a la previa, es decir $C^{\text{op}}_{X,Y}$.
+
+    Sea $\mathsf{C}$ una categor\'ia y sean $X$ y $Y$ objetos de $\mathsf{C}$.
+    A partir de estos datos, podemos formar una nueva categor\'ia $\mathsf{C}^{X,Y}$.
+
+    Sus objetos son triples $(Z,f,g)$, donde $Z$ es un objeto de $\mathsf{C}$, y $f:X \to Z$ y $g:Y \to Z$ son morfismos.
+    Un morfismo $\alpha: (Z', f' , g') \to (Z, f,g)$ es un morfismo $h: Z' \to Z$ tal que $h \circ f' = f$ y $h \circ g' = g$.
+
+    En otras palabras, se requiere que $h:Z' \to Z$ sea tal que el siguiente diagrama conmute.
+    \[\begin{tikzcd}[row sep=large,column sep=large]
+            & Z \\
+            X & {Z'} & Y
+            \arrow["f", from=2-1, to=1-2]
+            \arrow["{f'}"', from=2-1, to=2-2]
+            \arrow["g"', from=2-3, to=1-2]
+            \arrow["{g'}", from=2-3, to=2-2]
+            \arrow["h"{description}, from=2-2, to=1-2]
+        \end{tikzcd}\]
+    La composici\'on de morfismos es la usual composici\'on de morfismos. N\'otese que el diagrama resultante es el mismo que el del ejemplo anterior, solo que con todas las flechas volteadas.
+\end{exampleap}
+
+
+Procederemos con algunas definiciones comunes involucrando objetos y morfismos en una categor\'ia.
+
+\begin{definitionap}
+    Sea $\mathsf{C}$ una categor\'ia, entonces:
+    \begin{itemize}
+        \item Un objeto $X$ es \textbf{inicial} si para todo objeto $Y$ existe un \'unico morfismo $f:X \to Y$.
+        \item Un objeto $X$ es \textbf{terminal} si para todo objeto $Y$ existe un \'unico morfismo $f:Y \to X$.
+        \item Un morfismo $f:X \to Y$ es un \textbf{isomorfismo} si existe un morfismo $f^{-1}:Y \to X$ tal que $f\circ f^{-1}=\idfunc[Y]$ y $f^{-1}\circ f = \idfunc[X]$. Cuando esto se de, decimos que $f^{-1}$ es una \textbf{inversa} de $f$, y que $X$ y $Y$ son \textbf{isom\'orficos}, lo cual denotamos por $\eqv{X}{Y}$.
+    \end{itemize}
+\end{definitionap}
+
+N\'otese que ser un objeto terminal en $\mathsf{C}$ es lo mismo que ser un objeto inicial en $\mathsf{C}$. Veamos algunos ejemplos.
+
+\begin{exampleap}
+    En $\mathsf{Set}$, el conjunto vac\'io $\emptyset$ es inicial, puesto que dado un conjunto $X$, la \'unica funci\'on $!: \emptyset \to X$ es la trivial.
+    Por otro lado, cualquier conjunto $T$ con un solo elemento es terminal, pues la \'unica funci\'on $X \to T$ es la que lleva todos los elementos de $X$ a el \'unico elemento de $T$.
+    Finalmente, una funci\'on $f:X \to Y$ es un isomorfismo si y solo si es una biyecci\'on, siendo el morfismo inverso la funci\'on inversa usual.
+\end{exampleap}
+
+\begin{exampleap}
+    En $\mathsf{Vec}_K$, el espacio vectorial \emptyt de dimensi\'on 0 es ambos inicial y terminal, pues dado un espacio vectorial $V$, la \'unica funci\'on $! : \emptyt \to V$ es la que lleva el 0 al 0, y la \'unica funci\'on $V \to \emptyt$ es la que lleva todos los vectores de $V$ a $0$.
+    Finalmente, un morfismo es un isomorfismo exactamente cuando es un isomorfismo de espacios vectoriales.
+\end{exampleap}
+
+N\'otese que existen m\'ultiples objetos terminales en $\mathsf{Set}$, pero todos estos son isom\'orficos entre s\'i. Esta no es una casualidad.
+
+\begin{theorem}
+    Si $X$ y $Y$ son objetos terminales en una categor\'ia $\mathsf{C}$, entonces $\eqv{X}{Y}$. Lo mismo se cumple si $X$ y $Y$ son ambos iniciales.
+\end{theorem}
+\begin{proof}
+    Por ser $Y$ terminal, existe una \'unica funci\'on $f: X \to Y$. Por ser $X$ terminal, existe una \'unica funci\'on $g: Y \to X$. Pero ahora vemos que tenemos dos funciones $X \to X$, las cuales son $(g\circ f)$ y $\idfunc[X]$. Por unicidad, concluimos que $g\circ f = \idfunc[X]$. De manera similar, concluimos que $f \circ g = \idfunc[Y]$. Entonces, $\eqv{X}{Y}$.
+
+    La demostraci\'on cuando $X$ y $Y$ son iniciales es an\'aloga.
+\end{proof}
+
+Continuemos con unos ejemplos de las categor\'ias introducidas en los Ejemplos \ref{prodcat} y \ref{coprodcat}.
+
+\begin{exampleap}
+    Sean $X$ y $Y$ conjuntos. En la categor\'ia $\mathsf{Set}_{X,Y}$, el producto usual $X \times Y$ junto con las proyecciones es un objeto terminal.
+    En efecto, dados $Z$, $f:Z \to X$ y $g:Z\to Y$ la \'unica forma de definir una funci\'on $h:Z \to (X \times Y)$ tal que el diagrama conmute es por $h(z)=(f(z),g(z))$.
+    \[\begin{tikzcd}[row sep=large,column sep=large]
+            & Z \\
+            X & {X \times Y} & Y
+            \arrow["f"', from=1-2, to=2-1]
+            \arrow["{\pi_X}", from=2-2, to=2-1]
+            \arrow["g", from=1-2, to=2-3]
+            \arrow["{\pi_Y}"', from=2-2, to=2-3]
+            \arrow["h"{description}, from=1-2, to=2-2]
+        \end{tikzcd}\]
+\end{exampleap}
+
+\begin{exampleap}
+    Sean $X$ y $Y$ conjuntos. En la categor\'ia $\mathsf{Set}^{X,Y}$ el coproducto usual $X + Y$ junto con las inserciones naturales es un objeto inicial.
+    En efecto, dados $Z$, $f:X \to Z$ y $g:Y\to Z$ la \'unica forma de definir una funci\'on $h: (X + Y) \to Z$ tal que el diagrama conmute es por $h(x)=f(x)$ y $h(y)=f(y)$.
+    \[\begin{tikzcd}[row sep=large,column sep=large]
+            & Z \\
+            X & {X+Y} & Y
+            \arrow["f", from=2-1, to=1-2]
+            \arrow["{\iota_X}"', from=2-1, to=2-2]
+            \arrow["g"', from=2-3, to=1-2]
+            \arrow["\iota_Y", from=2-3, to=2-2]
+            \arrow["h"{description}, from=2-2, to=1-2]
+        \end{tikzcd}\]
+\end{exampleap}
+
+Similares resultados aplican para otras categor\'ias, por lo que formularemos las siguientes definiciones.
+
+\begin{definitionap}
+    Sea $\mathsf{C}$ una categor\'ia y sean $X$ y $Y$ objetos de $\mathsf{C}$.
+    Si $Z$ es un objeto terminal de $\mathsf{C}_{X,Y}$, diremos que $Z$ es el \textbf{producto} de $X$ y $Y$, y lo denotaremos por $X \to Y$.
+    Si $Z$ es un objeto inicial de $\mathsf{C}^{X,Y}$, diremos que $Z$ es el \textbf{coproducto} de $X$ y $Y$, y lo denotaremos por $X + Y$.
+\end{definitionap}
+
+Los fundadores de la teor\'ia de categor\'ias mencionaron que el concepto de categor\'ia se creo para poder definir lo que es un functor, y los functores se definieron para poder definir lo que es una transformaci\'on natural \cite{mac_lane_categories_2010}. Veamos estos conceptos ahora.
+
+\begin{definitionap}
+    Sean $\mathsf{C}$ y $\mathsf{D}$ categor\'ias. Un functor consiste de
+    \begin{itemize}
+        \item un objeto $F(X)$ en $\mathsf{D}$ para cada objeto $X$ en $\mathsf{C}$, y
+        \item un morfismo $F(f):F(X) \to F(Y)$ en $\mathsf{D}$ para cada morfismo $f:X \to Y$ en $\mathsf{C}.$
+    \end{itemize}
+    tales que se cumplen las siguientes dos condiciones
+    \begin{itemize}
+        \item Para todo par de morfismos $f: X \to Y$ y $g: Y \to Z$ en $\mathsf{C}$, se tiene que $F(g \circ f) = F g \circ F f$.
+        \item Para todo objeto $X$ en $\mathsf{C}$, se tiene que $F(\idfunc[X])=\idfunc[F(X)]$.
+    \end{itemize}
+\end{definitionap}
+
+\begin{exampleap}
+    El functor identidad $\idfunc[\mathsf{C}]:\mathsf{C} \to\mathsf{C}$ lleva cada objeto a s\'i mismo, y cada morfismo as\'i mismo. Las dos condiciones adicionales se cumplen inmediatamente, y omitiremos menci\'on de estas en los futuros ejemplos.
+\end{exampleap}
+
+\begin{exampleap}
+    El functor conjunto poder $\mathcal{P}:\set \to \set$ lleva objetos a su conjunto poder, y funciones $f:X \to Y$ a una funci\'on $\mathcal{P}(f):\mathcal{P}(X) \to \mathcal{P}(Y)$, la cual est\'a definida por
+    \[ \mathcal{P}(f)(S) := \{ f(s) \mid s \in S \} \]
+    En general, cuando tengamos un functor $F: \mathsf{C} \to \mathsf{C}$ que va de una categor\'ia $\mathsf{C}$ hacia si misma, diremos que es un \textbf{endofunctor}.
+\end{exampleap}
+
+\begin{exampleap}
+    El functor espacio dual $(\blank)^*:\mathsf{Vec}_K \to \mathsf{Vec}^{\text{op}}_K$ lleva cada espacio vectorial $V$ a su espacio dual $V^*$, y lleva una transformaci\'on lineal $f: V \to W$ a una funci\'on $f^*: W^* \to V^*$ definida por
+    \[ f^*(\alpha)(v):= \alpha(f(v)). \]
+\end{exampleap}
+
+En casos como este, cuando tengamos $F:\mathsf{C} \to \mathsf{D}^{\text{op}}$, diremos que $F$ es un functor \textbf{contravariante}; caso contrario, diremos que es \textbf{covariante}.
+
+\begin{exampleap}
+    Dados dos functores $F:\mathsf{C} \to \mathsf{D}$ y $G:\mathsf{D} \to \mathsf{E}$, podemos definir un nuevo functor $G \circ F:\mathsf{C} \to \mathsf{E}$, definido por
+    \[(G \circ F)(c) =G(F(c)) \,\, \text{ y } (G \circ F)(f)=G(F(f)),\] en objetos y morfismos, respectivamente.
+\end{exampleap}
+
+Para los siguientes ejemplos, necesitaremos una definici\'on adicional.
+
+\begin{definitionap}
+    Sea $\mathsf{C}$ una categor\'ia. Diremos que $\mathsf{C}$ es una \textbf{categor\'ia localmente peque\~na} si para todo par de objetos $X,Y$ de $\mathsf{C}$ la colecci\'on de morfismos con dominio $X$ y codominio $Y$ es un conjunto, y lo denotaremos por $\text{Hom}_\mathsf{C}(X,Y)$. Escribiremos tambi\'en $\text{Hom}(X,Y)$ cuando la categor\'ia est\'e sobrentendida.
+\end{definitionap}
+
+\begin{exampleap}\label{cat-homa-}
+    Para todo objeto $Z$ en una categor\'ia $\mathsf{C}$ localmente peque\~na, tenemos un functor contravariante
+    \[ \text{Hom}_\mathsf{C}(\blank, Z): \mathsf{C} \to \set^{\text{op}},\]
+    el cual lleva objetos $X$ al conjunto $\text{Hom}_\mathsf{C}(X,Z)$, y morfismos $f:X \to Y$ a una funci\'on de conjuntos
+    \[ \text{Hom}_\mathsf{C}(f, Z):\text{Hom}_\mathsf{C}(Y,Z) \to \text{Hom}_\mathsf{C}(X,Z) \]
+    definida por
+    \[ \text{Hom}_\mathsf{C}(f, Z)(\alpha) = \alpha \circ f \]
+
+    An\'alogamente, tenemos un functor covariante
+    \[ \text{Hom}_\mathsf{C}(Z, \blank): \mathsf{C} \to \set,\]
+    el cual lleva objetos $X$ a el conjunto $\text{Hom}_\mathsf{C}(Z,X)$, y morfismos $f:X \to Y$ a una funci\'on de conjuntos
+    \[ \text{Hom}_\mathsf{C}(Z,f):\text{Hom}_\mathsf{C}(Z,X) \to \text{Hom}_\mathsf{C}(Z,Y) \]
+    definida por
+    \[ \text{Hom}_\mathsf{C}(Z,f)(\alpha) = f \circ \alpha \]
+\end{exampleap}
+
+\begin{exampleap}
+    La colecci\'on de todas las categor\'ias localmente peque\~nas es una categor\'ia $\mathsf{Cat}$, siendo los objetos las categor\'ias, y los morfismos los functores entre las categor\'ias.
+
+    Sean $\mathsf{C}$ y $\mathsf{D}$ categor\'ias localmente peque\~nas, se puede verificar que la categor\'ia que tiene como objetos pares $(X,Y)$ con $X \in \mathsf{C}$ y $Y \in \mathsf{D}$, y como morfismos $h:(X,Y) \to (X',Y')$ pares $(f,g)$ de morfismos $f:X\to X'$ y $g:Y\to Y'$ es el producto de $\mathsf{C}$ y $\mathsf{D}$ en $\mathsf{Cat}$ \cite{mac_lane_categories_2010}.
+\end{exampleap}
+
+\begin{definitionap}
+    Dadas dos categor\'ias $\mathsf{C}$ y $\mathsf{D}$, y dos functores $F,G:\mathsf{C} \to \mathsf{D}$, una \textbf{transformaci\'on natural} $\tau : F \to G$ consiste de
+    \begin{itemize}
+        \item un morfismo $\tau_c: F(X) \to G(X)$ para cada $X : C$, llamado el \textbf{componente} de $\tau$ en $X$
+    \end{itemize}
+    tal que
+    para todo morfismo $f:X \to Y$ en $\mathsf{C}$, el siguiente diagrama conmute
+    \[\begin{tikzcd}[row sep=large,column sep=large]
+            {F(X)} & {G(X)} \\
+            {F(Y)} & {G(Y)}
+            \arrow["{\tau_X}", from=1-1, to=1-2]
+            \arrow["{G(f)}", from=1-2, to=2-2]
+            \arrow["{\tau_Y}"', from=2-1, to=2-2]
+            \arrow["{F(f)}"', from=1-1, to=2-1]
+        \end{tikzcd}\]
+\end{definitionap}
+
+\begin{exampleap}
+    Tenemos una transformaci\'on $\tau: \idfunc[\set] \to \mathcal{P}$, definiendo cada componente por $\tau_X(x) = \{x\}$. Necesitamos comprobar que para toda funci\'on entre conjuntos $f: X \to Y$ el siguiente diagrama conmuta
+    \[\begin{tikzcd}[row sep=large,column sep=large]
+            {X} & {\mathcal{P}(X)} \\
+            {Y} & {\mathcal{P}(Y)}
+            \arrow["{\tau_X}", from=1-1, to=1-2]
+            \arrow["{\mathcal{P}(f)}", from=1-2, to=2-2]
+            \arrow["{\tau_Y}"', from=2-1, to=2-2]
+            \arrow["{f}"', from=1-1, to=2-1]
+        \end{tikzcd}\]
+    Pero ahora tenemos que para todo $x \in X$
+    \begin{align*}
+        \mathcal{P}(f)(\tau_X(x)) & = \mathcal{P}(f)(\{x\}) \\
+                                  & = \{ f(x) \}            \\
+                                  & = \tau_Y(f(x))          \\
+    \end{align*}
+\end{exampleap}
+
+\begin{exampleap}
+    Tenemos una transformaci\'on natural $\tau: \idfunc[\mathsf{Vec}_K] \to (-)^{**}$, donde el functor $(-)^{**}$ es el functor espacio dual aplicado dos veces.
+    Esta transformaci\'on est\'a definida en cada componente por $\tau_V(v)(\alpha) = \alpha(v)$.
+    Sea $\alpha: V \to W$, vemos que el siguiente diagrama conmuta
+    \[\begin{tikzcd}[row sep=large,column sep=large]
+            {V} & {V^{**}} \\
+            {W} & {W^{**}}
+            \arrow["{\tau_V}", from=1-1, to=1-2]
+            \arrow["{f^{**}}", from=1-2, to=2-2]
+            \arrow["{\tau_W}"', from=2-1, to=2-2]
+            \arrow["{f}"', from=1-1, to=2-1]
+        \end{tikzcd}\]
+    pues para todo $v \in V$ y $\beta \in W^{*}$ tenemos
+    \begin{align*}
+        f^{**}(\tau_V(v))(\beta) & = \tau_V(v)(f^*(\beta)) \\
+                                 & = f^*(\beta)(v)         \\
+                                 & = \beta(f(v))           \\
+                                 & = \tau_W(f(v))(\beta)
+    \end{align*}
+\end{exampleap}
+
+Lo interesante del ejemplo previo es que, restringi\'endonos al caso de espacios vectoriales de dimensi\'on finita, cada componente es un isomorfismo.
+
+\begin{definitionap}
+    Dadas dos categor\'ias $\mathsf{C}$ y $\mathsf{D}$, y dos functores $F,G:\mathsf{C} \to \mathsf{D}$. Diremos que una transformación natural $\tau:F \to G$ es un \textbf{isomorfismo natural} si cada componente $\tau_c$ es un isomorfismo, y escribiremos $F \cong G$.
+\end{definitionap}
+
+Notamos que las transformaciones naturales se pueden componer en el siguiente sentido,
+si $\tau: F \to G$ y $\eta: G \to H$ son transformaciones naturales, podemos definir $\eta \circ \tau : F \to H$ por $(\eta \circ \tau)_c = \eta_c \circ \tau_c$. Para ver que esta definici\'on satisface el requerimiento de conmutatividad, observamos que el siguiente diagrama conmuta
+\[\begin{tikzcd}[row sep=large,column sep=large]
+        {F(x)} & {G(x)} & {H(x)} \\
+        {F(y)} & {G(y)} & {H(y)}
+        \arrow["{F(f)}"', from=1-1, to=2-1]
+        \arrow["{\tau_x}"', from=2-1, to=2-2]
+        \arrow["{\tau_x}", from=1-1, to=1-2]
+        \arrow["{G(f)}"{description}, from=1-2, to=2-2]
+        \arrow["{\eta_x}", from=1-2, to=1-3]
+        \arrow["{H(f)}", from=1-3, to=2-3]
+        \arrow["{\eta_y}"', from=2-2, to=2-3]
+    \end{tikzcd}\]
+pues cada uno de los cuadrados individuales conmuta.
+
+Esto hace que la colecci\'on de functores $\text{Hom}_{\mathsf{Cat}}(X, Y)$ sea una categor\'ia, siendo los objetos los functores, y los morfismos las transformaciones naturales entre ellos.
+
+De esta manera, vemos que un isomorfismo en esta categor\'ia es un isomorfismo natural $\tau$, pues podemos definir una transformaci\'on natural inversa $\tau^{-1}:G \to F$ dada por $(\tau^{-1})_d=(\tau_d)^{-1}$, y esta satisface que $\tau \circ \tau^{-1}=\idfunc$ y $\tau^{-1}\circ \tau=\idfunc$.
+
+Sin embargo, este propiedad rara vez se da en aplicaciones, una definici\'on similar, y m\'as conveniente es la siguiente.
+
+\begin{definitionap}
+    Una \textbf{equivalencia de categor\'ias} consiste de dos functores $F:C \to D$ y $G:D \to C$ tales que existen isomorfismos naturales $F \circ G \cong \idfunc[\mathsf{D}]$ y $G \circ F \cong \idfunc[\mathsf{C}]$. Cuando se de esto, escribiremos $\eqv{\mathsf{C}}{\mathsf{D}}$.
+\end{definitionap}
+
+\begin{exampleap}\label{tensor-hom}
+    Un ejemplo cl\'asico de equivalencia es la adjunci\'on Tensor-Hom de espacios vectoriales, o de una manera m\'as general, de $R$-m\'odulos:
+    \[ \eqv{\text{Hom}(M \times N, P)}{\text{Hom}(M, \text{Hom}(N,P))}, \]
+    para todo tr\'io de $R$-m\'odulos $M,N,P$. La demostración de este resultado se puede encontrar en \cite{aluffi_algebra_2009}.
+
+    M\'as general a\'un es la siguiente equivalencia entre las categor\'ias
+    \[ \eqv{\text{Hom}_{\mathsf{Cat}}(X \times Y, Z)}{\text{Hom}_{\mathsf{Cat}}(X, \text{Hom}_{\mathsf{Cat}}(Y,Z))}, \]
+    la cual se puede encontrar en \cite{mac_lane_categories_2010}.
+\end{exampleap}
+
+Por \'ultimo, presentamos las siguientes definiciones.
+
+\begin{definitionap}
+    Una categor\'ia $\mathsf{C}$ es una \textbf{subcategor\'ia} de una categor\'ia $\mathsf{D}$ si todos los objetos de $\mathsf{C}$ son objetos de $\mathsf{D}$, y todos los morfismos de $\mathsf{C}$ son morfismos de $\mathsf{D}$.
+
+    Decimos que $\mathsf{C}$ es una \textbf{subcategor\'ia completa} si $\text{Hom}_\mathsf{C}(X,Y)=\text{Hom}_\mathsf{D}(X,Y)$, para todo par de objetos $X$, $Y$ en $\mathsf{C}$.
+\end{definitionap}
+
+\begin{exampleap}
+    La categor\'ia $\mathsf{Set}_{\mathsf{Fin}}$, que tiene como objetos conjuntos finitos y como morfismos funciones entre estos conjuntos, es una subcategor\'ia completa de $\mathsf{Set}$.
+\end{exampleap}
+
+\begin{exampleap}
+    Dada una colecci\'on de objetos $C$ de una categor\'ia $\mathsf{D}$, la subcategor\'ia completa generada por $C$ es aquella que tiene como objetos los objetos de $C$, y tiene como morfismos de $X,Y$ en $C$, la colecci\'on $\text{Hom}_\mathsf{D}(X,Y)$.
+    La identidad y la composici\'on son las de $\mathsf{D}$.
+\end{exampleap}
+
+\end{document}

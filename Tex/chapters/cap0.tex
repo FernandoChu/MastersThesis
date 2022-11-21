@@ -1,0 +1,29 @@
+\documentclass[../main.tex]{subfiles}
+\begin{document}
+
+En la actualidad, la mayoría de las matemáticas está basada en teoría de conjuntos.
+Así, se pueden construir a los reales como cortes de Dedekind de los racionales; los cuales, a su vez, son clases de equivalencias de los enteros, que se construyen a partir de los naturales, y estos finalmente pueden ser definidos en términos puramente de conjuntos \cite{enderton_elements_1977}.
+
+Sin embargo, este procedimiento se da en realidad en dos niveles distintos.
+En el primero, el puramente lógico, los objetos de análisis son las proposiciones, y las reglas de la lógica indican qué inferencias y deducciones son correctas, al asumir ciertas hipótesis como verdaderas.
+En el segundo, los objetos de estudio son los conjuntos, y son los axiomas de la teoría de conjuntos los que permiten definir qué operación o relación está bien definida.
+Nótese que estos dos niveles están completamente separados: la lógica sola no puede razonar sobre la teoría de conjuntos (o cualquier otra teoría), mientras que la teoría de conjuntos sola no puede razonar sobre proposiciones o inferencias lógicas.
+
+En contraste, la Teoría Homot\'opica de Tipos unifica estos dos constructos, las proposiciones y los conjuntos, y solo usa una noción central, la de ``tipos’’.
+Así, podemos expresar diversas proposiciones, por ejemplo, que existe el tipo de los reales ($\cdot \vdash \R : \mathcal U_i$), o que $\pi$ es un elemento de este tipo ($\cdot \vdash \pi :\R$).
+También tendremos que las proposiciones mismas pueden ser representadas por un tipo, con expresiones como $\cdot \vdash p : 3^2=9$ dando a entender que $p$ es una demostración de que $3^2=9$.
+
+Además de tener una mayor elegancia teórica, existen múltiples ventajas de esta nueva teoría, mencionaremos solo algunas de ellas. Primero, permite formalizar algunos conceptos que intuitivamente deberían de existir y, sin embargo, son imposibles de formalizar en teoría de conjuntos.
+Por ejemplo, la función identidad universal, aplicable a cualquier conjunto, no está bien definida puesto que su ``conjunto’’ de dominio y de llegada es la colección de todos los conjuntos, y este no es un conjunto, sino una clase propia.
+
+Segundo, y más importante aún, es qué las proposiciones y las demostraciones se vuelven también objetos de estudio en el mismo nivel que otras estructuras matemáticas, como los grupos o los espacios vectoriales, por lo que se pueden analizar y manipular como es común en otras áreas de estudio.
+Esto será vital para la interpretación homotópica que detallaremos en el Cap\'itulo \ref{hott}, en donde una demostración de que $a=b$ se interpretará como un camino en cierto espacio topológico.
+
+Finalmente, esta teor\'ia permite una mayor facilidad para formalizar las definiciones y la demostraci\'on de proposiciones en computadora.
+Hemos realizado este trabajo para todos los resultados aqu\'i presentados, y se puede ver el c\'odigo en la siguiente p\'agina web \url{https://shiranaiyo.github.io/MastersThesis/}.
+
+Dada que la teor\'ia es substancialmente distinta a no visto comunmente, la introduciremos lentamente.
+En el Cap\'itulo 1 presentaremos algunos conceptos de Teor\'ia de Categor\'ia que utilizaremos a lo largo de este documento. En el Cap\'itulo 2 presentaremos la Teor\'ia de Tipos Dependientes, la teor\'ia base que utilizaremos para desarrollar la Teor\'ia Homot\'opica de Tipos. En el Cap\'itulo 3 veremos la relación entre los tipos dependientes y la homotop\'ia. En el Cap\'itulo 4 exploraremos algunos conceptos y resultados de topolog\'ia algebraica, formalizados en esta nueva teor\'ia.
+En el Cap\'itulo 5 resumimos lo desarrollado, y realizamos unos comentarios adicionales.
+
+\end{document}

@@ -1,0 +1,284 @@
+\documentclass[../main.tex]{subfiles}
+\begin{document}
+\chapter{Lista de reglas}\label{reglas}
+
+\begin{rulesap}
+    (Reglas básicas de universos)
+    \begin{center}
+        \AxiomC{$\Gamma$ ctx}\RightLabel{\footnotesize  $\mathcal{U}_i$-INTRO}
+        \UnaryInfC{$\Gamma \vdash  \mathcal{U}_i:  \mathcal{U}_{i+1}$}  \DisplayProof \hspace{3em}
+        \AxiomC{$\Gamma \vdash  A:  \mathcal{U}_{i}$}\RightLabel{\footnotesize  $\mathcal{U}_i$-CUMUL}
+        \UnaryInfC{$\Gamma \vdash  A :  \mathcal{U}_{i+1}$}  \DisplayProof
+    \end{center}
+\end{rulesap}
+
+\begin{rulesap}
+    (Reglas básicas de contextos y variables)
+    \begin{center}
+        \AxiomC{}\RightLabel{\footnotesize ctx-EMP}
+        \UnaryInfC{$\cdot$ ctx} \DisplayProof \hspace{3em}
+        \AxiomC{$x_1{:}A_1, \dots,x_{n-1}{:}A_{n-1} \vdash A_n:\mathcal{U}_i$}\RightLabel{\footnotesize ctx-EXT}
+        \UnaryInfC{$(x_1{:}A_1, \dots,x_n{:}A_n$) \text{ctx}}  \DisplayProof\\[.8em]
+        \AxiomC{$(x_1{:}A_1, \dots,x_n{:}A_n$) \text{ctx}}  \RightLabel{\footnotesize Vble}
+        \UnaryInfC{$x_1{:}A_1, \dots,x_n{:}A_n \vdash x_i:A_i$}  \DisplayProof
+    \end{center}
+    donde la regla ctx-EXT tiene la condición adicional de que $x_n$ debe ser distinta a las demás variables $x_1, \dots,x_{n-1}$, y la regla Vble requiere que $1 \leq i \leq n$.
+    La regla ctx-EMP tiene 0 hipótesis, por lo que siempre es posible aplicarla.
+\end{rulesap}
+
+\begin{rulesap}
+    (Reglas básicas de igualdades por definición)
+    \begin{center}
+        \AxiomC{$\Gamma \vdash a:A$}
+        \UnaryInfC{$\Gamma \vdash a\equiv a:A$} \DisplayProof \hspace{2em}
+        \AxiomC{$\Gamma \vdash a \equiv b:A$}
+        \UnaryInfC{$\Gamma \vdash b\equiv a:A$} \DisplayProof \hspace{2em}
+        \AxiomC{$\Gamma \vdash a \equiv b:A$}
+        \AxiomC{$\Gamma \vdash b \equiv c:A$}
+        \BinaryInfC{$\Gamma \vdash a\equiv c:A$} \DisplayProof  \\[1.2em]
+        \AxiomC{$\Gamma \vdash a :A$}
+        \AxiomC{$\Gamma \vdash A \equiv B : \mathcal{U}_i$}
+        \BinaryInfC{$\Gamma \vdash a:B$} \DisplayProof \hspace{1.5em}
+        \AxiomC{$\Gamma \vdash a \equiv b :A$}
+        \AxiomC{$\Gamma \vdash A \equiv B : \mathcal{U}_i$}
+        \BinaryInfC{$\Gamma \vdash a \equiv b : B$} \DisplayProof
+    \end{center}
+\end{rulesap}
+
+\begin{rulesap}
+    (Reglas de funciones dependientes)
+    \begin{center}
+        \AxiomC{$\Gamma \vdash A : \mathcal{U}_i$}
+        \AxiomC{$\Gamma, x:A \vdash B : \mathcal{U}_i$} \RightLabel{\footnotesize $\Pi$-FORM}
+        \BinaryInfC{$\Gamma \vdash \tprd{x:A} B : \mathcal{U}_i$} \DisplayProof  \\[.8em]
+        \AxiomC{$\Gamma, x:A \vdash b :B$}  \RightLabel{\footnotesize $\Pi$-INTRO}
+        \UnaryInfC{$\Gamma \vdash \lam{x:A}b : \tprd{x:A} B$}  \DisplayProof
+    \end{center}
+    donde la expresi\'on $\tprd{x:A} B$ liga a $x$ hasta el final de esta.
+    \begin{center}
+        \AxiomC{$\Gamma \vdash f : \tprd{x:A} B$}
+        \AxiomC{$\Gamma \vdash a:A$} \RightLabel{\footnotesize $\Pi$-ELIM}
+        \BinaryInfC{$\Gamma \vdash f(a) : B[a/x]$} \DisplayProof  \\[.8em]
+        \AxiomC{$\Gamma, x:A \vdash b: B$}
+        \AxiomC{$\Gamma \vdash a:A$} \RightLabel{\footnotesize $\Pi$-COMP}
+        \BinaryInfC{$\Gamma \vdash (\lam{x:A}b)(a) \equiv b[a/x] : B[a/x]$} \DisplayProof \\[.8em]
+        \AxiomC{$\Gamma \vdash f : \tprd{x:A} B$} \RightLabel{\footnotesize $\Pi$-UNIQ}
+        \UnaryInfC{$\Gamma \vdash f \equiv (\lam{x :A}f(x)):\tprd{x:A} B$} \DisplayProof
+    \end{center}
+\end{rulesap}
+
+\begin{rulesap}
+    (Reglas de pares dependientes)
+    \begin{center}
+        \AxiomC{$\Gamma \vdash A : \mathcal{U}_i$}
+        \AxiomC{$\Gamma \vdash B : A \to \mathcal{U}_i$} \RightLabel{\footnotesize $\Sigma$-FORM}
+        \BinaryInfC{$\Gamma \vdash \tsm{x:A} B : \mathcal{U}_i$} \DisplayProof  \\[.8em]
+        \AxiomC{$\Gamma \vdash B : A \to \mathcal{U}_i$}
+        \AxiomC{$\Gamma \vdash a:A$}
+        \AxiomC{$\Gamma \vdash b:B(a)$}  \RightLabel{\footnotesize $\Sigma$-INTRO}
+        \TrinaryInfC{$\Gamma \vdash (a,b) : \tsm{x:A} B$}  \DisplayProof
+    \end{center}
+    donde la expresi\'on $\tsm{x:A} B$ liga a $x$ hasta el final de esta.
+    \begin{center}
+        \def\extraVskip{.5pt}
+        \AxiomC{\ }
+        \AxiomC{$\Gamma\vdash C: (\tsm{x:A} B) \to  \mathcal U_i$}
+        \AxiomC{$\Gamma \vdash g : \tprd{a:A} \tprd{b:B(a)} C((a,b))$}
+        \alwaysNoLine
+        \BinaryInfC{$\Gamma \vdash p : \tsm{x:A}B$}
+        \AxiomC{\ }
+        \def\extraVskip{2pt} \def\ScoreOverhang{-2pt}  \def\defaultHypSeparation{\hskip -1em}
+        \alwaysSingleLine \RightLabel{\footnotesize{$\Sigma$-ELIM}}
+        \TrinaryInfC{$\Gamma \vdash \ind{\tsm{x:A} B}^{C,g,p}: C(p)$}
+        \DisplayProof
+    \end{center}
+    \begin{center}
+        \def\extraVskip{.5pt}
+        \AxiomC{\ }
+        \AxiomC{$\Gamma\vdash C: (\tsm{x:A} B) \to  \mathcal U_i$}
+        \AxiomC{$\Gamma \vdash g : \tprd{a:A} \tprd{b:B(a)} C(a,b)$}
+        \alwaysNoLine
+        \BinaryInfC{$\Gamma \vdash a:A \hspace{2em} \Gamma \vdash b : B[a/x]$}
+        \AxiomC{\ }
+        \def\extraVskip{2pt} \def\ScoreOverhang{-2pt}  \def\defaultHypSeparation{\hskip -1em}
+        \alwaysSingleLine \RightLabel{\footnotesize{$\Sigma$-COMP}}
+        \TrinaryInfC{$\Gamma \vdash \ind{\tsm{x:A} B}^{C,g,(a,b)} \jdeq g(a)(b) : C((a,b))$}
+        \DisplayProof
+    \end{center}
+\end{rulesap}
+
+\begin{rulesap}
+    (Reglas del tipo \emptyt.)
+    \begin{center}
+        \AxiomC{$\Gamma$ ctx} \RightLabel{\footnotesize $\emptyt$-FORM}
+        \UnaryInfC{$\Gamma \vdash \emptyt : \UU_0$} \DisplayProof \hspace{.8em}
+        \AxiomC{$\Gamma \vdash C : \emptyt \to \UU_0$}
+        \AxiomC{$\Gamma \vdash z : \emptyt$} \RightLabel{\footnotesize $\emptyt$-ELIM}
+        \BinaryInfC{$\Gamma \vdash \ind{\emptyt}^{C,z} : C(z)$}  \DisplayProof
+    \end{center}
+\end{rulesap}
+
+\begin{rulesap}
+    (Reglas del tipo \unit.)
+    \begin{center}
+        \AxiomC{$\Gamma$ ctx} \RightLabel{\footnotesize $\unit$-FORM}
+        \UnaryInfC{$\Gamma \vdash \unit : \UU_i$} \DisplayProof \hspace{.8em}
+        \AxiomC{$\Gamma$ ctx} \RightLabel{\footnotesize $\unit$-INTRO}
+        \UnaryInfC{$\Gamma \vdash \ttt : \unit$} \DisplayProof \\[.8em]
+        \AxiomC{$\Gamma \vdash C : \unit \to \UU_i$}
+        \AxiomC{$\Gamma \vdash c : C(\ttt)$}
+        \AxiomC{$\Gamma \vdash a : \unit$} \RightLabel{\footnotesize $\unit$-ELIM}
+        \TrinaryInfC{$\Gamma \vdash \ind{\unit}^{C,c,a} : C(a)$}  \DisplayProof\\[.8em]
+        \AxiomC{$\Gamma \vdash C : \unit \to \UU_i$}
+        \AxiomC{$\Gamma \vdash c : C(\ttt)$}\RightLabel{\footnotesize $\unit$-COMP}
+        \BinaryInfC{$\Gamma \vdash \ind{\unit}^{C,c,\ttt} \jdeq c : C(\ttt)$}  \DisplayProof
+    \end{center}
+\end{rulesap}
+
+\begin{rulesap}
+    (Reglas del coproducto.)
+    \begin{center}
+        \AxiomC{$\Gamma \vdash A : \UU_i$ }
+        \AxiomC{$\Gamma \vdash B : \UU_i$ } \RightLabel{\footnotesize $+$-FORM}
+        \BinaryInfC{$\Gamma \vdash A+B : \UU_i$} \DisplayProof \\[.8em]
+        \AxiomC{$\Gamma \vdash A : \UU_i$ }
+        \AxiomC{$\Gamma \vdash B : \UU_i$ }
+        \AxiomC{$\Gamma \vdash a : A$ } \RightLabel{\footnotesize $+$-INTRO$_1$}
+        \TrinaryInfC{$\Gamma \vdash \inl (a) : A+B$} \DisplayProof \\[.8em]
+        \AxiomC{$\Gamma \vdash A : \UU_i$ }
+        \AxiomC{$\Gamma \vdash B : \UU_i$ }
+        \AxiomC{$\Gamma \vdash b: B$ } \RightLabel{\footnotesize $+$-INTRO$_2$}
+        \TrinaryInfC{$\Gamma \vdash \inr (b) : A+B$} \DisplayProof \\[.8em]
+    \end{center}
+    \begin{center}
+        \def\extraVskip{.5pt}
+        \AxiomC{\ }
+        \AxiomC{$\Gamma  \vdash  C :A+B \to \UU_i$}
+        \AxiomC{$\Gamma \vdash c: \tprd{x:A}C(\inl(x))$}
+        \alwaysNoLine
+        \BinaryInfC{$\Gamma \vdash d: \tprd{y:B}C(\inr(y)) \hspace{2em} \Gamma \vdash e : A+B$}
+        \AxiomC{\ }
+        \def\extraVskip{2pt} \def\ScoreOverhang{-2pt}  \def\defaultHypSeparation{\hskip -1em}
+        \alwaysSingleLine \RightLabel{\footnotesize{$+$-ELIM}}
+        \TrinaryInfC{$\Gamma \vdash \ind{A+B}^{C,c,d,e} : C(e)$}
+        \DisplayProof
+    \end{center}
+    \begin{center}
+        \def\extraVskip{.5pt}
+        \AxiomC{\ }
+        \AxiomC{$\Gamma  \vdash  C :A+B \to \UU_i$}
+        \AxiomC{$\Gamma \vdash c: \tprd{x:A}C(\inl(x))$}
+        \alwaysNoLine
+        \BinaryInfC{$\Gamma \vdash d: \tprd{y:B}C(\inr(y)) \hspace{2em} \Gamma \vdash a : A$}
+        \AxiomC{\ }
+        \def\extraVskip{2pt} \def\ScoreOverhang{-2pt}  \def\defaultHypSeparation{\hskip -1em}
+        \alwaysSingleLine \RightLabel{\footnotesize{$+$-COMP$_1$}}
+        \TrinaryInfC{$\Gamma \vdash \ind{A+B}^{C,c,d,\inl(a)} \jdeq c(a) : C(\inl(a))$}
+        \DisplayProof
+    \end{center}
+    \begin{center}
+        \def\extraVskip{.5pt}
+        \AxiomC{\ }
+        \AxiomC{$\Gamma  \vdash  C :A+B \to \UU_i$}
+        \AxiomC{$\Gamma \vdash c: \tprd{x:A}C(\inl(x))$}
+        \alwaysNoLine
+        \BinaryInfC{$\Gamma \vdash d: \tprd{y:B}C(\inr(y)) \hspace{2em} \Gamma \vdash b : B$}
+        \AxiomC{\ }
+        \def\extraVskip{2pt} \def\ScoreOverhang{-2pt}  \def\defaultHypSeparation{\hskip -1em}
+        \alwaysSingleLine \RightLabel{\footnotesize{$+$-COMP$_2$}}
+        \TrinaryInfC{$\Gamma \vdash \ind{A+B}^{C,c,d,\inr(b)} \jdeq d(b): C(\inr(b))$}
+        \DisplayProof
+    \end{center}
+\end{rulesap}
+
+\begin{rulesap}
+    (Reglas del tipo \N.)
+    \begin{center}
+        \AxiomC{$\Gamma$ ctx} \RightLabel{\footnotesize $\N$-FORM}
+        \UnaryInfC{$\Gamma \vdash \N : \UU_i$} \DisplayProof \\[.8em]
+        \AxiomC{$\Gamma$ ctx} \RightLabel{\footnotesize $\N$-INTRO$_1$}
+        \UnaryInfC{$\Gamma \vdash 0 : \N$} \DisplayProof \hspace{.8em}
+        \AxiomC{$\Gamma$ ctx} \RightLabel{\footnotesize $\N$-INTRO$_2$}
+        \UnaryInfC{$\Gamma \vdash \suc : \N \to \N$} \DisplayProof \hspace{.8em}
+    \end{center}
+    \begin{center}
+        \def\extraVskip{.5pt}
+        \AxiomC{\ }
+        \AxiomC{$\Gamma\vdash C: \N \to  \mathcal U_i$}
+        \AxiomC{$\Gamma \vdash c_0 : C(0)$}
+        \alwaysNoLine
+        \BinaryInfC{$\Gamma \vdash c_s: \tprd{n:\N}C(n) \to C(\suc(n)) \hspace{2em} \Gamma \vdash n:\N$}
+        \AxiomC{\ }
+        \def\extraVskip{2pt} \def\ScoreOverhang{-2pt}  \def\defaultHypSeparation{\hskip -1em}
+        \alwaysSingleLine \RightLabel{\footnotesize{$\N$-ELIM}}
+        \TrinaryInfC{$\Gamma \vdash \ind{\N}^{C,c_0,c_s,n} : C(n)$}
+        \DisplayProof
+    \end{center}
+    \begin{center}
+        \def\extraVskip{.5pt}
+        \AxiomC{\ }
+        \AxiomC{$\Gamma\vdash C: \N \to  \mathcal U_i$}
+        \AxiomC{$\Gamma \vdash c_0 : C(0)$}
+        \alwaysNoLine
+        \BinaryInfC{$\Gamma \vdash c_s: \tprd{n:\N}C(n) \to C(\suc(n))$}
+        \AxiomC{\ }
+        \def\extraVskip{2pt} \def\ScoreOverhang{-2pt}  \def\defaultHypSeparation{\hskip -1em}
+        \alwaysSingleLine \RightLabel{\footnotesize{$\N$-COMP$_1$}}
+        \TrinaryInfC{$\Gamma \vdash \ind{\N}^{C,c_0,c_s,0} \jdeq c_0 : C(n)$}
+        \DisplayProof
+    \end{center}
+    \begin{center}
+        \def\extraVskip{.5pt}
+        \AxiomC{\ }
+        \AxiomC{$\Gamma\vdash C: \N \to  \mathcal U_i$}
+        \AxiomC{$\Gamma \vdash c_0 : C(0)$}
+        \alwaysNoLine
+        \BinaryInfC{$\Gamma \vdash c_s: \tprd{n:\N}C(n) \to C(\suc(n)) \hspace{2em} \Gamma \vdash n:\N$}
+        \AxiomC{\ }
+        \def\extraVskip{2pt} \def\ScoreOverhang{-2pt}  \def\defaultHypSeparation{\hskip -1em}
+        \alwaysSingleLine \RightLabel{\footnotesize{$\N$-COMP$_2$}}
+        \TrinaryInfC{$\Gamma \vdash \ind{\N}^{C,c_0,c_s,\suc(n)} \jdeq c_s(n,\ind{\N}^{C,c_0,c_s,n}) : C(\suc(n))$}
+        \DisplayProof
+    \end{center}
+\end{rulesap}
+
+\begin{rulesap}
+    (Reglas del tipo de identidades.)
+    \begin{center}
+        \AxiomC{$\Gamma \vdash A : \UU_i$}
+        \AxiomC{$\Gamma \vdash a : A$}
+        \AxiomC{$\Gamma \vdash b : A$} \RightLabel{\footnotesize $=$-FORM}
+        \TrinaryInfC{$\Gamma \vdash a =_A b : \UU_i$} \DisplayProof \\[.8em]
+        \AxiomC{$\Gamma \vdash A : \UU_i$}
+        \AxiomC{$\Gamma \vdash a : A$}\RightLabel{\footnotesize $=$-INTRO}
+        \BinaryInfC{$\Gamma \vdash \refl{a} : \id[A]{a}{a}$} \DisplayProof
+    \end{center}
+    \begin{center}
+        \def\extraVskip{.5pt}
+        \AxiomC{\ }
+        \AxiomC{$\Gamma \vdash  C : \tprd{x,y:A}(\id[A]{x}{y}) \to \UU_i$}
+        \AxiomC{$\Gamma \vdash c: \tprd{z:A}C(z,z, \refl{z})$}
+        \alwaysNoLine
+        \BinaryInfC{$\Gamma \vdash a: A \hspace{2em} \Gamma \vdash b:A \hspace{2em} \Gamma \vdash p: \id[A]{a}{b}$}
+        \AxiomC{\ }
+        \def\extraVskip{2pt} \def\ScoreOverhang{-2pt}  \def\defaultHypSeparation{\hskip -1em}
+        \alwaysSingleLine \RightLabel{\footnotesize{$=$-ELIM}}
+        \TrinaryInfC{$\Gamma \vdash \ind{=_A}^{C,c,a,b,p} : C(a,b,p)$}
+        \DisplayProof
+    \end{center}
+    \begin{center}
+        \def\extraVskip{.5pt}
+        \AxiomC{\ }
+        \AxiomC{$\Gamma \vdash  C : \tprd{x,y:A}(\id[A]{x}{y}) \to \UU_i$}
+        \AxiomC{$\Gamma \vdash c: \tprd{z:A}C(z,z, \refl{z})$}
+        \alwaysNoLine
+        \BinaryInfC{$\hspace{4em}\Gamma \vdash a: A$}
+        \AxiomC{\ }
+        \def\extraVskip{2pt} \def\ScoreOverhang{-2pt}  \def\defaultHypSeparation{\hskip -1em}
+        \alwaysSingleLine \RightLabel{\footnotesize{$=$-COMP}}
+        \TrinaryInfC{$\Gamma \vdash \ind{=_A}^{C,c,a,a,\refl{a}} : C(a,a,\refl{a})$}
+        \DisplayProof
+    \end{center}
+\end{rulesap}
+
+\end{document}

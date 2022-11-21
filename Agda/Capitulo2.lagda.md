@@ -182,6 +182,13 @@ data ℕ : 𝒰₀ where
     h 0        = a₀
     h (succ n) = f n (h n)
 
+-- Teorema 2.9.3.
+ℕ-rec : (C : 𝒰 𝒾)
+      → C
+      → (C → C)
+      → (ℕ → C)
+ℕ-rec C c f = ℕ-induction (λ _ → C) c (λ _ → f)
+
 -- Ejemplo 2.9.5.
 double : ℕ → ℕ
 double 0 = 0

@@ -1,0 +1,349 @@
+% !TeX root = main.tex
+\documentclass[12pt]{report}
+\usepackage[
+    a4paper,
+    top={2.5cm},
+    bottom={2.5cm},
+    left={4.0cm},
+    right={2.5cm},
+    includehead]{geometry}
+\usepackage[T1]{fontenc}
+\usepackage[spanish]{babel}
+\usepackage{amsmath}
+\usepackage{amsthm}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{biblatex}
+\usepackage{bussproofs}
+\usepackage{csquotes}
+\usepackage{etoolbox}
+\usepackage{float}
+\usepackage{fontspec}
+\usepackage[hidelinks]{hyperref}
+\usepackage{braket} % used for \setof{ ... } macro
+\usepackage{tikz}
+\usepackage{tikz-cd} 
+\usetikzlibrary{babel}
+\usepackage{enumitem,mathtools,xspace}
+\usepackage{fancyhdr}
+\usepackage{pdflscape}
+\usepackage{rotating}
+\usepackage{setspace}
+\usepackage{lmodern}
+\usepackage[scaled=0.95]{helvet}
+\usepackage{courier}
+\let\temp\rmdefault
+\usepackage{mathpazo}
+\let\rmdefault\temp
+\usepackage[nottoc,notlot,notlof]{tocbibind}
+\usepackage{tocloft}
+\input{macros}
+
+\addbibresource{references.bib}
+\setlist{noitemsep}
+
+
+\newfontfamily{\euclidfm}{Euclid-Italic.ttf}[SlantedFont = *]
+%\setmonofont{Euclid-Italic.ttf}
+
+%%% Path concatenation
+\newrobustcmd*{\concat}{%
+  \mathchoice{\mathbin{\raisebox{0.5ex}{$\displaystyle\centerdot$}}}%
+  {\mathbin{\raisebox{0.5ex}{$\centerdot$}}}%
+  {\mathbin{\raisebox{0.25ex}{$\scriptstyle\,\centerdot\,$}}}%
+  {\mathbin{\raisebox{0.1ex}{$\scriptscriptstyle\,\centerdot\,$}}}
+}
+
+\theoremstyle{definition}
+\newtheorem{definition}{Definici\'on}[section]
+\newtheorem{definitionap}{Definici\'on}[chapter]
+\newtheorem{example}[definition]{Ejemplo}
+\newtheorem{exampleap}{Ejemplo}[chapter]
+\newtheorem{notation}[definition]{Notación}
+\newtheorem{rules}[definition]{Reglas}
+\newtheorem{rulesap}{Reglas}[chapter]
+\theoremstyle{plain}
+\newtheorem{theorem}[definition]{Teorema}
+\newtheorem{proposition}[definition]{Proposici\'on}
+\newtheorem{propositionap}{Proposici\'on}[chapter]
+\newtheorem{corollary}[definition]{Corolario}
+\newtheorem{axiom}[definition]{Axioma}
+\newtheorem{lemma}[definition]{Lema}
+\newtheorem{lemmaap}{Lema}[chapter]
+
+\pagestyle{fancy}
+\fancyhf{}
+% \fancyhead[L]{\slshape\nouppercase{\euclidfm\rightmark}}
+\fancyhead[L]{\slshape\nouppercase{\euclidfm\leftmark}}
+\fancyhead[R]{\thepage}
+\fancyfoot{}
+\setlength{\headsep}{12pt}
+\setlength{\headheight}{14.5pt}
+
+\newenvironment{changemargin}[2]{%
+\begin{list}{}{%
+\setlength{\topsep}{0pt}%
+\setlength{\leftmargin}{#1}%
+\setlength{\rightmargin}{#2}%
+\setlength{\listparindent}{\parindent}%
+\setlength{\itemindent}{\parindent}%
+\setlength{\parsep}{\parskip}%
+}%
+\item[]}{\end{list}}
+
+% Remove page numbers from chapter
+\makeatletter
+\renewcommand\chapter{\if@openright\cleardoublepage\else\clearpage\fi
+                    \thispagestyle{empty}%
+                    \global\@topnum\z@
+                    \@afterindentfalse
+                    \secdef\@chapter\@schapter}
+\makeatother
+
+% table width
+\makeatletter
+\def\thickhline{%
+  \noalign{\ifnum0=`}\fi\hrule \@height \thickarrayrulewidth \futurelet
+   \reserved@a\@xthickhline}
+\def\@xthickhline{\ifx\reserved@a\thickhline
+               \vskip\doublerulesep
+               \vskip-\thickarrayrulewidth
+             \fi
+      \ifnum0=`{\fi}}
+\makeatother
+
+\newlength{\thickarrayrulewidth}
+\setlength{\thickarrayrulewidth}{2\arrayrulewidth}
+
+\newenvironment{justification}
+    { \renewcommand*{\proofname}{Justificación}
+      \begin{proof}
+    }
+    { \end{proof} }
+
+\setlength{\cftbeforetoctitleskip}{-2em}
+
+\newenvironment{dedication}
+  {\clearpage           % we want a new page
+   \thispagestyle{empty}% no header and footer
+   \vspace*{\stretch{1}}% some space at the top 
+   \itshape             % the text is in italics
+   \raggedleft          % flush to the right margin
+  }
+  {\par % end the paragraph
+   \vspace{\stretch{3}} % space at bottom is three times that at the top
+   \clearpage           % finish off the page
+  }
+
+\usepackage{subfiles}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{document}
+
+\begin{titlepage}
+    \setlength{\parindent}{0pt} \setlength{\parskip}{0pt}
+    \begin{center}
+        \textsc{\large \textbf{UNIVERSIDAD NACIONAL \\MAYOR DE SAN MARCOS}}\\[0.4cm]
+        {\large \textbf{FACULTAD DE CIENCIAS MATEM\'ATICAS}}\\[2cm]
+
+        \includegraphics[scale = 0.5]{images/shield}\\[1 cm]
+
+        {\Large \bfseries Teoría Homot\'opica de Tipos}\\[1cm]
+
+        Tesis para optar el Grado Acad\'emico de Mag\'ister en Matem\'atica \\[1.8 cm]
+
+        \textbf{AUTOR}\\[0.2cm]
+        Fernando Rafael Chu Rivera \\[1cm]
+        \textbf{ASESOR}\\[0.2cm]
+        Jorge Alberto Coripaco Huarcaya \\[2.5cm]
+
+        Lima - Per\'u \\
+        Diciembre 2022
+    \end{center}
+    %vfill{}
+\end{titlepage}
+
+\newpage
+\pagenumbering{gobble}
+\pagestyle{plain}
+\begin{center}
+    \textbf{Teoría Homot\'opica de Tipos} \\[1.5cm]
+\end{center}
+
+\begin{center}
+    Fernando Rafael Chu Rivera \\[1.5cm]
+\end{center}
+
+Tesis presentada a consideraci\'on del Cuerpo Docente de la Facultad de Ciencias Matem\'aticas, de la Universidad Nacional Mayor de San Marcos, como parte de los requisitos para obtener el Grado Acad\'emico de Mag\'ister en Matem\'atica.\\
+
+Aprobada por:\\
+\vspace{2cm}
+
+\begin{center}
+    .........................................................\\
+    Dr. -- \\
+    \quad    \\[1.5cm]
+    ..........................................................\\
+    Dr. -- \\
+    \quad  \\[1.5cm]
+    ...........................................................\\
+    Dr. -- \\
+    \quad  \\[1.5cm]
+\end{center}
+
+\vfill
+\begin{center}
+    Lima - Per\'u \\ Diciembre - 2022
+\end{center}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%5
+%% Ficha catalografica
+%%%%%%%%%%%%%%%%%%%%%%%%%%5
+% \newpage
+% \begin{dedication}
+%     \begin{center}
+%         FICHA CATALOGR\'AFICA\\[4cm]
+%     \end{center}
+%     \hfill \
+%     \parbox{10cm}{
+%         \hspace{-1cm} Chu Rivera, Fernando Rafael \\[0.1cm]
+%         Teor\'ia Homot\'opica de Tipos, (Lima) 2022.\\
+%         vii, 96 p., 29,7 cm, (UNMSM, Licenciado, Matemtica, 2016).\\
+%         Tesis, Universidad Nacional Mayor de San Marcos, Facultad de Ciencias Matem\'aticas 1. Matemtica. UNMSM/FdeCM II. Ttulo (Serie).\\[8cm]
+%     }
+% \end{dedication}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%5
+%% Abstract (ES)
+%%%%%%%%%%%%%%%%%%%%%%%%%%5
+\newpage
+\pagenumbering{gobble}
+\begin{center}
+    \textbf{TEOR\'IA HOMOT\'OPICA DE TIPOS} \\[0.4cm]
+    Fernando Rafael Chu Rivera \\[0.4cm]
+    Diciembre - 2022 \\[0.7cm]
+\end{center}
+
+\noindent Asesor \hspace{1.74cm} : Dr. Jorge Alberto Coripaco Huarcaya \\
+Grado obtenido \hspace{0.1cm} : Mag\'ister en Matem\'atica \\[1cm]
+
+\noindent{.\dotfill{}.\par}
+\vspace{1.5cm}
+
+\begin{center}
+    \textbf{RESUMEN}\\[1cm]
+\end{center}
+
+\noindent Presentamos la Teor\'ia Homot\'opica de Tipos, que uniformiza los conceptos de proposiciones y de conjuntos en uno solo m\'as general, el de ``tipos''.
+Desarrollamos las nociones principales de esta teor\'ia, y observamos que esta tiene una profunda estructura, que puede ser vista desde tres perspectivas distintas, la categ\'orica, la l\'ogica y la homot\'opica. Formalizamos algunos conceptos cl\'asicos de topolog\'ia algebraica, como contractibilidad, retracciones, secciones y equivalencias homot\'opica.
+Finalmente, culminamos con una demostraci\'on de que $\pi_1(\Sn^1)=\Z$, a modo de aplicaci\'on.
+Adicionalmente, comprobamos todos nuestros resultados a trav\'es de un asistente de pruebas, Agda.
+
+\vspace{1cm}
+\noindent Palabras clave: Teor\'ia de Tipos, Topolog\'ia Algebraica, Equivalencias Homot\'opicas, Teor\'ia de Categor\'ias, Grupo Fundamental.
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%5
+%% Abstract (ES)
+%%%%%%%%%%%%%%%%%%%%%%%%%%5
+\newpage
+\pagenumbering{gobble}
+\begin{center}
+    \textbf{HOMOTOPY TYPE THEORY} \\[0.4cm]
+    Fernando Rafael Chu Rivera \\[0.4cm]
+    December - 2022 \\[0.7cm]
+\end{center}
+
+\noindent Advisor \hspace{1.64cm} : Dr. Jorge Alberto Coripaco Huarcaya \\
+Degree obtained \hspace{0.1cm} : Master in Mathematics \\[1cm]
+
+\noindent{.\dotfill{}.\par}
+\vspace{1.5cm}
+
+\begin{center}
+    \textbf{Abstract}\\[1cm]
+\end{center}
+
+\noindent We present Homotopy Type Theory, which combines the concepts of propositions and sets in a more general one, that of ``types''.
+We develop the main notions of this theory, and observe that it has a very deep structure, which can be seen through three different lenses, categorical, logical, and homotopical.
+We formalize some classic concepts from algebraic topology, like contractibility, retractions, sections, and homotopic equivalences.
+Finally, we finish with a proof that $\pi_1(\Sn^1)=\Z$, as an application.
+Additionally, we check all our results through the use of a proof assistant, Agda.
+
+\vspace{1cm}
+\noindent Keywords: Type Theory, Algebraic Topology, Homotopic Equivalences, Category Theory, Fundamental Group.
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%5
+%% Dedicatoria
+%%%%%%%%%%%%%%%%%%%%%%%%%%5
+\newpage
+\pagenumbering{gobble}
+\begin{dedication}
+    Dedicado a todo ser o proceso \\
+    involucrado en la generaci\'on del \\
+    conocimiento humano, y a todos \\
+    aquellos que participaron en \\
+    mi desarrollo como persona.
+\end{dedication}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%5
+%% Abstract (ES)
+%%%%%%%%%%%%%%%%%%%%%%%%%%5
+\newpage
+\pagenumbering{gobble}
+\begin{center}
+    \vspace{1cm}
+    \textbf{Agradecimientos} \\[0.6cm]
+\end{center}
+Agradezco a mi familia, por su constante apoyo, y por la formaci\'on que me han dado como persona.
+Agradezco a mis amigos que me han acompa\~nado a lo largo de mi vida, y me han motivado a perseverar ante las adversidades.  \\[0.3cm]
+Agradezco a los profesores que me han ense\~nado diversos cursos durante mis estudios de maestr\'ia, aprecio todo el conocimiento transmitido en estas interesantes materias.
+Agradezco en particular, a mi asesor Dr. Jorge Coripaco, por aceptar explorar conmigo el tema nuevo que es Teor\'ia Homot\'opica de Tipos. \\[0.3cm]
+Finalmente, quiero agradecer a los organizadores y participantes de la escuela \textit{Homotopy Type Theory Electronic Seminar Talks Summer School 2022}, as\'i como a toda la comunidad de \textit{Homotopy Type Theory}, por su amabilidad y su voluntad de compartir su conocimiento.
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%5
+%% Contenido
+%%%%%%%%%%%%%%%%%%%%%%%%%%5
+\newpage
+\tableofcontents
+\newpage
+
+\pagenumbering{roman}
+\setcounter{page}{1}
+\setcounter{page}{1}
+
+\pagestyle{fancy}
+\chapter*{Introducci\'on}
+\addcontentsline{toc}{chapter}{\hspace{1.5em}Introducci\'on}
+\subfile{chapters/cap0}
+
+\chapter{Preliminares categ\'oricos}
+\pagenumbering{arabic}
+\setcounter{page}{1}
+\subfile{chapters/cap1}
+
+\fancyhead[L]{\slshape\nouppercase{\euclidfm\rightmark}}
+\chapter{Teoría de Tipos Dependientes}
+\subfile{chapters/cap2}
+
+\chapter{La Interpretación Homotópica}\label{hott}
+\subfile{chapters/cap3}
+
+\chapter{Teor\'ia Homot\'opica de Tipos}
+\subfile{chapters/cap4}
+
+\chapter{Conclusiones}
+\subfile{chapters/cap5}
+
+\appendix
+\subfile{chapters/appendix}
+
+\printbibliography
+\end{document}
