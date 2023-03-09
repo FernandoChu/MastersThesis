@@ -23,19 +23,18 @@ variable
 ```
 -->
 
-
-## Sección 2.5. El tipo de funciones
+## Sección 2.4. El tipo de funciones
 
 ```agda
--- Definición 2.5.5.
+-- Definición 2.4.5.
 idA : {A : 𝒰 𝒾} → A → A
 idA x = x
 
--- Definición 2.5.8.
+-- Definición 2.4.8.
 cnst : (A : 𝒰 𝒾) (B : 𝒰 𝒿) (x : A) (y : B) → A
 cnst A B x y = x
 
--- Definición 2.5.8.
+-- Definición 2.4.10.
 comp : {A : 𝒰 𝒾} {B : 𝒰 𝒿} {C : 𝒰 𝓀}
     → (B → C)
     → (A → B)
@@ -43,22 +42,22 @@ comp : {A : 𝒰 𝒾} {B : 𝒰 𝒿} {C : 𝒰 𝓀}
 comp g f x = g (f x)
 ```
 
-## Sección 2.6. El tipo de funciones dependientes
+## Sección 2.5. El tipo de funciones dependientes
 
 ```agda
--- Definición 2.6.9.
+-- Definición 2.5.9.
 id : {A : 𝒰 𝒾} → A → A
 id x = x
 
 𝑖𝑑 : (A : 𝒰 𝒾) → A → A
 𝑖𝑑 A x = x
 
--- Ejemplo 2.6.11.
+-- Ejemplo 2.5.11.
 swap : (A : 𝒰 𝒾) (B : 𝒰 𝒿) (C : 𝒰 𝓀) → ((A → B → C) → (B → A → C))
 swap A B C g b a = g a b
 
 
--- Definición 2.6.12.
+-- Definición 2.5.12.
 _∘_ : {X : 𝒰 𝒾} {Y : 𝒰 𝒿} {Z : Y → 𝒰 𝓀}
     → ((y : Y) → Z y)
     → (f : X → Y)
@@ -74,7 +73,7 @@ codomain : {X : 𝒰 𝒾} {Y : 𝒰 𝒿} → (X → Y) → 𝒰 𝒿
 codomain {𝒾} {𝒿} {X} {Y} f = Y
 ```
 
-## Sección 2.7. El tipo de pares dependientes
+## Sección 2.6. El tipo de pares dependientes
 
 ```agda
 -- Definición del tipo de pares dependientes
@@ -92,17 +91,18 @@ infixr -1 -Σ
 
 syntax -Σ X (λ x → y) = Σ x ꞉ X , y
 
+-- Notación 2.6.2.
 _×_ : (X : 𝒰 𝒾) (Y : 𝒰 𝒿) → 𝒰 (𝒾 ⊔ 𝒿)
 X × Y = Σ x ꞉ X , Y
 infixr 30 _×_
 
--- Teorema 2.7.5.
+-- Teorema 2.6.5.
 Σ-induction : {X : 𝒰 𝒾} {Y : X → 𝒰 𝒿} {A : Σ Y → 𝒰 𝓀}
             → ((x : X) (y : Y x) → A (x , y))
             → ((x , y) : Σ Y) → A (x , y)
 Σ-induction g (x , y) = g x y
 
--- Teorema 2.7.6.
+-- Teorema 2.6.6.
 pr₁ : {X : 𝒰 𝒾} {Y : X → 𝒰 𝒿} → Σ Y → X
 pr₁ (x , y) = x
 
@@ -110,13 +110,13 @@ pr₂ : {X : 𝒰 𝒾} {Y : X → 𝒰 𝒿} → (z : Σ Y) → Y (pr₁ z)
 pr₂ (x , y) = y
 ```
 
-## Sección 2.8. 0, 1, 2 y el tipo del coproducto
+## Sección 2.7. 0, 1, 2 y el tipo del coproducto
 
 ```agda
 -- Definición del tipo de pares dependientes
 data 𝟘 : 𝒰₀ where
 
--- Teorema 2.8.2.
+-- Teorema 2.7.2.
 𝟘-induction : (A : 𝟘 → 𝒰 𝒾) → (x : 𝟘) → A x
 𝟘-induction A ()
 
@@ -128,7 +128,7 @@ data 𝟘 : 𝒰₀ where
 data 𝟙 : 𝒰₀ where
   ⋆ : 𝟙
 
--- Teorema 2.8.4.
+-- Teorema 2.7.4.
 𝟙-induction : (A : 𝟙 → 𝒰 𝒾) → A ⋆ → (x : 𝟙) → A x
 𝟙-induction A a ⋆ = a
 
@@ -141,7 +141,7 @@ data _⊎_ (X : 𝒰 𝒾) (Y : 𝒰 𝒿) : 𝒰 (𝒾 ⊔ 𝒿) where
  inr : Y → X ⊎ Y
 infixr 20 _⊎_
 
--- Teorema 2.8.8.
+-- Teorema 2.7.8.
 ⊎-ind : {A : 𝒰 𝒾} {B : 𝒰 𝒿} (C : A ⊎ B → 𝒰 𝓀)
       → ((x : A) → C (inl x))
       → ((y : B) → C (inr y))
@@ -156,13 +156,13 @@ infixr 20 _⊎_
 pattern ₀ = inl ⋆
 pattern ₁ = inr ⋆
 
--- Teorema 2.8.10.
+-- Teorema 2.7.10.
 𝟚-induction : (A : 𝟚 → 𝒰 𝒾) → A ₀ → A ₁ → (n : 𝟚) → A n
 𝟚-induction A a₀ a₁ ₀ = a₀
 𝟚-induction A a₀ a₁ ₁ = a₁
 ```
 
-## Sección 2.9. El tipo de los naturales
+## Sección 2.8. El tipo de los naturales
 
 ```agda
 -- Definición del tipo de los naturales
@@ -171,7 +171,7 @@ data ℕ : 𝒰₀ where
   succ : ℕ → ℕ
 {-# BUILTIN NATURAL ℕ #-}
 
--- Teorema 2.9.3.
+-- Teorema 2.8.3.
 ℕ-induction : (A : ℕ → 𝒰 𝒾)
             → A 0
             → ((n : ℕ) → A n → A (succ n))
@@ -182,51 +182,51 @@ data ℕ : 𝒰₀ where
     h 0        = a₀
     h (succ n) = f n (h n)
 
--- Teorema 2.9.3.
+-- Teorema 2.8.5.
 ℕ-rec : (C : 𝒰 𝒾)
       → C
       → (C → C)
       → (ℕ → C)
 ℕ-rec C c f = ℕ-induction (λ _ → C) c (λ _ → f)
 
--- Ejemplo 2.9.5.
+-- Ejemplo 2.8.6.
 double : ℕ → ℕ
 double 0 = 0
 double (succ n) = succ (succ (double n))
 
--- Ejemplo 2.9.6.
+-- Ejemplo 2.8.7.
 add : ℕ → ℕ → ℕ
 add 0 = id
 add (succ n) = λ m → succ (add n m)
 ```
 
-## Sección 2.10. Proposiciones como tipos
+## Sección 2.9. Proposiciones como tipos
 
 ```agda
--- Definición 2.10.1.
+-- Definición 2.9.1.
 logeq : (A : 𝒰 𝒾) (B : 𝒰 𝒿) → 𝒰 (𝒾 ⊔ 𝒿)
 logeq A B = (A → B) × (B → A)
 
--- Ejemplo 2.10.2.
-ej-1-10-2 : {A : 𝒰 𝒾} {B : 𝒰 𝒿} → (A → 𝟘) ⊎ (B → 𝟘) → ((A × B) → 𝟘)
-ej-1-10-2 (inl f1) (a , b) = f1 a
-ej-1-10-2 (inr f2) (a , b) = f2 b
+-- Ejemplo 2.9.2.
+de-Morgan : {A : 𝒰 𝒾} {B : 𝒰 𝒿} → (A → 𝟘) ⊎ (B → 𝟘) → ((A × B) → 𝟘)
+de-Morgan (inl f1) (a , b) = f1 a
+de-Morgan (inr f2) (a , b) = f2 b
 
--- Ejemplo 2.10.3.
-ej-1-10-3 : {A : 𝒰 𝒾} {P : A → 𝒰 𝒿}
-          → Σ x ꞉ A , (P x → 𝟘)
-          → ((x : A) → P x)
-          → 𝟘
-ej-1-10-3 (a , g) h = g (h a)
+-- Ejemplo 2.9.4.
+Σ¬Π : {A : 𝒰 𝒾} {P : A → 𝒰 𝒿}
+    → Σ x ꞉ A , (P x → 𝟘)
+    → ((x : A) → P x)
+    → 𝟘
+Σ¬Π (a , g) h = g (h a)
 
--- Ejemplo 2.10.4.
+-- Ejemplo 2.9.5.
 ac : {A : 𝒰 𝒾} {B : 𝒰 𝒿} {R : A → B → 𝒰 𝓀}
    → ((x : A) → Σ y ꞉ B , R x y)
    → Σ f ꞉ (A → B) , ((x : A) → R x (f x))
 ac g = ((λ x → pr₁ (g x)) , (λ x → pr₂ (g x)))
 ```
 
-## Sección 2.11. El tipo de identidades
+## Sección 2.10. El tipo de identidades
 
 ```agda
 -- Definición del tipo de identidades
@@ -240,13 +240,26 @@ infix   0 _≡_
 {-# BUILTIN EQUALITY _≡_ #-}
 {-# BUILTIN REWRITE _≡_ #-}
 
--- Ejemplo 2.11.2.
-ej-1-11-2 : (n : ℕ) → (add 0 n ≡ n)
-ej-1-11-2 n = refl n
+-- Ejemplo 2.10.2.
+add0n : (n : ℕ) → (add 0 n ≡ n)
+add0n n = refl n
 
--- Teorema 2.11.4.
+-- Teorema 2.10.4.
 𝕁 : (A : 𝒰 𝒾) (D : (x y : A) → x ≡ y → 𝒰 𝒿)
   → ((x : A) → D x x (refl x))
   → (x y : A) (p : x ≡ y) → D x y p
 𝕁 A D d x x (refl x) = d x
+```
+
+## Sección 2.11. Grupos
+
+```agda
+GroupStr : (A : 𝒰 𝒾) → 𝒰 𝒾
+GroupStr A =
+  Σ m ꞉ (A → A → A) , ((x y z : A) → m x (m y z) ≡ m (m x y) z)
+    × (Σ e ꞉ A , ((g : A) → (m e g ≡ g) × (m g e ≡ g))
+    × (Σ i ꞉ (A → A) , ((g : A) → (m g (i g) ≡ e) × (m (i g) g ≡ e))))
+
+Group : {𝒾 : Level} → 𝒰 (𝒾 ⁺)
+Group {𝒾} = Σ A ꞉ 𝒰 𝒾 , GroupStr A
 ```

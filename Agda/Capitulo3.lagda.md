@@ -202,7 +202,6 @@ tr-ap-assoc : {A : 𝒰 𝒾} (B : A → 𝒰 𝒿) {x y : A}
               (p : x ≡ y)
             → tr id (ap B p) ≡ tr B p
 tr-ap-assoc B (refl _) = refl _
-
 ```
 
 ## Sección 3.5. Equivalencias homotópicas
@@ -398,7 +397,7 @@ pair⁼ {𝒾} {𝒿} {X} {Y} {w1 , w2} {w'1 , w'2} (refl w1 , refl w2) = refl (
        → z ≡ (pr₁ z , pr₂ z)
 Σ-uniq z = pair⁼ (refl _ , refl _)
 
--- Corolario 3.6.2.
+-- Corolario 3.6.3.
 pair×⁼⁻¹ : {X : 𝒰 𝒾} {Y : 𝒰 𝒿} {w w' : X × Y}
          → (w ≡ w') → ((pr₁ w ≡ pr₁ w') × (pr₂ w ≡ pr₂ w'))
 pair×⁼⁻¹ (refl w) = ( refl (pr₁ w) , refl (pr₂ w) )
@@ -444,6 +443,10 @@ funext : {A : 𝒰 𝒾} {B : A → 𝒰 𝒿}
 funext {f} {g} htpy =
   let (funext , η , ε ) = qinv-fe _ _
    in funext htpy
+
+-- Proposición 3.7.2.
+𝟘-initial : (C : 𝒰 𝒾) → (f : 𝟘 → C) → f ≡ !𝟘 C
+𝟘-initial C f = funext λ x → !𝟘 (f x ≡ !𝟘 C x) x
 
 -- Lema 3.7.3.
 PathOver-→ : {X : 𝒰 𝒾}
@@ -569,9 +572,10 @@ sm≡sn→m≡n {m} {n} p = decode-ℕ m n (encode-ℕ (succ m) (succ n) p)
     (ℕ-decidable m n)
 ```
 
-# Sección 10. Propiedades Universales
+## Sección 3.10. Propiedades Universales
 
 ```agda
+-- Teorema 3.10.1.
 ×-→ : (X : 𝒰 𝒾) (Y : 𝒰 𝒿) (Z : 𝒰 𝓀)
       (f : Z → X) (g : Z → Y)
       (h' : Z → X × Y)
@@ -581,6 +585,7 @@ sm≡sn→m≡n {m} {n} p = decode-ℕ m n (encode-ℕ (succ m) (succ n) p)
 ×-→ X Y Z f g h' p q =
   funext (λ z → pair×⁼(happly p z , happly q z))
 
+-- Teorema 3.10.2.
 ⊎-→ : (X : 𝒰 𝒾) (Y : 𝒰 𝒿) (Z : 𝒰 𝓀)
       (f : X → Z) (g : Y → Z)
       (h' : X ⊎ Y → Z)
@@ -592,6 +597,7 @@ sm≡sn→m≡n {m} {n} p = decode-ℕ m n (encode-ℕ (succ m) (succ n) p)
          (happly p)
          (happly q))
 
+-- Teorema 3.10.4.
 ℕ-→ : (C : 𝒰 𝒾)
       (c : C) (f : C → C)
       (h : ℕ → C)

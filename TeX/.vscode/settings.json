@@ -1,0 +1,32 @@
+{
+  "files.exclude": {
+    "**/*.aux": true,
+    "**/*.bcf": true,
+    "**/*.bbl": true,
+    "**/*.blg": true,
+    "**/*.out": true,
+    "**/*.fdb_latexmk": true,
+    "**/*.xml": true,
+    "**/*.fls": true,
+    "**/*.log": true,
+    "**/*.synctex.gz": true,
+    "**/*.toc": true,
+    "**/*.xdv": true
+  },
+  "ltex.language": "es",
+  "editor.wordWrap": "on",
+  "latex-workshop.latex.tools": [
+    {
+      "name": "latexmk",
+      "command": "latexmk",
+      "args": [
+        "-synctex=1",
+        "-interaction=nonstopmode",
+        "-file-line-error",
+        "-lualatex",
+        "-outdir=%OUTDIR%",
+        "%DOC%"
+      ]
+    }
+  ]
+}

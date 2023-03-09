@@ -15,7 +15,7 @@ Dado que las proposiciones y las demostraciones son objetos mismos en DTT, es ne
     Una \textbf{signatura} $Sg$ es una colección de símbolos tipográficos. Una \textbf{expresión} $Exp_{Sg}$ es una secuencia finita de símbolos provenientes de la signatura $Sg$.
 \end{definition}
 \begin{example}
-    La MC utiliza como signatura la colección que contiene a los caracteres alfanuméricos, los conectores lógicos y a los operadores; es decir,
+    La Matem\'atica Cl\'asica utiliza como signatura la colección que contiene a los caracteres alfanuméricos, los conectores lógicos y a los operadores; es decir,
     \[Sg=\{\textrm`1\textrm',\textrm`(\textrm',\textrm`n\textrm',\textrm`{+}\textrm',\textrm`\Sigma\textrm',\textrm`x_i\textrm',\dots\}.\]
     Una expresión típica de MC es $\langle \textrm`1\textrm', \textrm`{+}\textrm', \textrm`1\textrm', \textrm`{=}\textrm', \textrm`2\textrm' \rangle_{Sg}$.
 \end{example}
@@ -35,7 +35,7 @@ Para nuestras pr\'oximas definiciones, necesitaremos el siguiente concepto.
     Una \textbf{metavariable} es una variable que puede tomar como valor cualquier expresi\'on, a excepción de aquellas que contienen alguno de los s\'imbolos `\equiv', `:', `\vdash' o `ctx'.
 \end{definition}
 
-La raz\'on por la que omitimos estos tres s\'imbolos de la definici\'on es porque estos son \textit{caracteres reservados}, los cuales tienen un significado particular y ser\'an introducidos en la pr\'oxima secci\'on.
+La raz\'on por la que omitimos estos cuatro s\'imbolos de la definici\'on es porque estos son \textit{caracteres reservados}, los cuales tienen un significado particular y ser\'an introducidos en la pr\'oxima secci\'on.
 
 \begin{definition}
     Sean $a$ y $A$ metavariables, dada una expresión de la forma
@@ -177,7 +177,7 @@ La segunda regla indica que si $\Gamma$ implica que $A$ es un elemento del unive
 
 Dado que son las primeras reglas introducidas, hemos brindado una interpretaci\'on de ellas.
 Para las próximas reglas no realizaremos este tipo de comentarios, salvo para aclarar alguna posible confusión.
-La lista completa de reglas se encuentra en el Apéndice \ref{reglas}.
+La lista completa de reglas presentadas en esta secci\'on se encuentra en el Apéndice \ref{reglas}.
 
 \begin{notation}
     Omitiremos los subíndices de los universos en la mayoría de escenarios, por lo que interpretaremos expresiones sin sentido como $\mathcal U: \mathcal U$ agregando índices adecuados, obteniendo $\mathcal{U}_i: \mathcal{U}_{i+1}$.
@@ -229,7 +229,7 @@ Las tres primeras reglas de $\equiv$ indican que esta es una relación de equiva
 
 En las siguientes secciones introduciremos reglas para la formación, introducción y eliminación de algunos constructos.
 Para cada una de estas reglas, existe una regla correspondiente indicando que estas reglas preservan la igualdad por definición.
-Como es com\'un es la presentaci\'on de reglas de DTT, estas ser\'an omitidas.
+Como es com\'un en la presentaci\'on de reglas de DTT, estas ser\'an omitidas.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%% sec5
@@ -342,8 +342,8 @@ La currificación de una funci\'on $f: (A\times B) \to C$ es una funci\'on $f': 
         \AxiomC{$\Gamma'$} \RightLabel{\footnotesize ctx-Ext}
         \UnaryInfC{$\Gamma', x{:} A$ ctx} \RightLabel{\footnotesize ctx-Ext}
         \UnaryInfC{$\Gamma', x{:}A, y{:}B$ ctx} \RightLabel{\footnotesize Vble}
-        \UnaryInfC{$\Gamma', x{:}A, y{:}B \vdash a:A$}  \RightLabel{\footnotesize $\to$-INTRO}
-        \UnaryInfC{$\Gamma', x{:}A \vdash \lam{y:B}a: B \to A$}
+        \UnaryInfC{$\Gamma', x{:}A, y{:}B \vdash x:A$}  \RightLabel{\footnotesize $\to$-INTRO}
+        \UnaryInfC{$\Gamma', x{:}A \vdash \lam{y:B}x: B \to A$}
         \AxiomC{$\Gamma'$} \RightLabel{\footnotesize Vble}
         \UnaryInfC{$\Gamma' \vdash a:A$} \RightLabel{\footnotesize $\to$-COMP}
         \def\defaultHypSeparation{\hskip 3em}
@@ -377,25 +377,25 @@ Una operación común entre funciones es la composición, la siguiente derivaci�
 \begin{example}\label{comp-nodep}
     Sea $\Gamma \defeq A{:}\mathcal{U}, B{:}\mathcal{U},  C{:}\mathcal{U}$, primero veremos que podemos expandir este contexto adecuadamente; es decir $\Gamma \vdash \Gamma, g{:}B\to C, f{:}A\to B, x{:}A \text{ ctx}$.
     \begin{center}
-        \AxiomC{$\Gamma$} \RightLabel{\footnotesize Vble}
-        \UnaryInfC{$\Gamma \vdash B : \mathcal{U}_i$ ctx}
         \AxiomC{$\Gamma$ ctx} \RightLabel{\footnotesize Vble}
-        \UnaryInfC{$\Gamma \vdash C : \mathcal{U}_i$ ctx} \RightLabel{\footnotesize $\to$-FORM}
+        \UnaryInfC{$\Gamma \vdash B : \mathcal{U}$ ctx}
+        \AxiomC{$\Gamma$ ctx} \RightLabel{\footnotesize Vble}
+        \UnaryInfC{$\Gamma \vdash C : \mathcal{U}$ ctx} \RightLabel{\footnotesize $\to$-FORM}
         \def\defaultHypSeparation{\hskip 2.5em}
-        \BinaryInfC{$\Gamma \vdash B\to C{:} \mathcal{U}_i$} \RightLabel{\footnotesize ctx-Ext}
+        \BinaryInfC{$\Gamma \vdash B\to C: \mathcal{U}$} \RightLabel{\footnotesize ctx-Ext}
         \UnaryInfC{$\Gamma, (g {:} B\to C)$ ctx}
         \DisplayProof
     \end{center}
     Además,
     \begin{center}
         \AxiomC{$\Gamma, (g{:}B\to C)$ ctx} \RightLabel{\footnotesize Vble}
-        \UnaryInfC{$\Gamma, (g{:}B\to C) \vdash A : \mathcal{U}_i$}
+        \UnaryInfC{$\Gamma, (g{:}B\to C) \vdash A : \mathcal{U}$}
         \AxiomC{$\Gamma, (g{:}B\to C)$ ctx} \RightLabel{\footnotesize Vble}
-        \UnaryInfC{$\Gamma, (g{:}B\to C) \vdash B : \mathcal{U}_i$} \RightLabel{\footnotesize $\to$-FORM}
+        \UnaryInfC{$\Gamma, (g{:}B\to C) \vdash B : \mathcal{U}$} \RightLabel{\footnotesize $\to$-FORM}
         \def\defaultHypSeparation{\hskip 3em}
-        \BinaryInfC{$\Gamma, (g{:}B\to C) \vdash A\to B{:} \mathcal{U}_i$}\RightLabel{\footnotesize ctx-Ext}
+        \BinaryInfC{$\Gamma, (g{:}B\to C) \vdash A\to B: \mathcal{U}$}\RightLabel{\footnotesize ctx-Ext}
         \UnaryInfC{$\Gamma, (g{:}B\to C), (f{:}A\to B)$ ctx}\RightLabel{\footnotesize Vble}
-        \UnaryInfC{$\Gamma, (g{:} B \to C), (f{:} A \to B) \vdash x:A$} \RightLabel{\footnotesize ctx-Ext}
+        \UnaryInfC{$\Gamma, (g{:} B \to C), (f{:} A \to B) \vdash A:\UU$} \RightLabel{\footnotesize ctx-Ext}
         \UnaryInfC{$\Gamma, (g{:} B \to C), (f{:} A \to B), (x:A)$ ctx}
         \DisplayProof
     \end{center}
@@ -477,7 +477,7 @@ Presentamos el constructo an\'alogo en DTT.
 \end{definition}
 
 Recordamos que $B$ no es el car\'acter `$B$', sino una metavariable, por lo que esta puede contener la variable $x$ dentro de s\'i.
-Adem\'as, notamos que el requerimiento que $\Gamma, x:A \vdash B: \UU$ es equivalente a que exista un $f: A \to \UU$, por lo que en este caso también diremos que $B$ es una familia de tipos.
+Adem\'as, notamos que el requerimiento que $\Gamma, x:A \vdash B: \UU$ es equivalente a que exista una funci\'on $f: A \to \UU$, por lo que en este caso también diremos que $f$ es una familia de tipos.
 
 \begin{example}
     Cada punto $x$ en un espacio topol\'ogico $X$ tiene asociado un grupo, su grupo fundamental.
@@ -496,8 +496,8 @@ Esto se puede generalizar para familias arbitrarias.
     Sea $X$ un espacio topol\'ogico, para cada $x:X$ podemos escoger un elemento de $\pi_1(x,X) : \UU$, el elemento neutro de ese grupo $0_{\pi_1(x,X)}$.
 \end{example}
 
-En este \'ultimo ejemplo tenemos una regla de correspondencia, por lo que se esperar\'ia que podemos formar una función $f$ con el tipo $X \to \pi_1(x,X)$.
-Sin embargo, este tipo previo no est\'a bien tipado, el $x$ que aparece en el codominio no est\'a definido.
+En este \'ultimo ejemplo tenemos una regla de correspondencia, por lo que se esperar\'ia que podamos formar una función $f$ con el tipo $X \to \pi_1(x,X)$.
+Sin embargo, este tipo previo no est\'a bien tipado, pues el $x$ que aparece en el codominio no est\'a definido.
 El problema es que el codominio depende del $x:X$ escogido en el dominio, para estos casos necesitaremos el tipo de \textbf{funciones dependientes} de $A$ en $B$, denotado por $\tprd{x:A} B$.
 
 \begin{rules}
@@ -534,7 +534,7 @@ Notamos que estas reglas son generalizaciones directas de las reglas de funcione
 En efecto, tomaremos estas como las reglas oficiales y definiremos el tipo $A \to B$ como $\tprd{x:A}B$; puesto que en este caso $B$ es una familia constante, y se tiene que $B[a/x]$ es $B$, con lo que se obtienen las reglas originales.
 
 \begin{notation}
-    Los variables ligadas por $\Pi$ tienen menor precedencia que otros operadores dentro de un tipo, por lo que $\tprd{x:A}B \to C$ se entiende como $\tprd{x:A}(B \to C)$, por ejemplo.
+    Las variables ligadas por $\Pi$ tienen menor precedencia que otros operadores dentro de un tipo, por lo que $\tprd{x:A}B \to C$ se entiende como $\tprd{x:A}(B \to C)$, por ejemplo.
     Adem\'as, para acentuar el \'enfasis de la (posible) dependencia de $B$ sobre $x$, escribiremos $\tprd{x:A} B(x)$, entendiendo por esto como simplemente $\tprd{x:A} B$.
     Finalmente, mencionamos que existe otra notación alternativa para $\tprd{x:A} B(x)$, como
     $$\prd{x:A} B(x) \hspace{1em} \text{ y } \hspace{1em} \Pi(x:A), B(x).$$
@@ -615,7 +615,7 @@ Por este motivo, en las secciones siguientes comenzaremos a escribir solamente l
 Como se esperaría, podemos generalizar la definici\'on de composici\'on de funciones del Ejemplo \ref{comp-nodep}.
 \begin{definition}
     Podemos definir la funci\'on de composici\'on de funciones
-    \[ \mathsf{comp}^* \defeq \prd{A:\UU} \prd{B:\UU} \prd{(C:\UU)} \left( \prd{y:B}C(y) \right) \to \prd{f:A\to B} \prd{x:X} C(f (x )) \]
+    \[ \mathsf{comp}^* \defeq \prd{A:\UU} \prd{B:\UU} \prd{(C:B \to \UU)} \left( \prd{y:B}C(y) \right) \to \prd{f:A\to B} \prd{x:X} C(f (x )) \]
     dada por
     \[ \mathsf{comp}^*(A,B,C,g,f,x) \defeq g (f (x)) \]
     Esta funci\'on generaliza a la funci\'on del Ejemplo \ref{comp-nodep}, en el sentido de que
@@ -739,20 +739,20 @@ Veamos como podemos utilizar este principio para mostrar la existencia de las fu
         C\defeq \lam{p}A : \sm{x:A}B(x) \to \UU \\
         g \defeq \lam{x}\lam{y}x : \prd{a:A} \prd{b:B(a)}A
     \end{gather*}
-    Notando que $C({a,b}) \equiv A$, y aplicando el principio de inducción obtenemos
+    Notando que $C((a,b)) \equiv A$, y aplicando el principio de inducción obtenemos
     \begin{gather*}
         \fst \defeq \ind{\tsm{x:A}B(x)}(C,g): \prd{p: \sm{x:A} B(x)}A\\
-        \fst(a,b)\defeq \ind{\tsm{x:A}B(x)}(C,g,(a,b)) \equiv g(a)(b) \equiv a
+        \fst(a,b)\equiv \ind{\tsm{x:A}B(x)}(C,g,(a,b)) \equiv g(a)(b) \equiv a
     \end{gather*}
     De manera similar, tomando
     \begin{gather*}
         C' \defeq \lam{p} B(\fst(p)) : \sm{x:A} B(x) \to \UU \\
-        g \defeq \lam{x}\lam{y}y : \prd{a:A} \prd{b:B(a)}B(a)
+        g' \defeq \lam{x}\lam{y}y : \prd{a:A} \prd{b:B(a)}B(a)
     \end{gather*}
-    y notando que $C({a,b}) \equiv B(\fst((a,b)))\equiv B(a)$, aplicando el principio de inducción obtenemos
+    y notando que $C((a,b)) \equiv B(\fst((a,b)))\equiv B(a)$, aplicando el principio de inducción obtenemos
     \begin{gather*}
         \snd \defeq \ind{\tsm{x:A}B(x)}(C',g'): \prd{p: \sm{x:A} B(x)}B(\fst(p))\\
-        \snd \defeq \ind{\tsm{x:A}B(x)}(C',g',(a,b)) \equiv g'(a,b) \equiv b
+        \snd \equiv \ind{\tsm{x:A}B(x)}(C',g',(a,b)) \equiv g'(a,b) \equiv b
     \end{gather*}
     Por lo que ambas proyecciones existen.
 \end{proof}
@@ -1133,7 +1133,7 @@ En el caso en el que la familia $C: \N \to \UU$ es constante, el principio de in
     \end{align*}
 \end{proof}
 
-Es m\'as, para todos los tipos existe un principio de recursi\'on, el cual es simplemente el principio de inducci\'on aplicado a una familia constante.
+Es m\'as, para todos los tipos existe un principio de recursi\'on, el cual es simplemente el principio de inducci\'on aplicado a una familia constante, como ya lo vimos para el caso del tipo  $\emptyt$.
 Veamos dos aplicaciones de esto.
 
 \begin{example}
@@ -1200,7 +1200,7 @@ Esta correspondencia entre l\'ogica y tipos es llamada el \textbf{isomorfismo de
     \begin{center}
         \begin{tabular}{ l l }
             \thickhline
-            Matemática Clásica      & Teoría de Tipos dependientes \\
+            Matemática Clásica      & Teoría de Tipos Dependientes \\
             \hline
             $A \wedge B$            & $A \times B$                 \\
             $A \vee B$              & $A + B$                      \\
@@ -1217,7 +1217,7 @@ Esta correspondencia entre l\'ogica y tipos es llamada el \textbf{isomorfismo de
 \end{table}
 
 La correspondencia es relativamente simple por lo que no la explicaremos m\'as a detalle, solo el caso de $\lnot A$ merece una mayor atenci\'on.
-En DTT el $\emptyt$ toma el rol de un absurdo, puesto que su mismo principio de inducci\'on indica que es posible formar una función con cualquier codominio dado un elemento de $\emptyt$.
+En DTT, el $\emptyt$ toma el rol de un absurdo, puesto que su mismo principio de inducci\'on indica que es posible formar una función con cualquier codominio dado un elemento de $\emptyt$.
 Por este motivo, interpretamos $A \to \emptyt$ como $\lnot A$.
 
 \begin{definition}
@@ -1254,7 +1254,7 @@ Veamos algunos ejemplos de l\'ogica proposicional y l\'ogica predicativa.
 \begin{example}
     El axioma de elección en MC indica que dada una colección de conjuntos no vac\'ios $X$, es posible
     crear una función $f:X \to \bigcup X$ que selecciona un elemento de cada conjunto. Es decir,
-    \[ \left( \forall x \in X,  \exists y \in \bigcup x, (y \in x) \right) \implies \left( \exists f: X \to \bigcup X, \forall x \in X, (f(x) \in x) \right) \]
+    \[ \left( \forall x \in X,  \exists y \in \bigcup X, (y \in x) \right) \implies \left( \exists f: X \to \bigcup X, \forall x \in X, (f(x) \in x) \right) \]
     En DTT, esto podr\'ia ser entendido\footnote{La verdadera formalizaci\'on del axioma de elección como visto de manera cl\'asica, es ligeramente distinta a la presentaci\'on actual, ver \cite[Sección 3.8]{the_univalent_foundations_program_homotopy_2013}.} como un caso particular de
     \[ \ac : \Parens{\tprd{x:A} \tsm{y :B} R(x,y)} \to
         \Parens{\tsm{f:A\to B} \tprd{x:A} R(x,f(x))}
@@ -1270,7 +1270,7 @@ Veamos algunos ejemplos de l\'ogica proposicional y l\'ogica predicativa.
 \end{example}
 
 \begin{definition}
-    Dado un tipo $A$, si existe un elemento de \'el tal que $a:A$, diremos que $A$ es un tipo \textbf{habitado}.
+    Dado un tipo $A$, si existe un elemento $a$ tal que $a:A$, diremos que $A$ es un tipo \textbf{habitado}.
 \end{definition}
 
 As\'i, se dice una proposici\'on $P$ es \textbf{verdadera} cuando es un tipo habitado.
@@ -1345,7 +1345,7 @@ Este razonamiento nos da:
     \end{center}
 \end{rules}
 
-Como en los tipos previos, $\ind{=_A}^{C,c,a,a,p}$ es un primitivo que existe bajo ciertas condiciones, y estas reglas nos dan un principio de introducción y una b\'usqueda de patrones.
+Como en los tipos previos, $\ind{=_A}^{C,c,a,b,p}$ es un primitivo que existe bajo ciertas condiciones, y estas reglas nos dan un principio de introducción y una b\'usqueda de patrones.
 
 \begin{theorem}
     Para todo tipo $A : \UU$, existe una función
@@ -1360,7 +1360,7 @@ Como en los tipos previos, $\ind{=_A}^{C,c,a,a,p}$ es un primitivo que existe ba
 
 \begin{proof}
     Podemos definir $\indid{A}$ por
-    \[ \indid{A}(C,c,x,x,p) \defeq \indid{A}^{C,c,a,a,p}. \]
+    \[ \indid{A}(C,c,x,x,p) \defeq \indid{A}^{C,c,x,x,p}. \]
 \end{proof}
 
 \begin{notation}
@@ -1388,7 +1388,7 @@ Para diferenciar el tipo $\id[A]{x}{y}$ del juicio $x \jdeq y$, a veces se llama
 %%%% sec_
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Grupos}
-Veamos como los tipos introducidos nos permiten formalizar en DTT el concepto de un grupo.
+Veamos c\'omo los tipos introducidos nos permiten formalizar en DTT el concepto de un grupo.
 Recordemos que en MC un grupo es par $(G, *)$, tal que $G$ es un conjunto y $*$ es una operaci\'on binaria en $G$ tal que
 \begin{itemize}
     \item $*$ es asociativa,
@@ -1400,9 +1400,9 @@ Esta estructura puede ser reflejada directamente en la siguiente definici\'on
 \begin{definition}
     Dado un tipo $A$, diremos que este tiene una \textbf{estructura de grupo} si es que el tipo
     \begin{align*}
-        \mathsf{GroupStr}(A) \defeq \sm{m:A\to A \to A} & \prd{x,y,z:A} \left( m(x,m(y,z))=m(m(x,y),z) \right) \\
-        \times                                          & \sm{e:A } (e * g = g) \times (g * e = g)             \\
-        \times                                          & \sm{i:A \to A} (g * i(g) = e) \times (i(g) * g = e)
+        \mathsf{GroupStr}(A) \defeq \sm{m:A\to A \to A} & \prd{x,y,z:A} \left( m(x,m(y,z))=m(m(x,y),z) \right)                \\
+        \times                                          & \sm{e:A } \prd{g:A} (m(e, g) = g) \times (m(g , e) = g)             \\
+        \times                                          & \sm{i:A \to A} \prd{g:A} (m(g , i(g)) = e) \times (m(i(g),  g) = e)
     \end{align*}
     est\'a habitado.
 \end{definition}
@@ -1485,7 +1485,7 @@ La l\'ogica cl\'asica en realidad también est\'a formalizada de una forma simil
     \BinaryInfC{$\varphi \wedge \psi$}  \DisplayProof
 \end{center}
 
-As\'i existen reglas para cada constructo l\'ogico ($\forall, \exists, \wedge, \vee, \neg, \implies$), y resultados an\'alogos a los de la sección previa \cite{chiswell_mathematical_2007}, los cuales son asumidos implicitamente por los matemáticos, raz\'on por lo que omitimos las  para DTT.
+As\'i existen reglas para cada constructo l\'ogico ($\forall, \exists, \wedge, \vee, \neg, \implies$), y resultados an\'alogos a los de la sección previa \cite{chiswell_mathematical_2007}, los cuales son asumidos implicitamente por los matemáticos, raz\'on por la que los omitimos tambi\'en para DTT.
 
 La diferencia es entonces que las reglas de la l\'ogica cl\'asica son usualmente introducidas de manera informal, mientras que hemos decidido presentar las reglas de DTT formalmente en este trabajo.
 Diversas presentaciones de DTT introducen los constructos de forma informal, como \cite{nordstrom_programming_1990} y \cite{friedman_little_2018}.
@@ -1552,7 +1552,7 @@ Por poner otro ejemplo, dada la construcci\'on de los reales como cortes de Dede
 
 En contraste, en DTT, los elementos de un tipo pertenecen a un \'unico tipo (a excepción de los tipos mismos), y la estructura adicional es parte esencial y \'unica de una definición (ver \ref{Groups}, por ejemplo).
 Estos hechos permiten la inferencia del significado de variables no completamente especificadas, en la gran mayor\'ia de los casos.
-Esto hace que DTT sea una teor\'ia m\'as apropiada para la formalizaci\'on de las matemáticas, a trav\'es de programas de computadoras.
+Esto hace que DTT sea una teor\'ia m\'as apropiada para la formalizaci\'on de las matemáticas a trav\'es de programas de computadoras.
 
 Ya existe un gran esfuerzo a nivel global de traducir la matemática cl\'asica al lenguaje de DTT, usado por los asistentes de pruebas, y as\'i permitir la verificaci\'on de estos resultados por computadora.
 Entre estos, mencionamos las formalizaciones \cite{mahboubi_mathematical_2021} y \cite{the_mathlib_community_lean_2020}, proyectos con m\'as de 250 contribuidores en conjunto.

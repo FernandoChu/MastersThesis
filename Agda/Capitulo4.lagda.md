@@ -134,7 +134,6 @@ retrac-preserves-isContr A B s (b₀ , pf) =
     retraction s (section s a) ≡⟨ retract-equation s a ⟩
     a ∎
 
-
 -- Lema 4.2.8.
 trHomc- : {A : 𝒰 𝒾} (a : A) {x₁ x₂ : A} (p : x₁ ≡ x₂) (q : a ≡ x₁)
           → tr (λ x → a ≡ x) p q ≡ q ∙ p
@@ -590,3 +589,4 @@ decode-encode = 𝕊¹-ind _
 -- Corolario 4.4.15.
 π₁𝕊¹≡ℤ : πₙ 1 𝕊¹ base ≡ ℤ
 π₁𝕊¹≡ℤ = tr (λ - → ∥ - ∥₀ ≡ ℤ) (Ω𝕊¹≡ℤ ⁻¹) (∥∥₀-set-is-id ℤ hSetℤ)
+```

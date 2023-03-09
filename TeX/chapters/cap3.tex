@@ -37,7 +37,7 @@ Como categor\'ia, $X$ tiene una propiedad adicional, cada morfismo es invertible
 
 Hemos descrito el grupoide fundamental $\Pi_1(X)$ de $X$, y observamos que el grupo fundamental usual $\pi_1(X,x)$ aparece como la subcategor\'ia completa generada por $\{x\}$.
 
-Pero este este solo es el nivel 1 de una jerarquía infinita de homotop\'ias y de estructuras algebraicas.
+Pero este solo es el nivel 1 de una jerarquía infinita de homotop\'ias y de estructuras algebraicas.
 Una homotop\'ia $H$ usual entre dos caminos $p$ y $q$ puede ser entendida también como una superficie tal que sus bordes coinciden exactamente con $p$ y $q$; es decir, $H$ es un 2-camino entre 1-caminos. Un 3-camino ser\'ia una homotop\'ia entre dos homotop\'ias $H$ y $G$ que mantiene los bordes del 2-camino que generan.
 
 Generalizando, dados dos $n$-caminos $P$ y $Q$ con el mismo borde, definimos por recursi\'on que un ($n+1$)-camino entre $P$ y $Q$, es un mapa $H:I^{n+1}\to X$ tal que $\partial \text{Im}(H)=P \cup Q$.
@@ -51,7 +51,7 @@ Y se tiene que, como en el caso del grupo fundamental, $\pi_n(X,x)$ es la subcat
 Regresando a DTT, podemos entender una prueba $p$ de que $x=y$ como un camino $p$ de $x$ a $y$.
 Las reglas del tipo de identidad nos permiten comparar si dos pruebas (caminos) $p,q:x=_X y$ son iguales entre s\'i; es decir si existe un $r : \id[{(\id[A]{x}{y})}]{p}{q}$. Este es justamente un 2-camino, y de manera an\'aloga podemos iterar infinitamente y observar una estructura de $\infty$-grupoides \cite{curien_weak_2009} \cite{van_den_berg_types_2011}.
 
-En las siguientes secciones, verificaremos expl\'icitamente la estructura de $1$-grupoide de los tipos y caracterizaremos (hasta homotop\'ia) los caminos en algunos de los tipos introducidos la secci\'on previa.
+En las siguientes secciones, verificaremos expl\'icitamente la estructura de $1$-grupoide de los tipos y caracterizaremos (hasta homotop\'ia) los caminos en algunos de los tipos introducidos en la secci\'on previa.
 
 Veremos que varias definiciones y resultados pueden interpretarse de tres formas distintas, de una forma l\'ogica, de una forma homot\'opica, y de una forma categ\'orica.
 Esto se debe a la correspondencia Curry-Howard, al hecho de que los tipos corresponden a tipos de homotop\'ia de espacios topológicos y al hecho de que también son $\infty$-grupoides, respectivamente.
@@ -75,7 +75,7 @@ Las primeras tres condiciones vienen de los axiomas de una categor\'ia, mientras
 \begin{lemma}
   Para todo tipo $A$ y todo $x,y,z:A$ existe la función de concatenaci\'on de caminos
   \begin{equation*}
-    {\blank} \ct {\blank} : (x= y) \to   (y= z)\to (x=  z),
+    {\blank} \ct {\blank} : (x= y) \to (y= z) \to (x=  z),
   \end{equation*}
   tal que $\refl{x}\ct \refl{x}\jdeq \refl{x}$.
 \end{lemma}
@@ -324,7 +324,7 @@ Como uno esperar\'ia, el transporte es un functor (contravariante):
 Aunque el punto de vista categ\'orico nos brinda mucha informaci\'on, es a\'un m\'as \'util considere la perspectiva homot\'opica la cual presentamos a continuaci\'on.
 
 Dada una familia de tipos $B:A \to \UU$, la idea es considerar el tipo $B(x)$ como la fibra sobre $x$, como se ve en la Figura \ref{fig-fibras}.
-En efecto, en la primera proyecci\'on $\fst: \tsm{x:A}B(x) \to A$, aquellos elementos que son mapeados a $a$ son justamente de la forma $(a,y)$, por lo que podemos identificarlos con los elementos $y:B(x)$. Es m\'as, se puede demostrar que este concepto de fibra es equivalente al concepto usual de preimagen (ver Proposici\'on \ref{fibras-eq}).
+En efecto, en la primera proyecci\'on $\fst: \tsm{x:A}B(x) \to A$, aquellos elementos que son mapeados a $a$ son justamente de la forma $(a,y)$, por lo que podemos identificarlos con los elementos $y:B(a)$. Es m\'as, se puede demostrar que este concepto de fibra es equivalente al concepto usual de preimagen (ver Proposici\'on \ref{fibras-eq}).
 
 \begin{figure}[h]
   \caption{Tipos de familias como fibras}
@@ -357,7 +357,7 @@ Con esta definici\'on, podemos enunciar la siguiente propiedad.
   Para ver que $\fst(\mathsf{lift}(u,p))=p$, supongamos nuevamente que $p$ es $\refl{x}$, entonces nos queda probar $\apfunc \fst \left(\refl{(x,u)}\right)=\refl{x}$. Pero esto es cierto por definición de $\mathsf{ap}$.
 \end{proof}
 
-Aunque esta noci\'on de caminos es muy natural y permite expresar y probar varias propiedades, no es muy f\'acil manejar.
+Aunque esta noci\'on de caminos es muy natural y permite expresar y probar varias propiedades, no es muy f\'acil de manejar.
 Notando que existe un camino can\'onico $\mathsf{lift}(u,p):(x,u) = (y, \trfib{B}{p}{u})$, entonces vemos que todo camino $q:(x,u)=(y,v)$ sobre $p:x=y$ factoriza por $\mathsf{lift}(x,u)$ a un camino $r:(y , \trfib{B}{p}{u})=(y,v)$ sobre el camino constante en $y$, ver Figura \ref{caminos-sobre}.
 An\'alogamente, todo camino $r:(y , \trfib{B}{p}{u})=(y,v)$ sobre $\refl{y}$ puede ser expandido a un camino $q:(x,u)=(y,v)$ sobre $p$, pre-concatenando con $\mathsf{lift}(x,u)$.
 
@@ -451,13 +451,14 @@ En DTT, esto corresponder\'ia a afirmar que el siguiente tipo est\'a habitado.
 \begin{equation*}
   \mathsf{qinv}(f) \defeq \sm{g:B\to A} \big((f \circ g \htpy \idfunc[B]) \times (g\circ f \htpy \idfunc[A])\big)\label{eq:qinvtype}
 \end{equation*}
+
 Categ\'oricamente, y recordando que las homotop\'ias son transformaciones naturales, este tipo indica la existencia de una equivalencia de categor\'ias entre $A$ y $B$.
 Sin embargo, este tipo no corresponde adecuadamente al concepto equivalencias homot\'opicas, ni al de equivalencias categ\'oricas, sino al de quasi-inversas.
 
 \begin{definition}
   Sea $f:A\to B$ una funci\'on, una \textbf{quasi-inversa}
   de $f$ es un triple $(g,\alpha,\beta)$ perteneciente al tipo $\mathsf{qinv}(f)$.
-  Abusaremos la notación, y tambi\'en llamaremos quasi-inversa a la función $g$ del triple.
+  Abusaremos la notación, y tambi\'en llamaremos quasi-inversa a las funciones $f$ y $g$ del triple.
 \end{definition}
 
 \begin{example}
@@ -497,7 +498,7 @@ Existen m\'ultiples nociones que satisfacen este requisito, utilizaremos la de m
   Entonces $(g,\alpha,\beta'):\qinv(f)$.
 \end{proof}
 
-La otra condici\'on, que todos los elementos de $\isequiv(f)$ sean iguales entre s\'i es un resultado t\'ecnico, el cual se asumiremos como dado (ver \cite[Secci\'on 4.3]{the_univalent_foundations_program_homotopy_2013}).
+La otra condici\'on, que todos los elementos de $\isequiv(f)$ sean iguales entre s\'i, es un resultado t\'ecnico, el cual se asumiremos como dado (ver \cite[Secci\'on 4.3]{the_univalent_foundations_program_homotopy_2013}).
 
 Con el concepto de bi-invertibilidad en mano, podemos definir qu\'e es una equivalencia entre dos tipos.
 
@@ -510,7 +511,7 @@ Con el concepto de bi-invertibilidad en mano, podemos definir qu\'e es una equiv
 
 La noción de equivalencia previamente descrita es la de una equivalencia entre la estructura de tipos.
 Puesto que los tipos tienen una estructura natural de tipos de homotop\'ia de espacios topol\'ogicos, y tamb\'ien la de $\infty$-grupoides, estas dos estructuras se preservan autom\'aticamente.
-N\'otese que esta implica inmediatamente una equivalencia l\'ogica entre los dos tipos.
+N\'otese que una equivalencia implica inmediatamente una equivalencia l\'ogica entre los dos tipos.
 
 Asimismo, como la noci\'on de bi-invertibilidad es l\'ogicamente equivalente a la de tener una quasi-inversa, podemos usar este segundo concepto a la hora de realizar pruebas, como en el siguiente lema.
 
@@ -521,7 +522,7 @@ Asimismo, como la noci\'on de bi-invertibilidad es l\'ogicamente equivalente a l
   Hemos visto que la función identidad es su propia quasi-inversa, por lo que $\simeq$ es reflexiva.
 
   Sea $f:A \to B$ una equivalencia, esta entonces debe tener una quasi-inversa $f^{-1}:B\to A$.
-  Pero vemos que $f$ es una quasi-inversa de $f^{-1}$, por lo que $f^{-1}$ es una equivalencia $B\to A$.
+  Pero vemos que $f$ es una quasi-inversa de $f^{-1}$, por lo que $f^{-1}$ es una equivalencia $\eqv B A$.
 
   Finalmente, dados $f:\eqv A B$ y $g:\eqv B C$ con quasi-inversas $f^{-1}$ y $g^{-1}$; tenemos que para todo $x:A$
   \[ f^{-1} g^{-1} g f x = f^{-1} f x = x\]
@@ -558,14 +559,14 @@ Veamos las demostraciones de algunas equivalencias que hab\'iamos mencionado pre
   Primero definimos
   \begin{gather*}
     f : \prd{p:x=y} \biggr(\sm{q:\id{(x,u)}{(y,v)}}\fst(q)=p\biggr) \to \left(\id[B(x)]{\trfib{B}{p}{u}}{v}\right) \\
-    f(p, \refl{(x,u)}, \refl{p}) = \refl{u}
+    f(p, \refl{(x,u)}, \refl{p}) \defeq \refl{u}
   \end{gather*}
   En sentido contrario, definimos
   \begin{gather*}
     g : \prd{p:x=y} \left(\id[B(x)]{\trfib{B}{p}{u}}{v}\right) \to \biggr(\sm{q:\id{(x,u)}{(y,v)}}\fst(q)=p\biggr) \\
-    g(p, \refl{\trfib{B}{p}{u}}) = (\mathsf{lift}(u,p) , q)
+    g(p, \refl{\trfib{B}{p}{u}}) \defeq (\mathsf{lift}(u,p) , q')
   \end{gather*}
-  donde $q: \fst(\mathsf{lift}(u,p))=p$ es el camino dado por el Lema \ref{path-lift}.
+  donde $q': \fst(\mathsf{lift}(u,p))=p$ es el camino dado por el Lema \ref{path-lift}.
   Ahora, realizando inducci\'on en $p$, vemos que $g(p) \circ f(p) \htpy \idfunc$ y $f(p) \circ g(p) \htpy \idfunc$, por lo que son quasi-inversas.
 \end{proof}
 
@@ -676,7 +677,7 @@ Con la funci\'on $\funext$ en mano, podemos mostrar que el tipo $\emptyt$ es un 
   Para todo $x:\emptyt$ podemos inmediatamente concluir que $f(x)=\rec{\emptyt}(C)(x)$, por lo que $f=\rec{\emptyt}(C)$.
 \end{proof}
 
-Veamos con interact\'uan las el transporte en familias de tipos de funciones.
+Veamos c\'omo interact\'ua el transporte en familias de tipos de funciones.
 
 \begin{lemma}\label{path-over-f}
   Sea $X$ un tipo y $A,B : X \to \UU$ dos familias de tipos. Para todos $x_1,x_2 : X$, $p:x_1=x_2$, $f:A(x_1)\to B(x_1)$ y $y : A(x_2)$ se tiene que
@@ -733,7 +734,7 @@ Tenemos entonces $\eqv{(A = B)}{(\eqv{A}{B})}$, as\'i como una quasi-inversa de 
 Este es el primer axioma que nos separa de Dependent Type Theory.
 DTT usualmente asume tambi\'en el axioma $K$, que indica que todos los caminos con mismos extremos son homot\'opicos entre s\'i.
 Aunque esto no tiene sentido topol\'ogicamente, s\'i es intuitivo desde una perspectiva l\'ogica, pues un camino es una prueba de que $x=y$.
-As\'i, $K$ postula que todas las pruebas son iguales entre s\'i.
+As\'i, $K$ postula que todas estas pruebas son iguales entre s\'i.
 
 A fin de no colapsar la estructura que hay entre los caminos, no hemos introducido este axioma; adicionalmente, si se asume este junto con el axioma de Univalencia, la teor\'ia se vuelve inconsistente \cite[Lema 6.4.1.]{the_univalent_foundations_program_homotopy_2013}.
 
@@ -797,7 +798,7 @@ N\'otese que $\code(m,n)$ corresponde al algoritmo que resta 1 a $m$ y a $n$ has
   Solo falta demostrar la otra homotop\'ia,
   \[ \encode(m,n) \circ \decode(m,n) \htpy \idfunc. \]
   Dado $c: \code(m,n)$, procederemos por inducción en ambos $m$ y $n$.
-  Cuando ambos son 0, $\code(0,0)\jdeq \unit$, por lo que podemos asumir que $c \jdeq \star$, y ambos lados se reducen \star.
+  Cuando ambos son 0, $\code(0,0)\jdeq \unit$, por lo que podemos asumir que $c \jdeq \star$, y ambos lados se reducen a \star.
   Si uno es un sucesor y el otro no, $\code(m,n)$ es $\emptyt$, por lo que podemos derivar cualquier resultado a partir de $c : \emptyt$.
   Finalmente, si los dos son sucesores, tenemos
   \begin{align*}
@@ -844,7 +845,7 @@ Otra consecuencia es que la igualdad entre naturales es \textbf{decidible}; es d
 %%%% sec_
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Propiedades Universales}\label{univ-prop-sec}
-Con los conceptos ya introducidos, podemos ver que los tipos introducidos tienen las propiedades universales esperdads.
+Con los conceptos ya introducidos, podemos ver que los tipos introducidos tienen las propiedades universales esperadas.
 
 \begin{theorem}
   El tipo $A \times B$ es el producto de $A$ y $B$ en la categor\'ia $\mathsf{Type}$.

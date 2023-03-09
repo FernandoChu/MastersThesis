@@ -1,3 +1,15 @@
+*.aux
+*.bcf
+*.bbl
+*.blg
+*.out
+*.fdb_latexmk
+*.xml
+*.fls
+*.log
+*.synctex.gz
+*.toc
+*.xdv
 *.agdai
 **/_build
 node_modules

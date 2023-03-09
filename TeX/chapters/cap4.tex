@@ -37,7 +37,7 @@ Veamos c\'omo podemos hacer un an\'alisis similar a otros conceptos.
 %%%% sec2
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{$n$-tipos}
-En topolog\'ia cl\'asica, un espacio topol\'ogico es llamado contractible cuando la función identidad es homot\'opica a la imagen de un solo punto. Esto sugiere:
+En topolog\'ia cl\'asica, un espacio topol\'ogico es llamado contractible cuando la función identidad es homot\'opica a una funci\'on constante. Esto sugiere:
 
 \begin{definition}
   Un tipo $A$ es \textbf{contractible} cuando posee un elemento $a:A$, llamado el \textbf{centro de contracci\'on}, tal que $a=x$, para todo $x:A$. Es decir, definimos la propiedad de ser contractible como:
@@ -164,7 +164,7 @@ Esto sugiere que el tipo (\ref{prop}) previo corresponde a la propiedad de ser u
   Todo tipo contractible es una proposici\'on simple. En efecto, sea $(c,p):\iscontr(A)$, entonces para todo $x,y:A$ tenemos $x=c=y$. En particular, el tipo \unit es una proposici\'on simple.
 \end{example}
 \begin{example}
-  El tipo \emptyt es una proposici\'on simple. Si tenemos $x,y:\emptyt$ tenemos inmediatamente una contradicción, por lo que podemos derivar que el resultado deseado.
+  El tipo \emptyt es una proposici\'on simple. Si tenemos $x,y:\emptyt$ tenemos inmediatamente una contradicción, por lo que podemos derivar el resultado deseado.
 \end{example}
 \begin{example}
   Para toda $f: A \to B$, $\isequiv(f)$ es una proposici\'on simple; este es justo uno de los requisitos que hab\'iamos pedido de una noci\'on correcta de equivalencia homot\'opica.
@@ -305,7 +305,7 @@ En el caso del tipo del intervalo, el principio de recursi\'on dice que dado un 
   \item un camino $s : b_0 = b_1$,
 \end{itemize}
 existe una \'unica funci\'on $f:I \to B$ tal que $f(\izero)\jdeq b_0, f(\ione)\jdeq b_1$, y $f(\seg)= s$.
-N\'otece que las primeras dos igualdades son por definici\'on, mientras que la tercera de estas es una igualdad proposicional.
+N\'otese que las primeras dos igualdades son por definici\'on, mientras que la tercera de estas es una igualdad proposicional.
 
 El principio de inducci\'on de un tipo, como ya hemos mencionado, es el principio de recursi\'on generalizado para familias dependientes.
 Entonces, para el caso dice que dado una familia de tipos $P: I \to \UU$, junto con
@@ -376,7 +376,7 @@ Similarmente, usando esta misma t\'ecnica, podemos definir la esfera.
   \end{itemize}
 \end{definition}
 
-Este tipo de definiciones es an\'alogo a la construcci\'on de algunos espacios como CW complejos. Vamos un \'ultimo ejemplo.
+Este tipo de definiciones es an\'alogo a la construcci\'on de algunos espacios como CW complejos. Veamos el caso del toro.
 \begin{definition}
   Podemos definir al \textbf{toro} $T^2$ como el tipo generado por
   \begin{itemize}
@@ -480,7 +480,7 @@ Comencemos con el regreso de las quasi-inversas.
   \end{align*}
 \end{proof}
 
-Esta funci\'on lleva al $0_\Z$ al camino constante, lleva a los enteros positivos $n$ a $n$ concatenaciones de $\lloop$, y enteros negativos $-n$ a $N$ concatenaciones de $\lloop^{-1}$, de igual manera que en la demostraci\'on usual de MC.
+Esta funci\'on lleva al $0_\Z$ al camino constante, lleva a los enteros positivos $n$ a $n$ concatenaciones de $\lloop$, y enteros negativos $-n$ a $n$ concatenaciones de $\lloop^{-1}$, de igual manera que en la demostraci\'on usual de MC.
 
 Para generar una funci\'on $(\base = \base) \to \Z$ utilizaremos el m\'etodo encode-decode, caracterizando el tipo de caminos $(\base = x)$, para $x:\Sn^1$.
 
@@ -613,8 +613,6 @@ Este resultado indica cuando transportamos $\cover$ a lo largo de un camino $p \
   \end{align*}
 \end{proof}
 
-Este resultado indica que transportar un el entero asociado a $x : \Z$ concatenaciones del camino $\lloop$, es $x$ mismo.
-
 Con todos estos lemas, procedemos a mostrar la \'ultima homotop\'ia.
 
 \begin{lemma}
@@ -626,7 +624,7 @@ Con todos estos lemas, procedemos a mostrar la \'ultima homotop\'ia.
   \[ C = \lam{x : \Sn^1}\prd{p:\cover{x}} \encode(x, \decode(x,p)) = p. \]
   El lema es equivalente a mostrar una funci\'on $\lam{x:\Sn^1}C(x)$.
   Probaremos la existencia de esta funci\'on usando el principio de inducci\'on del c\'irculo.
-  Primero debemos dar un camino
+  Primero, debemos dar un camino
   \[ q : \encode(\base , \lloop\string^(x)) = x, \]
   el cual tenemos por el lema previo. Ahora, necesitamos un camino $q=^C_\lloop q$.
   Pero por el Lema \ref{path-over-pi}, es suficiente que para todo camino $\beta:a_1=^\cover_\lloop a_2$ se tenga que
