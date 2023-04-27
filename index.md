@@ -8,11 +8,11 @@ isIndex: true
 <a id="90" class="Keyword">open</a> <a id="95" class="Keyword">import</a> <a id="102" href="Capitulo4.html" class="Module">Capitulo4</a> <a id="112" class="Keyword">public</a>
 </pre>-->
 
-## [Teoría Homotópica de Tipos - Fernando Chu (Tesis de Maestría)](https://shiranaiyo.github.io/MastersThesis/)
+## [Teoría Homotópica de Tipos - Fernando Chu (Tesis de Maestría)](https://FernandoChu.github.io/MastersThesis/)
 
 En estas páginas pueden encontrar la formalización en Agda del contenido de
 mi tesis de maestría.
-El pdf lo pueden encontrar en el siguiente [link](https://github.com/shiranaiyo/MastersThesis/blob/main/TeX/main.pdf).
+El pdf lo pueden encontrar en el siguiente [link](https://github.com/FernandoChu/MastersThesis/blob/main/TeX/main.pdf).
 
 ## Capítulos
 
@@ -23,7 +23,7 @@ El pdf lo pueden encontrar en el siguiente [link](https://github.com/shiranaiyo/
 - Capítulo 5 - Conclusiones
 
 El código de todo el material para la creación de la página web y del pdf se
-encuentra libremente en un [repositorio abierto](https://github.com/shiranaiyo/MastersThesis).
+encuentra libremente en un [repositorio abierto](https://github.com/FernandoChu/MastersThesis).
 
 ## Agradecimientos
 
