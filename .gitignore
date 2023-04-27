@@ -11,6 +11,9 @@
 *.toc
 *.xdv
 *.agdai
+*.pdf
+*.ttf
+!TeX/main.pdf
 **/_build
 node_modules
 html

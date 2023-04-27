@@ -8,13 +8,13 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/shiranaiyo/MastersThesis.git"
+    "url": "git+https://github.com/FernandoChu/MastersThesis.git"
   },
   "author": "",
   "bugs": {
-    "url": "https://github.com/shiranaiyo/MastersThesis/issues"
+    "url": "https://github.com/FernandoChu/MastersThesis/issues"
   },
-  "homepage": "https://github.com/shiranaiyo/MastersThesis#readme",
+  "homepage": "https://github.com/FernandoChu/MastersThesis#readme",
   "dependencies": {
     "handlebars": "^4.7.7",
     "showdown": "^2.1.0"

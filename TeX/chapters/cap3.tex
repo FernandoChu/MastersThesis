@@ -43,7 +43,7 @@ Una homotop\'ia $H$ usual entre dos caminos $p$ y $q$ puede ser entendida tambi�
 Generalizando, dados dos $n$-caminos $P$ y $Q$ con el mismo borde, definimos por recursi\'on que un ($n+1$)-camino entre $P$ y $Q$, es un mapa $H:I^{n+1}\to X$ tal que $\partial \text{Im}(H)=P \cup Q$.
 
 Se puede verificar que las clases de homotop\'ia de estos $n$-caminos poseen una operación de concatenaci\'on y una operaci\'on que genera caminos inversos, y adem\'as satisfacen algunas reglas adicionales, llamadas \textbf{reglas de coherencia}, las cuales los hacen $n$-grupoides para todo $n \in \Z^+$.
-Esto muestra que los espacios topol\'ogicos tienen estructura de $\infty$-grupoides\footnote{Dado que las reglas de coherencia solo se cumplen hasta homotop\'ia, la estructura algebraica generada es de $\infty$-grupoides d\'ebiles; cada vez que hablemos de grupoides nos referiremos a grupoides d\'ebiles.}.
+Esto muestra que los espacios topol\'ogicos tienen estructura de $\infty$-grupoides\footnote{Dado que las reglas de coherencia solo se cumplen salvo homotop\'ia, la estructura algebraica generada es de $\infty$-grupoides d\'ebiles; cada vez que hablemos de grupoides nos referiremos a grupoides d\'ebiles.}.
 
 Denotamos la estructura de $n$-grupoide de $X$ por $\Pi_n(X)$.
 Y se tiene que, como en el caso del grupo fundamental, $\pi_n(X,x)$ es la subcategor\'ia completa de $\Pi_n(X)$ generada por $x$.
@@ -51,7 +51,7 @@ Y se tiene que, como en el caso del grupo fundamental, $\pi_n(X,x)$ es la subcat
 Regresando a DTT, podemos entender una prueba $p$ de que $x=y$ como un camino $p$ de $x$ a $y$.
 Las reglas del tipo de identidad nos permiten comparar si dos pruebas (caminos) $p,q:x=_X y$ son iguales entre s\'i; es decir si existe un $r : \id[{(\id[A]{x}{y})}]{p}{q}$. Este es justamente un 2-camino, y de manera an\'aloga podemos iterar infinitamente y observar una estructura de $\infty$-grupoides \cite{curien_weak_2009} \cite{van_den_berg_types_2011}.
 
-En las siguientes secciones, verificaremos expl\'icitamente la estructura de $1$-grupoide de los tipos y caracterizaremos (hasta homotop\'ia) los caminos en algunos de los tipos introducidos en la secci\'on previa.
+En las siguientes secciones, verificaremos expl\'icitamente la estructura de $1$-grupoide de los tipos y caracterizaremos (salvo homotop\'ia) los caminos en algunos de los tipos introducidos en la secci\'on previa.
 
 Veremos que varias definiciones y resultados pueden interpretarse de tres formas distintas, de una forma l\'ogica, de una forma homot\'opica, y de una forma categ\'orica.
 Esto se debe a la correspondencia Curry-Howard, al hecho de que los tipos corresponden a tipos de homotop\'ia de espacios topológicos y al hecho de que también son $\infty$-grupoides, respectivamente.
@@ -578,7 +578,7 @@ Con estos conceptos ya definidos, procedemos a caracterizar los caminos en algun
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Caminos entre pares dependientes}
 Dado un camino $p:\id[A\times B]{(a,b)}{(a',b')}$, podemos proyectar el camino sobre $A$ y sobre $B$ obteniendo dos caminos, $\ap{\proj1}p:\id[A]{a}{a'}$ y $\ap{\proj2}p:\id[B]{b}{b'}$.
-Intuitivamente, el camino $p$ est\'a \'unicamente determinado (hasta homotop\'ia) por estos dos caminos.
+Intuitivamente, el camino $p$ est\'a \'unicamente determinado (salvo homotop\'ia) por estos dos caminos.
 
 Para el caso de pares dependientes, se esperar\'ia un resultado similar. Es decir, que caminos $p:\id[\sm{x:A}B(x)]{(a,b)}{(a',b')}$ est\'an determinados por un par de caminos $\fst(p):\id[A]{a}{a'}$ y $b=^B_p b'$.
 Este es efectivamente el caso.

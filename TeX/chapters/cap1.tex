@@ -60,7 +60,7 @@ Por estos motivos, omitiremos menci\'on de estos detalles en los ejemplos siguie
     A partir de estos datos, podemos formar una nueva categor\'ia $\mathsf{C}_{X,Y}$.
 
     Sus objetos son triples $(Z,f,g)$, donde $Z$ es un objeto de $\mathsf{C}$, y $f:Z \to X$ y $g:Z \to Y$ son morfismos.
-    Un morfismo $\alpha: (Z, f , g) \to (Z', f',g')$ es un morfismo $h: Z \to Z'$ tal que $f \circ h = f'$ y $g \circ h = g'$.
+    Un morfismo $\alpha: (Z, f , g) \to (Z', f',g')$ es un morfismo $h: Z \to Z'$ tal que $f' \circ h = f$ y $g' \circ h = g$.
 
     En otras palabras, se requiere que $h:Z \to Z'$ sea tal que el siguiente diagrama conmute.
     \[\begin{tikzcd}[row sep=large,column sep=large]
@@ -151,7 +151,7 @@ Veamos unos ejemplos m\'as de objetos iniciales y terminales, en las categor\'ia
 
 \begin{exampleap}
     Sean $X$ y $Y$ conjuntos. En la categor\'ia $\mathsf{Set}^{X,Y}$ el coproducto usual $X + Y$ junto con las inserciones naturales es un objeto inicial.
-    En efecto, dados $Z$, $f:X \to Z$ y $g:Y\to Z$, la \'unica forma de definir una funci\'on $h: (X + Y) \to Z$ tal que el diagrama conmute es por $h(x)=f(x)$ y $h(y)=f(y)$.
+    En efecto, dados $Z$, $f:X \to Z$ y $g:Y\to Z$, la \'unica forma de definir una funci\'on $h: (X + Y) \to Z$ tal que el diagrama conmute es por $h(x)=f(x)$ y $h(y)=g(y)$.
     \[\begin{tikzcd}[row sep=large,column sep=large]
             & Z \\
             X & {X+Y} & Y
@@ -192,7 +192,7 @@ Los fundadores de la teor\'ia de categor\'ias mencionaron que el concepto de cat
 \end{exampleap}
 
 \begin{exampleap}
-    El functor conjunto poder $\mathcal{P}:\set \to \set$ lleva objetos a su conjunto poder, y funciones $f:X \to Y$ a la funci\'on $\mathcal{P}(f):\mathcal{P}(X) \to \mathcal{P}(Y)$ definida por
+    El functor conjunto potencia $\mathcal{P}:\set \to \set$ lleva objetos a su conjunto potencia, y funciones $f:X \to Y$ a la funci\'on $\mathcal{P}(f):\mathcal{P}(X) \to \mathcal{P}(Y)$ definida por
     \[ \mathcal{P}(f)(S) := \{ f(s) \mid s \in S \} \]
     En general, cuando tengamos un functor $F: \mathsf{C} \to \mathsf{C}$ que va de una categor\'ia $\mathsf{C}$ hacia si misma, diremos que es un \textbf{endofunctor}.
 \end{exampleap}
